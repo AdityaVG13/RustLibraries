@@ -1,0 +1,40 @@
+{
+  "comparison": [
+    {
+      "checksum_match": true,
+      "imagerust_ms": 1.303083,
+      "name": "ppm_grayscale_resize_threshold_2048x1024",
+      "pillow_ms": 21.54412498930469,
+      "speedup_vs_pillow": 16.533194730730653,
+      "winner": "imagerust"
+    }
+  ],
+  "imagerust": {
+    "cases": [
+      {
+        "checksum": 17416809835200,
+        "millis": 1.303083,
+        "name": "ppm_grayscale_resize_threshold_2048x1024"
+      }
+    ],
+    "engine": "imagerust"
+  },
+  "pillow": {
+    "cases": [
+      {
+        "checksum": 17416809835200,
+        "millis": 21.54412498930469,
+        "name": "ppm_grayscale_resize_threshold_2048x1024"
+      }
+    ],
+    "engine": "pillow",
+    "pillow_version": "12.2.0"
+  },
+  "score": {
+    "cases": 1,
+    "checksum_failures": [],
+    "global_pillow_replacement_claim": false,
+    "imagerust_wins": 1,
+    "pillow_wins": 0
+  }
+}
