@@ -263,6 +263,31 @@ fn reshape_and_transpose_are_metadata_operations() {
     let raveled = a.ravel().unwrap();
     assert_eq!(raveled.shape(), &[6]);
     assert_eq!(raveled.to_vec().unwrap(), vec![0, 1, 2, 3, 4, 5]);
+
+    let flipped_all = a.flip(None).unwrap();
+    assert_eq!(flipped_all.shape(), &[2, 3]);
+    assert_eq!(flipped_all.strides(), &[-3, -1]);
+    assert_eq!(flipped_all.to_vec().unwrap(), vec![5, 4, 3, 2, 1, 0]);
+
+    let flipped_cols = a.flip(Some(&[1])).unwrap();
+    assert_eq!(flipped_cols.to_vec().unwrap(), vec![2, 1, 0, 5, 4, 3]);
+
+    let three_dim = Array::from_vec(vec![2, 3, 2], (0_i64..12).collect()).unwrap();
+    let moved = three_dim.moveaxis(&[0, 1], &[-1, -2]).unwrap();
+    assert_eq!(moved.shape(), &[2, 3, 2]);
+    assert_eq!(moved.strides(), &[1, 2, 6]);
+    assert_eq!(
+        moved.to_vec().unwrap(),
+        vec![0, 6, 2, 8, 4, 10, 1, 7, 3, 9, 5, 11]
+    );
+
+    assert!(a.flip(Some(&[0, -2])).is_err());
+
+    let rolled = a.roll(2).unwrap();
+    assert_eq!(rolled.shape(), &[2, 3]);
+    assert_eq!(rolled.as_slice(), &[4, 5, 0, 1, 2, 3]);
+    let rolled_back = a.roll(-1).unwrap();
+    assert_eq!(rolled_back.as_slice(), &[1, 2, 3, 4, 5, 0]);
 }
 
 #[test]

@@ -246,6 +246,46 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=200_000,
     ),
     CaseSpec(
+        name="asv_manipulate_flip_all_f64_5x2x3x1",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_flip_all(shape=(5, 2, 3, 1))",
+        translation="same operation and shape with deterministic arange values instead of ASV ones, repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_flip_one_f64_5x2x3x1_axis1",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_flip_one(shape=(5, 2, 3, 1))",
+        translation="same operation and shape with deterministic arange values instead of ASV ones: flip(axis=1), repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_flip_neg_f64_5x2x3x1_axis_neg1",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_flip_neg(shape=(5, 2, 3, 1))",
+        translation="same operation and shape with deterministic arange values instead of ASV ones: flip(axis=-1), repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_moveaxis_f64_5x2x3x1",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_moveaxis(shape=(5, 2, 3, 1))",
+        translation="same operation and shape with deterministic arange values instead of ASV ones: moveaxis([0,1],[-1,-2]), repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_roll_f64_5x2x3x1_shift3",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_roll(shape=(5, 2, 3, 1))",
+        translation="same operation and shape with deterministic arange values instead of ASV ones: roll(shift=3), repeated because ASV auto-calibrates small-array timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_manipulate_reshape_f64_5x2x3x1_to_1x5x2x3",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_manipulate.py",
@@ -570,6 +610,21 @@ def edge_checksum(array: np.ndarray) -> float:
 
 def shape_checksum(array: np.ndarray) -> float:
     return float(sum(array.shape) + array.ndim)
+
+
+def sample_checksum(array: np.ndarray) -> float:
+    total = shape_checksum(array)
+    if array.size == 0:
+        return total
+    raw_indices = [0, array.size // 3, (array.size * 2) // 3, array.size - 1]
+    indices = []
+    for index in raw_indices:
+        if index not in indices:
+            indices.append(index)
+    for weight, flat_index in enumerate(indices, start=1):
+        logical_index = np.unravel_index(flat_index, array.shape)
+        total += weight * float(array[logical_index])
+    return float(total)
 
 
 def lstsq_fixture() -> tuple[np.ndarray, np.ndarray]:
@@ -924,6 +979,83 @@ def bench_numpy() -> dict:
     cases.append(
         {
             "name": "asv_manipulate_squeeze_dims_f64_5x2x3x1",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    dims_values = np.arange(5 * 2 * 3 * 1, dtype=np.float64).reshape(5, 2, 3, 1)
+
+    def flip_all() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += sample_checksum(np.flip(dims_values, axis=None))
+        return checksum
+
+    millis, checksum = median_ms(flip_all, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_flip_all_f64_5x2x3x1",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    def flip_one() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += sample_checksum(np.flip(dims_values, axis=1))
+        return checksum
+
+    millis, checksum = median_ms(flip_one, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_flip_one_f64_5x2x3x1_axis1",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    def flip_neg() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += sample_checksum(np.flip(dims_values, axis=-1))
+        return checksum
+
+    millis, checksum = median_ms(flip_neg, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_flip_neg_f64_5x2x3x1_axis_neg1",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    def moveaxis() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += sample_checksum(np.moveaxis(dims_values, [0, 1], [-1, -2]))
+        return checksum
+
+    millis, checksum = median_ms(moveaxis, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_moveaxis_f64_5x2x3x1",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    def roll() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += sample_checksum(np.roll(dims_values, 3))
+        return checksum
+
+    millis, checksum = median_ms(roll, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_roll_f64_5x2x3x1_shift3",
             "millis": millis,
             "checksum": checksum,
         }
@@ -1505,6 +1637,11 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         "asv_manipulate_concatenate_ax1_f64_32x64_n5",
         "asv_manipulate_stack_ax0_f64_32x64_n5",
         "asv_manipulate_stack_ax1_f64_32x64_n5",
+        "asv_manipulate_flip_all_f64_5x2x3x1",
+        "asv_manipulate_flip_one_f64_5x2x3x1_axis1",
+        "asv_manipulate_flip_neg_f64_5x2x3x1_axis_neg1",
+        "asv_manipulate_moveaxis_f64_5x2x3x1",
+        "asv_manipulate_roll_f64_5x2x3x1_shift3",
     }
     unsupported = sorted(requested - supported)
     if unsupported:
@@ -1527,6 +1664,7 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         (np.arange(32 * 64, dtype=np.float64) + idx * 32 * 64).reshape(32, 64)
         for idx in range(5)
     ]
+    dims_values = np.arange(5 * 2 * 3 * 1, dtype=np.float64).reshape(5, 2, 3, 1)
 
     def dot_a_b() -> float:
         checksum = 0.0
@@ -1639,6 +1777,46 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         return checksum
 
     append_case("asv_manipulate_stack_ax1_f64_32x64_n5", stack_ax1)
+
+    def flip_all() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += sample_checksum(np.flip(dims_values, axis=None))
+        return checksum
+
+    append_case("asv_manipulate_flip_all_f64_5x2x3x1", flip_all)
+
+    def flip_one() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += sample_checksum(np.flip(dims_values, axis=1))
+        return checksum
+
+    append_case("asv_manipulate_flip_one_f64_5x2x3x1_axis1", flip_one)
+
+    def flip_neg() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += sample_checksum(np.flip(dims_values, axis=-1))
+        return checksum
+
+    append_case("asv_manipulate_flip_neg_f64_5x2x3x1_axis_neg1", flip_neg)
+
+    def moveaxis() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += sample_checksum(np.moveaxis(dims_values, [0, 1], [-1, -2]))
+        return checksum
+
+    append_case("asv_manipulate_moveaxis_f64_5x2x3x1", moveaxis)
+
+    def roll() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += sample_checksum(np.roll(dims_values, 3))
+        return checksum
+
+    append_case("asv_manipulate_roll_f64_5x2x3x1_shift3", roll)
 
     cases_by_name = {case["name"]: case for case in cases}
     return {

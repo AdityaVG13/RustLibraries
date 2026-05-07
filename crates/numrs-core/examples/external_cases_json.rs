@@ -2,7 +2,7 @@ use std::fs;
 use std::hint::black_box;
 use std::time::{Duration, Instant};
 
-use numrs_core::Array;
+use numrs_core::{Array, ArrayView};
 
 struct Case {
     name: &'static str,
@@ -41,6 +41,31 @@ fn edge_sum_i64(array: &Array<i64>) -> f64 {
 
 fn shape_checksum(shape: &[usize]) -> f64 {
     shape.iter().map(|dim| *dim as f64).sum::<f64>() + shape.len() as f64
+}
+
+fn sample_checksum_f64(array: &ArrayView<'_, f64>) -> f64 {
+    let mut total = shape_checksum(array.shape());
+    if array.is_empty() {
+        return total;
+    }
+    let raw_indices = [0, array.len() / 3, (array.len() * 2) / 3, array.len() - 1];
+    let mut samples = Vec::with_capacity(raw_indices.len());
+    for index in raw_indices {
+        if !samples.contains(&index) {
+            samples.push(index);
+        }
+    }
+    for (sample_idx, flat_index) in samples.into_iter().enumerate() {
+        let mut remainder = flat_index;
+        let mut logical_index = vec![0usize; array.ndim()];
+        for axis in (0..array.ndim()).rev() {
+            let dim = array.shape()[axis];
+            logical_index[axis] = remainder.checked_rem(dim).unwrap_or(0);
+            remainder = remainder.checked_div(dim).unwrap_or(0);
+        }
+        total += (sample_idx + 1) as f64 * *array.get(&logical_index).unwrap();
+    }
+    total
 }
 
 fn read_lstsq_fixture() -> numrs_core::Result<(Array<f64>, Array<f64>)> {
@@ -508,6 +533,94 @@ fn main() -> numrs_core::Result<()> {
     );
     cases.push(Case {
         name: "asv_manipulate_squeeze_dims_f64_5x2x3x1",
+        millis,
+        checksum,
+    });
+
+    let dims_values = Array::from_shape_fn(vec![5, 2, 3, 1], |idx| {
+        (idx[0] * 2 * 3 + idx[1] * 3 + idx[2]) as f64
+    })?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = dims_values.flip(None).unwrap();
+                checksum += sample_checksum_f64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_flip_all_f64_5x2x3x1",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = dims_values.flip(Some(&[1])).unwrap();
+                checksum += sample_checksum_f64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_flip_one_f64_5x2x3x1_axis1",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = dims_values.flip(Some(&[-1])).unwrap();
+                checksum += sample_checksum_f64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_flip_neg_f64_5x2x3x1_axis_neg1",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = dims_values.moveaxis(&[0, 1], &[-1, -2]).unwrap();
+                checksum += sample_checksum_f64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_moveaxis_f64_5x2x3x1",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                let out = dims_values.roll(3).unwrap();
+                checksum += sample_checksum_f64(&out.view());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_roll_f64_5x2x3x1_shift3",
         millis,
         checksum,
     });

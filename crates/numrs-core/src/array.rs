@@ -186,6 +186,14 @@ impl<T> Array<T> {
         self.view().squeeze(axis)
     }
 
+    pub fn flip(&self, axes: Option<&[isize]>) -> Result<ArrayView<'_, T>> {
+        self.view().flip(axes)
+    }
+
+    pub fn moveaxis(&self, source: &[isize], destination: &[isize]) -> Result<ArrayView<'_, T>> {
+        self.view().moveaxis(source, destination)
+    }
+
     pub(crate) fn raw_data_mut(&mut self) -> &mut [T] {
         self.uniform = None;
         &mut self.data
@@ -274,6 +282,10 @@ impl<T: Clone> Array<T> {
         }
 
         Ok(Array::from_vec_trusted(shape, out))
+    }
+
+    pub fn roll(&self, shift: isize) -> Result<Array<T>> {
+        self.view().roll(shift)
     }
 
     pub fn take(&self, indices: &[isize]) -> Result<Array<T>> {
@@ -636,6 +648,48 @@ impl<'a, T> ArrayView<'a, T> {
         ))
     }
 
+    pub fn flip(&self, axes: Option<&[isize]>) -> Result<ArrayView<'a, T>> {
+        let axes = match axes {
+            Some(axes) => normalize_axis_list(axes, self.ndim(), "flip")?,
+            None => (0..self.ndim()).collect(),
+        };
+        let mut strides = self.strides.clone();
+        let mut offset = self.offset;
+        for axis in axes {
+            if self.shape[axis] > 0 {
+                offset += (self.shape[axis] as isize - 1) * strides[axis];
+            }
+            strides[axis] = -strides[axis];
+        }
+        Ok(ArrayView::from_parts(
+            self.data,
+            self.shape.clone(),
+            strides,
+            offset,
+        ))
+    }
+
+    pub fn moveaxis(&self, source: &[isize], destination: &[isize]) -> Result<ArrayView<'a, T>> {
+        if source.len() != destination.len() {
+            return Err(NumRsError::InvalidShape(format!(
+                "moveaxis source length {} does not match destination length {}",
+                source.len(),
+                destination.len()
+            )));
+        }
+        let source = normalize_axis_list(source, self.ndim(), "moveaxis source")?;
+        let destination = normalize_axis_list(destination, self.ndim(), "moveaxis destination")?;
+        let mut order = (0..self.ndim())
+            .filter(|axis| !source.contains(axis))
+            .collect::<Vec<_>>();
+        let mut pairs = destination.into_iter().zip(source).collect::<Vec<_>>();
+        pairs.sort_by_key(|(dest, _)| *dest);
+        for (dest, source_axis) in pairs {
+            order.insert(dest, source_axis);
+        }
+        self.permute_axes(&order)
+    }
+
     pub(crate) fn offset_iter(&self) -> Result<OffsetIter> {
         OffsetIter::new(&self.shape, &self.strides, self.offset)
     }
@@ -655,6 +709,20 @@ impl<'a, T> ArrayView<'a, T> {
 }
 
 impl<'a, T: Clone> ArrayView<'a, T> {
+    pub fn roll(&self, shift: isize) -> Result<Array<T>> {
+        let values = self.to_vec()?;
+        if values.is_empty() {
+            return Array::from_vec(self.shape.clone(), values);
+        }
+        let len = values.len();
+        let shift = shift.rem_euclid(len as isize) as usize;
+        let mut out = Vec::with_capacity(len);
+        for idx in 0..len {
+            out.push(values[(idx + len - shift) % len].clone());
+        }
+        Array::from_vec(self.shape.clone(), out)
+    }
+
     pub fn to_vec(&self) -> Result<Vec<T>> {
         if let Some(slice) = self.contiguous_slice() {
             return Ok(slice.to_vec());
@@ -1098,6 +1166,20 @@ fn normalize_take_index(index: isize, axis: usize, len: usize) -> Result<usize> 
         return Err(NumRsError::IndexOutOfBounds { axis, index, len });
     }
     Ok(normalized as usize)
+}
+
+fn normalize_axis_list(axes: &[isize], ndim: usize, label: &str) -> Result<Vec<usize>> {
+    let mut out = Vec::with_capacity(axes.len());
+    for axis in axes.iter().copied() {
+        let axis = normalize_axis(axis, ndim)?;
+        if out.contains(&axis) {
+            return Err(NumRsError::InvalidShape(format!(
+                "{label} contains duplicate axis {axis}"
+            )));
+        }
+        out.push(axis);
+    }
+    Ok(out)
 }
 
 fn is_positive_identity_take(indices: &[isize], len: usize) -> bool {
