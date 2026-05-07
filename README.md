@@ -10,23 +10,36 @@ Current flagship: `numrs-core`, a Rust-first NumPy-core foundation. It targets t
 
 This is not a full NumPy replacement yet, and no crate in this workspace should be treated as a full Python-library replacement until its documented parity gates are met. Current v0 slices are deliberately narrow and tested. The architecture is aimed above Python libraries on Rust-native strengths: explicit ownership, checked layout contracts, zero-copy view transforms, uniform-array plans, broadcast plans that avoid input materialization, and fast paths for contiguous kernels.
 
+| Crate | Python target | Current parity status | Allowed claim |
+| --- | --- | --- | --- |
+| `numrs-core` / NumRust | NumPy core | Partial | Wins only on the benchmarked NumPy-core slice. |
+| `statsrust` | StatsModels | Partial | Wins only on the benchmarked statistics slice. |
+| `scirust` | SciPy | Partial | Wins only on the benchmarked scientific-routines slice. |
+| `framerust` | Pandas | Partial | Wins only on the benchmarked groupby slice. |
+| `graphrust` | NetworkX | Partial | Wins only on the benchmarked graph slice. |
+| `mediaextractrust` | Python extraction libraries | Partial | Wins only on the benchmarked extraction slice. |
+| `validaterust` | Pydantic | Partial | Wins only on the benchmarked validation slice. |
+| `imagerust` | Pillow / scikit-image | Partial | Wins only on the benchmarked image-processing slice. |
+| `textrust` | NLTK / spaCy | Partial | Wins only on the benchmarked text-processing slice. |
+| `learnrust` | scikit-learn | Partial | Wins only on the benchmarked classical-ML slice. |
+
 ## Benchmark Snapshot
 
 Full tables, rerun commands, and claim gates live in [`docs/benchmark-dashboard.md`](docs/benchmark-dashboard.md). Current rule: implemented slices may claim measured wins; full-library replacement claims stay false until coverage and external evidence justify them.
 
-| Library slice | Rust crate | Python baseline | Cases | Rust wins | Python wins | Speedup summary | Report |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| NumPy core, external ASV-derived | `numrs-core` | NumPy 2.4.4 | 53 | 52 | 1 | 9.95x geomean | [`external-numpy-asv-inspired.md`](benchmark-results/external-numpy-asv-inspired.md) |
-| NumPy prior-loss focused rerun | `numrs-core` | NumPy 2.4.4 | 1 | 1 | 0 | 1.08x | [`external-numpy-loss-focused.md`](benchmark-results/external-numpy-loss-focused.md) |
-| Statistics | `statsrust` | StatsModels 0.14.6 | 4 | 4 | 0 | 3.51x geomean | [`statsrust-vs-statsmodels.md`](benchmark-results/statsrust-vs-statsmodels.md) |
-| Scientific routines | `scirust` | SciPy 1.17.1 | 9 | 9 | 0 | 19.11x geomean | [`scirust-vs-scipy.md`](benchmark-results/scirust-vs-scipy.md) |
-| Data aggregation | `framerust` | Pandas 3.0.2 | 1 | 1 | 0 | 2.14x | [`framerust-vs-pandas.md`](benchmark-results/framerust-vs-pandas.md) |
-| Graph analytics | `graphrust` | NetworkX 3.6.1 | 1 | 1 | 0 | 27.15x | [`graphrust-vs-networkx.md`](benchmark-results/graphrust-vs-networkx.md) |
-| Document extraction | `mediaextractrust` | Python extraction libraries | 2 | 2 | 0 | 81.21x to 122.93x | [`mediaextractrust-vs-python.md`](benchmark-results/mediaextractrust-vs-python.md) |
-| Data validation | `validaterust` | Pydantic 2.13.4 | 1 | 1 | 0 | 35.69x | [`validaterust-vs-pydantic.md`](benchmark-results/validaterust-vs-pydantic.md) |
-| Image processing | `imagerust` | Pillow 12.2.0 | 1 | 1 | 0 | 16.53x | [`imagerust-vs-pillow.md`](benchmark-results/imagerust-vs-pillow.md) |
-| Text processing | `textrust` | NLTK 3.9.4 | 1 | 1 | 0 | 23.92x | [`textrust-vs-nltk.md`](benchmark-results/textrust-vs-nltk.md) |
-| Classical ML | `learnrust` | scikit-learn 1.8.0 | 3 | 3 | 0 | 6.53x geomean | [`learnrust-vs-sklearn.md`](benchmark-results/learnrust-vs-sklearn.md) |
+| Library slice | Rust crate | Python baseline | Cases | Rust wins | Python wins | Full parity? | Speedup summary | Report |
+| --- | --- | --- | ---: | ---: | ---: | --- | ---: | --- |
+| NumPy core, external ASV-derived | `numrs-core` | NumPy 2.4.4 | 53 | 52 | 1 | No | 9.95x geomean | [`external-numpy-asv-inspired.md`](benchmark-results/external-numpy-asv-inspired.md) |
+| NumPy prior-loss focused rerun | `numrs-core` | NumPy 2.4.4 | 1 | 1 | 0 | No | 1.08x | [`external-numpy-loss-focused.md`](benchmark-results/external-numpy-loss-focused.md) |
+| Statistics | `statsrust` | StatsModels 0.14.6 | 4 | 4 | 0 | No | 3.51x geomean | [`statsrust-vs-statsmodels.md`](benchmark-results/statsrust-vs-statsmodels.md) |
+| Scientific routines | `scirust` | SciPy 1.17.1 | 9 | 9 | 0 | No | 19.11x geomean | [`scirust-vs-scipy.md`](benchmark-results/scirust-vs-scipy.md) |
+| Data aggregation | `framerust` | Pandas 3.0.2 | 1 | 1 | 0 | No | 2.14x | [`framerust-vs-pandas.md`](benchmark-results/framerust-vs-pandas.md) |
+| Graph analytics | `graphrust` | NetworkX 3.6.1 | 1 | 1 | 0 | No | 27.15x | [`graphrust-vs-networkx.md`](benchmark-results/graphrust-vs-networkx.md) |
+| Document extraction | `mediaextractrust` | Python extraction libraries | 2 | 2 | 0 | No | 81.21x to 122.93x | [`mediaextractrust-vs-python.md`](benchmark-results/mediaextractrust-vs-python.md) |
+| Data validation | `validaterust` | Pydantic 2.13.4 | 1 | 1 | 0 | No | 35.69x | [`validaterust-vs-pydantic.md`](benchmark-results/validaterust-vs-pydantic.md) |
+| Image processing | `imagerust` | Pillow 12.2.0 | 1 | 1 | 0 | No | 16.53x | [`imagerust-vs-pillow.md`](benchmark-results/imagerust-vs-pillow.md) |
+| Text processing | `textrust` | NLTK 3.9.4 | 1 | 1 | 0 | No | 23.92x | [`textrust-vs-nltk.md`](benchmark-results/textrust-vs-nltk.md) |
+| Classical ML | `learnrust` | scikit-learn 1.8.0 | 3 | 3 | 0 | No | 6.53x geomean | [`learnrust-vs-sklearn.md`](benchmark-results/learnrust-vs-sklearn.md) |
 
 ## Progress TODO
 
