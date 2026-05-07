@@ -1,11 +1,68 @@
 {
-  "geomean_speedup_vs_numpy": 9.464598527204952,
+  "geomean_speedup_vs_numpy": 8.790270522684228,
   "global_numpy_replacement_claim": false,
   "near_tie_relative_margin": 0.02,
-  "numpy_wins": 0,
-  "numrust_wins": 76,
-  "rows": [],
+  "numpy_wins": 2,
+  "numrust_wins": 78,
+  "rows": [
+    {
+      "checksum_match": true,
+      "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
+      "near_tie": false,
+      "numpy_ms": 29.160084028262645,
+      "numpy_pass_millis": [
+        30.925125000067055,
+        28.855625016149133,
+        28.968417027499527,
+        30.653082998469472,
+        29.160084028262645
+      ],
+      "numrust_ms": 30.568875,
+      "numrust_pass_millis": [
+        29.120833,
+        30.940375,
+        30.565459,
+        30.568875,
+        30.592917
+      ],
+      "numrust_slowdown_vs_numpy": 0.04831230837236,
+      "priority": 1,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_matmul_trans_a_at",
+      "speedup_vs_numpy": 0.9539142028701627,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally"
+    },
+    {
+      "checksum_match": true,
+      "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
+      "near_tie": false,
+      "numpy_ms": 41.240000049583614,
+      "numpy_pass_millis": [
+        41.04483296396211,
+        43.15116599900648,
+        40.91229196637869,
+        41.25275003025308,
+        41.240000049583614
+      ],
+      "numrust_ms": 42.12525,
+      "numrust_pass_millis": [
+        42.12525,
+        42.621291,
+        42.0925,
+        40.590166,
+        42.425583
+      ],
+      "numrust_slowdown_vs_numpy": 0.02146580866518022,
+      "priority": 2,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_matmul_trans_a_atc",
+      "speedup_vs_numpy": 0.978985289098192,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T.copy()), repeated equally"
+    }
+  ],
   "sort": "NumPy-winning rows only, ordered by ascending speedup_vs_numpy",
   "source_report": "benchmark-results/external-numpy-asv-inspired.json",
-  "supported_external_cases": 76
+  "supported_external_cases": 80
 }

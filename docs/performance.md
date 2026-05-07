@@ -9,8 +9,8 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 | Suite | Cases | Rust wins | Python wins | Speedup summary | Checksum failures |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | NumRust vs NumPy, targeted same-data | 10 | 10 | 0 | 1.67x geomean | 0 |
-| NumRust vs NumPy, external ASV-derived | 76 | 76 | 0 | 9.46x geomean | 0 |
-| NumRust vs NumPy, focused current-loss rerun | 0 | 0 | 0 | no current losses | 0 |
+| NumRust vs NumPy, external ASV-derived | 80 | 78 | 2 | 8.79x geomean | 0 |
+| NumRust vs NumPy, focused current-loss rerun | 2 | 1 | 1 | near-tie loss remains | 0 |
 | StatsRust vs StatsModels | 4 | 4 | 0 | 3.51x geomean | 0 |
 | SciRust vs SciPy | 9 | 9 | 0 | 19.11x geomean | 0 |
 | FrameRust vs Pandas | 1 | 1 | 0 | 2.14x | 0 |
@@ -45,7 +45,7 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 - `tensordot_axes` covers explicit-axis tensor contractions and uses packed BLAS for contiguous `f64` contraction plans, including direct-pack elision when an operand already matches the GEMM layout.
 - Contiguous `outer_product`, `weighted_axis1_sum`, and `bilinear_form` use Accelerate BLAS rank-1, matrix-vector, and dot kernels on macOS.
 - Shape and view transforms do not copy data for `broadcast_to`, `expand_dims`, `squeeze`, `reshape`, `flip`, and `moveaxis`; `roll` writes one owned C-order output. Pinned NumPy ASV manipulation rows cover all of these paths.
-- `concatenate` and `stack` cover same-shape owned arrays with C-order output and axis validation; pinned NumPy ASV rows cover axis-0 and axis-1 copies for five `float64` matrices.
+- `concatenate` and `stack` cover same-shape owned arrays with C-order output and axis validation; pinned NumPy ASV rows cover axis-0 and axis-1 copies for five `float64` matrices plus axis-0 `float32` and `int32` owned outputs.
 
 ## Benchmark Hook
 
@@ -64,9 +64,9 @@ The benchmark harnesses run one untimed warmup for each case on both engines, th
 
 `benchmarks/compare_numpy.py` is the NumPy comparison harness. Current evidence is written to `benchmark-results/numrust-vs-numpy.md`; the latest run ranks NumRust higher on 10 of 10 targeted cases, with 1.67x geometric-mean speedup and 0 checksum failures. This is still a targeted implemented-slice result, not a full NumPy replacement claim.
 
-`benchmarks/external_numpy_cases.py` is the externally derived harness. It pins NumPy ASV and Array API test sources in `benchmark-results/external-source-lock.json`, then translates supported NumPy ASV cases without filtering out losses. Latest run: NumRust wins 76 of 76 supported external cases, NumPy wins 0, with 9.46x geometric-mean speedup. The harness uses 5 full passes per engine, alternates engine order, aggregates each case by median across passes, supports sharded one-pass artifacts for long runs, writes pass samples for NumPy-winning rows, emits loss-triage artifacts sorted by worst NumPy win, and can rerun focused NumPy-winning rows after backend experiments with explicit stability metadata. This ranks NumRust higher on supported external cases only and does not prove global NumPy replacement status.
+`benchmarks/external_numpy_cases.py` is the externally derived harness. It pins NumPy ASV and Array API test sources in `benchmark-results/external-source-lock.json`, then translates supported NumPy ASV cases without filtering out losses. Latest run: NumRust wins 78 of 80 supported external cases, NumPy wins 2 linalg near ties, with 8.79x geometric-mean speedup. The harness uses 5 full passes per engine, alternates engine order, aggregates each case by median across passes, supports sharded one-pass artifacts for long runs, writes pass samples for NumPy-winning rows, emits loss-triage artifacts sorted by worst NumPy win, and can rerun focused NumPy-winning rows after backend experiments with explicit stability metadata. This ranks NumRust higher on supported external cases only and does not prove global NumPy replacement status.
 
-The latest focused-loss artifact has 0 cases because the full 76-case report has no NumPy-winning supported rows. It is still not a replacement for broader external coverage.
+The latest focused-loss artifact reruns the 2 current NumPy-winning full-report rows with 3 passes per engine. It flips 1 row back to NumRust and leaves 1 NumPy near-tie winner. It is still not a replacement for the full external report or broader external coverage.
 
 `benchmarks/compare_statsmodels.py` is the same-data StatsModels comparison harness for the implemented StatsRust slice. Latest run: StatsRust wins 4 of 4 cases against StatsModels 0.14.6, StatsModels wins 0, with 3.51x geometric-mean speedup and no checksum failures. This does not prove full StatsModels replacement status.
 
