@@ -44,7 +44,7 @@ Full tables, rerun commands, and claim gates live in [`docs/benchmark-dashboard.
 
 ## Progress TODO
 
-Backfilled items are completed work imported from the pre-GitHub build history. New work should update this list in the same commit as the implementation or benchmark evidence.
+Backfilled items are completed work imported from the pre-GitHub build history. New work should update this list in a dedicated TODO commit after the implementation or benchmark evidence commit.
 
 ### Backfilled Done
 
@@ -80,13 +80,14 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07: Add same-dtype NumRust `broadcast_arrays` and the pinned NumPy ASV `BroadcastArrays.time_broadcast_arrays` row. Step evidence: 67 NumRust wins, 1 NumPy win, 8.67x geomean, 0 checksum failures. Evidence: `crates/numrs-core/src/array.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
 - [x] 2026-05-07: Expand pinned NumPy ASV broadcast parameter coverage with four more `BroadcastArrays` and `BroadcastArraysTo` rows. Step evidence: 71 NumRust wins, 1 NumPy win, 9.07x geomean, 0 checksum failures. Evidence: `benchmarks/external_numpy_cases.py`, `benchmark-results/external-numpy-asv-inspired.md`.
 - [x] 2026-05-07: Add pinned NumPy ASV `float32` broadcast manipulation rows for `BroadcastArrays` and `BroadcastArraysTo`. Step evidence: 73 NumRust wins, 1 NumPy win, 9.23x geomean, 0 checksum failures. Evidence: `benchmarks/external_numpy_cases.py`, `benchmark-results/external-numpy-asv-inspired.md`.
-- [x] 2026-05-07: Add pinned NumPy ASV `int32` broadcast manipulation rows for `BroadcastArrays` and `BroadcastArraysTo`. Latest external ASV evidence: 76 NumRust wins, 0 NumPy wins, 9.46x geomean, 0 checksum failures. Evidence: `benchmarks/external_numpy_cases.py`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [x] 2026-05-07: Add pinned NumPy ASV `int32` broadcast manipulation rows for `BroadcastArrays` and `BroadcastArraysTo`. Step evidence: 76 NumRust wins, 0 NumPy wins, 9.46x geomean, 0 checksum failures. Evidence: `benchmarks/external_numpy_cases.py`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [x] 2026-05-07: Add pinned NumPy ASV `float32` and `int32` `ConcatenateStackArrays` axis-0 owned-output rows for `concatenate` and `stack`. Latest external ASV evidence: 78 NumRust wins, 2 NumPy wins, 8.79x geomean, 0 checksum failures; focused-loss evidence leaves 1 of 2 rows as a NumPy near-tie. Evidence: `benchmarks/external_numpy_cases.py`, `benchmark-results/external-numpy-asv-inspired.md`, `benchmark-results/external-numpy-loss-focused.md`.
 
 ### Open
 
 - [ ] 2026-05-07: Add more externally derived NumPy ASV cases without filtering out losses. Target: `benchmarks/external_numpy_cases.py`.
 - [ ] 2026-05-07: Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. Target: `docs/performance.md`.
-- [ ] 2026-05-07: Stabilize current full external NumPy linalg near ties without hiding rows. Latest full report has 0 NumPy wins but 6 near-tie linalg rows, so broaden coverage and optimize only when full-report timings improve. Target: `crates/numrs-core/src/blas.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [ ] 2026-05-07: Stabilize current full external NumPy linalg near ties without hiding rows. Latest full report has 2 NumPy-winning linalg near ties and 5 near-tie rows; the focused 3-pass rerun leaves 1 NumPy near-tie winner. Target: `crates/numrs-core/src/blas.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
 - [x] 2026-05-07: Optimize visible NumRust targeted losses without hiding rows: `where_select_f64_loop` and near-tie `dot_f64_192`. Latest targeted same-data evidence: 10 NumRust wins, 0 NumPy wins, 1.67x geomean, 0 checksum failures. Evidence: `crates/numrs-core/src/array.rs`, `benchmark-results/numrust-vs-numpy.md`.
 - [ ] 2026-05-07: Grow StatsRust and SciRust with more externally derived benchmarks. Target: `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py`.
 - [ ] 2026-05-07: Keep release and CI work deferred until the maintainer asks for it. Target: no `.github/workflows` or release automation for now.
