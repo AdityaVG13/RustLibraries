@@ -1,0 +1,41 @@
+{
+  "comparison": [
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "framerust_ms": 1.143834,
+      "name": "groupby_i64_sum_mean_count_250k_1000",
+      "pandas_ms": 2.450041996780783,
+      "speedup_vs_pandas": 2.1419559103687975,
+      "winner": "framerust"
+    }
+  ],
+  "framerust": {
+    "cases": [
+      {
+        "checksum": 6514488.02,
+        "millis": 1.143834,
+        "name": "groupby_i64_sum_mean_count_250k_1000"
+      }
+    ],
+    "engine": "framerust"
+  },
+  "pandas": {
+    "cases": [
+      {
+        "checksum": 6514488.02,
+        "millis": 2.450041996780783,
+        "name": "groupby_i64_sum_mean_count_250k_1000"
+      }
+    ],
+    "engine": "pandas",
+    "pandas_version": "3.0.2"
+  },
+  "score": {
+    "cases": 1,
+    "checksum_failures": [],
+    "framerust_wins": 1,
+    "global_pandas_replacement_claim": false,
+    "pandas_wins": 0
+  }
+}
