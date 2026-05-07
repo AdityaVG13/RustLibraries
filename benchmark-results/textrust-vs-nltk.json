@@ -1,0 +1,40 @@
+{
+  "comparison": [
+    {
+      "checksum_match": true,
+      "name": "wordpunct_tokenize_200000_sentences",
+      "nltk_ms": 526.8283329787664,
+      "speedup_vs_nltk": 23.920828539644592,
+      "textrust_ms": 22.023833,
+      "winner": "textrust"
+    }
+  ],
+  "nltk": {
+    "cases": [
+      {
+        "checksum": 28953894188306,
+        "millis": 526.8283329787664,
+        "name": "wordpunct_tokenize_200000_sentences"
+      }
+    ],
+    "engine": "nltk",
+    "nltk_version": "3.9.4"
+  },
+  "score": {
+    "cases": 1,
+    "checksum_failures": [],
+    "global_nltk_replacement_claim": false,
+    "nltk_wins": 0,
+    "textrust_wins": 1
+  },
+  "textrust": {
+    "cases": [
+      {
+        "checksum": 28953894188306,
+        "millis": 22.023833,
+        "name": "wordpunct_tokenize_200000_sentences"
+      }
+    ],
+    "engine": "textrust"
+  }
+}
