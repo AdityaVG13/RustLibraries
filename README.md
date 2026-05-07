@@ -28,6 +28,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07 backfilled: Start StatsRust and SciRust slices with tests and comparison harnesses. Evidence: `crates/statsrust`, `crates/scirust`, `benchmark-results/*statsmodels*`, `benchmark-results/*scipy*`.
 - [x] 2026-05-07 backfilled: Invent and implement RigorTrail for evidence-ledger validation and claim gating. Evidence: `crates/rigortrail`, `docs/rigortrail.md`.
 - [x] 2026-05-07 backfilled: Pass Rust format, clippy, workspace tests, Python benchmark schema tests, and source-lock verification before GitHub import. Evidence: `docs/completion-audit.md`.
+- [x] 2026-05-07: Start FrameRust with typed columns, validated frames, first-seen-order groupby, and `count`/`sum`/`mean`/`min`/`max` aggregations. Evidence: `crates/framerust`.
 
 ### Open
 
@@ -87,6 +88,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `crates/statsrust`: StatsModels-style statistics crate.
 - `crates/scirust`: SciPy-style numerical routines crate.
 - `crates/rigortrail`: new benchmark/evaluation evidence-ledger crate.
+- `crates/framerust`: Pandas-style data aggregation crate.
 - `docs/research.md`: research notes and source map.
 - `docs/novel-library-research.md`: research notes for the new invented crate.
 - `docs/architecture.md`: architecture decisions and optimization roadmap.
