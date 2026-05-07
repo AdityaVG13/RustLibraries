@@ -20,8 +20,9 @@ This file is intentionally committed and should be updated in normal git commits
 - [x] NumRust manipulation v2: add `flip`, `moveaxis`, and `roll`, plus pinned NumPy ASV manipulation rows. Step evidence: 65 NumRust wins, 2 NumPy wins, 8.47x geomean, 0 checksum failures.
 - [x] NumRust broadcast arrays v1: add same-dtype `broadcast_arrays` and pinned NumPy ASV `BroadcastArrays.time_broadcast_arrays` evidence. Step evidence: 67 NumRust wins, 1 NumPy win, 8.67x geomean, 0 checksum failures.
 - [x] NumRust broadcast ASV parameter expansion: add four more pinned `BroadcastArrays` and `BroadcastArraysTo` parameter rows. Step evidence: 71 NumRust wins, 1 NumPy win, 9.07x geomean, 0 checksum failures.
-- [x] NumRust broadcast dtype expansion: add pinned `float32` `BroadcastArrays` and `BroadcastArraysTo` rows. Latest external evidence: 73 NumRust wins, 1 NumPy win, 9.23x geomean, 0 checksum failures.
-- [ ] NumRust external linalg stability cleanup: optimize the current full-report `asv_linalg_matmul_trans_a_at_f64_150x400_400x150` loss without hiding rows. Latest focused rerun flips it to NumRust at 1.05x, but the full 74-case report remains authoritative.
+- [x] NumRust broadcast dtype expansion: add pinned `float32` `BroadcastArrays` and `BroadcastArraysTo` rows. Step evidence: 73 NumRust wins, 1 NumPy win, 9.23x geomean, 0 checksum failures.
+- [x] NumRust integer broadcast dtype expansion: add pinned `int32` `BroadcastArrays` and `BroadcastArraysTo` rows. Latest external evidence: 76 NumRust wins, 0 NumPy wins, 9.46x geomean, 0 checksum failures.
+- [ ] NumRust external linalg stability cleanup: stabilize current full-report near ties without hiding rows. Latest full report has 0 NumPy wins but 6 near-tie linalg rows, so keep broadening coverage and optimize only when full-report timings improve.
 
 ## Ecosystem
 
