@@ -30,6 +30,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07 backfilled: Pass Rust format, clippy, workspace tests, Python benchmark schema tests, and source-lock verification before GitHub import. Evidence: `docs/completion-audit.md`.
 - [x] 2026-05-07: Start FrameRust with typed columns, validated frames, first-seen-order groupby, and `count`/`sum`/`mean`/`min`/`max` aggregations. Evidence: `crates/framerust`.
 - [x] 2026-05-07: Add same-data FrameRust vs Pandas benchmark evidence for the implemented groupby aggregation slice. Evidence: `benchmarks/compare_pandas.py`, `benchmark-results/framerust-vs-pandas.md`.
+- [x] 2026-05-07: Start GraphRust with CSR graph construction, BFS distances, connected components, and PageRank. Evidence: `crates/graphrust`.
 
 ### Open
 
@@ -91,6 +92,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `crates/scirust`: SciPy-style numerical routines crate.
 - `crates/rigortrail`: new benchmark/evaluation evidence-ledger crate.
 - `crates/framerust`: Pandas-style data aggregation crate.
+- `crates/graphrust`: NetworkX-style graph analytics crate.
 - `docs/research.md`: research notes and source map.
 - `docs/novel-library-research.md`: research notes for the new invented crate.
 - `docs/architecture.md`: architecture decisions and optimization roadmap.

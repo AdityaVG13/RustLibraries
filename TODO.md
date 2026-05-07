@@ -33,6 +33,7 @@ This file is intentionally committed and should be updated in normal git commits
 - [x] FrameRust v0: typed columns, validated frames, first-seen-order groupby, and numeric aggregations.
 - [x] FrameRust benchmark v0: same-data groupby aggregation comparison against Pandas.
 - [ ] GraphRust: NetworkX-style graph APIs and graph algorithm benchmarks.
+- [x] GraphRust v0: CSR graphs, BFS distances, connected components, and PageRank.
 - [ ] UXRust: Streamlit/Gradio/Dash/NiceGUI-style Rust UI/UX workflow library.
 - [ ] MediaExtractRust: ultra-fast extraction from PDFs, Office docs, images, scans, HTML, markdown, email, and archives.
 - [ ] LearnRust: scikit-learn-style classical ML APIs and benchmarks.
