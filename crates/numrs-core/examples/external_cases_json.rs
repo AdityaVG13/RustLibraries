@@ -614,6 +614,115 @@ fn main() -> numrs_core::Result<()> {
         checksum,
     });
 
+    let stats_data_bool = Array::full(vec![200], true)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += if stats_data_bool.min_all().unwrap() {
+                    1.0
+                } else {
+                    0.0
+                };
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_min_bool_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += if stats_data_bool.max_all().unwrap() {
+                    1.0
+                } else {
+                    0.0
+                };
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_max_bool_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_bool.mean_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_mean_bool_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_bool.std_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_std_bool_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += if stats_data_bool.prod_all().unwrap() {
+                    1.0
+                } else {
+                    0.0
+                };
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_prod_bool_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_bool.var_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_var_bool_200",
+        millis,
+        checksum,
+    });
+
     let argmax_data = Array::<i64>::zeros(vec![200_000])?;
     let (millis, checksum) = bench(
         || {

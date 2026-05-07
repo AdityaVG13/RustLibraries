@@ -407,6 +407,16 @@ fn reduces_all_and_by_axis() {
     assert!((u64_values.var_all().unwrap() - 1.25).abs() < 1e-12);
     assert!((u64_values.std_all().unwrap() - 1.25_f64.sqrt()).abs() < 1e-12);
 
+    let bool_values = Array::from_vec(vec![4], vec![true, true, false, true]).unwrap();
+    assert_eq!(bool_values.mean_all().unwrap(), 0.75);
+    assert!((bool_values.var_all().unwrap() - 0.1875).abs() < 1e-12);
+    assert!((bool_values.std_all().unwrap() - 0.1875_f64.sqrt()).abs() < 1e-12);
+    assert!(!bool_values.prod_all().unwrap());
+    assert!(Array::from_vec(vec![3], vec![true, true, true])
+        .unwrap()
+        .prod_all()
+        .unwrap());
+
     let by_col = a.sum_axis(0).unwrap();
     assert_eq!(by_col.shape(), &[3]);
     assert_eq!(by_col.as_slice(), &[5.0, 7.0, 9.0]);

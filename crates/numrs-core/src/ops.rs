@@ -395,6 +395,36 @@ impl Array<u64> {
 }
 
 impl Array<bool> {
+    pub fn mean_all(&self) -> Result<f64> {
+        if let Some(value) = self.uniform_value() {
+            if !self.is_empty() {
+                return Ok(if *value { 1.0 } else { 0.0 });
+            }
+        }
+        self.view().mean_all()
+    }
+
+    pub fn var_all(&self) -> Result<f64> {
+        if self.has_uniform_storage() && !self.is_empty() {
+            return Ok(0.0);
+        }
+        self.view().var_all()
+    }
+
+    pub fn std_all(&self) -> Result<f64> {
+        if self.has_uniform_storage() && !self.is_empty() {
+            return Ok(0.0);
+        }
+        self.view().std_all()
+    }
+
+    pub fn prod_all(&self) -> Result<bool> {
+        if let Some(value) = self.uniform_value() {
+            return Ok(*value || self.is_empty());
+        }
+        self.view().prod_all()
+    }
+
     pub fn logical_not(&self) -> Result<Array<bool>> {
         self.view().logical_not()
     }
@@ -2680,6 +2710,48 @@ fn swap_rows(matrix: &mut [f64], n: usize, left: usize, right: usize) {
 }
 
 impl<'a> ArrayView<'a, bool> {
+    pub fn mean_all(&self) -> Result<f64> {
+        let len = self.len();
+        if len == 0 {
+            return Err(NumRsError::EmptyReduction);
+        }
+        let mut acc = 0usize;
+        for offset in self.offset_iter()? {
+            acc += usize::from(self.data_at(offset));
+        }
+        Ok(acc as f64 / len as f64)
+    }
+
+    pub fn var_all(&self) -> Result<f64> {
+        let len = self.len();
+        if len == 0 {
+            return Err(NumRsError::EmptyReduction);
+        }
+        let mean = self.mean_all()?;
+        let mut acc = 0.0;
+        for offset in self.offset_iter()? {
+            let diff = f64::from(self.data_at(offset)) - mean;
+            acc += diff * diff;
+        }
+        Ok(acc / len as f64)
+    }
+
+    pub fn std_all(&self) -> Result<f64> {
+        Ok(self.var_all()?.sqrt())
+    }
+
+    pub fn prod_all(&self) -> Result<bool> {
+        if let Some(slice) = self.contiguous_slice() {
+            return Ok(slice.iter().copied().all(|value| value));
+        }
+        for offset in self.offset_iter()? {
+            if !self.data_at(offset) {
+                return Ok(false);
+            }
+        }
+        Ok(true)
+    }
+
     pub fn logical_not(&self) -> Result<Array<bool>> {
         self.map(|value| !value)
     }
