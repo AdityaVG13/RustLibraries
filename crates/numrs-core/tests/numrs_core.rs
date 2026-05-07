@@ -402,6 +402,11 @@ fn reduces_all_and_by_axis() {
     assert!((i64_values.var_all().unwrap() - 1.25).abs() < 1e-12);
     assert!((i64_values.std_all().unwrap() - 1.25_f64.sqrt()).abs() < 1e-12);
 
+    let u64_values = Array::from_vec(vec![4], vec![1_u64, 2, 3, 4]).unwrap();
+    assert_eq!(u64_values.mean_all().unwrap(), 2.5);
+    assert!((u64_values.var_all().unwrap() - 1.25).abs() < 1e-12);
+    assert!((u64_values.std_all().unwrap() - 1.25_f64.sqrt()).abs() < 1e-12);
+
     let by_col = a.sum_axis(0).unwrap();
     assert_eq!(by_col.shape(), &[3]);
     assert_eq!(by_col.as_slice(), &[5.0, 7.0, 9.0]);

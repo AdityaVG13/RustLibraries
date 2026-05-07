@@ -110,6 +110,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=100_000,
     ),
     CaseSpec(
+        name="asv_reduce_stats_min_u64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_min(dtype=uint64)",
+        translation="direct setup and operation: min(ones(200, uint64)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_reduce_stats_max_f64_200",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_reduce.py",
@@ -131,6 +139,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         source_path="benchmarks/benchmarks/bench_reduce.py",
         source_symbol="StatsReductions.time_max(dtype=int64)",
         translation="direct setup and operation: max(ones(200, int64)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_stats_max_u64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_max(dtype=uint64)",
+        translation="direct setup and operation: max(ones(200, uint64)), repeated because ASV auto-calibrates tiny timings",
         repetitions=100_000,
     ),
     CaseSpec(
@@ -158,6 +174,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=100_000,
     ),
     CaseSpec(
+        name="asv_reduce_stats_mean_u64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_mean(dtype=uint64)",
+        translation="direct setup and operation: mean(ones(200, uint64)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_reduce_stats_std_f64_200",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_reduce.py",
@@ -179,6 +203,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         source_path="benchmarks/benchmarks/bench_reduce.py",
         source_symbol="StatsReductions.time_std(dtype=int64)",
         translation="direct setup and operation: std(ones(200, int64)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_stats_std_u64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_std(dtype=uint64)",
+        translation="direct setup and operation: std(ones(200, uint64)), repeated because ASV auto-calibrates tiny timings",
         repetitions=100_000,
     ),
     CaseSpec(
@@ -206,6 +238,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=100_000,
     ),
     CaseSpec(
+        name="asv_reduce_stats_prod_u64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_prod(dtype=uint64)",
+        translation="direct setup and operation: prod(ones(200, uint64)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_reduce_stats_var_f64_200",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_reduce.py",
@@ -227,6 +267,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         source_path="benchmarks/benchmarks/bench_reduce.py",
         source_symbol="StatsReductions.time_var(dtype=int64)",
         translation="direct setup and operation: var(ones(200, int64)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_stats_var_u64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_var(dtype=uint64)",
+        translation="direct setup and operation: var(ones(200, uint64)), repeated because ASV auto-calibrates tiny timings",
         repetitions=100_000,
     ),
     CaseSpec(
@@ -1115,6 +1163,62 @@ def bench_numpy() -> dict:
 
     millis, checksum = median_ms(stats_var_i64, rounds=7)
     cases.append({"name": "asv_reduce_stats_var_i64_200", "millis": millis, "checksum": checksum})
+
+    stats_data_u64 = np.ones(200, dtype=np.uint64)
+
+    def stats_min_u64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += float(np.min(stats_data_u64))
+        return checksum
+
+    millis, checksum = median_ms(stats_min_u64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_min_u64_200", "millis": millis, "checksum": checksum})
+
+    def stats_max_u64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += float(np.max(stats_data_u64))
+        return checksum
+
+    millis, checksum = median_ms(stats_max_u64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_max_u64_200", "millis": millis, "checksum": checksum})
+
+    def stats_mean_u64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += float(np.mean(stats_data_u64))
+        return checksum
+
+    millis, checksum = median_ms(stats_mean_u64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_mean_u64_200", "millis": millis, "checksum": checksum})
+
+    def stats_std_u64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += float(np.std(stats_data_u64))
+        return checksum
+
+    millis, checksum = median_ms(stats_std_u64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_std_u64_200", "millis": millis, "checksum": checksum})
+
+    def stats_prod_u64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += float(np.prod(stats_data_u64))
+        return checksum
+
+    millis, checksum = median_ms(stats_prod_u64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_prod_u64_200", "millis": millis, "checksum": checksum})
+
+    def stats_var_u64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += float(np.var(stats_data_u64))
+        return checksum
+
+    millis, checksum = median_ms(stats_var_u64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_var_u64_200", "millis": millis, "checksum": checksum})
 
     argmax_data = np.zeros(200_000, dtype=np.int64)
 
@@ -2104,6 +2208,12 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         "asv_reduce_stats_std_i64_200",
         "asv_reduce_stats_prod_i64_200",
         "asv_reduce_stats_var_i64_200",
+        "asv_reduce_stats_min_u64_200",
+        "asv_reduce_stats_max_u64_200",
+        "asv_reduce_stats_mean_u64_200",
+        "asv_reduce_stats_std_u64_200",
+        "asv_reduce_stats_prod_u64_200",
+        "asv_reduce_stats_var_u64_200",
         "asv_manipulate_broadcast_arrays_f64_16x32",
         "asv_manipulate_broadcast_arrays_f64_128x256",
         "asv_manipulate_broadcast_arrays_f32_128x256",
@@ -2151,6 +2261,7 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
     one_dim_big = np.arange(480_000, dtype=np.float64)
     stats_data_f32 = np.ones(200, dtype=np.float32)
     stats_data_i64 = np.ones(200, dtype=np.int64)
+    stats_data_u64 = np.ones(200, dtype=np.uint64)
     concat_arrays = [
         (np.arange(32 * 64, dtype=np.float64) + idx * 32 * 64).reshape(32, 64)
         for idx in range(5)
@@ -2268,6 +2379,22 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
     append_selected_stats_i64("std", np.std)
     append_selected_stats_i64("prod", np.prod)
     append_selected_stats_i64("var", np.var)
+
+    def append_selected_stats_u64(op_name: str, op: Callable[[np.ndarray], np.generic]) -> None:
+        def stats_op() -> float:
+            checksum = 0.0
+            for _ in range(100_000):
+                checksum += float(op(stats_data_u64))
+            return checksum
+
+        append_case(f"asv_reduce_stats_{op_name}_u64_200", stats_op)
+
+    append_selected_stats_u64("min", np.min)
+    append_selected_stats_u64("max", np.max)
+    append_selected_stats_u64("mean", np.mean)
+    append_selected_stats_u64("std", np.std)
+    append_selected_stats_u64("prod", np.prod)
+    append_selected_stats_u64("var", np.var)
 
     def append_selected_broadcast_arrays(dtype_name: str, rows: int, cols: int, repetitions: int) -> None:
         dtype = np.dtype(dtype_name)
