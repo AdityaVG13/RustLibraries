@@ -1,0 +1,61 @@
+{
+  "comparison": [
+    {
+      "checksum_match": true,
+      "mediaextractrust_ms": 5.149333,
+      "name": "html_text_20000_sections",
+      "python_ms": 418.1854169582948,
+      "speedup_vs_python": 81.21156991755919,
+      "winner": "mediaextractrust"
+    },
+    {
+      "checksum_match": true,
+      "mediaextractrust_ms": 3.829209,
+      "name": "pdf_literal_text_20000_lines",
+      "python_ms": 470.73954198276624,
+      "speedup_vs_python": 122.93388581891618,
+      "winner": "mediaextractrust"
+    }
+  ],
+  "mediaextractrust": {
+    "cases": [
+      {
+        "checksum": 13470951013767602139,
+        "millis": 5.149333,
+        "name": "html_text_20000_sections"
+      },
+      {
+        "checksum": 2618066270990984727,
+        "millis": 3.829209,
+        "name": "pdf_literal_text_20000_lines"
+      }
+    ],
+    "engine": "mediaextractrust"
+  },
+  "python": {
+    "cases": [
+      {
+        "checksum": 13470951013767602139,
+        "millis": 418.1854169582948,
+        "name": "html_text_20000_sections"
+      },
+      {
+        "checksum": 2618066270990984727,
+        "millis": 470.73954198276624,
+        "name": "pdf_literal_text_20000_lines"
+      }
+    ],
+    "engine": "python",
+    "libraries": {
+      "beautifulsoup4": "bs4",
+      "pypdf": "pypdf"
+    }
+  },
+  "score": {
+    "cases": 2,
+    "checksum_failures": [],
+    "global_python_document_pipeline_replacement_claim": false,
+    "mediaextractrust_wins": 2,
+    "python_wins": 0
+  }
+}
