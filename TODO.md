@@ -22,8 +22,9 @@ This file is intentionally committed and should be updated in normal git commits
 - [x] NumRust broadcast ASV parameter expansion: add four more pinned `BroadcastArrays` and `BroadcastArraysTo` parameter rows. Step evidence: 71 NumRust wins, 1 NumPy win, 9.07x geomean, 0 checksum failures.
 - [x] NumRust broadcast dtype expansion: add pinned `float32` `BroadcastArrays` and `BroadcastArraysTo` rows. Step evidence: 73 NumRust wins, 1 NumPy win, 9.23x geomean, 0 checksum failures.
 - [x] NumRust integer broadcast dtype expansion: add pinned `int32` `BroadcastArrays` and `BroadcastArraysTo` rows. Step evidence: 76 NumRust wins, 0 NumPy wins, 9.46x geomean, 0 checksum failures.
-- [x] NumRust concatenate/stack dtype expansion: add pinned `float32` and `int32` `ConcatenateStackArrays` axis-0 owned-output rows. Latest external evidence: 78 NumRust wins, 2 NumPy wins, 8.79x geomean, 0 checksum failures; focused-loss evidence leaves 1 of 2 rows as a NumPy near-tie.
-- [ ] NumRust external linalg stability cleanup: stabilize current full-report near ties without hiding rows. Latest full report has 2 NumPy-winning linalg near ties and 5 near-tie rows; the focused 3-pass rerun leaves 1 NumPy near-tie winner.
+- [x] NumRust concatenate/stack dtype expansion: add pinned `float32` and `int32` `ConcatenateStackArrays` axis-0 owned-output rows. Step evidence: 78 NumRust wins, 2 NumPy wins, 8.79x geomean, 0 checksum failures; focused-loss evidence leaves 1 of 2 rows as a NumPy near-tie.
+- [x] NumRust concatenate/stack axis-1 dtype expansion: add pinned `float32` and `int32` `ConcatenateStackArrays` axis-1 owned-output rows. Latest external evidence: 82 NumRust wins, 2 NumPy wins, 8.41x geomean, 0 checksum failures; focused-loss evidence flips both current NumPy-winning rows to NumRust.
+- [ ] NumRust external linalg stability cleanup: stabilize current full-report near ties without hiding rows. Latest full report has 2 NumPy-winning linalg near ties and 7 near-tie rows; the focused 3-pass rerun flips both current NumPy-winning rows to NumRust, but full-report wins remain the target.
 
 ## Ecosystem
 
