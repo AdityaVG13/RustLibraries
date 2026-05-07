@@ -126,6 +126,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=100_000,
     ),
     CaseSpec(
+        name="asv_reduce_stats_min_c64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_min(dtype=complex64)",
+        translation="direct setup and operation: min(ones(200, complex64) * 1j), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_reduce_stats_max_f64_200",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_reduce.py",
@@ -163,6 +171,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         source_path="benchmarks/benchmarks/bench_reduce.py",
         source_symbol="StatsReductions.time_max(dtype=bool_)",
         translation="direct setup and operation: max(ones(200, bool_)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_stats_max_c64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_max(dtype=complex64)",
+        translation="direct setup and operation: max(ones(200, complex64) * 1j), repeated because ASV auto-calibrates tiny timings",
         repetitions=100_000,
     ),
     CaseSpec(
@@ -206,6 +222,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=100_000,
     ),
     CaseSpec(
+        name="asv_reduce_stats_mean_c64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_mean(dtype=complex64)",
+        translation="direct setup and operation: mean(ones(200, complex64) * 1j), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_reduce_stats_std_f64_200",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_reduce.py",
@@ -243,6 +267,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         source_path="benchmarks/benchmarks/bench_reduce.py",
         source_symbol="StatsReductions.time_std(dtype=bool_)",
         translation="direct setup and operation: std(ones(200, bool_)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_stats_std_c64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_std(dtype=complex64)",
+        translation="direct setup and operation: std(ones(200, complex64) * 1j), repeated because ASV auto-calibrates tiny timings",
         repetitions=100_000,
     ),
     CaseSpec(
@@ -286,6 +318,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=100_000,
     ),
     CaseSpec(
+        name="asv_reduce_stats_prod_c64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_prod(dtype=complex64)",
+        translation="direct setup and operation: prod(ones(200, complex64) * 1j), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_reduce_stats_var_f64_200",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_reduce.py",
@@ -323,6 +363,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         source_path="benchmarks/benchmarks/bench_reduce.py",
         source_symbol="StatsReductions.time_var(dtype=bool_)",
         translation="direct setup and operation: var(ones(200, bool_)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_stats_var_c64_200",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="StatsReductions.time_var(dtype=complex64)",
+        translation="direct setup and operation: var(ones(200, complex64) * 1j), repeated because ASV auto-calibrates tiny timings",
         repetitions=100_000,
     ),
     CaseSpec(
@@ -936,6 +984,11 @@ def edge_checksum(array: np.ndarray) -> float:
     return float(flat[0]) + float(flat[-1])
 
 
+def complex_scalar_checksum(value: np.generic) -> float:
+    item = complex(value)
+    return float(item.real + 7.0 * item.imag)
+
+
 def shape_checksum(array: np.ndarray) -> float:
     return float(sum(array.shape) + array.ndim)
 
@@ -1323,6 +1376,63 @@ def bench_numpy() -> dict:
 
     millis, checksum = median_ms(stats_var_bool, rounds=7)
     cases.append({"name": "asv_reduce_stats_var_bool_200", "millis": millis, "checksum": checksum})
+
+    stats_data_c64 = np.ones(200, dtype=np.complex64)
+    stats_data_c64 = stats_data_c64 * stats_data_c64.T * 1j
+
+    def stats_min_c64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += complex_scalar_checksum(np.min(stats_data_c64))
+        return checksum
+
+    millis, checksum = median_ms(stats_min_c64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_min_c64_200", "millis": millis, "checksum": checksum})
+
+    def stats_max_c64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += complex_scalar_checksum(np.max(stats_data_c64))
+        return checksum
+
+    millis, checksum = median_ms(stats_max_c64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_max_c64_200", "millis": millis, "checksum": checksum})
+
+    def stats_mean_c64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += complex_scalar_checksum(np.mean(stats_data_c64))
+        return checksum
+
+    millis, checksum = median_ms(stats_mean_c64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_mean_c64_200", "millis": millis, "checksum": checksum})
+
+    def stats_std_c64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += float(np.std(stats_data_c64))
+        return checksum
+
+    millis, checksum = median_ms(stats_std_c64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_std_c64_200", "millis": millis, "checksum": checksum})
+
+    def stats_prod_c64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += complex_scalar_checksum(np.prod(stats_data_c64))
+        return checksum
+
+    millis, checksum = median_ms(stats_prod_c64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_prod_c64_200", "millis": millis, "checksum": checksum})
+
+    def stats_var_c64() -> float:
+        checksum = 0.0
+        for _ in range(100_000):
+            checksum += float(np.var(stats_data_c64))
+        return checksum
+
+    millis, checksum = median_ms(stats_var_c64, rounds=7)
+    cases.append({"name": "asv_reduce_stats_var_c64_200", "millis": millis, "checksum": checksum})
 
     argmax_data = np.zeros(200_000, dtype=np.int64)
 
@@ -2324,6 +2434,12 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         "asv_reduce_stats_std_bool_200",
         "asv_reduce_stats_prod_bool_200",
         "asv_reduce_stats_var_bool_200",
+        "asv_reduce_stats_min_c64_200",
+        "asv_reduce_stats_max_c64_200",
+        "asv_reduce_stats_mean_c64_200",
+        "asv_reduce_stats_std_c64_200",
+        "asv_reduce_stats_prod_c64_200",
+        "asv_reduce_stats_var_c64_200",
         "asv_manipulate_broadcast_arrays_f64_16x32",
         "asv_manipulate_broadcast_arrays_f64_128x256",
         "asv_manipulate_broadcast_arrays_f32_128x256",
@@ -2373,6 +2489,8 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
     stats_data_i64 = np.ones(200, dtype=np.int64)
     stats_data_u64 = np.ones(200, dtype=np.uint64)
     stats_data_bool = np.ones(200, dtype=np.bool_)
+    stats_data_c64 = np.ones(200, dtype=np.complex64)
+    stats_data_c64 = stats_data_c64 * stats_data_c64.T * 1j
     concat_arrays = [
         (np.arange(32 * 64, dtype=np.float64) + idx * 32 * 64).reshape(32, 64)
         for idx in range(5)
@@ -2522,6 +2640,32 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
     append_selected_stats_bool("std", np.std)
     append_selected_stats_bool("prod", np.prod)
     append_selected_stats_bool("var", np.var)
+
+    def append_selected_stats_c64(op_name: str, op: Callable[[np.ndarray], np.generic]) -> None:
+        def stats_op() -> float:
+            checksum = 0.0
+            for _ in range(100_000):
+                checksum += complex_scalar_checksum(op(stats_data_c64))
+            return checksum
+
+        append_case(f"asv_reduce_stats_{op_name}_c64_200", stats_op)
+
+    append_selected_stats_c64("min", np.min)
+    append_selected_stats_c64("max", np.max)
+    append_selected_stats_c64("mean", np.mean)
+
+    def append_selected_real_stats_c64(op_name: str, op: Callable[[np.ndarray], np.generic]) -> None:
+        def stats_op() -> float:
+            checksum = 0.0
+            for _ in range(100_000):
+                checksum += float(op(stats_data_c64))
+            return checksum
+
+        append_case(f"asv_reduce_stats_{op_name}_c64_200", stats_op)
+
+    append_selected_real_stats_c64("std", np.std)
+    append_selected_stats_c64("prod", np.prod)
+    append_selected_real_stats_c64("var", np.var)
 
     def append_selected_broadcast_arrays(dtype_name: str, rows: int, cols: int, repetitions: int) -> None:
         dtype = np.dtype(dtype_name)

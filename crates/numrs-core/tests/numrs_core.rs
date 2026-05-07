@@ -1,4 +1,4 @@
-use numrs_core::{promote_dtype, Array, DTypeKind, NumRsError, Slice};
+use numrs_core::{promote_dtype, Array, Complex32, DTypeKind, NumRsError, Slice};
 
 #[test]
 fn constructs_typed_arrays_and_reports_dtype() {
@@ -416,6 +416,25 @@ fn reduces_all_and_by_axis() {
         .unwrap()
         .prod_all()
         .unwrap());
+
+    let complex_values = Array::from_vec(
+        vec![3],
+        vec![
+            Complex32::new(1.0, 2.0),
+            Complex32::new(1.0, 1.0),
+            Complex32::new(2.0, -1.0),
+        ],
+    )
+    .unwrap();
+    assert_eq!(complex_values.min_all().unwrap(), Complex32::new(1.0, 1.0));
+    assert_eq!(complex_values.max_all().unwrap(), Complex32::new(2.0, -1.0));
+    assert_eq!(complex_values.prod_all().unwrap(), Complex32::new(1.0, 7.0));
+    assert_eq!(
+        complex_values.mean_all().unwrap(),
+        Complex32::new(4.0 / 3.0, 2.0 / 3.0)
+    );
+    assert!((complex_values.var_all().unwrap() - (16.0 / 9.0)).abs() < 1e-6);
+    assert!((complex_values.std_all().unwrap() - (16.0_f64 / 9.0).sqrt()).abs() < 1e-6);
 
     let by_col = a.sum_axis(0).unwrap();
     assert_eq!(by_col.shape(), &[3]);

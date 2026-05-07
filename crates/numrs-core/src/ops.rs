@@ -167,7 +167,7 @@ where
 
 impl<T> Array<T>
 where
-    T: Copy + PartialOrd,
+    T: ExtremeKernel,
 {
     pub fn min_all(&self) -> Result<T> {
         if let Some(value) = self.uniform_value() {
@@ -435,6 +435,31 @@ impl Array<bool> {
 
     pub fn logical_or(&self, rhs: &Array<bool>) -> Result<Array<bool>> {
         self.view().logical_or(&rhs.view())
+    }
+}
+
+impl Array<Complex32> {
+    pub fn mean_all(&self) -> Result<Complex32> {
+        if let Some(value) = self.uniform_value() {
+            if !self.is_empty() {
+                return Ok(*value);
+            }
+        }
+        self.view().mean_all()
+    }
+
+    pub fn var_all(&self) -> Result<f64> {
+        if self.uniform_value().is_some() && !self.is_empty() {
+            return Ok(0.0);
+        }
+        self.view().var_all()
+    }
+
+    pub fn std_all(&self) -> Result<f64> {
+        if self.uniform_value().is_some() && !self.is_empty() {
+            return Ok(0.0);
+        }
+        self.view().std_all()
     }
 }
 
@@ -845,14 +870,14 @@ where
 
 impl<'a, T> ArrayView<'a, T>
 where
-    T: Copy + PartialOrd,
+    T: ExtremeKernel,
 {
     pub fn min_all(&self) -> Result<T> {
-        self.extreme_by(|candidate, best| candidate < best)
+        T::min_all(self)
     }
 
     pub fn max_all(&self) -> Result<T> {
-        self.extreme_by(|candidate, best| candidate > best)
+        T::max_all(self)
     }
 }
 
@@ -885,42 +910,72 @@ where
     }
 }
 
-impl<'a, T> ArrayView<'a, T>
-where
-    T: Copy + PartialOrd,
-{
-    fn extreme_by<F>(&self, better: F) -> Result<T>
-    where
-        F: Fn(T, T) -> bool,
-    {
-        if self.is_empty() {
-            return Err(NumRsError::EmptyReduction);
-        }
+pub trait ExtremeKernel: Copy {
+    fn min_all(view: &ArrayView<'_, Self>) -> Result<Self>;
 
-        if let Some(slice) = self.contiguous_slice() {
-            let (first, rest) = slice.split_first().expect("empty checked above");
-            let mut best_value = *first;
-            for value in rest.iter().copied() {
-                if better(value, best_value) {
-                    best_value = value;
+    fn max_all(view: &ArrayView<'_, Self>) -> Result<Self>;
+}
+
+macro_rules! impl_partial_ord_extreme_kernel {
+    ($($ty:ty),+ $(,)?) => {
+        $(
+            impl ExtremeKernel for $ty {
+                fn min_all(view: &ArrayView<'_, Self>) -> Result<Self> {
+                    generic_extreme_by(view, |candidate, best| candidate < best)
+                }
+
+                fn max_all(view: &ArrayView<'_, Self>) -> Result<Self> {
+                    generic_extreme_by(view, |candidate, best| candidate > best)
                 }
             }
-            return Ok(best_value);
-        }
+        )+
+    };
+}
 
-        let mut offsets = self.offset_iter()?;
-        let first_offset = offsets.next().expect("empty checked above");
-        let mut best_value = self.data_at(first_offset);
+impl_partial_ord_extreme_kernel!(f64, f32, i64, i32, i16, i8, u64, u32, u16, u8, bool);
 
-        for offset in offsets {
-            let value = self.data_at(offset);
+impl ExtremeKernel for Complex32 {
+    fn min_all(view: &ArrayView<'_, Self>) -> Result<Self> {
+        complex32_extreme_all(view, complex32_less)
+    }
+
+    fn max_all(view: &ArrayView<'_, Self>) -> Result<Self> {
+        complex32_extreme_all(view, complex32_greater)
+    }
+}
+
+fn generic_extreme_by<T, F>(view: &ArrayView<'_, T>, better: F) -> Result<T>
+where
+    T: Copy,
+    F: Fn(T, T) -> bool,
+{
+    if view.is_empty() {
+        return Err(NumRsError::EmptyReduction);
+    }
+
+    if let Some(slice) = view.contiguous_slice() {
+        let (first, rest) = slice.split_first().expect("empty checked above");
+        let mut best_value = *first;
+        for value in rest.iter().copied() {
             if better(value, best_value) {
                 best_value = value;
             }
         }
-
-        Ok(best_value)
+        return Ok(best_value);
     }
+
+    let mut offsets = view.offset_iter()?;
+    let first_offset = offsets.next().expect("empty checked above");
+    let mut best_value = view.data_at(first_offset);
+
+    for offset in offsets {
+        let value = view.data_at(offset);
+        if better(value, best_value) {
+            best_value = value;
+        }
+    }
+
+    Ok(best_value)
 }
 
 pub trait ArgReduceKernel: Copy + PartialOrd {
@@ -1138,8 +1193,6 @@ macro_rules! impl_product_kernel {
 impl_product_kernel!(
     f64 => 1.0,
     f32 => 1.0,
-    Complex64 => Complex64::new(1.0, 0.0),
-    Complex32 => Complex32::new(1.0, 0.0),
     i64 => 1,
     i32 => 1,
     i16 => 1,
@@ -1149,6 +1202,54 @@ impl_product_kernel!(
     u16 => 1,
     u8 => 1,
 );
+
+fn complex32_powu(mut base: Complex32, mut exp: usize) -> Complex32 {
+    let mut acc = Complex32::new(1.0, 0.0);
+    while exp > 0 {
+        if exp & 1 == 1 {
+            acc *= base;
+        }
+        exp >>= 1;
+        if exp > 0 {
+            base *= base;
+        }
+    }
+    acc
+}
+
+fn complex64_powu(mut base: Complex64, mut exp: usize) -> Complex64 {
+    let mut acc = Complex64::new(1.0, 0.0);
+    while exp > 0 {
+        if exp & 1 == 1 {
+            acc *= base;
+        }
+        exp >>= 1;
+        if exp > 0 {
+            base *= base;
+        }
+    }
+    acc
+}
+
+impl ProductKernel for Complex32 {
+    fn one() -> Self {
+        Complex32::new(1.0, 0.0)
+    }
+
+    fn prod_uniform(value: Self, len: usize) -> Self {
+        complex32_powu(value, len)
+    }
+}
+
+impl ProductKernel for Complex64 {
+    fn one() -> Self {
+        Complex64::new(1.0, 0.0)
+    }
+
+    fn prod_uniform(value: Self, len: usize) -> Self {
+        complex64_powu(value, len)
+    }
+}
 
 impl<'a, T> ArrayView<'a, T>
 where
@@ -2684,6 +2785,91 @@ impl<'a> ArrayView<'a, u64> {
         for offset in self.offset_iter()? {
             let diff = self.data_at(offset) as f64 - mean;
             acc += diff * diff;
+        }
+        Ok(acc / len as f64)
+    }
+
+    pub fn std_all(&self) -> Result<f64> {
+        Ok(self.var_all()?.sqrt())
+    }
+}
+
+fn complex32_has_nan(value: Complex32) -> bool {
+    value.re.is_nan() || value.im.is_nan()
+}
+
+fn complex32_less(candidate: Complex32, best: Complex32) -> bool {
+    if complex32_has_nan(candidate) {
+        return true;
+    }
+    if complex32_has_nan(best) {
+        return false;
+    }
+    candidate.re < best.re || (candidate.re == best.re && candidate.im < best.im)
+}
+
+fn complex32_greater(candidate: Complex32, best: Complex32) -> bool {
+    if complex32_has_nan(candidate) {
+        return true;
+    }
+    if complex32_has_nan(best) {
+        return false;
+    }
+    candidate.re > best.re || (candidate.re == best.re && candidate.im > best.im)
+}
+
+fn complex32_extreme_all<F>(view: &ArrayView<'_, Complex32>, better: F) -> Result<Complex32>
+where
+    F: Fn(Complex32, Complex32) -> bool,
+{
+    if view.is_empty() {
+        return Err(NumRsError::EmptyReduction);
+    }
+
+    if let Some(slice) = view.contiguous_slice() {
+        let (first, rest) = slice.split_first().expect("empty checked above");
+        let mut best_value = *first;
+        for value in rest.iter().copied() {
+            if better(value, best_value) {
+                best_value = value;
+            }
+        }
+        return Ok(best_value);
+    }
+
+    let mut offsets = view.offset_iter()?;
+    let first_offset = offsets.next().expect("empty checked above");
+    let mut best_value = view.data_at(first_offset);
+
+    for offset in offsets {
+        let value = view.data_at(offset);
+        if better(value, best_value) {
+            best_value = value;
+        }
+    }
+
+    Ok(best_value)
+}
+
+impl<'a> ArrayView<'a, Complex32> {
+    pub fn mean_all(&self) -> Result<Complex32> {
+        let len = self.len();
+        if len == 0 {
+            return Err(NumRsError::EmptyReduction);
+        }
+        Ok(self.sum_all()? / len as f32)
+    }
+
+    pub fn var_all(&self) -> Result<f64> {
+        let len = self.len();
+        if len == 0 {
+            return Err(NumRsError::EmptyReduction);
+        }
+        let mean = self.mean_all()?;
+        let mut acc = 0.0;
+        for offset in self.offset_iter()? {
+            let diff = self.data_at(offset) - mean;
+            acc += diff.norm_sqr() as f64;
         }
         Ok(acc / len as f64)
     }

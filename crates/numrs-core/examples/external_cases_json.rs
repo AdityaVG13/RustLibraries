@@ -2,7 +2,7 @@ use std::fs;
 use std::hint::black_box;
 use std::time::{Duration, Instant};
 
-use numrs_core::{Array, ArrayView};
+use numrs_core::{Array, ArrayView, Complex32};
 
 struct Case {
     name: &'static str,
@@ -47,6 +47,10 @@ fn edge_sum_i32(array: &Array<i32>) -> f64 {
 fn edge_sum_i64(array: &Array<i64>) -> f64 {
     let values = array.as_slice();
     (values[0] + values[values.len() - 1]) as f64
+}
+
+fn complex_scalar_checksum(value: Complex32) -> f64 {
+    value.re as f64 + 7.0 * value.im as f64
 }
 
 fn shape_checksum(shape: &[usize]) -> f64 {
@@ -719,6 +723,103 @@ fn main() -> numrs_core::Result<()> {
     );
     cases.push(Case {
         name: "asv_reduce_stats_var_bool_200",
+        millis,
+        checksum,
+    });
+
+    let stats_data_c64 = Array::full(vec![200], Complex32::new(0.0, 1.0))?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += complex_scalar_checksum(stats_data_c64.min_all().unwrap());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_min_c64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += complex_scalar_checksum(stats_data_c64.max_all().unwrap());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_max_c64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += complex_scalar_checksum(stats_data_c64.mean_all().unwrap());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_mean_c64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_c64.std_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_std_c64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += complex_scalar_checksum(stats_data_c64.prod_all().unwrap());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_prod_c64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_c64.var_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_var_c64_200",
         millis,
         checksum,
     });

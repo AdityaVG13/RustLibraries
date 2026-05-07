@@ -1,11 +1,40 @@
 {
-  "geomean_speedup_vs_numpy": 22.07399853265877,
+  "geomean_speedup_vs_numpy": 28.633360418168888,
   "global_numpy_replacement_claim": false,
   "near_tie_relative_margin": 0.02,
-  "numpy_wins": 0,
-  "numrust_wins": 108,
-  "rows": [],
+  "numpy_wins": 1,
+  "numrust_wins": 113,
+  "rows": [
+    {
+      "checksum_match": true,
+      "name": "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
+      "near_tie": true,
+      "numpy_ms": 95.82933300407603,
+      "numpy_pass_millis": [
+        95.5554160173051,
+        95.29779100557789,
+        96.64549998706207,
+        95.82933300407603,
+        96.5737919905223
+      ],
+      "numrust_ms": 96.338458,
+      "numrust_pass_millis": [
+        95.401708,
+        96.041667,
+        96.338458,
+        107.88425,
+        101.341667
+      ],
+      "numrust_slowdown_vs_numpy": 0.00531283042429509,
+      "priority": 1,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_matmul_trans_atc_a",
+      "speedup_vs_numpy": 0.9947152465744887,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400).T.copy(), arange(60000).reshape(150,400)), repeated equally"
+    }
+  ],
   "sort": "NumPy-winning rows only, ordered by ascending speedup_vs_numpy",
   "source_report": "benchmark-results/external-numpy-asv-inspired.json",
-  "supported_external_cases": 108
+  "supported_external_cases": 114
 }
