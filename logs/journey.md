@@ -1,0 +1,111 @@
+# Journey Log
+
+## 2026-05-07
+
+Started with the required Grill-Me pass.
+
+Decisions resolved:
+
+- Initial deliverable: flagship first.
+- Flagship library: NumPy core.
+- Binding strategy: pure Rust first, PyO3 later.
+- v0 scope: typed ndarray, shape/strides, views, slicing, reshape, transpose, broadcasting, elementwise ops, reductions, and 2-D dot.
+- User refinement: aim for NumPy parity as the long-term bar, but make the Rust architecture better, faster, and more optimized.
+
+Research pass:
+
+- Read current NumPy ndarray documentation for the shape/dtype/view model.
+- Read NumPy broadcasting rules.
+- Read Array API indexing and broadcasting specs.
+- Read Rust `ndarray` documentation and its NumPy migration notes.
+
+Implementation pass:
+
+- Created a Rust workspace.
+- Added `numrs-core` as the flagship crate.
+- Chose a pure safe-Rust v0 kernel stack, with explicit fast paths for contiguous equal-shape elementwise operations and broadcasted strided fallback.
+- Added tests for dtype reporting, views, slicing, reshape, transpose, broadcasting, bool kernels, reductions, dot products, and typed errors.
+- Added dependency-free microbenchmark hook for contiguous and broadcast add paths.
+- Added in-place broadcast arithmetic, `ravel`, `expand_dims`, `squeeze`, and `mean_axis` to raise the NumPy-core floor.
+
+Verification pass:
+
+- `cargo fmt --all --check`: passed.
+- `cargo test --workspace`: 13 passed across 3 suites.
+- `cargo clippy --workspace --all-targets -- -D warnings`: passed with no issues.
+- `cargo run -p numrs-core --example basic`: printed broadcast add and sliced column output.
+- `cargo run --release -p numrs-core --example microbench`: contiguous add 250k elements x 50 in 8 ms; broadcast add `[1024, 1024]` in 3 ms on this machine.
+- `cargo doc --workspace --no-deps`: generated docs for `numrs_core`.
+
+## 2026-05-07 Continued
+
+User asked whether the port was better than NumPy. I answered no for global NumPy replacement.
+
+Second pass:
+
+- Kept crate name `numrs-core`; documented ecosystem name as NumRust.
+- Expanded dtype markers to `f64`, `f32`, signed ints, unsigned ints, and bool.
+- Added fancy indexing foundations: flat `take`, axis `take_axis`, and exact-shape boolean masks.
+- Added macOS Accelerate-backed BLAS for contiguous `f64`/`f32` dot.
+- Added Accelerate/vDSP-backed contiguous `f64`/`f32` sums.
+- Added a NumPy comparison harness in `benchmarks/compare_numpy.py`.
+- Current targeted suite result: NumRust wins 8 of 8 cases, geomean 1.53x vs NumPy 2.4.4.
+- Added optimized `f64` outer-broadcast add for the column-vector plus row-vector pattern.
+- Added `benchmarks/verify_numpy_parity.py` plus `parity_json` to compare representative NumRust behavior against NumPy.
+- Started the SciPy-style crate, now named `scirust`, with bounded scalar optimization, root finding, trapezoid integration, and Simpson integration.
+- Started the StatsModels-style crate, now named `statsrust`, with OLS/WLS fitting, prediction, and regression diagnostics.
+- Expanded `statsrust` with binary Logit fitting, probability prediction, class prediction, log-likelihood diagnostics, pseudo R-squared, accuracy, options, and validation tests.
+
+External evidence pass:
+
+- User correctly challenged self-authored benchmark bias.
+- Added a source lock for NumPy ASV and Array API tests: `benchmark-results/external-source-lock.json`.
+- Added ASV-derived supported cases and generated `benchmark-results/external-numpy-asv-inspired.md`.
+- First external run exposed losses in row-vector broadcast and contiguous identity `take_axis`; added generic fast paths for both.
+- Added dtype item sizes, primitive `astype`, and deterministic promotion metadata.
+- Added flat `argmax` and `argmin` plus contiguous fast paths.
+- Added stats reductions: `min_all`, `max_all`, `prod_all`, `var_all`, and `std_all`.
+- Added indexed writes and scatter-at updates: `put`, `putmask`, `add_at`, and `maximum_at`.
+- Added small pure-Rust linalg: `norm_l2`, `det`, and vector `solve` for `f64`.
+- Added selected einsum-style contractions: outer product, scalar multiply, contiguous sum, and weighted axis-1 sum.
+- Added BLAS-backed `f64` outer product and weighted matrix-vector sum, plus a direct f64 matrix-minus-row-vector broadcast kernel.
+- Added generic NumPy-style `matmul` covering vector dot, matrix-vector, vector-matrix, matrix-matrix, and broadcasted batched matrix multiplication, with NumPy parity coverage.
+- Added explicit-axis `tensordot_axes`, then optimized the `f64` path by packing contraction plans into BLAS matrix multiplication.
+- Added the NumPy ASV `Eindot.time_tensordot_a_b_axes_1_0_0_1` case to the external evidence suite.
+- Researched Rust benchmark/provenance crates and built `rigortrail`, a new evidence-ledger crate for bias-resistant benchmark and evaluation claims.
+- Renamed the follow-on packages so `NumRust` is not forced onto every port: `statsrust` for the StatsModels-style slice and `scirust` for the SciPy-style slice.
+- Added uniform-array metadata for `full` and `zeros`, with mutation invalidation and fast paths for reductions plus all-true/all-false `putmask`.
+- That external pass reached NumRust wins 26 of 26 supported ASV-derived cases, NumPy wins 0, geomean speedup 19.56x, ranked higher by wins on supported cases. Global NumPy replacement claim remained false.
+- Added a same-data StatsModels benchmark harness for OLS, OLS prediction, WLS, and Logit. Optimized OLS prediction to avoid per-call design-matrix allocation. Latest run: StatsRust wins 4 of 4, StatsModels wins 0, geomean speedup 3.51x, no checksum failures. Global StatsModels replacement claim remains false.
+- Added upstream source pins for SciPy ASV and StatsModels source APIs. StatsModels has no benchmark/asv tree at the pinned commit, so its current harness is labeled same-data local evidence rather than externally derived benchmark evidence.
+- Added translated SciPy ASV `Zeros.time_zeros` cases for `f2` with `bisect` and `brentq` to the SciRust harness. Optimized Simpson integration by applying the composite rule in two-interval segments. That pass reached SciRust wins 7 of 7, SciPy wins 0, geomean speedup 26.06x, no checksum failures. Global SciPy replacement claim remained false.
+- Added `numrust-python`, a PyO3-backed Python namespace bridge over `numrs-core`, plus `benchmarks/verify_array_api_namespace.py`. The verifier builds the extension, imports `numrust`, and passes smoke cases for creation, primitive and complex dtype tokens/storage, namespace hook, mixed-dtype arithmetic, true division, comparisons, first-axis integer indexing, astype, isdtype, reshape, permute dims, matmul, sum, and mean.
+- Added `benchmarks/run_array_api_tests.py`, which clones the pinned upstream `array-api-tests` commit and runs pytest without patching the suite. The first focused probe passed object behavior, setitem, creation/dtype, `iinfo`/`isdtype`, FFT, `take`, manipulation, selected linalg behavior, DLPack, and name-surface checks, while the first full-suite probe exposed remaining conformance failures.
+- Expanded the Rust-backed Python namespace across elementwise special cases, sorting, statistics, set/search APIs, signatures, scalar conversions, and deterministic linalg fallbacks. The focused upstream probe now collects 1113 tests with 1109 passed and 4 skipped. The pinned full Array API 2023.12 suite now collects 1219 tests with 1161 passed, 58 skipped, and return code 0. This is real external conformance evidence, not a NumPy replacement claim.
+- Added three more pinned NumPy ASV-derived einsum cases: repeated trailing-tile multiply and scalar-times-sum variants. The initial repeated-tile case exposed a real NumPy win, so `numrs-core` gained a contiguous `f64` trailing-tile broadcast multiply path backed by an aarch64 NEON helper. That external run reached NumRust wins 29 of 29 supported ASV-derived cases, NumPy wins 0, geomean speedup 18.19x, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remained false.
+- Expanded SciRust with `cumulative_simpson_uniform` and last-axis batched cumulative Simpson support, then added translated pinned SciPy ASV `CumulativeSimpson.time_1d` and `CumulativeSimpson.time_multid` cases. Latest SciPy comparison: SciRust wins 9 of 9, SciPy wins 0, geomean speedup 19.11x, no checksum failures; 4 cases now translate pinned SciPy ASV benchmarks. Global SciPy replacement claim remains false.
+- Added seven more pinned NumPy ASV `Einsum.time_einsum_noncon_*` cases. They use the exact odd-valued `np.arange(1, ..., 2)` setups from the pinned ASV source and are translated for both engines. Dot and tensordot are now repeated equally because ASV auto-calibrates sub-millisecond cases. The first expanded run exposed a real `Eindot.time_dot_a_b` NumPy win, so macOS f64 row-major GEMM now calls column-major BLAS with swapped operands to avoid the row-major adapter path while writing identical output memory. That expanded NumPy external run reached NumRust wins 36 of 36 supported ASV-derived cases, NumPy wins 0, geomean speedup 15.36x, no checksum failures, and 1 unsupported external case bucket still tracked.
+- Added pinned NumPy ASV `Lstsq.time_numpy_linalg_lstsq_a__b_float64` as a square full-rank fixture shared by both engines. The Rust side uses the equivalent square solve, not a broad `lstsq` claim. That NumPy external run reached NumRust wins 37 of 37 supported ASV-derived cases, NumPy wins 0, geomean speedup 15.07x, no checksum failures, and 1 unsupported external case bucket still tracked.
+- Added pinned NumPy ASV `Eindot.time_matmul_a_b`. The first honest run exposed a real `matmul` loss because NumRust's array-level `matmul` was still falling through the generic strided loop. Promoted contiguous 2-D `f64`/`f32` array-level `matmul` and `dot2d` to direct BLAS fast paths without per-call owned view metadata. That NumPy external run reached NumRust wins 38 of 38 supported ASV-derived cases, NumPy wins 0, geomean speedup 14.72x, no checksum failures, and 1 unsupported external case bucket still tracked.
+- Added pinned NumPy ASV `Eindot.time_matmul_d_matmul_b_c`. The first honest run exposed a matrix-vector `matmul` loss, so NumRust gained array-level `f64`/`f32` vector-vector, matrix-vector, and vector-matrix fast paths using vDSP dot products and BLAS GEMV. The near-tie GEMM cases now use equal 100-repetition calibration because ASV normally auto-calibrates these sub-millisecond operations. That NumPy external run reached NumRust wins 39 of 39 supported ASV-derived cases, NumPy wins 0, geomean speedup 13.60x, no checksum failures, and 1 unsupported external case bucket still tracked.
+- Added pinned NumPy ASV `Eindot.time_matmul_trans_a_at` for `a @ a.T` with the transposed operand preserved as a view. The first honest run exposed the generic strided fallback, so NumRust gained BLAS-backed transpose-A and transpose-B view dispatch for `f64`/`f32` dot/matmul. The Rust harness now pre-creates the left view in setup, matching NumPy ASV's pre-created `self.a` and `self.at`. That NumPy external run reached NumRust wins 40 of 40 supported ASV-derived cases, NumPy wins 0, geomean speedup 12.21x, no checksum failures, and 1 unsupported external case bucket still tracked.
+- Added pinned NumPy ASV `Eindot.time_dot_trans_a_at` beside the existing transposed matmul case. The first calibrated run exposed a near-tie in the sibling matmul case, so hot cross-crate `ArrayView::dot2d`/`matmul` and f64/f32 dispatch were marked inline. That NumPy external run reached NumRust wins 41 of 41 supported ASV-derived cases, NumPy wins 0, geomean speedup 11.61x, no checksum failures, and 1 unsupported external case bucket still tracked.
+- Added pinned NumPy ASV `Eindot.time_dot_d_dot_b_c`, the dot analogue of the nested vector/matrix matmul case. The first run exposed sub-millisecond timing instability in that pair, so both nested dot/matmul cases now use equal 1000-repetition calibration. That NumPy external run reached NumRust wins 42 of 42 supported ASV-derived cases, NumPy wins 0, geomean speedup 11.34x, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remained false.
+- Added pinned NumPy ASV `Eindot.time_dot_trans_a_atc` and `Eindot.time_matmul_trans_a_atc`, the copied-transpose variants of `dot(a, a.T.copy())` and `a @ a.T.copy()`. Initial honest runs exposed near-tie NumPy wins, so the failed SYRK/adapter, widened-NEON, vDSP, and Rayon experiments were removed instead of kept as noise. The external harness now runs 5 full passes per engine, alternates engine order, aggregates per-case medians across passes, writes pass samples for NumPy-winning rows, and flags near-ties within 2%. That real external run reached NumRust wins 42 of 44 supported ASV-derived cases, NumPy wins 2 on `asv_linalg_matmul_a_b_f64_150x400_400x600` and `asv_linalg_matmul_trans_a_at_f64_150x400_400x150`, geomean speedup 9.85x, 2 near-ties within 2%, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remained false.
+- Added pinned NumPy ASV `Eindot.time_dot_trans_at_a`, `Eindot.time_dot_trans_atc_a`, `Eindot.time_matmul_trans_at_a`, and `Eindot.time_matmul_trans_atc_a`, expanding coverage to transposed-left and copied-transposed-left dot/matmul cases from the same upstream ASV setup. Added a schema test requiring every runnable benchmark's root source symbol to appear in the external source lock. That real 5-pass external run reached NumRust wins 47 of 48 supported ASV-derived cases, NumPy wins 1 on `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400`, geomean speedup 8.23x, 5 near-ties within 2%, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remained false.
+- Tried a direct row-major CBLAS dispatch for the remaining copied-transpose matmul near-tie. The focused Rust run got slower on the target row, so the experiment was removed. Added external report consistency tests instead: the generated JSON report must cover every runnable case, preserve source metadata, carry full pass samples, and have score counts that recompute from raw rows.
+- Added `inner2d` to the Rust core as a deliberately narrow 2-D NumPy `inner` slice, with contiguous `f64`/`f32` dispatch through transpose-B BLAS and generic fallback for other tested dtypes/views. Added pinned NumPy ASV `Eindot.time_inner_trans_a_a` and `Eindot.time_inner_trans_a_ac` rows. That real 5-pass external run reached NumRust wins 49 of 50 supported ASV-derived cases, NumPy wins 1 on `asv_linalg_dot_trans_a_atc_f64_150x400_400x150`, geomean speedup 7.53x, 5 near-ties within 2%, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remained false.
+- Added `bilinear_form` to cover the pinned NumPy ASV `Eindot.time_einsum_i_ij_j` contraction via BLAS matrix-vector plus dot on contiguous `f64`, with a generic strided fallback. That real 5-pass external run reached NumRust wins 50 of 51 supported ASV-derived cases, NumPy wins 1 on `asv_linalg_inner_a_ac_f64_150x400_150x400`, geomean speedup 8.07x, 4 near-ties within 2%, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remained false.
+- Added pinned NumPy ASV `Eindot.time_einsum_ij_jk_a_b`, the matrix contraction form of `einsum("ij,jk", a, b)`, and routed the Rust side through the equivalent `dot2d` BLAS-backed path. That real 5-pass external run reached NumRust wins 49 of 52 supported ASV-derived cases, NumPy wins 3 on `asv_linalg_dot_trans_a_atc_f64_150x400_400x150`, `asv_linalg_matmul_trans_a_at_f64_150x400_400x150`, and `asv_linalg_matmul_trans_a_atc_f64_150x400_400x150`, geomean speedup 8.16x, 5 near-ties within 2%, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remained false.
+- Added pinned NumPy ASV `StatsReductions.time_mean(dtype=float64)` using the upstream `ones(200)` setup for both engines. The long single-process harness exceeded the tool session lifetime, so the same five alternating full passes were run as five independent pass artifacts and aggregated with the harness' own scoring/report functions. That real 5-pass external run reached NumRust wins 50 of 53 supported ASV-derived cases, NumPy wins 3 on `asv_linalg_matmul_a_b_f64_150x400_400x600`, `asv_linalg_matmul_trans_at_a_f64_400x150_150x400`, and `asv_linalg_einsum_scalar_mul_f64_480000`, geomean speedup 9.23x, 2 near-ties within 2%, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remained false.
+- Tested two optimization experiments against current NumPy-winning rows and removed both because focused external-path measurements got worse: Accelerate `vDSP_vsmulD` for contiguous `f64` scalar multiply, and `matrixmultiply` for macOS transposed-left `f64` GEMM. The benchmark harness now exposes first-class `--pass-index`/`--pass-out` and `--aggregate-passes` modes so long 5-pass external runs can be split into real one-pass artifacts and aggregated without manual JSON stitching.
+- Re-ran the full 5-pass external NumPy ASV-derived harness through fresh sharded pass artifacts using the new aggregation path. The latest real run reaches NumRust wins 43 of 53 supported ASV-derived cases, NumPy wins 10, geomean speedup 8.92x, 1 near-tie within 2%, no checksum failures, and 1 unsupported external case bucket still tracked. Global NumPy replacement claim remains false.
+- Added generated loss-triage artifacts, `benchmark-results/external-numpy-loss-triage.json` and `.md`, sorted by worst current NumPy-winning row and preserving source metadata plus per-pass samples. External evidence tests now cover that the triage rows match the generated report's NumPy wins.
+- Tested two more focused backend experiments from the loss triage and removed both because real external-path timings got worse: `matrixmultiply` for base contiguous `f64` GEMM made the 150x400 by 400x600 rows much slower, and copy-then-`cblas_dscal` made contiguous scalar multiply slower than the existing NEON path.
+- Added `--rerun-losses` to the external NumPy harness. It reads the current generated report, reruns the NumPy-winning rows, and writes focused loss artifacts so backend experiments can be measured against the real current losses without running the full 53-case suite each time.
+- Ran `--rerun-losses` against the current 10 NumPy-winning rows. The first focused rerun reported NumRust wins 10 of 10 with no checksum failures, while the full 53-case report remained the authoritative latest score at 43 of 53. This exposed timing sensitivity in the current linalg losses rather than proving global superiority.
+- Extended `--rerun-losses` with `--loss-passes` so focused loss reruns can use alternating engine order and median aggregation, matching the full harness shape for the selected current-loss rows.
+- Ran `--rerun-losses --loss-passes 2`; the focused median rerun reported NumRust wins 9 of 10, NumPy wins 1 on `asv_linalg_inner_a_ac_f64_150x400_150x400`, and no checksum failures. The full 53-case report remains the authoritative latest score.
+- Ran `--rerun-losses --loss-passes 3`; the focused median rerun reported NumRust wins 10 of 10 with no checksum failures. The full 53-case report remains the authoritative latest score because focused reruns intentionally cover only rows that previously lost.
+- Tried a direct array-level `inner2d_arrays` fast path for `f64` and `f32`, targeting the focused `inner(a, ac)` row. The focused rerun regressed to 8 of 10, so the optimization was removed. After reverting, that 3-pass focused rerun reported NumRust wins 7 of 10, NumPy wins 3, and no checksum failures. The full 53-case report remained the authoritative latest score.
+- Added stability metadata to focused loss artifacts so they explicitly separate source NumPy wins that flip during focused reruns from source NumPy wins that remain NumPy wins, while retaining the full report as the authoritative score source. Regenerated the real 3-pass focused rerun: NumRust wins 9 of 10, NumPy wins 1 on `asv_linalg_matmul_trans_a_at_f64_150x400_400x150`, 7 near ties within 2%, and no checksum failures. External evidence tests now reconcile the stability metadata against raw focused rows.
