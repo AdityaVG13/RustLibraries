@@ -100,9 +100,9 @@ Latest focused rerun of those NumPy-winning rows:
 
 - Focused cases: 2
 - Focused passes per engine: 3
-- NumRust wins: 2
-- NumPy wins: 0
-- Near ties within 2%: 0
+- NumRust wins: 1
+- NumPy wins: 1
+- Near ties within 2%: 1
 - Checksum failures: 0
 - Report: `benchmark-results/external-numpy-loss-focused.md`
 

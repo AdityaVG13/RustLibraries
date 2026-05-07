@@ -16,7 +16,7 @@ This is the quick read for benchmark status. Every number below comes from commi
 | --- | --- | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | NumPy targeted | `numrs-core` | NumPy 2.4.4 | Same-data implemented slice | 10 | 10 | 0 | No | 1.67x geomean | 0 | [`numrust-vs-numpy.md`](../benchmark-results/numrust-vs-numpy.md) |
 | NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 53 supported | 51 | 2 | No | 8.87x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
-| NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of current NumPy wins | 2 | 2 | 0 | No | 1.02x | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
+| NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of current NumPy wins | 2 | 1 | 1 | No | 1.07x win / 0.99x near-tie loss | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | Same-data implemented slice | 4 | 4 | 0 | No | 3.51x geomean | 0 | [`statsrust-vs-statsmodels.md`](../benchmark-results/statsrust-vs-statsmodels.md) |
 | Scientific routines | `scirust` | SciPy 1.17.1 | SciPy ASV translations plus same-data slice | 9 | 9 | 0 | No | 19.11x geomean | 0 | [`scirust-vs-scipy.md`](../benchmark-results/scirust-vs-scipy.md) |
 | Data aggregation | `framerust` | Pandas 3.0.2 | Same-data implemented slice | 1 | 1 | 0 | No | 2.14x | 0 | [`framerust-vs-pandas.md`](../benchmark-results/framerust-vs-pandas.md) |
@@ -43,7 +43,7 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Checksum failures | 0 |
 | Global NumPy replacement claim | false |
 
-The remaining full-suite NumPy wins are `asv_linalg_dot_trans_a_atc_f64_150x400_400x150` and `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400`, both near ties in the authoritative full report. The focused 3-pass rerun flips both rows to NumRust at about 1.02x, but the full 53-case ASV-derived report remains the authoritative score until the whole suite is rerun.
+The remaining full-suite NumPy wins are `asv_linalg_dot_trans_a_atc_f64_150x400_400x150` and `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400`, both near ties in the authoritative full report. The focused 3-pass rerun flips the dot row to NumRust at 1.07x, while the matmul row remains a NumPy near-tie at 0.99x. The full 53-case ASV-derived report remains the authoritative score until the whole suite is rerun.
 
 ## Conformance Snapshot
 

@@ -10,7 +10,7 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 | --- | ---: | ---: | ---: | ---: | ---: |
 | NumRust vs NumPy, targeted same-data | 10 | 10 | 0 | 1.67x geomean | 0 |
 | NumRust vs NumPy, external ASV-derived | 53 | 51 | 2 | 8.87x geomean | 0 |
-| NumRust vs NumPy, focused current-loss rerun | 2 | 2 | 0 | 1.02x | 0 |
+| NumRust vs NumPy, focused current-loss rerun | 2 | 1 | 1 | 1.07x win / 0.99x near-tie loss | 0 |
 | StatsRust vs StatsModels | 4 | 4 | 0 | 3.51x geomean | 0 |
 | SciRust vs SciPy | 9 | 9 | 0 | 19.11x geomean | 0 |
 | FrameRust vs Pandas | 1 | 1 | 0 | 2.14x | 0 |
@@ -35,7 +35,7 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 - Contiguous `argmax`/`argmin` scan direct slices instead of generic stride iterators.
 - Primitive `astype` casts contiguous arrays with direct slice iteration.
 - `putmask`, `put`, `add_at`, and `maximum_at` cover NumPy ASV itemselection and ufunc-at patterns.
-- `nonzero` and broadcasted `where_select` add NumPy-style selection scope for boolean masks. Contiguous `nonzero` now has 1-D and 2-D direct paths; broadcasted `where_select` still has a visible NumPy win in the targeted report.
+- `nonzero` and broadcasted `where_select` add NumPy-style selection scope for boolean masks. Contiguous `nonzero` has 1-D and 2-D direct paths; dtype-specialized `where_select_f64` fast paths remove the previous targeted-suite selection loss.
 - `min_all`, `max_all`, `prod_all`, `var_all`, and `std_all` cover NumPy ASV stats-reduction patterns.
 - `norm_l2`, `det`, and `solve` cover NumPy ASV small-linalg patterns without calling LAPACK.
 - `outer_product`, `mul_scalar`, repeated trailing-tile multiply, `weighted_axis1_sum`, and `bilinear_form` cover selected NumPy ASV einsum-style contraction patterns; contiguous `f64` scalar multiply and repeated trailing-tile multiply have aarch64 NEON paths.
@@ -64,7 +64,7 @@ The benchmark harnesses run one untimed warmup for each case on both engines, th
 
 `benchmarks/external_numpy_cases.py` is the externally derived harness. It pins NumPy ASV and Array API test sources in `benchmark-results/external-source-lock.json`, then translates supported NumPy ASV cases without filtering out losses. Latest run: NumRust wins 51 of 53 supported external cases, NumPy wins 2, with 8.87x geometric-mean speedup. The remaining NumPy wins are copied-transpose linalg near ties: `asv_linalg_dot_trans_a_atc_f64_150x400_400x150` at 0.98x and `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400` at 0.99x. The harness uses 5 full passes per engine, alternates engine order, aggregates each case by median across passes, supports sharded one-pass artifacts for long runs, writes pass samples for NumPy-winning rows, emits loss-triage artifacts sorted by worst NumPy win, and can rerun focused NumPy-winning rows after backend experiments with explicit stability metadata. This ranks NumRust higher on supported external cases only and does not prove global NumPy replacement status.
 
-The latest 3-pass focused rerun of the two NumPy-winning rows reports NumRust wins 2 of 2, NumPy wins 0, about 1.02x speedup on both rows, and no checksum failures. This is a triage signal for timing sensitivity, not a replacement for the full 53-case score.
+The latest 3-pass focused rerun of the two NumPy-winning rows reports NumRust wins 1 of 2, NumPy wins 1 of 2, with the dot row at 1.07x and the copied-transpose matmul row still a NumPy near-tie at 0.99x. There are no checksum failures. This is a triage signal for timing sensitivity, not a replacement for the full 53-case score.
 
 `benchmarks/compare_statsmodels.py` is the same-data StatsModels comparison harness for the implemented StatsRust slice. Latest run: StatsRust wins 4 of 4 cases against StatsModels 0.14.6, StatsModels wins 0, with 3.51x geometric-mean speedup and no checksum failures. This does not prove full StatsModels replacement status.
 
