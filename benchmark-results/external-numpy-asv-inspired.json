@@ -21,28 +21,28 @@
       "name": "asv_ufunc_broadcast_sub_f64",
       "near_tie": false,
       "numpy_checksum": 0.0,
-      "numpy_ms": 1.7751670093275607,
+      "numpy_ms": 1.5319159720093012,
       "numpy_pass_millis": [
-        1.5346670406870544,
-        1.7526659648865461,
-        1.8161250045523047,
-        1.8518329598009586,
-        1.7751670093275607
+        2.1100410376675427,
+        1.4940830296836793,
+        1.5319159720093012,
+        1.5245419926941395,
+        1.5429999912157655
       ],
       "numrust_checksum": 0.0,
-      "numrust_ms": 0.87075,
+      "numrust_ms": 0.956375,
       "numrust_pass_millis": [
-        0.806584,
-        0.865125,
-        0.8945,
-        0.87075,
-        0.873292
+        0.90675,
+        0.983584,
+        0.956375,
+        1.021458,
+        0.884125
       ],
       "repetitions": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_ufunc.py",
       "source_symbol": "Broadcast.time_broadcast",
-      "speedup_vs_numpy": 2.0386643805082523,
+      "speedup_vs_numpy": 1.6017942459906431,
       "translation": "direct setup and operation: ones((50000, 100), f64) - ones((100,), f64)",
       "winner": "numrust"
     },
@@ -52,28 +52,28 @@
       "name": "asv_ufunc_astype_i32_to_f64_100x100",
       "near_tie": false,
       "numpy_checksum": 49995000.0,
-      "numpy_ms": 16.524082981050014,
+      "numpy_ms": 13.801958004478365,
       "numpy_pass_millis": [
-        13.844959030393511,
-        15.889416972640902,
-        16.524082981050014,
-        17.61704101227224,
-        16.739125014282763
+        14.71466600196436,
+        13.829042029101402,
+        13.672832981683314,
+        13.7836670037359,
+        13.801958004478365
       ],
       "numrust_checksum": 49995000.0,
-      "numrust_ms": 4.689875,
+      "numrust_ms": 5.506583,
       "numrust_pass_millis": [
-        4.616792,
-        4.8875,
-        4.8025,
-        4.431042,
-        4.689875
+        5.266167,
+        5.617,
+        5.455416,
+        5.951667,
+        5.506583
       ],
       "repetitions": 5000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_ufunc.py",
       "source_symbol": "NDArrayAsType.time_astype(typeconv=('int32', 'float64'))",
-      "speedup_vs_numpy": 3.5233525373384182,
+      "speedup_vs_numpy": 2.506446920799771,
       "translation": "same operation, dtype pair, and 100x100 get_squares_ shape; deterministic arange values",
       "winner": "numrust"
     },
@@ -83,28 +83,28 @@
       "name": "asv_ufunc_add_at_f64_10000000",
       "near_tie": false,
       "numpy_checksum": 4589.9999999991505,
-      "numpy_ms": 7.169707969296724,
+      "numpy_ms": 5.7935420190915465,
       "numpy_pass_millis": [
-        5.92125003458932,
-        7.169707969296724,
-        6.8330420181155205,
-        8.043291978538036,
-        7.688790967222303
+        7.683541974984109,
+        5.809333990328014,
+        5.765540990978479,
+        5.7935420190915465,
+        5.7461250107735395
       ],
       "numrust_checksum": 4589.999999999151,
-      "numrust_ms": 4.451,
+      "numrust_ms": 3.998792,
       "numrust_pass_millis": [
-        3.963833,
-        4.433083,
-        4.55475,
-        4.451,
-        4.604459
+        4.173958,
+        3.851167,
+        3.943458,
+        4.008333,
+        3.998792
       ],
       "repetitions": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_ufunc.py",
       "source_symbol": "At.time_sum_at",
-      "speedup_vs_numpy": 1.6108083507743707,
+      "speedup_vs_numpy": 1.4488230493337855,
       "translation": "same operation and sizes; deterministic values and indices instead of RNG setup",
       "winner": "numrust"
     },
@@ -114,28 +114,28 @@
       "name": "asv_ufunc_maximum_at_f64_10000000",
       "near_tie": false,
       "numpy_checksum": 0.459,
-      "numpy_ms": 7.662457996048033,
+      "numpy_ms": 5.951167026069015,
       "numpy_pass_millis": [
-        6.099166988860816,
-        7.662457996048033,
-        7.360209012404084,
-        8.522916992660612,
-        7.6705829706043005
+        8.28991603339091,
+        5.940167000517249,
+        5.965665972325951,
+        5.942791991401464,
+        5.951167026069015
       ],
       "numrust_checksum": 0.459,
-      "numrust_ms": 5.087625,
+      "numrust_ms": 4.626167,
       "numrust_pass_millis": [
-        3.6805,
-        4.822,
-        5.132667,
-        5.087625,
-        5.304916
+        4.626167,
+        4.778,
+        3.8015,
+        3.900625,
+        4.800292
       ],
       "repetitions": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_ufunc.py",
       "source_symbol": "At.time_maximum_at",
-      "speedup_vs_numpy": 1.506097244991137,
+      "speedup_vs_numpy": 1.2864142228477735,
       "translation": "same operation and sizes; deterministic values and indices instead of RNG setup",
       "winner": "numrust"
     },
@@ -145,28 +145,28 @@
       "name": "asv_reduce_small_sum_f32_100",
       "near_tie": false,
       "numpy_checksum": 20000000.0,
-      "numpy_ms": 170.0267919804901,
+      "numpy_ms": 135.8743329765275,
       "numpy_pass_millis": [
-        134.4524580053985,
-        170.0267919804901,
-        172.87120898254216,
-        189.47116599883884,
-        169.51075004180893
+        153.8816670072265,
+        134.79625002946705,
+        135.8743329765275,
+        137.63033301802352,
+        135.56804100517184
       ],
       "numrust_checksum": 20000000.0,
-      "numrust_ms": 3.063667,
+      "numrust_ms": 2.772167,
       "numrust_pass_millis": [
-        2.76425,
-        3.346333,
-        3.063667,
-        2.833167,
-        4.108667
+        2.894667,
+        2.698917,
+        2.780542,
+        2.68575,
+        2.772167
       ],
       "repetitions": 200000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "SmallReduction.time_small",
-      "speedup_vs_numpy": 55.49780442211575,
+      "speedup_vs_numpy": 49.01376178871168,
       "translation": "direct setup and operation, repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -176,28 +176,28 @@
       "name": "asv_reduce_stats_min_f64_200",
       "near_tie": false,
       "numpy_checksum": 100000.0,
-      "numpy_ms": 85.98254201933742,
+      "numpy_ms": 68.21295799454674,
       "numpy_pass_millis": [
-        67.33279203763232,
-        85.98254201933742,
-        88.09987496351823,
-        94.81566603062674,
-        79.8879160429351
+        77.22954195924103,
+        68.15958296647295,
+        68.21295799454674,
+        70.149416977074,
+        66.84508302714676
       ],
       "numrust_checksum": 100000.0,
-      "numrust_ms": 0.338125,
+      "numrust_ms": 0.33425,
       "numrust_pass_millis": [
-        0.333583,
-        0.32675,
-        0.3595,
-        0.338125,
-        0.374208
+        0.351333,
+        0.331583,
+        0.3155,
+        0.33425,
+        0.336333
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "StatsReductions.time_min(dtype=float64)",
-      "speedup_vs_numpy": 254.29217602761528,
+      "speedup_vs_numpy": 204.07766041749213,
       "translation": "direct setup and operation: min(ones(200, float64)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -207,28 +207,28 @@
       "name": "asv_reduce_stats_max_f64_200",
       "near_tie": false,
       "numpy_checksum": 100000.0,
-      "numpy_ms": 84.52608302468434,
+      "numpy_ms": 67.17950000893325,
       "numpy_pass_millis": [
-        67.1644170070067,
-        84.52608302468434,
-        85.46858397312462,
-        97.27120900060982,
-        83.91283295350149
+        72.30766699649394,
+        66.93199998699129,
+        66.46279199048877,
+        68.8329580007121,
+        67.17950000893325
       ],
       "numrust_checksum": 100000.0,
-      "numrust_ms": 0.358792,
+      "numrust_ms": 0.330208,
       "numrust_pass_millis": [
-        0.334208,
-        0.358792,
-        0.3595,
-        0.338083,
-        0.374125
+        0.349,
+        0.3265,
+        0.323667,
+        0.333459,
+        0.330208
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "StatsReductions.time_max(dtype=float64)",
-      "speedup_vs_numpy": 235.58519427602718,
+      "speedup_vs_numpy": 203.44600981482353,
       "translation": "direct setup and operation: max(ones(200, float64)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -238,28 +238,28 @@
       "name": "asv_reduce_stats_mean_f64_200",
       "near_tie": false,
       "numpy_checksum": 100000.0,
-      "numpy_ms": 131.98279199423268,
+      "numpy_ms": 102.94883302412927,
       "numpy_pass_millis": [
-        105.0445000291802,
-        131.98279199423268,
-        132.09145795553923,
-        154.95812497101724,
-        128.87562497053295
+        109.11525000119582,
+        102.84000000683591,
+        101.95229097735137,
+        102.94883302412927,
+        103.68466703221202
       ],
       "numrust_checksum": 100000.0,
-      "numrust_ms": 0.124125,
+      "numrust_ms": 0.111292,
       "numrust_pass_millis": [
-        0.111208,
-        0.152333,
-        0.146208,
-        0.11225,
-        0.124125
+        0.125833,
+        0.109709,
+        0.103167,
+        0.111334,
+        0.111292
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "StatsReductions.time_mean(dtype=float64)",
-      "speedup_vs_numpy": 1063.305474273778,
+      "speedup_vs_numpy": 925.0335426097947,
       "translation": "direct setup and operation: mean(ones(200, float64)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -269,28 +269,28 @@
       "name": "asv_reduce_stats_std_f64_200",
       "near_tie": false,
       "numpy_checksum": 0.0,
-      "numpy_ms": 411.435124988202,
+      "numpy_ms": 334.9399169674143,
       "numpy_pass_millis": [
-        337.20545802498236,
-        411.435124988202,
-        415.8279999974184,
-        457.1795000229031,
-        406.6499170148745
+        355.60504195746034,
+        336.1949999816716,
+        334.9399169674143,
+        334.58462497219443,
+        334.5550420344807
       ],
       "numrust_checksum": 0.0,
-      "numrust_ms": 0.119292,
+      "numrust_ms": 0.106042,
       "numrust_pass_millis": [
-        0.106209,
-        0.119292,
-        0.1335,
-        0.107916,
-        0.119334
+        0.111417,
+        0.10575,
+        0.1055,
+        0.107834,
+        0.106042
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "StatsReductions.time_std(dtype=float64)",
-      "speedup_vs_numpy": 3448.974994033146,
+      "speedup_vs_numpy": 3158.559032905965,
       "translation": "direct setup and operation: std(ones(200, float64)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -300,28 +300,28 @@
       "name": "asv_reduce_stats_prod_f64_200",
       "near_tie": false,
       "numpy_checksum": 100000.0,
-      "numpy_ms": 97.86720800912008,
+      "numpy_ms": 77.59300002362579,
       "numpy_pass_millis": [
-        79.10475000971928,
-        97.24729100707918,
-        100.01445905072615,
-        109.30183297023177,
-        97.86720800912008
+        79.09437495982274,
+        77.5349999894388,
+        77.38466700538993,
+        78.03487504133955,
+        77.59300002362579
       ],
       "numrust_checksum": 100000.0,
-      "numrust_ms": 9.779542,
+      "numrust_ms": 8.719708,
       "numrust_pass_millis": [
-        8.715083,
-        9.961167,
-        9.782209,
-        9.425,
-        9.779542
+        9.147792,
+        8.475083,
+        8.406167,
+        8.757583,
+        8.719708
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "StatsReductions.time_prod(dtype=float64)",
-      "speedup_vs_numpy": 10.007340630994793,
+      "speedup_vs_numpy": 8.898577799121918,
       "translation": "direct setup and operation: prod(ones(200, float64)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -331,28 +331,28 @@
       "name": "asv_reduce_stats_var_f64_200",
       "near_tie": false,
       "numpy_checksum": 0.0,
-      "numpy_ms": 390.82883298397064,
+      "numpy_ms": 314.6787079749629,
       "numpy_pass_millis": [
-        311.84162496356294,
-        390.82883298397064,
-        389.88345803227276,
-        450.2929580048658,
-        397.856000054162
+        316.0369580145925,
+        314.6787079749629,
+        313.9516669907607,
+        315.0155409821309,
+        313.40783298946917
       ],
       "numrust_checksum": 0.0,
-      "numrust_ms": 0.114833,
+      "numrust_ms": 0.106917,
       "numrust_pass_millis": [
+        0.109333,
+        0.106209,
+        0.104208,
         0.106917,
-        0.114833,
-        0.114833,
-        0.129375,
-        0.114708
+        0.107208
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "StatsReductions.time_var(dtype=float64)",
-      "speedup_vs_numpy": 3403.4539982755014,
+      "speedup_vs_numpy": 2943.205551736047,
       "translation": "direct setup and operation: var(ones(200, float64)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -362,28 +362,28 @@
       "name": "asv_reduce_argmax_i64_200000",
       "near_tie": false,
       "numpy_checksum": 0.0,
-      "numpy_ms": 542.394417047035,
+      "numpy_ms": 485.4591669864021,
       "numpy_pass_millis": [
-        484.067750046961,
-        484.3285420211032,
-        553.1316249980591,
-        596.8005829490721,
-        542.394417047035
+        491.70200002845377,
+        484.3465000158176,
+        484.6949580241926,
+        485.4591669864021,
+        485.4906250257045
       ],
       "numrust_checksum": 0.0,
-      "numrust_ms": 0.0275,
+      "numrust_ms": 0.025542,
       "numrust_pass_millis": [
-        0.025583,
-        0.027666,
-        0.0275,
-        0.026042,
-        0.028333
+        0.026292,
+        0.0255,
+        0.024,
+        0.025542,
+        0.025542
       ],
       "repetitions": 20000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "ArgMax.time_argmax(dtype=int64)",
-      "speedup_vs_numpy": 19723.433347164908,
+      "speedup_vs_numpy": 19006.309881230998,
       "translation": "direct setup and operation: zeros(200000, int64).argmax(), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -393,28 +393,28 @@
       "name": "asv_reduce_argmin_i64_200000",
       "near_tie": false,
       "numpy_checksum": 0.0,
-      "numpy_ms": 620.6193329999223,
+      "numpy_ms": 518.789374968037,
       "numpy_pass_millis": [
-        532.7921250136569,
-        535.7469999580644,
-        623.8647080026567,
-        672.0107500441372,
-        620.6193329999223
+        533.74016599264,
+        518.0710409767926,
+        519.496499968227,
+        518.7008330249228,
+        518.789374968037
       ],
       "numrust_checksum": 0.0,
-      "numrust_ms": 0.027583,
+      "numrust_ms": 0.025875,
       "numrust_pass_millis": [
-        0.025792,
-        0.027667,
-        0.027583,
-        0.025958,
-        0.02775
+        0.02625,
+        0.025875,
+        0.025625,
+        0.026375,
+        0.025625
       ],
       "repetitions": 20000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_reduce.py",
       "source_symbol": "ArgMin.time_argmin(dtype=int64)",
-      "speedup_vs_numpy": 22500.06645397246,
+      "speedup_vs_numpy": 20049.830916639112,
       "translation": "direct setup and operation: ones(200000, int64).argmin(), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -424,28 +424,28 @@
       "name": "asv_itemselection_take_i64_1000x1",
       "near_tie": false,
       "numpy_checksum": 4000.0,
-      "numpy_ms": 4.105957981664687,
+      "numpy_ms": 3.838375036139041,
       "numpy_pass_millis": [
-        3.958917048294097,
-        3.5816250019706786,
-        4.105957981664687,
-        4.709707980509847,
-        4.199000017251819
+        3.8492910098284483,
+        3.587666025850922,
+        3.4417500137351453,
+        3.8385840016417205,
+        3.838375036139041
       ],
       "numrust_checksum": 4000.0,
-      "numrust_ms": 0.976667,
+      "numrust_ms": 0.911209,
       "numrust_pass_millis": [
-        0.892708,
-        0.976667,
-        1.078541,
-        0.887291,
-        0.99525
+        0.930833,
+        0.878167,
+        0.852625,
+        0.930625,
+        0.911209
       ],
       "repetitions": 2000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_itemselection.py",
       "source_symbol": "Take.time_contiguous(shape=(1000, 1), mode='raise', dtype='int64')",
-      "speedup_vs_numpy": 4.204051106123876,
+      "speedup_vs_numpy": 4.21239807348154,
       "translation": "direct setup and operation, repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -455,28 +455,28 @@
       "name": "asv_itemselection_putmask_dense_scalar_f64_1000",
       "near_tie": false,
       "numpy_checksum": 20000.0,
-      "numpy_ms": 6.0909579624421895,
+      "numpy_ms": 5.0663750153034925,
       "numpy_pass_millis": [
-        5.118499975651503,
-        4.95450000744313,
-        6.0909579624421895,
-        6.9900419912301,
-        6.111916969530284
+        5.0663750153034925,
+        5.177833023481071,
+        5.306791979819536,
+        4.879541986156255,
+        5.065417033620179
       ],
       "numrust_checksum": 20000.0,
-      "numrust_ms": 1.119042,
+      "numrust_ms": 0.888292,
       "numrust_pass_millis": [
-        1.27825,
-        1.178458,
-        0.985875,
-        0.98375,
-        1.119042
+        1.06575,
+        0.723458,
+        0.599792,
+        0.888292,
+        1.014791
       ],
       "repetitions": 10000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_itemselection.py",
       "source_symbol": "PutMask.time_dense(values_is_scalar=True, dtype=float64)",
-      "speedup_vs_numpy": 5.4430110419825075,
+      "speedup_vs_numpy": 5.703501793670879,
       "translation": "direct setup and operation: putmask(ones(1000), dense_bool_mask, scalar_one), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -486,28 +486,28 @@
       "name": "asv_itemselection_putmask_sparse_scalar_f64_1000",
       "near_tie": false,
       "numpy_checksum": 20000.0,
-      "numpy_ms": 5.401625006925315,
+      "numpy_ms": 4.729459004011005,
       "numpy_pass_millis": [
-        4.773250024300069,
-        4.6968330279923975,
-        5.401625006925315,
-        5.942124989815056,
-        5.564082995988429
+        4.700249992311001,
+        4.791750048752874,
+        4.729459004011005,
+        4.732166009489447,
+        4.689916968345642
       ],
       "numrust_checksum": 20000.0,
-      "numrust_ms": 0.02525,
+      "numrust_ms": 0.025916,
       "numrust_pass_millis": [
-        0.023417,
-        0.025291,
-        0.025333,
-        0.024042,
-        0.02525
+        0.025875,
+        0.025625,
+        0.026209,
+        0.025916,
+        0.028
       ],
       "repetitions": 10000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_itemselection.py",
       "source_symbol": "PutMask.time_sparse(values_is_scalar=True, dtype=float64)",
-      "speedup_vs_numpy": 213.9257428485273,
+      "speedup_vs_numpy": 182.49185846623726,
       "translation": "direct setup and operation: putmask(ones(1000), sparse_bool_mask, scalar_one), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -517,28 +517,28 @@
       "name": "asv_itemselection_put_ordered_f64_1000",
       "near_tie": false,
       "numpy_checksum": 20000.0,
-      "numpy_ms": 21.887874987442046,
+      "numpy_ms": 19.835833052638918,
       "numpy_pass_millis": [
-        20.21795802284032,
-        19.696041010320187,
-        21.887874987442046,
-        23.717832984402776,
-        22.709749988280237
+        19.88466701004654,
+        19.783166993875057,
+        19.835833052638918,
+        19.856750033795834,
+        19.668166001792997
       ],
       "numrust_checksum": 20000.0,
-      "numrust_ms": 7.567083,
+      "numrust_ms": 7.009417,
       "numrust_pass_millis": [
-        6.998666,
-        7.567083,
-        7.628042,
-        7.60525,
-        7.277375
+        7.364,
+        7.068333,
+        6.957042,
+        7.009417,
+        6.985334
       ],
       "repetitions": 10000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_itemselection.py",
       "source_symbol": "Put.time_ordered(values_is_scalar=False, dtype=float64)",
-      "speedup_vs_numpy": 2.8925115513391417,
+      "speedup_vs_numpy": 2.8298834343339707,
       "translation": "direct setup and operation: put(ones(1000), arange(1000), ones(1000)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -546,30 +546,30 @@
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
       "name": "asv_linalg_dot_a_b_f64_150x400_400x600",
-      "near_tie": false,
+      "near_tie": true,
       "numpy_checksum": 2893480040200000.0,
-      "numpy_ms": 229.73770799580961,
+      "numpy_ms": 147.48054201481864,
       "numpy_pass_millis": [
-        150.22970899008214,
-        153.5699589876458,
-        254.82916698092595,
-        271.3347089593299,
-        229.73770799580961
+        146.50862495182082,
+        147.48054201481864,
+        146.24450000701472,
+        147.82179199391976,
+        147.90829102275893
       ],
       "numrust_checksum": 2893480040200000.0,
-      "numrust_ms": 169.968625,
+      "numrust_ms": 144.806792,
       "numrust_pass_millis": [
-        143.769125,
-        163.365,
-        193.696625,
-        169.968625,
-        229.254041
+        144.307792,
+        144.806792,
+        144.90625,
+        144.863709,
+        144.78525
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_dot_a_b",
-      "speedup_vs_numpy": 1.3516477408451684,
+      "speedup_vs_numpy": 1.0184642583258017,
       "translation": "direct setup and operation: dot(arange(60000).reshape(150,400), arange(240000).reshape(400,600)), repeated equally",
       "winner": "numrust"
     },
@@ -577,30 +577,30 @@
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
       "name": "asv_linalg_matmul_a_b_f64_150x400_400x600",
-      "near_tie": false,
+      "near_tie": true,
       "numpy_checksum": 2893480040200000.0,
-      "numpy_ms": 221.99508402263746,
+      "numpy_ms": 145.54812503047287,
       "numpy_pass_millis": [
-        151.31045802263543,
-        147.61320903198794,
-        233.74766699271277,
-        250.40504202479497,
-        221.99508402263746
+        144.79112502885982,
+        143.975707993377,
+        145.54812503047287,
+        145.56912501575425,
+        145.89041599538177
       ],
       "numrust_checksum": 2893480040200000.0,
-      "numrust_ms": 203.032625,
+      "numrust_ms": 144.755708,
       "numrust_pass_millis": [
-        143.691416,
-        162.109917,
-        214.729,
-        203.032625,
-        203.922792
+        144.341292,
+        144.755708,
+        143.383375,
+        145.159916,
+        144.999583
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_matmul_a_b",
-      "speedup_vs_numpy": 1.0933961180999234,
+      "speedup_vs_numpy": 1.0054741677645822,
       "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(240000).reshape(400,600)), repeated equally",
       "winner": "numrust"
     },
@@ -610,28 +610,28 @@
       "name": "asv_linalg_matmul_d_matmul_b_c_f64",
       "near_tie": false,
       "numpy_checksum": 4.594545663960056e+18,
-      "numpy_ms": 5.115750012919307,
+      "numpy_ms": 4.844666982535273,
       "numpy_pass_millis": [
-        4.926917026750743,
-        4.896999977063388,
-        5.526707973331213,
-        5.793374963104725,
-        5.115750012919307
+        4.844666982535273,
+        4.876540973782539,
+        4.727041989099234,
+        4.932708980049938,
+        4.782583040650934
       ],
       "numrust_checksum": 4.594545663960056e+18,
-      "numrust_ms": 4.228584,
+      "numrust_ms": 3.979125,
       "numrust_pass_millis": [
-        4.128042,
-        4.295958,
-        4.976833,
-        4.228584,
-        4.098125
+        3.88525,
+        3.869958,
+        4.325292,
+        3.979125,
+        4.003291
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_matmul_d_matmul_b_c",
-      "speedup_vs_numpy": 1.2098021495893914,
+      "speedup_vs_numpy": 1.2175206816913953,
       "translation": "direct setup and operation: matmul(arange(400), matmul(arange(240000).reshape(400,600), arange(600))), repeated equally",
       "winner": "numrust"
     },
@@ -641,28 +641,28 @@
       "name": "asv_linalg_dot_d_dot_b_c_f64",
       "near_tie": false,
       "numpy_checksum": 4.594545663960056e+18,
-      "numpy_ms": 4.985124978702515,
+      "numpy_ms": 4.618457984179258,
       "numpy_pass_millis": [
-        4.652208008337766,
-        4.842500027734786,
-        5.238124984316528,
-        5.503790976945311,
-        4.985124978702515
+        4.618457984179258,
+        4.7658339608460665,
+        4.558749962598085,
+        5.078667018096894,
+        4.5508749899454415
       ],
       "numrust_checksum": 4.594545663960056e+18,
-      "numrust_ms": 4.104125,
+      "numrust_ms": 4.053041,
       "numrust_pass_millis": [
-        4.104125,
-        4.0265,
-        4.100875,
-        4.30625,
-        5.056083
+        3.879875,
+        4.000959,
+        4.103458,
+        4.06025,
+        4.053041
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_dot_d_dot_b_c",
-      "speedup_vs_numpy": 1.2146620725983044,
+      "speedup_vs_numpy": 1.1395043830494826,
       "translation": "direct setup and operation: dot(arange(400), dot(arange(240000).reshape(400,600), arange(600))); equivalent vector/matrix matmul path in Rust, repeated equally",
       "winner": "numrust"
     },
@@ -672,28 +672,28 @@
       "name": "asv_linalg_dot_trans_a_at_f64_150x400_400x150",
       "near_tie": false,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 47.86654200870544,
+      "numpy_ms": 34.823708003386855,
       "numpy_pass_millis": [
-        32.810207980219275,
-        33.041917020455,
-        49.11270801676437,
-        55.23774999892339,
-        47.86654200870544
+        34.91195902461186,
+        32.924374972935766,
+        34.902957966551185,
+        33.04687503259629,
+        34.823708003386855
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 31.370708,
+      "numrust_ms": 31.242208,
       "numrust_pass_millis": [
-        29.035292,
-        31.136208,
-        39.392792,
-        31.370708,
-        42.820417
+        31.07625,
+        31.242208,
+        29.264917,
+        31.315791,
+        31.29
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_dot_trans_a_at",
-      "speedup_vs_numpy": 1.5258355663731096,
+      "speedup_vs_numpy": 1.1146365840527934,
       "translation": "direct setup and operation: dot(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally",
       "winner": "numrust"
     },
@@ -701,32 +701,32 @@
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
       "name": "asv_linalg_dot_trans_a_atc_f64_150x400_400x150",
-      "near_tie": false,
+      "near_tie": true,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 61.31887499941513,
+      "numpy_ms": 42.037750012241304,
       "numpy_pass_millis": [
-        41.659540962427855,
-        41.51895799441263,
-        61.31887499941513,
-        85.51641699159518,
-        65.01816702075303
+        41.9243749929592,
+        41.80125001585111,
+        44.11541600711644,
+        42.037750012241304,
+        44.15600001811981
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 46.308208,
+      "numrust_ms": 42.680375,
       "numrust_pass_millis": [
-        40.864959,
-        46.308208,
-        56.925167,
-        43.42,
-        57.458
+        41.995125,
+        42.680375,
+        41.612084,
+        43.305458,
+        43.0935
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_dot_trans_a_atc",
-      "speedup_vs_numpy": 1.3241470064964538,
+      "speedup_vs_numpy": 0.9849433143978071,
       "translation": "direct setup and operation: dot(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T.copy()), repeated equally",
-      "winner": "numrust"
+      "winner": "numpy"
     },
     {
       "checksum_abs_diff": 0.0,
@@ -734,28 +734,28 @@
       "name": "asv_linalg_dot_trans_at_a_f64_400x150_150x400",
       "near_tie": false,
       "numpy_checksum": 359998940150000.0,
-      "numpy_ms": 138.84437503293157,
+      "numpy_ms": 96.55054204631597,
       "numpy_pass_millis": [
-        95.24320799391717,
-        95.78845801297575,
-        138.84437503293157,
-        157.4994169641286,
-        141.49270800407976
+        97.54941699793562,
+        95.32741695875302,
+        96.24937502667308,
+        96.55054204631597,
+        97.36054099630564
       ],
       "numrust_checksum": 359998940150000.0,
-      "numrust_ms": 87.058333,
+      "numrust_ms": 79.297667,
       "numrust_pass_millis": [
-        77.925542,
-        87.058333,
-        102.116208,
-        83.185416,
-        100.044875
+        82.028125,
+        77.753792,
+        80.138417,
+        79.297667,
+        78.170333
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_dot_trans_at_a",
-      "speedup_vs_numpy": 1.594843023618791,
+      "speedup_vs_numpy": 1.217571029502242,
       "translation": "direct setup and operation: dot(arange(60000).reshape(150,400).T, arange(60000).reshape(150,400)), repeated equally",
       "winner": "numrust"
     },
@@ -765,28 +765,28 @@
       "name": "asv_linalg_dot_trans_atc_a_f64_400x150_150x400",
       "near_tie": false,
       "numpy_checksum": 359998940150000.0,
-      "numpy_ms": 160.10808397550136,
+      "numpy_ms": 101.36037500342354,
       "numpy_pass_millis": [
-        99.971458024811,
-        103.45879197120667,
-        160.10808397550136,
-        179.19195798458531,
-        184.9652499658987
+        100.34495801664889,
+        99.79412500979379,
+        101.60179197555408,
+        101.36037500342354,
+        101.42399999313056
       ],
       "numrust_checksum": 359998940150000.0,
-      "numrust_ms": 104.735708,
+      "numrust_ms": 95.584375,
       "numrust_pass_millis": [
-        95.672459,
-        104.004,
-        129.009375,
-        104.735708,
-        117.728292
+        102.849083,
+        95.584375,
+        95.600875,
+        94.97575,
+        95.096458
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_dot_trans_atc_a",
-      "speedup_vs_numpy": 1.5286867013445058,
+      "speedup_vs_numpy": 1.060428286562773,
       "translation": "direct setup and operation: dot(arange(60000).reshape(150,400).T.copy(), arange(60000).reshape(150,400)), repeated equally",
       "winner": "numrust"
     },
@@ -796,28 +796,28 @@
       "name": "asv_linalg_inner_a_a_f64_150x400_150x400",
       "near_tie": false,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 39.90562498802319,
+      "numpy_ms": 34.84070801641792,
       "numpy_pass_millis": [
-        33.29816699260846,
-        33.000375027768314,
-        46.28108302131295,
-        52.501666999887675,
-        39.90562498802319
+        34.055458032526076,
+        33.13133300980553,
+        34.91450002184138,
+        34.944834013003856,
+        34.84070801641792
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 31.545542,
+      "numrust_ms": 29.239041,
       "numrust_pass_millis": [
-        29.803333,
-        31.433333,
-        39.5525,
-        31.545542,
-        38.05325
+        32.558959,
+        29.199833,
+        29.42125,
+        29.239041,
+        29.130125
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_inner_trans_a_a",
-      "speedup_vs_numpy": 1.2650163052523615,
+      "speedup_vs_numpy": 1.1915817627677296,
       "translation": "direct setup and operation: inner(arange(60000).reshape(150,400), same array), repeated equally",
       "winner": "numrust"
     },
@@ -827,28 +827,28 @@
       "name": "asv_linalg_inner_a_ac_f64_150x400_150x400",
       "near_tie": false,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 63.44087497564033,
+      "numpy_ms": 50.228499982040375,
       "numpy_pass_millis": [
-        49.135792010929435,
-        48.743250023107976,
-        81.02883299579844,
-        83.53362500201911,
-        63.44087497564033
+        49.1704159649089,
+        50.228499982040375,
+        49.460459034889936,
+        50.98666698904708,
+        50.88387499563396
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 52.064,
+      "numrust_ms": 47.824083,
       "numrust_pass_millis": [
-        49.500791,
-        51.719916,
-        64.247542,
-        52.064,
-        59.674625
+        52.939959,
+        47.7235,
+        47.691,
+        49.847042,
+        47.824083
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_inner_trans_a_ac",
-      "speedup_vs_numpy": 1.2185171130846713,
+      "speedup_vs_numpy": 1.050276279882677,
       "translation": "direct setup and operation: inner(arange(60000).reshape(150,400), copied array), repeated equally",
       "winner": "numrust"
     },
@@ -858,28 +858,28 @@
       "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
       "near_tie": false,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 40.65799998352304,
+      "numpy_ms": 30.42958298465237,
       "numpy_pass_millis": [
-        29.138167039491236,
-        28.93241698620841,
-        44.1325000138022,
-        47.37550002755597,
-        40.65799998352304
+        30.42958298465237,
+        30.331540969200432,
+        31.543250021059066,
+        29.982957988977432,
+        31.364166003186256
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 31.371333,
+      "numrust_ms": 29.283042,
       "numrust_pass_millis": [
-        30.430083,
-        30.822834,
-        37.415083,
-        31.371333,
-        34.100834
+        30.702625,
+        29.162042,
+        29.122417,
+        29.283042,
+        29.292375
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_matmul_trans_a_at",
-      "speedup_vs_numpy": 1.2960239841744385,
+      "speedup_vs_numpy": 1.0391537526959245,
       "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally",
       "winner": "numrust"
     },
@@ -889,28 +889,28 @@
       "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
       "near_tie": false,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 62.09708302048966,
+      "numpy_ms": 42.977208038792014,
       "numpy_pass_millis": [
-        41.72458400717005,
-        41.08370799804106,
-        63.46229201881215,
-        78.08762497734278,
-        62.09708302048966
+        41.367083962541074,
+        42.977208038792014,
+        43.70687500340864,
+        41.493917000479996,
+        43.378125003073364
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 48.701875,
+      "numrust_ms": 40.866458,
       "numrust_pass_millis": [
-        42.141916,
-        43.638125,
-        52.645459,
-        48.701875,
-        58.173
+        42.964584,
+        40.768542,
+        40.866458,
+        40.969625,
+        40.784334
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_matmul_trans_a_atc",
-      "speedup_vs_numpy": 1.2750450166546907,
+      "speedup_vs_numpy": 1.0516499384113986,
       "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T.copy()), repeated equally",
       "winner": "numrust"
     },
@@ -918,30 +918,30 @@
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
       "name": "asv_linalg_matmul_trans_at_a_f64_400x150_150x400",
-      "near_tie": false,
+      "near_tie": true,
       "numpy_checksum": 359998940150000.0,
-      "numpy_ms": 110.18116702325642,
+      "numpy_ms": 79.96362500125542,
       "numpy_pass_millis": [
-        78.97045800928026,
-        78.70449998881668,
-        110.18116702325642,
-        141.8770420132205,
-        111.88608297379687
+        79.26775002852082,
+        80.63416701043025,
+        80.47891600290313,
+        79.96362500125542,
+        79.76254203822464
       ],
       "numrust_checksum": 359998940150000.0,
-      "numrust_ms": 92.608875,
+      "numrust_ms": 78.933084,
       "numrust_pass_millis": [
-        78.468958,
-        84.790375,
-        101.955417,
-        92.608875,
-        115.233167
+        78.946209,
+        79.666167,
+        77.72825,
+        78.933084,
+        77.844084
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_matmul_trans_at_a",
-      "speedup_vs_numpy": 1.1897473867732054,
+      "speedup_vs_numpy": 1.0130558816282338,
       "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400).T, arange(60000).reshape(150,400)), repeated equally",
       "winner": "numrust"
     },
@@ -949,32 +949,32 @@
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
       "name": "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
-      "near_tie": false,
+      "near_tie": true,
       "numpy_checksum": 359998940150000.0,
-      "numpy_ms": 122.21699999645352,
+      "numpy_ms": 95.78408399829641,
       "numpy_pass_millis": [
-        98.85620803106576,
-        95.4692080267705,
-        142.26024999516085,
-        174.245499947574,
-        122.21699999645352
+        95.72712500812486,
+        95.5791249871254,
+        95.78408399829641,
+        97.38141699926928,
+        97.34945796662942
       ],
       "numrust_checksum": 359998940150000.0,
-      "numrust_ms": 107.798125,
+      "numrust_ms": 97.034709,
       "numrust_pass_millis": [
-        94.43425,
-        103.298083,
-        129.201167,
-        107.798125,
-        136.399625
+        103.528417,
+        97.044292,
+        97.034709,
+        95.060875,
+        95.045166
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_matmul_trans_atc_a",
-      "speedup_vs_numpy": 1.133758124238743,
+      "speedup_vs_numpy": 0.987111570544272,
       "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400).T.copy(), arange(60000).reshape(150,400)), repeated equally",
-      "winner": "numrust"
+      "winner": "numpy"
     },
     {
       "checksum_abs_diff": 0.0,
@@ -982,28 +982,28 @@
       "name": "asv_linalg_tensordot_a3_b3_axes_10_01",
       "near_tie": false,
       "numpy_checksum": 2233323484688000.0,
-      "numpy_ms": 5.55583304958418,
+      "numpy_ms": 4.392625007312745,
       "numpy_pass_millis": [
-        5.224541993811727,
-        4.69616602640599,
-        5.62141602858901,
-        6.410125002730638,
-        5.55583304958418
+        4.392625007312745,
+        4.351791983935982,
+        4.559665976557881,
+        4.41579200560227,
+        4.389124980662018
       ],
       "numrust_checksum": 2233323484688000.0,
-      "numrust_ms": 4.155083,
+      "numrust_ms": 2.892958,
       "numrust_pass_millis": [
-        3.052458,
-        3.793875,
-        4.155083,
-        4.251917,
-        5.1235
+        5.773041,
+        2.777833,
+        2.892958,
+        3.014416,
+        2.835792
       ],
       "repetitions": 10,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_tensordot_a_b_axes_1_0_0_1",
-      "speedup_vs_numpy": 1.3371172247543983,
+      "speedup_vs_numpy": 1.5183853368464888,
       "translation": "direct setup and operation: tensordot(arange(480000).reshape(60,80,100), arange(192000).reshape(80,60,40), axes=([1,0],[0,1])), repeated equally",
       "winner": "numrust"
     },
@@ -1013,28 +1013,28 @@
       "name": "asv_linalg_norm_small_array_f64_5",
       "near_tie": false,
       "numpy_checksum": 547722.5575058461,
-      "numpy_ms": 48.19662502268329,
+      "numpy_ms": 40.849999990314245,
       "numpy_pass_millis": [
-        50.028709054458886,
-        48.19662502268329,
-        50.74287502793595,
-        45.002374972682446,
-        41.444499976933
+        40.849999990314245,
+        40.80370796145871,
+        40.689957968425006,
+        41.48650000570342,
+        41.776583006139845
       ],
       "numrust_checksum": 547722.5575058461,
-      "numrust_ms": 5.374,
+      "numrust_ms": 4.738417,
       "numrust_pass_millis": [
-        4.718125,
-        5.5965,
-        5.374,
-        5.318708,
-        5.718625
+        5.227667,
+        4.6225,
+        4.585625,
+        4.738417,
+        4.793416
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "LinalgSmallArrays.time_norm_small_array",
-      "speedup_vs_numpy": 8.968482512594584,
+      "speedup_vs_numpy": 8.621022588411751,
       "translation": "direct setup and operation: norm(arange(5.0)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -1044,28 +1044,28 @@
       "name": "asv_linalg_det_small_array_f64_5x5",
       "near_tie": false,
       "numpy_checksum": 0.0,
-      "numpy_ms": 113.7296250090003,
+      "numpy_ms": 92.30749995913357,
       "numpy_pass_millis": [
-        114.92295900825411,
-        113.7296250090003,
-        117.65741696581244,
-        104.31366600096226,
-        92.21274999435991
+        92.4959999974817,
+        91.2373749888502,
+        91.36416699038818,
+        92.66691602533683,
+        92.30749995913357
       ],
       "numrust_checksum": 0.0,
-      "numrust_ms": 9.655958,
+      "numrust_ms": 8.331625,
       "numrust_pass_millis": [
-        8.313416,
-        9.865375,
-        9.655958,
-        8.922333,
-        10.003583
+        9.676875,
+        8.232041,
+        8.331625,
+        8.40925,
+        8.244167
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "LinalgSmallArrays.time_det_small_array",
-      "speedup_vs_numpy": 11.778181409757613,
+      "speedup_vs_numpy": 11.079171225197193,
       "translation": "direct setup and operation: det(arange(25.0).reshape(5,5)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -1075,28 +1075,28 @@
       "name": "asv_linalg_det_3x3_f64",
       "near_tie": false,
       "numpy_checksum": -500000.00000000006,
-      "numpy_ms": 109.04549999395385,
+      "numpy_ms": 87.41604199167341,
       "numpy_pass_millis": [
-        111.23116698581725,
-        109.04549999395385,
-        120.6115409731865,
-        108.86429098900408,
-        88.3240420371294
+        87.2084170114249,
+        88.38024997385219,
+        87.11770799709484,
+        88.04541599238291,
+        87.41604199167341
       ],
       "numrust_checksum": -499999.99999999994,
-      "numrust_ms": 8.015416,
+      "numrust_ms": 7.148958,
       "numrust_pass_millis": [
-        6.979125,
-        8.015416,
-        8.206667,
-        7.483708,
-        8.396917
+        8.019584,
+        7.1465,
+        7.135458,
+        7.192167,
+        7.148958
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "LinalgSmallArrays.time_det_3x3",
-      "speedup_vs_numpy": 13.604471682312415,
+      "speedup_vs_numpy": 12.227801868702182,
       "translation": "direct setup and operation: det(eye(3) + arange(9.0).reshape(3,3)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -1106,28 +1106,28 @@
       "name": "asv_linalg_solve_3x3_f64",
       "near_tie": false,
       "numpy_checksum": 40000.00000007539,
-      "numpy_ms": 215.2755000279285,
+      "numpy_ms": 174.05887495260686,
       "numpy_pass_millis": [
-        216.82729199528694,
-        215.2755000279285,
-        241.22379103209823,
-        200.119832996279,
-        175.71300000417978
+        172.17737500322983,
+        174.48499996680766,
+        174.05887495260686,
+        173.52275003213435,
+        174.45812502410263
       ],
       "numrust_checksum": 40000.00000007539,
-      "numrust_ms": 16.257792,
+      "numrust_ms": 14.396917,
       "numrust_pass_millis": [
-        14.313,
-        16.257792,
-        16.557208,
-        16.224875,
-        17.203042
+        15.811333,
+        14.237,
+        14.028125,
+        14.396917,
+        14.602209
       ],
       "repetitions": 100000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "LinalgSmallArrays.time_solve_3x3",
-      "speedup_vs_numpy": 13.241373738077625,
+      "speedup_vs_numpy": 12.090010309332676,
       "translation": "direct setup and operation: solve(eye(3) + arange(9.0).reshape(3,3), arange(3.0)), repeated because ASV auto-calibrates tiny timings",
       "winner": "numrust"
     },
@@ -1137,28 +1137,28 @@
       "name": "asv_linalg_lstsq_square_f64_100x100",
       "near_tie": false,
       "numpy_checksum": -487.02559350316494,
-      "numpy_ms": 64.61104098707438,
+      "numpy_ms": 64.00416698306799,
       "numpy_pass_millis": [
-        68.6104170163162,
-        63.871041988022625,
-        67.27200001478195,
-        64.61104098707438,
-        63.90254100551829
+        64.16808301582932,
+        63.78954101819545,
+        64.00416698306799,
+        63.95383400376886,
+        64.33525000466034
       ],
       "numrust_checksum": -487.025593503164,
-      "numrust_ms": 5.998416,
+      "numrust_ms": 5.185334,
       "numrust_pass_millis": [
-        5.143791,
-        5.998416,
-        6.228833,
-        5.518625,
-        6.1045
+        5.800583,
+        5.199125,
+        5.173084,
+        5.183208,
+        5.185334
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Lstsq.time_numpy_linalg_lstsq_a__b_float64",
-      "speedup_vs_numpy": 10.771350467702536,
+      "speedup_vs_numpy": 12.343306522408776,
       "translation": "direct setup from common.py get_squares_()['float64'] and get_indexes_rand()[:100]; square full-rank lstsq compared to equivalent square solve, repeated equally",
       "winner": "numrust"
     },
@@ -1168,28 +1168,28 @@
       "name": "asv_linalg_einsum_outer_f64_3000",
       "near_tie": false,
       "numpy_checksum": 8994001.0,
-      "numpy_ms": 2.1317919599823654,
+      "numpy_ms": 1.7051250324584544,
       "numpy_pass_millis": [
-        2.1317919599823654,
-        1.8159169703722,
-        2.236166037619114,
-        2.1600000327453017,
-        1.745083020068705
+        1.6851249965839088,
+        1.7104170401580632,
+        1.7051250324584544,
+        1.6974580357782543,
+        1.7161249998025596
       ],
       "numrust_checksum": 8994001.0,
-      "numrust_ms": 0.703375,
+      "numrust_ms": 0.667167,
       "numrust_pass_millis": [
-        0.647583,
-        0.689916,
-        0.842375,
-        0.703375,
-        0.884875
+        0.980833,
+        0.642625,
+        0.642041,
+        0.673709,
+        0.667167
       ],
       "repetitions": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_outer(dtype=float64)",
-      "speedup_vs_numpy": 3.0308042793422647,
+      "speedup_vs_numpy": 2.5557694437201697,
       "translation": "direct setup and operation: einsum(\"i,j\", arange(3000), arange(3000))",
       "winner": "numrust"
     },
@@ -1199,28 +1199,28 @@
       "name": "asv_linalg_einsum_i_ij_j_f64_400_400x600_600",
       "near_tie": false,
       "numpy_checksum": 2.297272831980028e+18,
-      "numpy_ms": 262.6413329853676,
+      "numpy_ms": 254.3178329942748,
       "numpy_pass_millis": [
-        255.06266701268032,
-        256.7807500017807,
-        262.6413329853676,
-        297.99358296440914,
-        272.67650002613664
+        254.35645802645013,
+        253.58000001870096,
+        250.23095798678696,
+        254.3178329942748,
+        254.45854099234566
       ],
       "numrust_checksum": 2.297272831980028e+18,
-      "numrust_ms": 4.159333,
+      "numrust_ms": 4.157625,
       "numrust_pass_millis": [
-        4.187125,
-        3.968375,
-        4.051584,
-        4.159333,
-        4.766083
+        4.255333,
+        4.126958,
+        4.053917,
+        4.157625,
+        4.3125
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_einsum_i_ij_j",
-      "speedup_vs_numpy": 63.1450602741756,
+      "speedup_vs_numpy": 61.16901668483203,
       "translation": "direct setup and operation: einsum('i,ij,j', arange(400), arange(240000).reshape(400,600), arange(600)), repeated equally",
       "winner": "numrust"
     },
@@ -1230,28 +1230,28 @@
       "name": "asv_linalg_einsum_ij_jk_f64_150x400_400x600",
       "near_tie": false,
       "numpy_checksum": 2893480040200000.0,
-      "numpy_ms": 4861.085000040475,
+      "numpy_ms": 4163.403832993936,
       "numpy_pass_millis": [
-        4861.085000040475,
-        4668.63970796112,
-        5034.326791996136,
-        4168.431665981188,
-        4924.349542008713
+        4161.758333968464,
+        4155.260500032455,
+        4170.250333030708,
+        4169.006415992044,
+        4163.403832993936
       ],
       "numrust_checksum": 2893480040200000.0,
-      "numrust_ms": 176.206833,
+      "numrust_ms": 144.660292,
       "numrust_pass_millis": [
-        143.758958,
-        176.206833,
-        220.18675,
-        172.39225,
-        226.057167
+        144.39425,
+        145.1525,
+        143.061125,
+        144.660292,
+        145.014083
       ],
       "repetitions": 1000,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_einsum_ij_jk_a_b",
-      "speedup_vs_numpy": 27.587380791529664,
+      "speedup_vs_numpy": 28.78055736949526,
       "translation": "direct setup and operation: einsum('ij,jk', arange(60000).reshape(150,400), arange(240000).reshape(400,600)), repeated equally; equivalent Rust matrix-contraction path",
       "winner": "numrust"
     },
@@ -1261,28 +1261,28 @@
       "name": "asv_linalg_einsum_multiply_f64_30x40_20x30x40",
       "near_tie": false,
       "numpy_checksum": 28774801.0,
-      "numpy_ms": 0.017082958947867155,
+      "numpy_ms": 0.014042016118764877,
       "numpy_pass_millis": [
-        0.016708974726498127,
-        0.017082958947867155,
-        0.01708301715552807,
-        0.017290993127971888,
-        0.015124969650059938
+        0.015208031982183456,
+        0.014042016118764877,
+        0.013999990187585354,
+        0.015290977898985147,
+        0.013833981938660145
       ],
       "numrust_checksum": 28774801.0,
-      "numrust_ms": 0.003333,
+      "numrust_ms": 0.003208,
       "numrust_pass_millis": [
+        0.003458,
+        0.002916,
         0.003,
-        0.003208,
-        0.003333,
-        0.003666,
-        0.00375
+        0.003833,
+        0.003208
       ],
       "repetitions": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_multiply(dtype=float64)",
-      "speedup_vs_numpy": 5.1254002243825845,
+      "speedup_vs_numpy": 4.377187069440423,
       "translation": "direct setup and operation: einsum(\"..., ...\", arange(1200).reshape(30,40), arange(24000).reshape(20,30,40))",
       "winner": "numrust"
     },
@@ -1292,28 +1292,28 @@
       "name": "asv_linalg_einsum_sum_mul_f64_scalar_10x100x10",
       "near_tie": false,
       "numpy_checksum": 1499850000000.0,
-      "numpy_ms": 0.7590410532429814,
+      "numpy_ms": 0.6497090216726065,
       "numpy_pass_millis": [
-        0.972250010818243,
-        0.8847080171108246,
-        0.7590410532429814,
-        0.7233329815790057,
-        0.6951669929549098
+        0.6492919637821615,
+        0.6550410180352628,
+        0.6454589893110096,
+        0.6619160412810743,
+        0.6497090216726065
       ],
       "numrust_checksum": 1499850000000.0,
-      "numrust_ms": 0.05825,
+      "numrust_ms": 0.050917,
       "numrust_pass_millis": [
-        0.049167,
-        0.051333,
-        0.05825,
-        0.089333,
-        0.061833
+        0.057291,
+        0.050917,
+        0.048708,
+        0.053375,
+        0.05025
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_sum_mul(dtype=float64)",
-      "speedup_vs_numpy": 13.030747695158478,
+      "speedup_vs_numpy": 12.760159115277933,
       "translation": "direct setup and operation: einsum(\",i...->\", 300, arange(10000).reshape(10,100,10)), repeated equally",
       "winner": "numrust"
     },
@@ -1323,28 +1323,28 @@
       "name": "asv_linalg_einsum_sum_mul2_f64_10x100x10_scalar",
       "near_tie": false,
       "numpy_checksum": 1499850000000.0,
-      "numpy_ms": 0.7369579980149865,
+      "numpy_ms": 0.6546250078827143,
       "numpy_pass_millis": [
-        0.9117089794017375,
-        0.7340830052271485,
-        0.7369579980149865,
-        0.7595840143039823,
-        0.7020839839242399
+        0.6704580155201256,
+        0.6481250165961683,
+        0.6487500504590571,
+        0.6546250078827143,
+        0.655583047773689
       ],
       "numrust_checksum": 1499850000000.0,
-      "numrust_ms": 0.055,
+      "numrust_ms": 0.052,
       "numrust_pass_millis": [
-        0.050833,
-        0.055,
-        0.058958,
-        0.049708,
-        0.062
+        0.05725,
+        0.052,
+        0.050166,
+        0.052042,
+        0.05075
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_sum_mul2(dtype=float64)",
-      "speedup_vs_numpy": 13.399236327545209,
+      "speedup_vs_numpy": 12.588942459282967,
       "translation": "direct setup and operation: einsum(\"i...,->\", arange(10000).reshape(10,100,10), 300), repeated equally",
       "winner": "numrust"
     },
@@ -1352,32 +1352,32 @@
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
       "name": "asv_linalg_einsum_scalar_mul_f64_480000",
-      "near_tie": true,
+      "near_tie": false,
       "numpy_checksum": 14399970000.0,
-      "numpy_ms": 6.180583965033293,
+      "numpy_ms": 6.691416027024388,
       "numpy_pass_millis": [
-        6.157333962619305,
-        6.318958010524511,
-        6.126415973994881,
-        6.180583965033293,
-        7.084082986693829
+        6.734416994731873,
+        6.518500042147934,
+        6.691416027024388,
+        6.553833023644984,
+        6.786499987356365
       ],
       "numrust_checksum": 14399970000.0,
-      "numrust_ms": 6.281334,
+      "numrust_ms": 6.260166,
       "numrust_pass_millis": [
-        6.273125,
-        6.717875,
-        6.281334,
-        6.239167,
-        6.417084
+        6.730958,
+        6.210375,
+        6.260166,
+        6.25675,
+        6.317375
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_mul(dtype=float64)",
-      "speedup_vs_numpy": 0.9839604079377553,
+      "speedup_vs_numpy": 1.068887953933552,
       "translation": "direct setup and operation: einsum(\"i,->i\", arange(480000), 300), repeated equally",
-      "winner": "numpy"
+      "winner": "numrust"
     },
     {
       "checksum_abs_diff": 0.0,
@@ -1385,28 +1385,28 @@
       "name": "asv_linalg_einsum_sum_f64_480000",
       "near_tie": false,
       "numpy_checksum": 11519976000000.0,
-      "numpy_ms": 4.570666991639882,
+      "numpy_ms": 4.106124979443848,
       "numpy_pass_millis": [
-        4.7401670017279685,
-        4.570666991639882,
-        4.93712502066046,
-        4.532208025921136,
-        4.139083030167967
+        4.103832994587719,
+        4.097249999176711,
+        4.1472919983789325,
+        4.11933398572728,
+        4.106124979443848
       ],
       "numrust_checksum": 11519976000000.0,
-      "numrust_ms": 3.656208,
+      "numrust_ms": 3.345791,
       "numrust_pass_millis": [
-        3.366167,
-        3.656208,
-        3.765625,
-        3.604667,
-        3.931125
+        3.747041,
+        3.313583,
+        3.344208,
+        3.368667,
+        3.345791
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_contig_outstride0(dtype=float64)",
-      "speedup_vs_numpy": 1.2501113152314864,
+      "speedup_vs_numpy": 1.2272508890853755,
       "translation": "direct setup and operation: einsum(\"i->\", arange(480000)), repeated equally",
       "winner": "numrust"
     },
@@ -1416,28 +1416,28 @@
       "name": "asv_linalg_einsum_weighted_sum_f64_400x600",
       "near_tie": false,
       "numpy_checksum": 863276404000000.0,
-      "numpy_ms": 5.013999994844198,
+      "numpy_ms": 4.390624992083758,
       "numpy_pass_millis": [
-        5.481374973896891,
-        5.013999994844198,
-        5.7526250020600855,
-        4.98387502739206,
-        4.357958037871867
+        4.390624992083758,
+        4.379249992780387,
+        4.39825002104044,
+        4.374749958515167,
+        4.402666003443301
       ],
       "numrust_checksum": 863276404000000.0,
-      "numrust_ms": 0.400916,
+      "numrust_ms": 0.387833,
       "numrust_pass_millis": [
-        0.400916,
-        0.424,
-        0.3905,
-        0.364375,
-        0.48875
+        0.376459,
+        0.394125,
+        0.387833,
+        0.383208,
+        0.424792
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_contig_contig(dtype=float64)",
-      "speedup_vs_numpy": 12.5063604217447,
+      "speedup_vs_numpy": 11.320916456525769,
       "translation": "direct setup and operation: einsum(\"ji,i->\", arange(240000).reshape(400,600), arange(600)), repeated equally",
       "winner": "numrust"
     },
@@ -1447,28 +1447,28 @@
       "name": "asv_linalg_einsum_noncon_outer_f64_2000",
       "near_tie": false,
       "numpy_checksum": 15992002.0,
-      "numpy_ms": 1.7205419717356563,
+      "numpy_ms": 1.4784160302951932,
       "numpy_pass_millis": [
-        1.907958008814603,
-        1.7205419717356563,
-        1.9546669791452587,
-        1.6617089859209955,
-        1.4971659984439611
+        1.44604203524068,
+        1.4739580219611526,
+        1.4784160302951932,
+        1.5273750177584589,
+        1.5124999918043613
       ],
       "numrust_checksum": 15992002.0,
-      "numrust_ms": 0.544542,
+      "numrust_ms": 0.575459,
       "numrust_pass_millis": [
-        0.619292,
-        0.56175,
-        0.39125,
-        0.544542,
-        0.5405
+        0.5325,
+        0.575459,
+        0.647792,
+        0.338375,
+        0.661042
       ],
       "repetitions": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_noncon_outer(dtype=float64)",
-      "speedup_vs_numpy": 3.159612980698746,
+      "speedup_vs_numpy": 2.5691074955734345,
       "translation": "direct setup and operation: einsum(\"i,j\", arange(1,4000,2), arange(1,4000,2))",
       "winner": "numrust"
     },
@@ -1478,28 +1478,28 @@
       "name": "asv_linalg_einsum_noncon_multiply_f64_30x40_20x30x40",
       "near_tie": false,
       "numpy_checksum": 115149602.0,
-      "numpy_ms": 0.016457983292639256,
+      "numpy_ms": 0.013792014215141535,
       "numpy_pass_millis": [
-        0.01616595545783639,
-        0.016457983292639256,
-        0.017250014934688807,
-        0.01708301715552807,
-        0.013749988283962011
+        0.014749995898455381,
+        0.012791017070412636,
+        0.013792014215141535,
+        0.013666984159499407,
+        0.013958022464066744
       ],
       "numrust_checksum": 115149602.0,
-      "numrust_ms": 0.003459,
+      "numrust_ms": 0.003291,
       "numrust_pass_millis": [
-        0.00325,
-        0.003459,
-        0.003542,
-        0.00375,
-        0.003416
+        0.0035,
+        0.003209,
+        0.003333,
+        0.003209,
+        0.003291
       ],
       "repetitions": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_noncon_multiply(dtype=float64)",
-      "speedup_vs_numpy": 4.75801771975694,
+      "speedup_vs_numpy": 4.190827777314353,
       "translation": "direct setup and operation: einsum(\"..., ...\", arange(1,2400,2).reshape(30,40), arange(1,48000,2).reshape(20,30,40))",
       "winner": "numrust"
     },
@@ -1509,28 +1509,28 @@
       "name": "asv_linalg_einsum_noncon_sum_mul_f64_scalar_20x30x40",
       "near_tie": false,
       "numpy_checksum": 17280000000000.0,
-      "numpy_ms": 0.9026249754242599,
+      "numpy_ms": 0.7777090067975223,
       "numpy_pass_millis": [
-        0.9026249754242599,
-        0.879583996720612,
-        1.1495419894345105,
-        1.0025830124504864,
-        0.7979999645613134
+        0.7625829894095659,
+        0.7786249625496566,
+        0.7777090067975223,
+        0.7780829910188913,
+        0.7758749998174608
       ],
       "numrust_checksum": 17280000000000.0,
-      "numrust_ms": 0.170167,
+      "numrust_ms": 0.158208,
       "numrust_pass_millis": [
-        0.159417,
-        0.170167,
-        0.177042,
-        0.165375,
-        0.186375
+        0.170292,
+        0.153792,
+        0.158583,
+        0.156334,
+        0.158208
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_noncon_sum_mul(dtype=float64)",
-      "speedup_vs_numpy": 5.304347937169132,
+      "speedup_vs_numpy": 4.9157375530789995,
       "translation": "direct setup and operation: einsum(\",i...->\", 300, arange(1,48000,2).reshape(20,30,40)), repeated equally",
       "winner": "numrust"
     },
@@ -1540,28 +1540,28 @@
       "name": "asv_linalg_einsum_noncon_sum_mul2_f64_20x30x40_scalar",
       "near_tie": false,
       "numpy_checksum": 17280000000000.0,
-      "numpy_ms": 0.9741670219227672,
+      "numpy_ms": 0.7845000363886356,
       "numpy_pass_millis": [
-        0.9741670219227672,
-        0.9984999778680503,
-        1.0742919985204935,
-        0.8426670101471245,
-        0.7811670075170696
+        0.7881249766796827,
+        0.7901669596321881,
+        0.7837499724701047,
+        0.7845000363886356,
+        0.7782499887980521
       ],
       "numrust_checksum": 17280000000000.0,
-      "numrust_ms": 0.170167,
+      "numrust_ms": 0.156708,
       "numrust_pass_millis": [
+        0.169542,
+        0.153625,
+        0.154542,
         0.15775,
-        0.170167,
-        0.181416,
-        0.163791,
-        0.192333
+        0.156708
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_noncon_sum_mul2(dtype=float64)",
-      "speedup_vs_numpy": 5.724770501464838,
+      "speedup_vs_numpy": 5.0061262755483815,
       "translation": "direct setup and operation: einsum(\"i...,->\", arange(1,48000,2).reshape(20,30,40), 300), repeated equally",
       "winner": "numrust"
     },
@@ -1571,28 +1571,28 @@
       "name": "asv_linalg_einsum_noncon_scalar_mul_f64_2000",
       "near_tie": false,
       "numpy_checksum": 120000000.0,
-      "numpy_ms": 0.4959999932907522,
+      "numpy_ms": 0.4243329749442637,
       "numpy_pass_millis": [
-        0.5357909831218421,
-        0.4959999932907522,
-        0.6129579851403832,
-        0.4598749801516533,
-        0.42829103767871857
+        0.4243329749442637,
+        0.42933301301673055,
+        0.41070900624617934,
+        0.4345410270616412,
+        0.41695800609886646
       ],
       "numrust_checksum": 120000000.0,
-      "numrust_ms": 0.025625,
+      "numrust_ms": 0.023416,
       "numrust_pass_millis": [
-        0.022958,
-        0.025959,
-        0.025625,
-        0.023458,
-        0.025875
+        0.023583,
+        0.0235,
+        0.023083,
+        0.023416,
+        0.023208
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_noncon_mul(dtype=float64)",
-      "speedup_vs_numpy": 19.356097299151305,
+      "speedup_vs_numpy": 18.121497050916627,
       "translation": "direct setup and operation: einsum(\"i,->i\", arange(1,4000,2), 300), repeated equally",
       "winner": "numrust"
     },
@@ -1602,28 +1602,28 @@
       "name": "asv_linalg_einsum_noncon_weighted_sum_f64_30x40",
       "near_tie": false,
       "numpy_checksum": 5823960000.0,
-      "numpy_ms": 0.5239580059424043,
+      "numpy_ms": 0.4876669845543802,
       "numpy_pass_millis": [
-        0.5737910396419466,
-        0.5239580059424043,
-        0.671749992761761,
-        0.516125001013279,
-        0.5011659814044833
+        0.4883750225417316,
+        0.4876669845543802,
+        0.4755000118166208,
+        0.49129099352285266,
+        0.4831249825656414
       ],
       "numrust_checksum": 5823960000.0,
-      "numrust_ms": 0.042791,
+      "numrust_ms": 0.047708,
       "numrust_pass_millis": [
-        0.049125,
-        0.041167,
-        0.042791,
-        0.039833,
-        0.04475
+        0.040917,
+        0.047833,
+        0.047458,
+        0.047708,
+        0.050916
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_noncon_contig_contig(dtype=float64)",
-      "speedup_vs_numpy": 12.24458428039551,
+      "speedup_vs_numpy": 10.221912143757445,
       "translation": "direct setup and operation: einsum(\"ji,i->\", arange(1,2400,2).reshape(30,40), arange(1,80,2)), repeated equally",
       "winner": "numrust"
     },
@@ -1633,28 +1633,28 @@
       "name": "asv_linalg_einsum_noncon_sum_f64_2000",
       "near_tie": false,
       "numpy_checksum": 400000000.0,
-      "numpy_ms": 0.2865829737856984,
+      "numpy_ms": 0.25208399165421724,
       "numpy_pass_millis": [
-        0.29816600726917386,
-        0.2865829737856984,
-        0.3154999576508999,
-        0.271500030066818,
-        0.26241695741191506
+        0.25979202473536134,
+        0.24820800172165036,
+        0.2496659872122109,
+        0.25641598040238023,
+        0.25208399165421724
       ],
       "numrust_checksum": 400000000.0,
-      "numrust_ms": 0.013541,
+      "numrust_ms": 0.013042,
       "numrust_pass_millis": [
-        0.013125,
-        0.013083,
-        0.014625,
-        0.013541,
-        0.014542
+        0.014167,
+        0.01375,
+        0.012,
+        0.013042,
+        0.012208
       ],
       "repetitions": 100,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Einsum.time_einsum_noncon_contig_outstride0(dtype=float64)",
-      "speedup_vs_numpy": 21.164092296410786,
+      "speedup_vs_numpy": 19.32862993821632,
       "translation": "direct setup and operation: einsum(\"i->\", arange(1,4000,2)), repeated equally",
       "winner": "numrust"
     }
@@ -1668,638 +1668,638 @@
     "cases": [
       {
         "checksum": 0.0,
-        "millis": 1.7751670093275607,
+        "millis": 1.5319159720093012,
         "name": "asv_ufunc_broadcast_sub_f64",
         "pass_millis": [
-          1.5346670406870544,
-          1.7526659648865461,
-          1.8161250045523047,
-          1.8518329598009586,
-          1.7751670093275607
+          2.1100410376675427,
+          1.4940830296836793,
+          1.5319159720093012,
+          1.5245419926941395,
+          1.5429999912157655
         ]
       },
       {
         "checksum": 49995000.0,
-        "millis": 16.524082981050014,
+        "millis": 13.801958004478365,
         "name": "asv_ufunc_astype_i32_to_f64_100x100",
         "pass_millis": [
-          13.844959030393511,
-          15.889416972640902,
-          16.524082981050014,
-          17.61704101227224,
-          16.739125014282763
+          14.71466600196436,
+          13.829042029101402,
+          13.672832981683314,
+          13.7836670037359,
+          13.801958004478365
         ]
       },
       {
         "checksum": 4589.9999999991505,
-        "millis": 7.169707969296724,
+        "millis": 5.7935420190915465,
         "name": "asv_ufunc_add_at_f64_10000000",
         "pass_millis": [
-          5.92125003458932,
-          7.169707969296724,
-          6.8330420181155205,
-          8.043291978538036,
-          7.688790967222303
+          7.683541974984109,
+          5.809333990328014,
+          5.765540990978479,
+          5.7935420190915465,
+          5.7461250107735395
         ]
       },
       {
         "checksum": 0.459,
-        "millis": 7.662457996048033,
+        "millis": 5.951167026069015,
         "name": "asv_ufunc_maximum_at_f64_10000000",
         "pass_millis": [
-          6.099166988860816,
-          7.662457996048033,
-          7.360209012404084,
-          8.522916992660612,
-          7.6705829706043005
+          8.28991603339091,
+          5.940167000517249,
+          5.965665972325951,
+          5.942791991401464,
+          5.951167026069015
         ]
       },
       {
         "checksum": 20000000.0,
-        "millis": 170.0267919804901,
+        "millis": 135.8743329765275,
         "name": "asv_reduce_small_sum_f32_100",
         "pass_millis": [
-          134.4524580053985,
-          170.0267919804901,
-          172.87120898254216,
-          189.47116599883884,
-          169.51075004180893
+          153.8816670072265,
+          134.79625002946705,
+          135.8743329765275,
+          137.63033301802352,
+          135.56804100517184
         ]
       },
       {
         "checksum": 100000.0,
-        "millis": 85.98254201933742,
+        "millis": 68.21295799454674,
         "name": "asv_reduce_stats_min_f64_200",
         "pass_millis": [
-          67.33279203763232,
-          85.98254201933742,
-          88.09987496351823,
-          94.81566603062674,
-          79.8879160429351
+          77.22954195924103,
+          68.15958296647295,
+          68.21295799454674,
+          70.149416977074,
+          66.84508302714676
         ]
       },
       {
         "checksum": 100000.0,
-        "millis": 84.52608302468434,
+        "millis": 67.17950000893325,
         "name": "asv_reduce_stats_max_f64_200",
         "pass_millis": [
-          67.1644170070067,
-          84.52608302468434,
-          85.46858397312462,
-          97.27120900060982,
-          83.91283295350149
+          72.30766699649394,
+          66.93199998699129,
+          66.46279199048877,
+          68.8329580007121,
+          67.17950000893325
         ]
       },
       {
         "checksum": 100000.0,
-        "millis": 131.98279199423268,
+        "millis": 102.94883302412927,
         "name": "asv_reduce_stats_mean_f64_200",
         "pass_millis": [
-          105.0445000291802,
-          131.98279199423268,
-          132.09145795553923,
-          154.95812497101724,
-          128.87562497053295
+          109.11525000119582,
+          102.84000000683591,
+          101.95229097735137,
+          102.94883302412927,
+          103.68466703221202
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 411.435124988202,
+        "millis": 334.9399169674143,
         "name": "asv_reduce_stats_std_f64_200",
         "pass_millis": [
-          337.20545802498236,
-          411.435124988202,
-          415.8279999974184,
-          457.1795000229031,
-          406.6499170148745
+          355.60504195746034,
+          336.1949999816716,
+          334.9399169674143,
+          334.58462497219443,
+          334.5550420344807
         ]
       },
       {
         "checksum": 100000.0,
-        "millis": 97.86720800912008,
+        "millis": 77.59300002362579,
         "name": "asv_reduce_stats_prod_f64_200",
         "pass_millis": [
-          79.10475000971928,
-          97.24729100707918,
-          100.01445905072615,
-          109.30183297023177,
-          97.86720800912008
+          79.09437495982274,
+          77.5349999894388,
+          77.38466700538993,
+          78.03487504133955,
+          77.59300002362579
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 390.82883298397064,
+        "millis": 314.6787079749629,
         "name": "asv_reduce_stats_var_f64_200",
         "pass_millis": [
-          311.84162496356294,
-          390.82883298397064,
-          389.88345803227276,
-          450.2929580048658,
-          397.856000054162
+          316.0369580145925,
+          314.6787079749629,
+          313.9516669907607,
+          315.0155409821309,
+          313.40783298946917
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 542.394417047035,
+        "millis": 485.4591669864021,
         "name": "asv_reduce_argmax_i64_200000",
         "pass_millis": [
-          484.067750046961,
-          484.3285420211032,
-          553.1316249980591,
-          596.8005829490721,
-          542.394417047035
+          491.70200002845377,
+          484.3465000158176,
+          484.6949580241926,
+          485.4591669864021,
+          485.4906250257045
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 620.6193329999223,
+        "millis": 518.789374968037,
         "name": "asv_reduce_argmin_i64_200000",
         "pass_millis": [
-          532.7921250136569,
-          535.7469999580644,
-          623.8647080026567,
-          672.0107500441372,
-          620.6193329999223
+          533.74016599264,
+          518.0710409767926,
+          519.496499968227,
+          518.7008330249228,
+          518.789374968037
         ]
       },
       {
         "checksum": 4000.0,
-        "millis": 4.105957981664687,
+        "millis": 3.838375036139041,
         "name": "asv_itemselection_take_i64_1000x1",
         "pass_millis": [
-          3.958917048294097,
-          3.5816250019706786,
-          4.105957981664687,
-          4.709707980509847,
-          4.199000017251819
+          3.8492910098284483,
+          3.587666025850922,
+          3.4417500137351453,
+          3.8385840016417205,
+          3.838375036139041
         ]
       },
       {
         "checksum": 20000.0,
-        "millis": 6.0909579624421895,
+        "millis": 5.0663750153034925,
         "name": "asv_itemselection_putmask_dense_scalar_f64_1000",
         "pass_millis": [
-          5.118499975651503,
-          4.95450000744313,
-          6.0909579624421895,
-          6.9900419912301,
-          6.111916969530284
+          5.0663750153034925,
+          5.177833023481071,
+          5.306791979819536,
+          4.879541986156255,
+          5.065417033620179
         ]
       },
       {
         "checksum": 20000.0,
-        "millis": 5.401625006925315,
+        "millis": 4.729459004011005,
         "name": "asv_itemselection_putmask_sparse_scalar_f64_1000",
         "pass_millis": [
-          4.773250024300069,
-          4.6968330279923975,
-          5.401625006925315,
-          5.942124989815056,
-          5.564082995988429
+          4.700249992311001,
+          4.791750048752874,
+          4.729459004011005,
+          4.732166009489447,
+          4.689916968345642
         ]
       },
       {
         "checksum": 20000.0,
-        "millis": 21.887874987442046,
+        "millis": 19.835833052638918,
         "name": "asv_itemselection_put_ordered_f64_1000",
         "pass_millis": [
-          20.21795802284032,
-          19.696041010320187,
-          21.887874987442046,
-          23.717832984402776,
-          22.709749988280237
+          19.88466701004654,
+          19.783166993875057,
+          19.835833052638918,
+          19.856750033795834,
+          19.668166001792997
         ]
       },
       {
         "checksum": 2893480040200000.0,
-        "millis": 229.73770799580961,
+        "millis": 147.48054201481864,
         "name": "asv_linalg_dot_a_b_f64_150x400_400x600",
         "pass_millis": [
-          150.22970899008214,
-          153.5699589876458,
-          254.82916698092595,
-          271.3347089593299,
-          229.73770799580961
+          146.50862495182082,
+          147.48054201481864,
+          146.24450000701472,
+          147.82179199391976,
+          147.90829102275893
         ]
       },
       {
         "checksum": 2893480040200000.0,
-        "millis": 221.99508402263746,
+        "millis": 145.54812503047287,
         "name": "asv_linalg_matmul_a_b_f64_150x400_400x600",
         "pass_millis": [
-          151.31045802263543,
-          147.61320903198794,
-          233.74766699271277,
-          250.40504202479497,
-          221.99508402263746
+          144.79112502885982,
+          143.975707993377,
+          145.54812503047287,
+          145.56912501575425,
+          145.89041599538177
         ]
       },
       {
         "checksum": 4.594545663960056e+18,
-        "millis": 5.115750012919307,
+        "millis": 4.844666982535273,
         "name": "asv_linalg_matmul_d_matmul_b_c_f64",
         "pass_millis": [
-          4.926917026750743,
-          4.896999977063388,
-          5.526707973331213,
-          5.793374963104725,
-          5.115750012919307
+          4.844666982535273,
+          4.876540973782539,
+          4.727041989099234,
+          4.932708980049938,
+          4.782583040650934
         ]
       },
       {
         "checksum": 4.594545663960056e+18,
-        "millis": 4.985124978702515,
+        "millis": 4.618457984179258,
         "name": "asv_linalg_dot_d_dot_b_c_f64",
         "pass_millis": [
-          4.652208008337766,
-          4.842500027734786,
-          5.238124984316528,
-          5.503790976945311,
-          4.985124978702515
+          4.618457984179258,
+          4.7658339608460665,
+          4.558749962598085,
+          5.078667018096894,
+          4.5508749899454415
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 47.86654200870544,
+        "millis": 34.823708003386855,
         "name": "asv_linalg_dot_trans_a_at_f64_150x400_400x150",
         "pass_millis": [
-          32.810207980219275,
-          33.041917020455,
-          49.11270801676437,
-          55.23774999892339,
-          47.86654200870544
+          34.91195902461186,
+          32.924374972935766,
+          34.902957966551185,
+          33.04687503259629,
+          34.823708003386855
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 61.31887499941513,
+        "millis": 42.037750012241304,
         "name": "asv_linalg_dot_trans_a_atc_f64_150x400_400x150",
         "pass_millis": [
-          41.659540962427855,
-          41.51895799441263,
-          61.31887499941513,
-          85.51641699159518,
-          65.01816702075303
+          41.9243749929592,
+          41.80125001585111,
+          44.11541600711644,
+          42.037750012241304,
+          44.15600001811981
         ]
       },
       {
         "checksum": 359998940150000.0,
-        "millis": 138.84437503293157,
+        "millis": 96.55054204631597,
         "name": "asv_linalg_dot_trans_at_a_f64_400x150_150x400",
         "pass_millis": [
-          95.24320799391717,
-          95.78845801297575,
-          138.84437503293157,
-          157.4994169641286,
-          141.49270800407976
+          97.54941699793562,
+          95.32741695875302,
+          96.24937502667308,
+          96.55054204631597,
+          97.36054099630564
         ]
       },
       {
         "checksum": 359998940150000.0,
-        "millis": 160.10808397550136,
+        "millis": 101.36037500342354,
         "name": "asv_linalg_dot_trans_atc_a_f64_400x150_150x400",
         "pass_millis": [
-          99.971458024811,
-          103.45879197120667,
-          160.10808397550136,
-          179.19195798458531,
-          184.9652499658987
+          100.34495801664889,
+          99.79412500979379,
+          101.60179197555408,
+          101.36037500342354,
+          101.42399999313056
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 39.90562498802319,
+        "millis": 34.84070801641792,
         "name": "asv_linalg_inner_a_a_f64_150x400_150x400",
         "pass_millis": [
-          33.29816699260846,
-          33.000375027768314,
-          46.28108302131295,
-          52.501666999887675,
-          39.90562498802319
+          34.055458032526076,
+          33.13133300980553,
+          34.91450002184138,
+          34.944834013003856,
+          34.84070801641792
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 63.44087497564033,
+        "millis": 50.228499982040375,
         "name": "asv_linalg_inner_a_ac_f64_150x400_150x400",
         "pass_millis": [
-          49.135792010929435,
-          48.743250023107976,
-          81.02883299579844,
-          83.53362500201911,
-          63.44087497564033
+          49.1704159649089,
+          50.228499982040375,
+          49.460459034889936,
+          50.98666698904708,
+          50.88387499563396
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 40.65799998352304,
+        "millis": 30.42958298465237,
         "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
         "pass_millis": [
-          29.138167039491236,
-          28.93241698620841,
-          44.1325000138022,
-          47.37550002755597,
-          40.65799998352304
+          30.42958298465237,
+          30.331540969200432,
+          31.543250021059066,
+          29.982957988977432,
+          31.364166003186256
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 62.09708302048966,
+        "millis": 42.977208038792014,
         "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
         "pass_millis": [
-          41.72458400717005,
-          41.08370799804106,
-          63.46229201881215,
-          78.08762497734278,
-          62.09708302048966
+          41.367083962541074,
+          42.977208038792014,
+          43.70687500340864,
+          41.493917000479996,
+          43.378125003073364
         ]
       },
       {
         "checksum": 359998940150000.0,
-        "millis": 110.18116702325642,
+        "millis": 79.96362500125542,
         "name": "asv_linalg_matmul_trans_at_a_f64_400x150_150x400",
         "pass_millis": [
-          78.97045800928026,
-          78.70449998881668,
-          110.18116702325642,
-          141.8770420132205,
-          111.88608297379687
+          79.26775002852082,
+          80.63416701043025,
+          80.47891600290313,
+          79.96362500125542,
+          79.76254203822464
         ]
       },
       {
         "checksum": 359998940150000.0,
-        "millis": 122.21699999645352,
+        "millis": 95.78408399829641,
         "name": "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
         "pass_millis": [
-          98.85620803106576,
-          95.4692080267705,
-          142.26024999516085,
-          174.245499947574,
-          122.21699999645352
+          95.72712500812486,
+          95.5791249871254,
+          95.78408399829641,
+          97.38141699926928,
+          97.34945796662942
         ]
       },
       {
         "checksum": 2233323484688000.0,
-        "millis": 5.55583304958418,
+        "millis": 4.392625007312745,
         "name": "asv_linalg_tensordot_a3_b3_axes_10_01",
         "pass_millis": [
-          5.224541993811727,
-          4.69616602640599,
-          5.62141602858901,
-          6.410125002730638,
-          5.55583304958418
+          4.392625007312745,
+          4.351791983935982,
+          4.559665976557881,
+          4.41579200560227,
+          4.389124980662018
         ]
       },
       {
         "checksum": 547722.5575058461,
-        "millis": 48.19662502268329,
+        "millis": 40.849999990314245,
         "name": "asv_linalg_norm_small_array_f64_5",
         "pass_millis": [
-          50.028709054458886,
-          48.19662502268329,
-          50.74287502793595,
-          45.002374972682446,
-          41.444499976933
+          40.849999990314245,
+          40.80370796145871,
+          40.689957968425006,
+          41.48650000570342,
+          41.776583006139845
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 113.7296250090003,
+        "millis": 92.30749995913357,
         "name": "asv_linalg_det_small_array_f64_5x5",
         "pass_millis": [
-          114.92295900825411,
-          113.7296250090003,
-          117.65741696581244,
-          104.31366600096226,
-          92.21274999435991
+          92.4959999974817,
+          91.2373749888502,
+          91.36416699038818,
+          92.66691602533683,
+          92.30749995913357
         ]
       },
       {
         "checksum": -500000.00000000006,
-        "millis": 109.04549999395385,
+        "millis": 87.41604199167341,
         "name": "asv_linalg_det_3x3_f64",
         "pass_millis": [
-          111.23116698581725,
-          109.04549999395385,
-          120.6115409731865,
-          108.86429098900408,
-          88.3240420371294
+          87.2084170114249,
+          88.38024997385219,
+          87.11770799709484,
+          88.04541599238291,
+          87.41604199167341
         ]
       },
       {
         "checksum": 40000.00000007539,
-        "millis": 215.2755000279285,
+        "millis": 174.05887495260686,
         "name": "asv_linalg_solve_3x3_f64",
         "pass_millis": [
-          216.82729199528694,
-          215.2755000279285,
-          241.22379103209823,
-          200.119832996279,
-          175.71300000417978
+          172.17737500322983,
+          174.48499996680766,
+          174.05887495260686,
+          173.52275003213435,
+          174.45812502410263
         ]
       },
       {
         "checksum": -487.02559350316494,
-        "millis": 64.61104098707438,
+        "millis": 64.00416698306799,
         "name": "asv_linalg_lstsq_square_f64_100x100",
         "pass_millis": [
-          68.6104170163162,
-          63.871041988022625,
-          67.27200001478195,
-          64.61104098707438,
-          63.90254100551829
+          64.16808301582932,
+          63.78954101819545,
+          64.00416698306799,
+          63.95383400376886,
+          64.33525000466034
         ]
       },
       {
         "checksum": 8994001.0,
-        "millis": 2.1317919599823654,
+        "millis": 1.7051250324584544,
         "name": "asv_linalg_einsum_outer_f64_3000",
         "pass_millis": [
-          2.1317919599823654,
-          1.8159169703722,
-          2.236166037619114,
-          2.1600000327453017,
-          1.745083020068705
+          1.6851249965839088,
+          1.7104170401580632,
+          1.7051250324584544,
+          1.6974580357782543,
+          1.7161249998025596
         ]
       },
       {
         "checksum": 2.297272831980028e+18,
-        "millis": 262.6413329853676,
+        "millis": 254.3178329942748,
         "name": "asv_linalg_einsum_i_ij_j_f64_400_400x600_600",
         "pass_millis": [
-          255.06266701268032,
-          256.7807500017807,
-          262.6413329853676,
-          297.99358296440914,
-          272.67650002613664
+          254.35645802645013,
+          253.58000001870096,
+          250.23095798678696,
+          254.3178329942748,
+          254.45854099234566
         ]
       },
       {
         "checksum": 2893480040200000.0,
-        "millis": 4861.085000040475,
+        "millis": 4163.403832993936,
         "name": "asv_linalg_einsum_ij_jk_f64_150x400_400x600",
         "pass_millis": [
-          4861.085000040475,
-          4668.63970796112,
-          5034.326791996136,
-          4168.431665981188,
-          4924.349542008713
+          4161.758333968464,
+          4155.260500032455,
+          4170.250333030708,
+          4169.006415992044,
+          4163.403832993936
         ]
       },
       {
         "checksum": 28774801.0,
-        "millis": 0.017082958947867155,
+        "millis": 0.014042016118764877,
         "name": "asv_linalg_einsum_multiply_f64_30x40_20x30x40",
         "pass_millis": [
-          0.016708974726498127,
-          0.017082958947867155,
-          0.01708301715552807,
-          0.017290993127971888,
-          0.015124969650059938
+          0.015208031982183456,
+          0.014042016118764877,
+          0.013999990187585354,
+          0.015290977898985147,
+          0.013833981938660145
         ]
       },
       {
         "checksum": 1499850000000.0,
-        "millis": 0.7590410532429814,
+        "millis": 0.6497090216726065,
         "name": "asv_linalg_einsum_sum_mul_f64_scalar_10x100x10",
         "pass_millis": [
-          0.972250010818243,
-          0.8847080171108246,
-          0.7590410532429814,
-          0.7233329815790057,
-          0.6951669929549098
+          0.6492919637821615,
+          0.6550410180352628,
+          0.6454589893110096,
+          0.6619160412810743,
+          0.6497090216726065
         ]
       },
       {
         "checksum": 1499850000000.0,
-        "millis": 0.7369579980149865,
+        "millis": 0.6546250078827143,
         "name": "asv_linalg_einsum_sum_mul2_f64_10x100x10_scalar",
         "pass_millis": [
-          0.9117089794017375,
-          0.7340830052271485,
-          0.7369579980149865,
-          0.7595840143039823,
-          0.7020839839242399
+          0.6704580155201256,
+          0.6481250165961683,
+          0.6487500504590571,
+          0.6546250078827143,
+          0.655583047773689
         ]
       },
       {
         "checksum": 14399970000.0,
-        "millis": 6.180583965033293,
+        "millis": 6.691416027024388,
         "name": "asv_linalg_einsum_scalar_mul_f64_480000",
         "pass_millis": [
-          6.157333962619305,
-          6.318958010524511,
-          6.126415973994881,
-          6.180583965033293,
-          7.084082986693829
+          6.734416994731873,
+          6.518500042147934,
+          6.691416027024388,
+          6.553833023644984,
+          6.786499987356365
         ]
       },
       {
         "checksum": 11519976000000.0,
-        "millis": 4.570666991639882,
+        "millis": 4.106124979443848,
         "name": "asv_linalg_einsum_sum_f64_480000",
         "pass_millis": [
-          4.7401670017279685,
-          4.570666991639882,
-          4.93712502066046,
-          4.532208025921136,
-          4.139083030167967
+          4.103832994587719,
+          4.097249999176711,
+          4.1472919983789325,
+          4.11933398572728,
+          4.106124979443848
         ]
       },
       {
         "checksum": 863276404000000.0,
-        "millis": 5.013999994844198,
+        "millis": 4.390624992083758,
         "name": "asv_linalg_einsum_weighted_sum_f64_400x600",
         "pass_millis": [
-          5.481374973896891,
-          5.013999994844198,
-          5.7526250020600855,
-          4.98387502739206,
-          4.357958037871867
+          4.390624992083758,
+          4.379249992780387,
+          4.39825002104044,
+          4.374749958515167,
+          4.402666003443301
         ]
       },
       {
         "checksum": 15992002.0,
-        "millis": 1.7205419717356563,
+        "millis": 1.4784160302951932,
         "name": "asv_linalg_einsum_noncon_outer_f64_2000",
         "pass_millis": [
-          1.907958008814603,
-          1.7205419717356563,
-          1.9546669791452587,
-          1.6617089859209955,
-          1.4971659984439611
+          1.44604203524068,
+          1.4739580219611526,
+          1.4784160302951932,
+          1.5273750177584589,
+          1.5124999918043613
         ]
       },
       {
         "checksum": 115149602.0,
-        "millis": 0.016457983292639256,
+        "millis": 0.013792014215141535,
         "name": "asv_linalg_einsum_noncon_multiply_f64_30x40_20x30x40",
         "pass_millis": [
-          0.01616595545783639,
-          0.016457983292639256,
-          0.017250014934688807,
-          0.01708301715552807,
-          0.013749988283962011
+          0.014749995898455381,
+          0.012791017070412636,
+          0.013792014215141535,
+          0.013666984159499407,
+          0.013958022464066744
         ]
       },
       {
         "checksum": 17280000000000.0,
-        "millis": 0.9026249754242599,
+        "millis": 0.7777090067975223,
         "name": "asv_linalg_einsum_noncon_sum_mul_f64_scalar_20x30x40",
         "pass_millis": [
-          0.9026249754242599,
-          0.879583996720612,
-          1.1495419894345105,
-          1.0025830124504864,
-          0.7979999645613134
+          0.7625829894095659,
+          0.7786249625496566,
+          0.7777090067975223,
+          0.7780829910188913,
+          0.7758749998174608
         ]
       },
       {
         "checksum": 17280000000000.0,
-        "millis": 0.9741670219227672,
+        "millis": 0.7845000363886356,
         "name": "asv_linalg_einsum_noncon_sum_mul2_f64_20x30x40_scalar",
         "pass_millis": [
-          0.9741670219227672,
-          0.9984999778680503,
-          1.0742919985204935,
-          0.8426670101471245,
-          0.7811670075170696
+          0.7881249766796827,
+          0.7901669596321881,
+          0.7837499724701047,
+          0.7845000363886356,
+          0.7782499887980521
         ]
       },
       {
         "checksum": 120000000.0,
-        "millis": 0.4959999932907522,
+        "millis": 0.4243329749442637,
         "name": "asv_linalg_einsum_noncon_scalar_mul_f64_2000",
         "pass_millis": [
-          0.5357909831218421,
-          0.4959999932907522,
-          0.6129579851403832,
-          0.4598749801516533,
-          0.42829103767871857
+          0.4243329749442637,
+          0.42933301301673055,
+          0.41070900624617934,
+          0.4345410270616412,
+          0.41695800609886646
         ]
       },
       {
         "checksum": 5823960000.0,
-        "millis": 0.5239580059424043,
+        "millis": 0.4876669845543802,
         "name": "asv_linalg_einsum_noncon_weighted_sum_f64_30x40",
         "pass_millis": [
-          0.5737910396419466,
-          0.5239580059424043,
-          0.671749992761761,
-          0.516125001013279,
-          0.5011659814044833
+          0.4883750225417316,
+          0.4876669845543802,
+          0.4755000118166208,
+          0.49129099352285266,
+          0.4831249825656414
         ]
       },
       {
         "checksum": 400000000.0,
-        "millis": 0.2865829737856984,
+        "millis": 0.25208399165421724,
         "name": "asv_linalg_einsum_noncon_sum_f64_2000",
         "pass_millis": [
-          0.29816600726917386,
-          0.2865829737856984,
-          0.3154999576508999,
-          0.271500030066818,
-          0.26241695741191506
+          0.25979202473536134,
+          0.24820800172165036,
+          0.2496659872122109,
+          0.25641598040238023,
+          0.25208399165421724
         ]
       }
     ],
@@ -2311,638 +2311,638 @@
     "cases": [
       {
         "checksum": 0.0,
-        "millis": 0.87075,
+        "millis": 0.956375,
         "name": "asv_ufunc_broadcast_sub_f64",
         "pass_millis": [
-          0.806584,
-          0.865125,
-          0.8945,
-          0.87075,
-          0.873292
+          0.90675,
+          0.983584,
+          0.956375,
+          1.021458,
+          0.884125
         ]
       },
       {
         "checksum": 49995000.0,
-        "millis": 4.689875,
+        "millis": 5.506583,
         "name": "asv_ufunc_astype_i32_to_f64_100x100",
         "pass_millis": [
-          4.616792,
-          4.8875,
-          4.8025,
-          4.431042,
-          4.689875
+          5.266167,
+          5.617,
+          5.455416,
+          5.951667,
+          5.506583
         ]
       },
       {
         "checksum": 4589.999999999151,
-        "millis": 4.451,
+        "millis": 3.998792,
         "name": "asv_ufunc_add_at_f64_10000000",
         "pass_millis": [
-          3.963833,
-          4.433083,
-          4.55475,
-          4.451,
-          4.604459
+          4.173958,
+          3.851167,
+          3.943458,
+          4.008333,
+          3.998792
         ]
       },
       {
         "checksum": 0.459,
-        "millis": 5.087625,
+        "millis": 4.626167,
         "name": "asv_ufunc_maximum_at_f64_10000000",
         "pass_millis": [
-          3.6805,
-          4.822,
-          5.132667,
-          5.087625,
-          5.304916
+          4.626167,
+          4.778,
+          3.8015,
+          3.900625,
+          4.800292
         ]
       },
       {
         "checksum": 20000000.0,
-        "millis": 3.063667,
+        "millis": 2.772167,
         "name": "asv_reduce_small_sum_f32_100",
         "pass_millis": [
-          2.76425,
-          3.346333,
-          3.063667,
-          2.833167,
-          4.108667
+          2.894667,
+          2.698917,
+          2.780542,
+          2.68575,
+          2.772167
         ]
       },
       {
         "checksum": 100000.0,
-        "millis": 0.338125,
+        "millis": 0.33425,
         "name": "asv_reduce_stats_min_f64_200",
         "pass_millis": [
-          0.333583,
-          0.32675,
-          0.3595,
-          0.338125,
-          0.374208
+          0.351333,
+          0.331583,
+          0.3155,
+          0.33425,
+          0.336333
         ]
       },
       {
         "checksum": 100000.0,
-        "millis": 0.358792,
+        "millis": 0.330208,
         "name": "asv_reduce_stats_max_f64_200",
         "pass_millis": [
-          0.334208,
-          0.358792,
-          0.3595,
-          0.338083,
-          0.374125
+          0.349,
+          0.3265,
+          0.323667,
+          0.333459,
+          0.330208
         ]
       },
       {
         "checksum": 100000.0,
-        "millis": 0.124125,
+        "millis": 0.111292,
         "name": "asv_reduce_stats_mean_f64_200",
         "pass_millis": [
-          0.111208,
-          0.152333,
-          0.146208,
-          0.11225,
-          0.124125
+          0.125833,
+          0.109709,
+          0.103167,
+          0.111334,
+          0.111292
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 0.119292,
+        "millis": 0.106042,
         "name": "asv_reduce_stats_std_f64_200",
         "pass_millis": [
-          0.106209,
-          0.119292,
-          0.1335,
-          0.107916,
-          0.119334
+          0.111417,
+          0.10575,
+          0.1055,
+          0.107834,
+          0.106042
         ]
       },
       {
         "checksum": 100000.0,
-        "millis": 9.779542,
+        "millis": 8.719708,
         "name": "asv_reduce_stats_prod_f64_200",
         "pass_millis": [
-          8.715083,
-          9.961167,
-          9.782209,
-          9.425,
-          9.779542
+          9.147792,
+          8.475083,
+          8.406167,
+          8.757583,
+          8.719708
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 0.114833,
+        "millis": 0.106917,
         "name": "asv_reduce_stats_var_f64_200",
         "pass_millis": [
+          0.109333,
+          0.106209,
+          0.104208,
           0.106917,
-          0.114833,
-          0.114833,
-          0.129375,
-          0.114708
+          0.107208
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 0.0275,
+        "millis": 0.025542,
         "name": "asv_reduce_argmax_i64_200000",
         "pass_millis": [
-          0.025583,
-          0.027666,
-          0.0275,
-          0.026042,
-          0.028333
+          0.026292,
+          0.0255,
+          0.024,
+          0.025542,
+          0.025542
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 0.027583,
+        "millis": 0.025875,
         "name": "asv_reduce_argmin_i64_200000",
         "pass_millis": [
-          0.025792,
-          0.027667,
-          0.027583,
-          0.025958,
-          0.02775
+          0.02625,
+          0.025875,
+          0.025625,
+          0.026375,
+          0.025625
         ]
       },
       {
         "checksum": 4000.0,
-        "millis": 0.976667,
+        "millis": 0.911209,
         "name": "asv_itemselection_take_i64_1000x1",
         "pass_millis": [
-          0.892708,
-          0.976667,
-          1.078541,
-          0.887291,
-          0.99525
+          0.930833,
+          0.878167,
+          0.852625,
+          0.930625,
+          0.911209
         ]
       },
       {
         "checksum": 20000.0,
-        "millis": 1.119042,
+        "millis": 0.888292,
         "name": "asv_itemselection_putmask_dense_scalar_f64_1000",
         "pass_millis": [
-          1.27825,
-          1.178458,
-          0.985875,
-          0.98375,
-          1.119042
+          1.06575,
+          0.723458,
+          0.599792,
+          0.888292,
+          1.014791
         ]
       },
       {
         "checksum": 20000.0,
-        "millis": 0.02525,
+        "millis": 0.025916,
         "name": "asv_itemselection_putmask_sparse_scalar_f64_1000",
         "pass_millis": [
-          0.023417,
-          0.025291,
-          0.025333,
-          0.024042,
-          0.02525
+          0.025875,
+          0.025625,
+          0.026209,
+          0.025916,
+          0.028
         ]
       },
       {
         "checksum": 20000.0,
-        "millis": 7.567083,
+        "millis": 7.009417,
         "name": "asv_itemselection_put_ordered_f64_1000",
         "pass_millis": [
-          6.998666,
-          7.567083,
-          7.628042,
-          7.60525,
-          7.277375
+          7.364,
+          7.068333,
+          6.957042,
+          7.009417,
+          6.985334
         ]
       },
       {
         "checksum": 2893480040200000.0,
-        "millis": 169.968625,
+        "millis": 144.806792,
         "name": "asv_linalg_dot_a_b_f64_150x400_400x600",
         "pass_millis": [
-          143.769125,
-          163.365,
-          193.696625,
-          169.968625,
-          229.254041
+          144.307792,
+          144.806792,
+          144.90625,
+          144.863709,
+          144.78525
         ]
       },
       {
         "checksum": 2893480040200000.0,
-        "millis": 203.032625,
+        "millis": 144.755708,
         "name": "asv_linalg_matmul_a_b_f64_150x400_400x600",
         "pass_millis": [
-          143.691416,
-          162.109917,
-          214.729,
-          203.032625,
-          203.922792
+          144.341292,
+          144.755708,
+          143.383375,
+          145.159916,
+          144.999583
         ]
       },
       {
         "checksum": 4.594545663960056e+18,
-        "millis": 4.228584,
+        "millis": 3.979125,
         "name": "asv_linalg_matmul_d_matmul_b_c_f64",
         "pass_millis": [
-          4.128042,
-          4.295958,
-          4.976833,
-          4.228584,
-          4.098125
+          3.88525,
+          3.869958,
+          4.325292,
+          3.979125,
+          4.003291
         ]
       },
       {
         "checksum": 4.594545663960056e+18,
-        "millis": 4.104125,
+        "millis": 4.053041,
         "name": "asv_linalg_dot_d_dot_b_c_f64",
         "pass_millis": [
-          4.104125,
-          4.0265,
-          4.100875,
-          4.30625,
-          5.056083
+          3.879875,
+          4.000959,
+          4.103458,
+          4.06025,
+          4.053041
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 31.370708,
+        "millis": 31.242208,
         "name": "asv_linalg_dot_trans_a_at_f64_150x400_400x150",
         "pass_millis": [
-          29.035292,
-          31.136208,
-          39.392792,
-          31.370708,
-          42.820417
+          31.07625,
+          31.242208,
+          29.264917,
+          31.315791,
+          31.29
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 46.308208,
+        "millis": 42.680375,
         "name": "asv_linalg_dot_trans_a_atc_f64_150x400_400x150",
         "pass_millis": [
-          40.864959,
-          46.308208,
-          56.925167,
-          43.42,
-          57.458
+          41.995125,
+          42.680375,
+          41.612084,
+          43.305458,
+          43.0935
         ]
       },
       {
         "checksum": 359998940150000.0,
-        "millis": 87.058333,
+        "millis": 79.297667,
         "name": "asv_linalg_dot_trans_at_a_f64_400x150_150x400",
         "pass_millis": [
-          77.925542,
-          87.058333,
-          102.116208,
-          83.185416,
-          100.044875
+          82.028125,
+          77.753792,
+          80.138417,
+          79.297667,
+          78.170333
         ]
       },
       {
         "checksum": 359998940150000.0,
-        "millis": 104.735708,
+        "millis": 95.584375,
         "name": "asv_linalg_dot_trans_atc_a_f64_400x150_150x400",
         "pass_millis": [
-          95.672459,
-          104.004,
-          129.009375,
-          104.735708,
-          117.728292
+          102.849083,
+          95.584375,
+          95.600875,
+          94.97575,
+          95.096458
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 31.545542,
+        "millis": 29.239041,
         "name": "asv_linalg_inner_a_a_f64_150x400_150x400",
         "pass_millis": [
-          29.803333,
-          31.433333,
-          39.5525,
-          31.545542,
-          38.05325
+          32.558959,
+          29.199833,
+          29.42125,
+          29.239041,
+          29.130125
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 52.064,
+        "millis": 47.824083,
         "name": "asv_linalg_inner_a_ac_f64_150x400_150x400",
         "pass_millis": [
-          49.500791,
-          51.719916,
-          64.247542,
-          52.064,
-          59.674625
+          52.939959,
+          47.7235,
+          47.691,
+          49.847042,
+          47.824083
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 31.371333,
+        "millis": 29.283042,
         "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
         "pass_millis": [
-          30.430083,
-          30.822834,
-          37.415083,
-          31.371333,
-          34.100834
+          30.702625,
+          29.162042,
+          29.122417,
+          29.283042,
+          29.292375
         ]
       },
       {
         "checksum": 1430418666800000.0,
-        "millis": 48.701875,
+        "millis": 40.866458,
         "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
         "pass_millis": [
-          42.141916,
-          43.638125,
-          52.645459,
-          48.701875,
-          58.173
+          42.964584,
+          40.768542,
+          40.866458,
+          40.969625,
+          40.784334
         ]
       },
       {
         "checksum": 359998940150000.0,
-        "millis": 92.608875,
+        "millis": 78.933084,
         "name": "asv_linalg_matmul_trans_at_a_f64_400x150_150x400",
         "pass_millis": [
-          78.468958,
-          84.790375,
-          101.955417,
-          92.608875,
-          115.233167
+          78.946209,
+          79.666167,
+          77.72825,
+          78.933084,
+          77.844084
         ]
       },
       {
         "checksum": 359998940150000.0,
-        "millis": 107.798125,
+        "millis": 97.034709,
         "name": "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
         "pass_millis": [
-          94.43425,
-          103.298083,
-          129.201167,
-          107.798125,
-          136.399625
+          103.528417,
+          97.044292,
+          97.034709,
+          95.060875,
+          95.045166
         ]
       },
       {
         "checksum": 2233323484688000.0,
-        "millis": 4.155083,
+        "millis": 2.892958,
         "name": "asv_linalg_tensordot_a3_b3_axes_10_01",
         "pass_millis": [
-          3.052458,
-          3.793875,
-          4.155083,
-          4.251917,
-          5.1235
+          5.773041,
+          2.777833,
+          2.892958,
+          3.014416,
+          2.835792
         ]
       },
       {
         "checksum": 547722.5575058461,
-        "millis": 5.374,
+        "millis": 4.738417,
         "name": "asv_linalg_norm_small_array_f64_5",
         "pass_millis": [
-          4.718125,
-          5.5965,
-          5.374,
-          5.318708,
-          5.718625
+          5.227667,
+          4.6225,
+          4.585625,
+          4.738417,
+          4.793416
         ]
       },
       {
         "checksum": 0.0,
-        "millis": 9.655958,
+        "millis": 8.331625,
         "name": "asv_linalg_det_small_array_f64_5x5",
         "pass_millis": [
-          8.313416,
-          9.865375,
-          9.655958,
-          8.922333,
-          10.003583
+          9.676875,
+          8.232041,
+          8.331625,
+          8.40925,
+          8.244167
         ]
       },
       {
         "checksum": -499999.99999999994,
-        "millis": 8.015416,
+        "millis": 7.148958,
         "name": "asv_linalg_det_3x3_f64",
         "pass_millis": [
-          6.979125,
-          8.015416,
-          8.206667,
-          7.483708,
-          8.396917
+          8.019584,
+          7.1465,
+          7.135458,
+          7.192167,
+          7.148958
         ]
       },
       {
         "checksum": 40000.00000007539,
-        "millis": 16.257792,
+        "millis": 14.396917,
         "name": "asv_linalg_solve_3x3_f64",
         "pass_millis": [
-          14.313,
-          16.257792,
-          16.557208,
-          16.224875,
-          17.203042
+          15.811333,
+          14.237,
+          14.028125,
+          14.396917,
+          14.602209
         ]
       },
       {
         "checksum": -487.025593503164,
-        "millis": 5.998416,
+        "millis": 5.185334,
         "name": "asv_linalg_lstsq_square_f64_100x100",
         "pass_millis": [
-          5.143791,
-          5.998416,
-          6.228833,
-          5.518625,
-          6.1045
+          5.800583,
+          5.199125,
+          5.173084,
+          5.183208,
+          5.185334
         ]
       },
       {
         "checksum": 8994001.0,
-        "millis": 0.703375,
+        "millis": 0.667167,
         "name": "asv_linalg_einsum_outer_f64_3000",
         "pass_millis": [
-          0.647583,
-          0.689916,
-          0.842375,
-          0.703375,
-          0.884875
+          0.980833,
+          0.642625,
+          0.642041,
+          0.673709,
+          0.667167
         ]
       },
       {
         "checksum": 2.297272831980028e+18,
-        "millis": 4.159333,
+        "millis": 4.157625,
         "name": "asv_linalg_einsum_i_ij_j_f64_400_400x600_600",
         "pass_millis": [
-          4.187125,
-          3.968375,
-          4.051584,
-          4.159333,
-          4.766083
+          4.255333,
+          4.126958,
+          4.053917,
+          4.157625,
+          4.3125
         ]
       },
       {
         "checksum": 2893480040200000.0,
-        "millis": 176.206833,
+        "millis": 144.660292,
         "name": "asv_linalg_einsum_ij_jk_f64_150x400_400x600",
         "pass_millis": [
-          143.758958,
-          176.206833,
-          220.18675,
-          172.39225,
-          226.057167
+          144.39425,
+          145.1525,
+          143.061125,
+          144.660292,
+          145.014083
         ]
       },
       {
         "checksum": 28774801.0,
-        "millis": 0.003333,
+        "millis": 0.003208,
         "name": "asv_linalg_einsum_multiply_f64_30x40_20x30x40",
         "pass_millis": [
+          0.003458,
+          0.002916,
           0.003,
-          0.003208,
-          0.003333,
-          0.003666,
-          0.00375
+          0.003833,
+          0.003208
         ]
       },
       {
         "checksum": 1499850000000.0,
-        "millis": 0.05825,
+        "millis": 0.050917,
         "name": "asv_linalg_einsum_sum_mul_f64_scalar_10x100x10",
         "pass_millis": [
-          0.049167,
-          0.051333,
-          0.05825,
-          0.089333,
-          0.061833
+          0.057291,
+          0.050917,
+          0.048708,
+          0.053375,
+          0.05025
         ]
       },
       {
         "checksum": 1499850000000.0,
-        "millis": 0.055,
+        "millis": 0.052,
         "name": "asv_linalg_einsum_sum_mul2_f64_10x100x10_scalar",
         "pass_millis": [
-          0.050833,
-          0.055,
-          0.058958,
-          0.049708,
-          0.062
+          0.05725,
+          0.052,
+          0.050166,
+          0.052042,
+          0.05075
         ]
       },
       {
         "checksum": 14399970000.0,
-        "millis": 6.281334,
+        "millis": 6.260166,
         "name": "asv_linalg_einsum_scalar_mul_f64_480000",
         "pass_millis": [
-          6.273125,
-          6.717875,
-          6.281334,
-          6.239167,
-          6.417084
+          6.730958,
+          6.210375,
+          6.260166,
+          6.25675,
+          6.317375
         ]
       },
       {
         "checksum": 11519976000000.0,
-        "millis": 3.656208,
+        "millis": 3.345791,
         "name": "asv_linalg_einsum_sum_f64_480000",
         "pass_millis": [
-          3.366167,
-          3.656208,
-          3.765625,
-          3.604667,
-          3.931125
+          3.747041,
+          3.313583,
+          3.344208,
+          3.368667,
+          3.345791
         ]
       },
       {
         "checksum": 863276404000000.0,
-        "millis": 0.400916,
+        "millis": 0.387833,
         "name": "asv_linalg_einsum_weighted_sum_f64_400x600",
         "pass_millis": [
-          0.400916,
-          0.424,
-          0.3905,
-          0.364375,
-          0.48875
+          0.376459,
+          0.394125,
+          0.387833,
+          0.383208,
+          0.424792
         ]
       },
       {
         "checksum": 15992002.0,
-        "millis": 0.544542,
+        "millis": 0.575459,
         "name": "asv_linalg_einsum_noncon_outer_f64_2000",
         "pass_millis": [
-          0.619292,
-          0.56175,
-          0.39125,
-          0.544542,
-          0.5405
+          0.5325,
+          0.575459,
+          0.647792,
+          0.338375,
+          0.661042
         ]
       },
       {
         "checksum": 115149602.0,
-        "millis": 0.003459,
+        "millis": 0.003291,
         "name": "asv_linalg_einsum_noncon_multiply_f64_30x40_20x30x40",
         "pass_millis": [
-          0.00325,
-          0.003459,
-          0.003542,
-          0.00375,
-          0.003416
+          0.0035,
+          0.003209,
+          0.003333,
+          0.003209,
+          0.003291
         ]
       },
       {
         "checksum": 17280000000000.0,
-        "millis": 0.170167,
+        "millis": 0.158208,
         "name": "asv_linalg_einsum_noncon_sum_mul_f64_scalar_20x30x40",
         "pass_millis": [
-          0.159417,
-          0.170167,
-          0.177042,
-          0.165375,
-          0.186375
+          0.170292,
+          0.153792,
+          0.158583,
+          0.156334,
+          0.158208
         ]
       },
       {
         "checksum": 17280000000000.0,
-        "millis": 0.170167,
+        "millis": 0.156708,
         "name": "asv_linalg_einsum_noncon_sum_mul2_f64_20x30x40_scalar",
         "pass_millis": [
+          0.169542,
+          0.153625,
+          0.154542,
           0.15775,
-          0.170167,
-          0.181416,
-          0.163791,
-          0.192333
+          0.156708
         ]
       },
       {
         "checksum": 120000000.0,
-        "millis": 0.025625,
+        "millis": 0.023416,
         "name": "asv_linalg_einsum_noncon_scalar_mul_f64_2000",
         "pass_millis": [
-          0.022958,
-          0.025959,
-          0.025625,
-          0.023458,
-          0.025875
+          0.023583,
+          0.0235,
+          0.023083,
+          0.023416,
+          0.023208
         ]
       },
       {
         "checksum": 5823960000.0,
-        "millis": 0.042791,
+        "millis": 0.047708,
         "name": "asv_linalg_einsum_noncon_weighted_sum_f64_30x40",
         "pass_millis": [
-          0.049125,
-          0.041167,
-          0.042791,
-          0.039833,
-          0.04475
+          0.040917,
+          0.047833,
+          0.047458,
+          0.047708,
+          0.050916
         ]
       },
       {
         "checksum": 400000000.0,
-        "millis": 0.013541,
+        "millis": 0.013042,
         "name": "asv_linalg_einsum_noncon_sum_f64_2000",
         "pass_millis": [
-          0.013125,
-          0.013083,
-          0.014625,
-          0.013541,
-          0.014542
+          0.014167,
+          0.01375,
+          0.012,
+          0.013042,
+          0.012208
         ]
       }
     ],
@@ -2950,15 +2950,19 @@
   },
   "score": {
     "checksum_failures": [],
-    "geomean_speedup_vs_numpy": 9.948948990158147,
+    "geomean_speedup_vs_numpy": 8.874954446677316,
     "global_numpy_replacement_claim": false,
     "near_tie_cases": [
-      "asv_linalg_einsum_scalar_mul_f64_480000"
+      "asv_linalg_dot_a_b_f64_150x400_400x600",
+      "asv_linalg_matmul_a_b_f64_150x400_400x600",
+      "asv_linalg_dot_trans_a_atc_f64_150x400_400x150",
+      "asv_linalg_matmul_trans_at_a_f64_400x150_150x400",
+      "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400"
     ],
     "near_tie_relative_margin": 0.02,
-    "numpy_wins": 1,
+    "numpy_wins": 2,
     "numrust_ranked_higher_on_supported_external_cases": true,
-    "numrust_wins": 52,
+    "numrust_wins": 51,
     "supported_external_cases": 53,
     "unsupported_external_cases": 1
   },
