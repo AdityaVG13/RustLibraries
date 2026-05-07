@@ -7,3 +7,4 @@
 .pytest_cache/
 .venv/
 .DS_Store
+goal.md
