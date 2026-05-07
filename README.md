@@ -32,6 +32,8 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07: Add same-data FrameRust vs Pandas benchmark evidence for the implemented groupby aggregation slice. Evidence: `benchmarks/compare_pandas.py`, `benchmark-results/framerust-vs-pandas.md`.
 - [x] 2026-05-07: Start GraphRust with CSR graph construction, BFS distances, connected components, and PageRank. Evidence: `crates/graphrust`.
 - [x] 2026-05-07: Add same-data GraphRust vs NetworkX benchmark evidence for the implemented BFS slice. Evidence: `benchmarks/compare_networkx.py`, `benchmark-results/graphrust-vs-networkx.md`.
+- [x] 2026-05-07: Start MediaExtractRust with text/Markdown normalization, HTML text extraction, and uncompressed PDF literal text extraction. Evidence: `crates/mediaextractrust`.
+- [x] 2026-05-07: Add same-data MediaExtractRust vs Python benchmark evidence for implemented HTML and PDF text extraction slices. Evidence: `benchmarks/compare_mediaextract.py`, `benchmark-results/mediaextractrust-vs-python.md`.
 
 ### Open
 
@@ -77,6 +79,7 @@ cargo run --release -p numrs-core --example microbench
 uv run benchmarks/compare_numpy.py
 uv run --with numpy --with pandas benchmarks/compare_pandas.py
 uv run --with networkx benchmarks/compare_networkx.py
+uv run --with beautifulsoup4 --with pypdf benchmarks/compare_mediaextract.py
 uv run benchmarks/external_sources.py --update-lock
 uv run --with numpy python benchmarks/external_numpy_cases.py
 uv run benchmarks/verify_array_api_namespace.py
@@ -95,6 +98,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `crates/rigortrail`: new benchmark/evaluation evidence-ledger crate.
 - `crates/framerust`: Pandas-style data aggregation crate.
 - `crates/graphrust`: NetworkX-style graph analytics crate.
+- `crates/mediaextractrust`: document/media text extraction crate.
 - `docs/research.md`: research notes and source map.
 - `docs/novel-library-research.md`: research notes for the new invented crate.
 - `docs/architecture.md`: architecture decisions and optimization roadmap.
@@ -107,6 +111,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `benchmark-results/numrust-vs-numpy.md`: current NumRust vs NumPy evidence.
 - `benchmark-results/framerust-vs-pandas.md`: current FrameRust vs Pandas evidence for the implemented aggregation slice.
 - `benchmark-results/graphrust-vs-networkx.md`: current GraphRust vs NetworkX evidence for the implemented BFS slice.
+- `benchmark-results/mediaextractrust-vs-python.md`: current MediaExtractRust vs Python evidence for implemented extraction slices.
 - `benchmark-results/external-numpy-asv-inspired.md`: externally derived NumPy ASV evidence.
 - `benchmark-results/array-api-tests-focused-probe.md`: pinned upstream focused Array API probe, currently 1109 passed, 4 skipped, out of 1113 collected.
 - `benchmark-results/array-api-tests-full-maxfail.md`: pinned upstream full Array API 2023.12 probe, currently 1161 passed, 58 skipped, out of 1219 collected.

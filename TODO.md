@@ -37,6 +37,8 @@ This file is intentionally committed and should be updated in normal git commits
 - [x] GraphRust benchmark v0: same-data BFS comparison against NetworkX.
 - [ ] UXRust: Streamlit/Gradio/Dash/NiceGUI-style Rust UI/UX workflow library.
 - [ ] MediaExtractRust: ultra-fast extraction from PDFs, Office docs, images, scans, HTML, markdown, email, and archives.
+- [x] MediaExtractRust v0: text/Markdown normalization, HTML text extraction, and uncompressed PDF literal text extraction.
+- [x] MediaExtractRust benchmark v0: same-data HTML and uncompressed PDF text extraction comparison against Python libraries.
 - [ ] LearnRust: scikit-learn-style classical ML APIs and benchmarks.
 - [ ] PlotRust: Matplotlib/Seaborn/Plotly-style visualization APIs.
 - [ ] ImageRust: Pillow/scikit-image-style image processing APIs.
