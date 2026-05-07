@@ -382,7 +382,7 @@ fn supports_bool_broadcast_kernels() {
 
 #[test]
 fn reduces_all_and_by_axis() {
-    let a = Array::from_vec(vec![2, 3], vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0]).unwrap();
+    let a = Array::from_vec(vec![2, 3], vec![1.0_f64, 2.0, 3.0, 4.0, 5.0, 6.0]).unwrap();
 
     assert_eq!(a.sum_all().unwrap(), 21.0);
     assert_eq!(a.mean_all().unwrap(), 3.5);
@@ -391,6 +391,11 @@ fn reduces_all_and_by_axis() {
     assert_eq!(a.prod_all().unwrap(), 720.0);
     assert!((a.var_all().unwrap() - (35.0 / 12.0)).abs() < 1e-12);
     assert!((a.std_all().unwrap() - (35.0_f64 / 12.0).sqrt()).abs() < 1e-12);
+
+    let f32_values = Array::from_vec(vec![4], vec![1.0_f32, 2.0, 3.0, 4.0]).unwrap();
+    assert_eq!(f32_values.mean_all().unwrap(), 2.5);
+    assert!((f32_values.var_all().unwrap() - 1.25).abs() < 1e-12);
+    assert!((f32_values.std_all().unwrap() - 1.25_f64.sqrt()).abs() < 1e-12);
 
     let by_col = a.sum_axis(0).unwrap();
     assert_eq!(by_col.shape(), &[3]);

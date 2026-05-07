@@ -1,19 +1,18 @@
 # External NumPy Focused Loss Rerun
 
 - Source report: `benchmark-results/external-numpy-asv-inspired.json`
-- Focused cases: 2
+- Focused cases: 1
 - Full focused passes per engine: 3
-- NumRust wins in focused rerun: 2
+- NumRust wins in focused rerun: 1
 - NumPy wins in focused rerun: 0
 - Checksum failures: 0
-- Focused NumRust flips from source NumPy wins: 2
+- Focused NumRust flips from source NumPy wins: 1
 - Source NumPy wins still won by NumPy: 0
-- Focused near ties within 2%: 1
+- Focused near ties within 2%: 0
 - Authoritative score source: `benchmark-results/external-numpy-asv-inspired.json`
 - Raw per-pass samples: `benchmark-results/external-numpy-loss-focused.json`
 - Global NumPy replacement claim: false
 
 | Priority | Case | NumRust ms | NumPy ms | Speedup | Winner | Baseline Speedup | Checksum |
 | ---: | --- | ---: | ---: | ---: | --- | ---: | --- |
-| 1 | `asv_linalg_matmul_trans_a_at_f64_150x400_400x150` | 29.052 | 30.871 | 1.06x | numrust | 1.00x | ok |
-| 2 | `asv_linalg_inner_a_ac_f64_150x400_150x400` | 49.448 | 50.415 | 1.02x | numrust | 1.00x | ok |
+| 1 | `asv_linalg_matmul_trans_a_atc_f64_150x400_400x150` | 40.855 | 41.831 | 1.02x | numrust | 1.00x | ok |

@@ -2,85 +2,54 @@
   "benchmark_pass_order": "alternating; NumRust first on even passes, NumPy first on odd passes",
   "benchmark_passes_per_engine": 3,
   "checksum_failures": [],
-  "focused_cases": 2,
+  "focused_cases": 1,
   "global_numpy_replacement_claim": false,
   "near_tie_relative_margin": 0.02,
   "numpy_wins": 0,
-  "numrust_wins": 2,
+  "numrust_wins": 1,
   "purpose": "Focused rerun of current NumPy-winning external rows for optimization triage.",
   "rows": [
     {
-      "baseline_speedup_vs_numpy": 0.9976207092017645,
+      "baseline_speedup_vs_numpy": 0.9976352465812995,
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
-      "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
+      "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
       "near_tie": false,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 30.870999966282398,
+      "numpy_ms": 41.8305000057444,
       "numpy_pass_millis": [
-        31.17683297023177,
-        30.79037496354431,
-        30.870999966282398
+        41.8305000057444,
+        43.01466699689627,
+        41.74620803678408
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 29.052084,
+      "numrust_ms": 40.855,
       "numrust_pass_millis": [
-        29.052084,
-        28.909709,
-        30.814625
+        40.798625,
+        42.48225,
+        40.855
       ],
       "priority": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
-      "source_symbol": "Eindot.time_matmul_trans_a_at",
-      "speedup_vs_numpy": 1.0626087948211356,
-      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally",
-      "winner": "numrust"
-    },
-    {
-      "baseline_speedup_vs_numpy": 0.9988512867576074,
-      "checksum_abs_diff": 0.0,
-      "checksum_match": true,
-      "name": "asv_linalg_inner_a_ac_f64_150x400_150x400",
-      "near_tie": true,
-      "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 50.41508300928399,
-      "numpy_pass_millis": [
-        50.54816696792841,
-        50.328167038969696,
-        50.41508300928399
-      ],
-      "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 49.44825,
-      "numrust_pass_millis": [
-        49.286417,
-        49.653666,
-        49.44825
-      ],
-      "priority": 2,
-      "source_id": "numpy-asv",
-      "source_path": "benchmarks/benchmarks/bench_linalg.py",
-      "source_symbol": "Eindot.time_inner_trans_a_ac",
-      "speedup_vs_numpy": 1.0195524211531042,
-      "translation": "direct setup and operation: inner(arange(60000).reshape(150,400), copied array), repeated equally",
+      "source_symbol": "Eindot.time_matmul_trans_a_atc",
+      "speedup_vs_numpy": 1.023877126563319,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T.copy()), repeated equally",
       "winner": "numrust"
     }
   ],
   "source_report": "benchmark-results/external-numpy-asv-inspired.json",
   "stability": {
     "authoritative_score_source": "benchmark-results/external-numpy-asv-inspired.json",
-    "focused_near_ties": 1,
-    "focused_numrust_winner_flips": 2,
+    "focused_near_ties": 0,
+    "focused_numrust_winner_flips": 1,
     "focused_still_numpy_winners": 0,
     "interpretation": "Focused reruns are optimization and stability probes for current loss rows; the full external report remains the authoritative supported-case score.",
-    "near_tie_cases": [
-      "asv_linalg_inner_a_ac_f64_150x400_150x400"
-    ],
+    "near_tie_cases": [],
     "numrust_flip_cases": [
-      "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
-      "asv_linalg_inner_a_ac_f64_150x400_150x400"
+      "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150"
     ],
-    "source_numpy_winners": 2,
+    "source_numpy_winners": 1,
     "stable_numpy_win_cases": []
   }
 }

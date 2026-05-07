@@ -323,6 +323,103 @@ fn main() -> numrs_core::Result<()> {
         checksum,
     });
 
+    let stats_data_f32 = Array::full(vec![200], 1.0_f32)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_f32.min_all().unwrap() as f64;
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_min_f32_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_f32.max_all().unwrap() as f64;
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_max_f32_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_f32.mean_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_mean_f32_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_f32.std_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_std_f32_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_f32.prod_all().unwrap() as f64;
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_prod_f32_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_f32.var_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_var_f32_200",
+        millis,
+        checksum,
+    });
+
     let argmax_data = Array::<i64>::zeros(vec![200_000])?;
     let (millis, checksum) = bench(
         || {
