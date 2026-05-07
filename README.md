@@ -71,7 +71,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [ ] 2026-05-07: Add per-crate `README.md` files showing immediate Rust usage, Python-equivalent workflows, supported scope, unsupported scope, and benchmark status.
 - [ ] 2026-05-07: Add Criterion or equivalent Rust-native benchmark suites alongside Python comparison harnesses.
 - [ ] 2026-05-07: Add corpus-based correctness tests for parsing, aggregation, graph algorithms, statistics, and document extraction.
-- [ ] 2026-05-07: Add benchmark dashboards that separate full-suite scores, focused reruns, checksum failures, unsupported cases, and near ties.
+- [x] 2026-05-07: Add benchmark dashboards that separate full-suite scores, focused reruns, checksum failures, unsupported cases, and near ties. Evidence: `docs/benchmark-dashboard.md`.
 
 ### Python Library Port Backlog
 

@@ -19,6 +19,7 @@ This file is intentionally committed and should be updated in normal git commits
 
 - Grow StatsRust and SciRust with externally derived benchmarks where upstream suites exist.
 - Use RigorTrail to gate broad replacement claims on source pins, checksums, unsupported cases, and benchmark scope.
+- [x] Benchmark dashboard v0: table-first README snapshot plus dashboard doc for full-suite scores, focused reruns, checksum status, rerun commands, and claim gates.
 
 ## Release Readiness
 
