@@ -1,68 +1,68 @@
 {
-  "geomean_speedup_vs_numpy": 8.790270522684228,
+  "geomean_speedup_vs_numpy": 8.406627826805915,
   "global_numpy_replacement_claim": false,
   "near_tie_relative_margin": 0.02,
   "numpy_wins": 2,
-  "numrust_wins": 78,
+  "numrust_wins": 82,
   "rows": [
     {
       "checksum_match": true,
       "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
-      "near_tie": false,
-      "numpy_ms": 29.160084028262645,
+      "near_tie": true,
+      "numpy_ms": 30.695624998770654,
       "numpy_pass_millis": [
-        30.925125000067055,
-        28.855625016149133,
-        28.968417027499527,
-        30.653082998469472,
-        29.160084028262645
+        28.938415984157473,
+        30.783583992160857,
+        30.695624998770654,
+        30.716957990080118,
+        30.64104198710993
       ],
-      "numrust_ms": 30.568875,
+      "numrust_ms": 30.768833,
       "numrust_pass_millis": [
-        29.120833,
-        30.940375,
-        30.565459,
-        30.568875,
-        30.592917
+        30.872,
+        30.768833,
+        28.875167,
+        31.036,
+        30.756041
       ],
-      "numrust_slowdown_vs_numpy": 0.04831230837236,
+      "numrust_slowdown_vs_numpy": 0.0023849653242857816,
       "priority": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_matmul_trans_a_at",
-      "speedup_vs_numpy": 0.9539142028701627,
+      "speedup_vs_numpy": 0.9976207092017645,
       "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally"
     },
     {
       "checksum_match": true,
-      "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
-      "near_tie": false,
-      "numpy_ms": 41.240000049583614,
+      "name": "asv_linalg_inner_a_ac_f64_150x400_150x400",
+      "near_tie": true,
+      "numpy_ms": 49.23854098888114,
       "numpy_pass_millis": [
-        41.04483296396211,
-        43.15116599900648,
-        40.91229196637869,
-        41.25275003025308,
-        41.240000049583614
+        48.5429170075804,
+        49.439875001553446,
+        50.486708991229534,
+        48.78379200818017,
+        49.23854098888114
       ],
-      "numrust_ms": 42.12525,
+      "numrust_ms": 49.295167,
       "numrust_pass_millis": [
-        42.12525,
-        42.621291,
-        42.0925,
-        40.590166,
-        42.425583
+        49.445,
+        47.538041,
+        49.295167,
+        49.449917,
+        48.957583
       ],
-      "numrust_slowdown_vs_numpy": 0.02146580866518022,
+      "numrust_slowdown_vs_numpy": 0.0011500343020245385,
       "priority": 2,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
-      "source_symbol": "Eindot.time_matmul_trans_a_atc",
-      "speedup_vs_numpy": 0.978985289098192,
-      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T.copy()), repeated equally"
+      "source_symbol": "Eindot.time_inner_trans_a_ac",
+      "speedup_vs_numpy": 0.9988512867576074,
+      "translation": "direct setup and operation: inner(arange(60000).reshape(150,400), copied array), repeated equally"
     }
   ],
   "sort": "NumPy-winning rows only, ordered by ascending speedup_vs_numpy",
   "source_report": "benchmark-results/external-numpy-asv-inspired.json",
-  "supported_external_cases": 80
+  "supported_external_cases": 84
 }

@@ -294,6 +294,22 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=2_000,
     ),
     CaseSpec(
+        name="asv_manipulate_concatenate_ax1_f32_32x64_n5",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="ConcatenateStackArrays.time_concatenate_ax1(shape=(32, 64), narrays=5, ndtype=float32)",
+        translation="same operation, shape, array count, and dtype; deterministic arange values instead of RNG setup, repeated equally",
+        repetitions=2_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_concatenate_ax1_i32_32x64_n5",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="ConcatenateStackArrays.time_concatenate_ax1(shape=(32, 64), narrays=5, ndtype=int32)",
+        translation="same operation, shape, array count, and dtype; deterministic arange values instead of RNG setup, repeated equally",
+        repetitions=2_000,
+    ),
+    CaseSpec(
         name="asv_manipulate_stack_ax0_f64_32x64_n5",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_manipulate.py",
@@ -322,6 +338,22 @@ RUNNABLE_CASES: list[CaseSpec] = [
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_manipulate.py",
         source_symbol="ConcatenateStackArrays.time_stack_ax1(shape=(32, 64), narrays=5, ndtype=float64)",
+        translation="same operation, shape, array count, and dtype; deterministic arange values instead of RNG setup, repeated equally",
+        repetitions=2_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_stack_ax1_f32_32x64_n5",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="ConcatenateStackArrays.time_stack_ax1(shape=(32, 64), narrays=5, ndtype=float32)",
+        translation="same operation, shape, array count, and dtype; deterministic arange values instead of RNG setup, repeated equally",
+        repetitions=2_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_stack_ax1_i32_32x64_n5",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="ConcatenateStackArrays.time_stack_ax1(shape=(32, 64), narrays=5, ndtype=int32)",
         translation="same operation, shape, array count, and dtype; deterministic arange values instead of RNG setup, repeated equally",
         repetitions=2_000,
     ),
@@ -1108,6 +1140,21 @@ def bench_numpy() -> dict:
             }
         )
 
+        def concatenate_ax1_dtype() -> float:
+            checksum = 0.0
+            for _ in range(2_000):
+                checksum += edge_checksum(np.concatenate(arrays, axis=1))
+            return checksum
+
+        millis, checksum = median_ms(concatenate_ax1_dtype, rounds=7)
+        cases.append(
+            {
+                "name": f"asv_manipulate_concatenate_ax1_{suffix}_32x64_n5",
+                "millis": millis,
+                "checksum": checksum,
+            }
+        )
+
         def stack_ax0_dtype() -> float:
             checksum = 0.0
             for _ in range(2_000):
@@ -1118,6 +1165,21 @@ def bench_numpy() -> dict:
         cases.append(
             {
                 "name": f"asv_manipulate_stack_ax0_{suffix}_32x64_n5",
+                "millis": millis,
+                "checksum": checksum,
+            }
+        )
+
+        def stack_ax1_dtype() -> float:
+            checksum = 0.0
+            for _ in range(2_000):
+                checksum += edge_checksum(np.stack(arrays, axis=1))
+            return checksum
+
+        millis, checksum = median_ms(stack_ax1_dtype, rounds=7)
+        cases.append(
+            {
+                "name": f"asv_manipulate_stack_ax1_{suffix}_32x64_n5",
                 "millis": millis,
                 "checksum": checksum,
             }
@@ -1836,10 +1898,14 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         "asv_manipulate_concatenate_ax0_f32_32x64_n5",
         "asv_manipulate_concatenate_ax0_i32_32x64_n5",
         "asv_manipulate_concatenate_ax1_f64_32x64_n5",
+        "asv_manipulate_concatenate_ax1_f32_32x64_n5",
+        "asv_manipulate_concatenate_ax1_i32_32x64_n5",
         "asv_manipulate_stack_ax0_f64_32x64_n5",
         "asv_manipulate_stack_ax0_f32_32x64_n5",
         "asv_manipulate_stack_ax0_i32_32x64_n5",
         "asv_manipulate_stack_ax1_f64_32x64_n5",
+        "asv_manipulate_stack_ax1_f32_32x64_n5",
+        "asv_manipulate_stack_ax1_i32_32x64_n5",
         "asv_manipulate_flip_all_f64_5x2x3x1",
         "asv_manipulate_flip_one_f64_5x2x3x1_axis1",
         "asv_manipulate_flip_neg_f64_5x2x3x1_axis_neg1",
@@ -2044,6 +2110,17 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
             concatenate_ax0_dtype,
         )
 
+        def concatenate_ax1_dtype() -> float:
+            checksum = 0.0
+            for _ in range(2_000):
+                checksum += edge_checksum(np.concatenate(arrays, axis=1))
+            return checksum
+
+        append_case(
+            f"asv_manipulate_concatenate_ax1_{suffix}_32x64_n5",
+            concatenate_ax1_dtype,
+        )
+
         def stack_ax0_dtype() -> float:
             checksum = 0.0
             for _ in range(2_000):
@@ -2051,6 +2128,14 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
             return checksum
 
         append_case(f"asv_manipulate_stack_ax0_{suffix}_32x64_n5", stack_ax0_dtype)
+
+        def stack_ax1_dtype() -> float:
+            checksum = 0.0
+            for _ in range(2_000):
+                checksum += edge_checksum(np.stack(arrays, axis=1))
+            return checksum
+
+        append_case(f"asv_manipulate_stack_ax1_{suffix}_32x64_n5", stack_ax1_dtype)
 
     append_selected_concat_stack_dtype("float32")
     append_selected_concat_stack_dtype("int32")

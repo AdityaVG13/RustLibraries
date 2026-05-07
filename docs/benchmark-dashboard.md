@@ -15,8 +15,8 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Area | Rust crate | Python baseline | Evidence tier | Cases | Rust wins | Python wins | Full parity? | Speedup summary | Checksum failures | Report |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | NumPy targeted | `numrs-core` | NumPy 2.4.4 | Same-data implemented slice | 10 | 10 | 0 | No | 1.67x geomean | 0 | [`numrust-vs-numpy.md`](../benchmark-results/numrust-vs-numpy.md) |
-| NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 80 supported | 78 | 2 | No | 8.79x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
-| NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of current NumPy wins | 2 | 1 | 1 | No | near-tie loss remains | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
+| NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 84 supported | 82 | 2 | No | 8.41x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
+| NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of current NumPy wins | 2 | 2 | 0 | No | focused losses flip | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | Same-data implemented slice | 4 | 4 | 0 | No | 3.51x geomean | 0 | [`statsrust-vs-statsmodels.md`](../benchmark-results/statsrust-vs-statsmodels.md) |
 | Scientific routines | `scirust` | SciPy 1.17.1 | SciPy ASV translations plus same-data slice | 9 | 9 | 0 | No | 19.11x geomean | 0 | [`scirust-vs-scipy.md`](../benchmark-results/scirust-vs-scipy.md) |
 | Data aggregation | `framerust` | Pandas 3.0.2 | Same-data implemented slice | 1 | 1 | 0 | No | 2.14x | 0 | [`framerust-vs-pandas.md`](../benchmark-results/framerust-vs-pandas.md) |
@@ -34,16 +34,16 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Pinned NumPy ASV commit | `80b1a07494964733f7d4571781608238f500e2dd` |
 | Pinned Array API tests commit | `55fcc60179efa2680ddd6cd926ddf17b83530e2b` |
 | Full passes per engine | 5 |
-| Supported external cases | 80 |
+| Supported external cases | 84 |
 | Unsupported external cases tracked | 1 |
-| NumRust wins | 78 |
+| NumRust wins | 82 |
 | NumPy wins | 2 |
-| Geomean speedup vs NumPy | 8.79x |
-| Near-tie cases within 2% | 5 |
+| Geomean speedup vs NumPy | 8.41x |
+| Near-tie cases within 2% | 7 |
 | Checksum failures | 0 |
 | Global NumPy replacement claim | false |
 
-The authoritative full report currently has 2 NumPy-winning supported rows, both linalg near ties. The focused-loss artifact reruns those rows with 3 alternating passes and still has 1 NumPy near-tie winner. The global NumPy replacement claim stays false because the supported external slice is not the full NumPy API surface.
+The authoritative full report currently has 2 NumPy-winning supported rows, both linalg near ties. The focused-loss artifact reruns those rows with 3 alternating passes and flips both back to NumRust. The full report remains authoritative, and the global NumPy replacement claim stays false because the supported external slice is not the full NumPy API surface.
 
 ## Conformance Snapshot
 

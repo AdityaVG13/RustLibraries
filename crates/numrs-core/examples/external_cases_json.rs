@@ -675,6 +675,23 @@ fn main() -> numrs_core::Result<()> {
         || {
             let mut checksum = 0.0;
             for _ in 0..2_000 {
+                let out = Array::concatenate(&concat_arrays_f32, 1).unwrap();
+                checksum += edge_sum_f32(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_concatenate_ax1_f32_32x64_n5",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
                 let out = Array::stack(&concat_arrays_f32, 0).unwrap();
                 checksum += edge_sum_f32(&out);
             }
@@ -684,6 +701,23 @@ fn main() -> numrs_core::Result<()> {
     );
     cases.push(Case {
         name: "asv_manipulate_stack_ax0_f32_32x64_n5",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
+                let out = Array::stack(&concat_arrays_f32, 1).unwrap();
+                checksum += edge_sum_f32(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_stack_ax1_f32_32x64_n5",
         millis,
         checksum,
     });
@@ -716,6 +750,23 @@ fn main() -> numrs_core::Result<()> {
         || {
             let mut checksum = 0.0;
             for _ in 0..2_000 {
+                let out = Array::concatenate(&concat_arrays_i32, 1).unwrap();
+                checksum += edge_sum_i32(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_concatenate_ax1_i32_32x64_n5",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
                 let out = Array::stack(&concat_arrays_i32, 0).unwrap();
                 checksum += edge_sum_i32(&out);
             }
@@ -725,6 +776,23 @@ fn main() -> numrs_core::Result<()> {
     );
     cases.push(Case {
         name: "asv_manipulate_stack_ax0_i32_32x64_n5",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
+                let out = Array::stack(&concat_arrays_i32, 1).unwrap();
+                checksum += edge_sum_i32(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_stack_ax1_i32_32x64_n5",
         millis,
         checksum,
     });
