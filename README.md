@@ -2,13 +2,13 @@
 
 Flagship-first porting lab for rebuilding top Python library ideas in pure Rust.
 
-Working names: **NumRust** for the NumPy-core slice, **StatsRust** for the StatsModels-style slice, and **SciRust** for the SciPy-style slice. Core crate: `numrs-core`.
+Working names: **NumRust** for the NumPy-core slice, **StatsRust** for the StatsModels-style slice, **SciRust** for the SciPy-style slice, and **LearnRust** for the scikit-learn-style slice. Core crate: `numrs-core`.
 
 Current flagship: `numrs-core`, a Rust-first NumPy-core foundation. It targets typed n-dimensional arrays, shape/stride metadata, uniform-array metadata, zero-copy views, NumPy-style slicing, reshape, transpose, broadcasting, elementwise kernels, reductions, 2-D dot products, NumPy-style matrix multiplication, and tensor contractions.
 
 ## Status
 
-This is not a full NumPy replacement yet. The v0 slice is deliberately narrow and tested. The architecture is aimed above NumPy on Rust-native strengths: explicit ownership, checked layout contracts, zero-copy view transforms, uniform-array plans, broadcast plans that avoid input materialization, and fast paths for contiguous kernels.
+This is not a full NumPy replacement yet, and no crate in this workspace should be treated as a full Python-library replacement until its documented parity gates are met. Current v0 slices are deliberately narrow and tested. The architecture is aimed above Python libraries on Rust-native strengths: explicit ownership, checked layout contracts, zero-copy view transforms, uniform-array plans, broadcast plans that avoid input materialization, and fast paths for contiguous kernels.
 
 ## Benchmark Snapshot
 
@@ -26,6 +26,7 @@ Full tables, rerun commands, and claim gates live in [`docs/benchmark-dashboard.
 | Data validation | `validaterust` | Pydantic 2.13.4 | 1 | 1 | 0 | 35.69x | [`validaterust-vs-pydantic.md`](benchmark-results/validaterust-vs-pydantic.md) |
 | Image processing | `imagerust` | Pillow 12.2.0 | 1 | 1 | 0 | 16.53x | [`imagerust-vs-pillow.md`](benchmark-results/imagerust-vs-pillow.md) |
 | Text processing | `textrust` | NLTK 3.9.4 | 1 | 1 | 0 | 23.92x | [`textrust-vs-nltk.md`](benchmark-results/textrust-vs-nltk.md) |
+| Classical ML | `learnrust` | scikit-learn 1.8.0 | 3 | 3 | 0 | 6.53x geomean | [`learnrust-vs-sklearn.md`](benchmark-results/learnrust-vs-sklearn.md) |
 
 ## Progress TODO
 
@@ -107,6 +108,7 @@ uv run --with beautifulsoup4 --with pypdf benchmarks/compare_mediaextract.py
 uv run --with pydantic benchmarks/compare_pydantic.py
 uv run --with pillow benchmarks/compare_pillow.py
 uv run --with nltk benchmarks/compare_nltk.py
+uv run --with numpy --with scikit-learn benchmarks/compare_sklearn.py
 uv run benchmarks/external_sources.py --update-lock
 uv run --with numpy python benchmarks/external_numpy_cases.py
 uv run benchmarks/verify_array_api_namespace.py
@@ -129,6 +131,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `crates/validaterust`: Pydantic-style schema validation crate.
 - `crates/imagerust`: Pillow-style image processing crate.
 - `crates/textrust`: NLTK-style text processing crate.
+- `crates/learnrust`: scikit-learn-style classical ML crate.
 - `docs/research.md`: research notes and source map.
 - `docs/novel-library-research.md`: research notes for the new invented crate.
 - `docs/architecture.md`: architecture decisions and optimization roadmap.
@@ -146,6 +149,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `benchmark-results/validaterust-vs-pydantic.md`: current ValidateRust vs Pydantic evidence for the implemented validation slice.
 - `benchmark-results/imagerust-vs-pillow.md`: current ImageRust vs Pillow evidence for the implemented image-processing slice.
 - `benchmark-results/textrust-vs-nltk.md`: current TextRust vs NLTK evidence for the implemented tokenization slice.
+- `benchmark-results/learnrust-vs-sklearn.md`: current LearnRust vs scikit-learn evidence for the implemented preprocessing, nearest-centroid, and metrics slice.
 - `benchmark-results/external-numpy-asv-inspired.md`: externally derived NumPy ASV evidence.
 - `benchmark-results/array-api-tests-focused-probe.md`: pinned upstream focused Array API probe, currently 1109 passed, 4 skipped, out of 1113 collected.
 - `benchmark-results/array-api-tests-full-maxfail.md`: pinned upstream full Array API 2023.12 probe, currently 1161 passed, 58 skipped, out of 1219 collected.

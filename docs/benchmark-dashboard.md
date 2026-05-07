@@ -16,6 +16,7 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Data validation | `validaterust` | Pydantic 2.13.4 | Same-data implemented slice | 1 | 1 | 0 | 35.69x | 0 | [`validaterust-vs-pydantic.md`](../benchmark-results/validaterust-vs-pydantic.md) |
 | Image processing | `imagerust` | Pillow 12.2.0 | Same-data implemented slice | 1 | 1 | 0 | 16.53x | 0 | [`imagerust-vs-pillow.md`](../benchmark-results/imagerust-vs-pillow.md) |
 | Text processing | `textrust` | NLTK 3.9.4 | Same-data implemented slice | 1 | 1 | 0 | 23.92x | 0 | [`textrust-vs-nltk.md`](../benchmark-results/textrust-vs-nltk.md) |
+| Classical ML | `learnrust` | scikit-learn 1.8.0 | Same-data implemented slice | 3 | 3 | 0 | 6.53x geomean | 0 | [`learnrust-vs-sklearn.md`](../benchmark-results/learnrust-vs-sklearn.md) |
 
 ## NumRust External Detail
 
@@ -62,6 +63,7 @@ The remaining full-suite NumPy win is `asv_linalg_einsum_scalar_mul_f64_480000`,
 | Pydantic comparison | `uv run --with pydantic benchmarks/compare_pydantic.py` | `benchmark-results/validaterust-vs-pydantic.md` |
 | Pillow comparison | `uv run --with pillow benchmarks/compare_pillow.py` | `benchmark-results/imagerust-vs-pillow.md` |
 | NLTK comparison | `uv run --with nltk benchmarks/compare_nltk.py` | `benchmark-results/textrust-vs-nltk.md` |
+| scikit-learn comparison | `uv run --with numpy --with scikit-learn benchmarks/compare_sklearn.py` | `benchmark-results/learnrust-vs-sklearn.md` |
 
 ## Claim Gates
 
@@ -72,6 +74,7 @@ The remaining full-suite NumPy win is `asv_linalg_einsum_scalar_mul_f64_480000`,
 | Checksum parity | Output checksums must match or the row fails | 0 failures in the cited reports |
 | Loss visibility | Python-winning rows must remain visible | Met in NumPy ASV-derived report |
 | Scope honesty | Slice wins cannot be marketed as full-library parity | Enforced in reports and docs |
+| Full parity | A Rust crate must cover the Python library's real API surface before any full-replacement claim | Not met for any crate yet |
 | External evidence | Prefer pinned upstream benchmarks where available | Met for NumPy ASV, Array API, and part of SciPy |
 | Enterprise readiness | Stable APIs, docs, examples, error model, fuzz/property tests, and security review | In progress |
 
@@ -82,5 +85,5 @@ The remaining full-suite NumPy win is `asv_linalg_einsum_scalar_mul_f64_480000`,
 | 1 | NumRust contiguous scalar multiply | Still a 1.6% NumPy near-tie win in the authoritative full run. |
 | 2 | Broader NumRust ASV coverage | The current supported slice ranks higher, but full NumPy-scale scope needs more translated cases. |
 | 3 | Broader externally derived SciPy and StatsModels cases | Current wins are strong but the benchmark surface is narrow. |
-| 4 | More cases for FrameRust, GraphRust, MediaExtractRust, ValidateRust, ImageRust, and TextRust | The current slices all beat Python, but production-grade parity needs broader workloads. |
+| 4 | More cases for FrameRust, GraphRust, MediaExtractRust, ValidateRust, ImageRust, TextRust, and LearnRust | The current slices all beat Python, but production-grade parity needs broader workloads. |
 | 5 | Per-crate README files and Rust-native benchmark suites | Public users need crate-local usage, scope, and reproducible performance gates. |

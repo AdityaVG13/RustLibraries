@@ -18,6 +18,7 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 | ValidateRust vs Pydantic | 1 | 1 | 0 | 35.69x | 0 |
 | ImageRust vs Pillow | 1 | 1 | 0 | 16.53x | 0 |
 | TextRust vs NLTK | 1 | 1 | 0 | 23.92x | 0 |
+| LearnRust vs scikit-learn | 3 | 3 | 0 | 6.53x geomean | 0 |
 
 ## Implemented Fast Paths
 

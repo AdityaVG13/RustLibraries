@@ -1,0 +1,80 @@
+{
+  "comparison": [
+    {
+      "checksum_abs_diff": 2.0627943797535409e-13,
+      "checksum_match": true,
+      "learnrust_ms": 2.976208,
+      "name": "standard_scaler_fit_transform_200000x12",
+      "sklearn_ms": 8.921540982555598,
+      "speedup_vs_sklearn": 2.997620120151413,
+      "winner": "learnrust"
+    },
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "learnrust_ms": 1.056375,
+      "name": "nearest_centroid_fit_predict_120000x8_40000x8_6",
+      "sklearn_ms": 12.184709019493312,
+      "speedup_vs_sklearn": 11.534454165891194,
+      "winner": "learnrust"
+    },
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "learnrust_ms": 3.662708,
+      "name": "accuracy_confusion_1000000_8",
+      "sklearn_ms": 29.474833980202675,
+      "speedup_vs_sklearn": 8.047279220784915,
+      "winner": "learnrust"
+    }
+  ],
+  "learnrust": {
+    "cases": [
+      {
+        "checksum": -1.041224960734,
+        "millis": 2.976208,
+        "name": "standard_scaler_fit_transform_200000x12"
+      },
+      {
+        "checksum": 1599727.0,
+        "millis": 1.056375,
+        "name": "nearest_centroid_fit_predict_120000x8_40000x8_6"
+      },
+      {
+        "checksum": 7000000.947368,
+        "millis": 3.662708,
+        "name": "accuracy_confusion_1000000_8"
+      }
+    ],
+    "engine": "learnrust"
+  },
+  "score": {
+    "cases": 3,
+    "checksum_failures": [],
+    "geomean_speedup_vs_sklearn": 6.528412250925796,
+    "global_sklearn_replacement_claim": false,
+    "learnrust_wins": 3,
+    "sklearn_wins": 0
+  },
+  "sklearn": {
+    "cases": [
+      {
+        "checksum": -1.0412249607337938,
+        "millis": 8.921540982555598,
+        "name": "standard_scaler_fit_transform_200000x12"
+      },
+      {
+        "checksum": 1599727.0,
+        "millis": 12.184709019493312,
+        "name": "nearest_centroid_fit_predict_120000x8_40000x8_6"
+      },
+      {
+        "checksum": 7000000.947368,
+        "millis": 29.474833980202675,
+        "name": "accuracy_confusion_1000000_8"
+      }
+    ],
+    "engine": "sklearn",
+    "sklearn_version": "1.8.0"
+  }
+}
