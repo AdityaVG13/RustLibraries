@@ -100,7 +100,7 @@ impl RgbImage {
             let r = u32::from(rgb[0]);
             let g = u32::from(rgb[1]);
             let b = u32::from(rgb[2]);
-            pixels.push(((77 * r + 150 * g + 29 * b + 128) >> 8) as u8);
+            pixels.push(((299 * r + 587 * g + 114 * b + 500) / 1000) as u8);
         }
         GrayImage {
             width: self.width,
@@ -136,11 +136,11 @@ impl GrayImage {
         }
         let mut pixels = vec![0u8; width * height];
         for y in 0..height {
-            let src_y = y * self.height / height;
+            let src_y = ((2 * y + 1) * self.height / (2 * height)).min(self.height - 1);
             let src_row = src_y * self.width;
             let dst_row = y * width;
             for x in 0..width {
-                let src_x = x * self.width / width;
+                let src_x = ((2 * x + 1) * self.width / (2 * width)).min(self.width - 1);
                 pixels[dst_row + x] = self.pixels[src_row + src_x];
             }
         }
@@ -269,7 +269,7 @@ mod tests {
     #[test]
     fn converts_to_grayscale() {
         let image = RgbImage::from_rgb(2, 1, vec![255, 0, 0, 0, 255, 0]).unwrap();
-        assert_eq!(image.grayscale().pixels(), &[77, 149]);
+        assert_eq!(image.grayscale().pixels(), &[76, 150]);
     }
 
     #[test]
@@ -281,6 +281,17 @@ mod tests {
         };
         let resized = image.resize_nearest(4, 2).unwrap();
         assert_eq!(resized.pixels(), &[1, 1, 2, 2, 3, 3, 4, 4]);
+    }
+
+    #[test]
+    fn downscales_nearest_neighbor_like_pillow() {
+        let image = GrayImage {
+            width: 4,
+            height: 1,
+            pixels: vec![10, 20, 30, 40],
+        };
+        let resized = image.resize_nearest(2, 1).unwrap();
+        assert_eq!(resized.pixels(), &[20, 40]);
     }
 
     #[test]
