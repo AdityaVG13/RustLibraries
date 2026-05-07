@@ -2,6 +2,17 @@
 
 The in-repo `compare_numpy.py`, `compare_statsmodels.py`, and `compare_scipy.py` suites are useful for regression work, but self-selected cases are not enough evidence for broad replacement claims.
 
+Use [`benchmark-dashboard.md`](benchmark-dashboard.md) for the table-first scorecard across all implemented library slices. This file documents where the external evidence comes from and how the pinned sources are verified.
+
+## Evidence Tiers
+
+| Tier | Source | Current use | Claim strength |
+| --- | --- | --- | --- |
+| 1 | Pinned upstream benchmark or conformance source | NumPy ASV-derived cases, Array API tests, selected SciPy ASV translations | Strongest current evidence |
+| 2 | Same-data Rust-vs-Python harness | StatsRust, SciRust local cases, FrameRust, GraphRust, MediaExtractRust, ValidateRust, ImageRust, TextRust | Good slice-regression evidence |
+| 3 | Source/API pin without benchmark translation | StatsModels and remaining SciPy source pins | Research support only |
+| 4 | Self-authored smoke cases | Narrow NumRust comparison harnesses and examples | Useful for development, not broad claims |
+
 This repo separates evidence tiers:
 
 1. Self-authored or same-data slice benchmarks: `benchmarks/compare_numpy.py`, `benchmarks/compare_statsmodels.py`, and `benchmarks/compare_scipy.py`.

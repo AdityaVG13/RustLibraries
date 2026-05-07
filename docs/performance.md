@@ -2,6 +2,23 @@
 
 `numrs-core` exposes safe Rust kernels, uses explicit layout dispatch, and calls optimized native backends when a layout maps cleanly to BLAS or vDSP.
 
+For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-dashboard.md). The dashboard separates full external scores, focused reruns, same-data slice benchmarks, checksum status, rerun commands, and remaining Python-winning rows.
+
+## Current Benchmark Summary
+
+| Suite | Cases | Rust wins | Python wins | Speedup summary | Checksum failures |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NumRust vs NumPy, external ASV-derived | 53 | 43 | 10 | 8.92x geomean | 0 |
+| NumRust vs NumPy, focused prior-loss rerun | 10 | 9 | 1 | 7 near ties within 2% | 0 |
+| StatsRust vs StatsModels | 4 | 4 | 0 | 3.51x geomean | 0 |
+| SciRust vs SciPy | 9 | 9 | 0 | 19.11x geomean | 0 |
+| FrameRust vs Pandas | 1 | 1 | 0 | 2.14x | 0 |
+| GraphRust vs NetworkX | 1 | 1 | 0 | 27.15x | 0 |
+| MediaExtractRust vs Python extraction libraries | 2 | 2 | 0 | 81.21x to 122.93x | 0 |
+| ValidateRust vs Pydantic | 1 | 1 | 0 | 35.69x | 0 |
+| ImageRust vs Pillow | 1 | 1 | 0 | 16.53x | 0 |
+| TextRust vs NLTK | 1 | 1 | 0 | 23.92x | 0 |
+
 ## Implemented Fast Paths
 
 - Contiguous equal-shape elementwise operations zip input slices directly.

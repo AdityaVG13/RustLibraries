@@ -10,6 +10,23 @@ Current flagship: `numrs-core`, a Rust-first NumPy-core foundation. It targets t
 
 This is not a full NumPy replacement yet. The v0 slice is deliberately narrow and tested. The architecture is aimed above NumPy on Rust-native strengths: explicit ownership, checked layout contracts, zero-copy view transforms, uniform-array plans, broadcast plans that avoid input materialization, and fast paths for contiguous kernels.
 
+## Benchmark Snapshot
+
+Full tables, rerun commands, and claim gates live in [`docs/benchmark-dashboard.md`](docs/benchmark-dashboard.md). Current rule: implemented slices may claim measured wins; full-library replacement claims stay false until coverage and external evidence justify them.
+
+| Library slice | Rust crate | Python baseline | Cases | Rust wins | Python wins | Speedup summary | Report |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| NumPy core, external ASV-derived | `numrs-core` | NumPy 2.4.4 | 53 | 43 | 10 | 8.92x geomean | [`external-numpy-asv-inspired.md`](benchmark-results/external-numpy-asv-inspired.md) |
+| NumPy prior-loss focused rerun | `numrs-core` | NumPy 2.4.4 | 10 | 9 | 1 | 7 near ties within 2% | [`external-numpy-loss-focused.md`](benchmark-results/external-numpy-loss-focused.md) |
+| Statistics | `statsrust` | StatsModels 0.14.6 | 4 | 4 | 0 | 3.51x geomean | [`statsrust-vs-statsmodels.md`](benchmark-results/statsrust-vs-statsmodels.md) |
+| Scientific routines | `scirust` | SciPy 1.17.1 | 9 | 9 | 0 | 19.11x geomean | [`scirust-vs-scipy.md`](benchmark-results/scirust-vs-scipy.md) |
+| Data aggregation | `framerust` | Pandas 3.0.2 | 1 | 1 | 0 | 2.14x | [`framerust-vs-pandas.md`](benchmark-results/framerust-vs-pandas.md) |
+| Graph analytics | `graphrust` | NetworkX 3.6.1 | 1 | 1 | 0 | 27.15x | [`graphrust-vs-networkx.md`](benchmark-results/graphrust-vs-networkx.md) |
+| Document extraction | `mediaextractrust` | Python extraction libraries | 2 | 2 | 0 | 81.21x to 122.93x | [`mediaextractrust-vs-python.md`](benchmark-results/mediaextractrust-vs-python.md) |
+| Data validation | `validaterust` | Pydantic 2.13.4 | 1 | 1 | 0 | 35.69x | [`validaterust-vs-pydantic.md`](benchmark-results/validaterust-vs-pydantic.md) |
+| Image processing | `imagerust` | Pillow 12.2.0 | 1 | 1 | 0 | 16.53x | [`imagerust-vs-pillow.md`](benchmark-results/imagerust-vs-pillow.md) |
+| Text processing | `textrust` | NLTK 3.9.4 | 1 | 1 | 0 | 23.92x | [`textrust-vs-nltk.md`](benchmark-results/textrust-vs-nltk.md) |
+
 ## Progress TODO
 
 Backfilled items are completed work imported from the pre-GitHub build history. New work should update this list in the same commit as the implementation or benchmark evidence.
@@ -114,6 +131,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `docs/research.md`: research notes and source map.
 - `docs/novel-library-research.md`: research notes for the new invented crate.
 - `docs/architecture.md`: architecture decisions and optimization roadmap.
+- `docs/benchmark-dashboard.md`: benchmark scorecard, rerun matrix, and claim gates.
 - `docs/performance.md`: current fast paths and benchmark hook.
 - `docs/external-evidence.md`: pinned online benchmark and conformance sources.
 - `docs/python-array-api.md`: Python namespace bridge and conformance roadmap.
