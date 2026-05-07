@@ -6,6 +6,7 @@ members = [
     "crates/rigortrail",
     "crates/framerust",
     "crates/graphrust",
+    "crates/mediaextractrust",
     "crates/numrust-python",
 ]
 resolver = "2"
