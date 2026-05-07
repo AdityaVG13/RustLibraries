@@ -133,6 +133,42 @@ fn supports_fancy_indexing_take_and_boolean_masks() {
 }
 
 #[test]
+fn supports_nonzero_and_where_selection() {
+    let mask = Array::from_vec(
+        vec![3, 4],
+        vec![
+            true, false, false, true, false, true, false, false, true, false, true, false,
+        ],
+    )
+    .unwrap();
+
+    let nonzero = mask.nonzero().unwrap();
+    assert_eq!(nonzero.len(), 2);
+    assert_eq!(nonzero[0].as_slice(), &[0, 0, 1, 2, 2]);
+    assert_eq!(nonzero[1].as_slice(), &[0, 3, 1, 0, 2]);
+
+    let values = Array::from_vec(vec![3, 4], (0_i64..12).collect()).unwrap();
+    let fallback = Array::full(vec![1, 4], -1_i64).unwrap();
+    let selected = mask.where_select(&values, &fallback).unwrap();
+    assert_eq!(selected.shape(), &[3, 4]);
+    assert_eq!(
+        selected.as_slice(),
+        &[0, -1, -1, 3, -1, 5, -1, -1, 8, -1, 10, -1]
+    );
+
+    let transposed_mask = mask.transpose();
+    let transposed_values = values.transpose();
+    let selected = transposed_mask
+        .where_select(&transposed_values, &Array::scalar(-2_i64).unwrap().view())
+        .unwrap();
+    assert_eq!(selected.shape(), &[4, 3]);
+    assert_eq!(
+        selected.as_slice(),
+        &[0, -2, 8, -2, 5, -2, -2, -2, 10, 3, -2, -2]
+    );
+}
+
+#[test]
 fn views_slice_without_copying_and_keep_numpy_negative_index_rules() {
     let a = Array::from_vec(vec![3, 4], (0_i64..12).collect()).unwrap();
 

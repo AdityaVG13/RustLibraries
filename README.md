@@ -29,6 +29,7 @@ Full tables, rerun commands, and claim gates live in [`docs/benchmark-dashboard.
 
 | Library slice | Rust crate | Python baseline | Cases | Rust wins | Python wins | Full parity? | Speedup summary | Report |
 | --- | --- | --- | ---: | ---: | ---: | --- | ---: | --- |
+| NumPy targeted same-data | `numrs-core` | NumPy 2.4.4 | 10 | 8 | 2 | No | 1.52x geomean | [`numrust-vs-numpy.md`](benchmark-results/numrust-vs-numpy.md) |
 | NumPy core, external ASV-derived | `numrs-core` | NumPy 2.4.4 | 53 | 52 | 1 | No | 9.95x geomean | [`external-numpy-asv-inspired.md`](benchmark-results/external-numpy-asv-inspired.md) |
 | NumPy prior-loss focused rerun | `numrs-core` | NumPy 2.4.4 | 1 | 1 | 0 | No | 1.08x | [`external-numpy-loss-focused.md`](benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | 4 | 4 | 0 | No | 3.51x geomean | [`statsrust-vs-statsmodels.md`](benchmark-results/statsrust-vs-statsmodels.md) |
@@ -116,7 +117,7 @@ cargo fmt --all --check
 cargo test --workspace
 cargo run -p numrs-core --example basic
 cargo run --release -p numrs-core --example microbench
-uv run benchmarks/compare_numpy.py
+uv run --with numpy benchmarks/compare_numpy.py
 uv run --with numpy --with pandas benchmarks/compare_pandas.py
 uv run --with networkx benchmarks/compare_networkx.py
 uv run --with beautifulsoup4 --with pypdf benchmarks/compare_mediaextract.py

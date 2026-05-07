@@ -14,6 +14,7 @@ This is the quick read for benchmark status. Every number below comes from commi
 
 | Area | Rust crate | Python baseline | Evidence tier | Cases | Rust wins | Python wins | Full parity? | Speedup summary | Checksum failures | Report |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | --- |
+| NumPy targeted | `numrs-core` | NumPy 2.4.4 | Same-data implemented slice | 10 | 8 | 2 | No | 1.52x geomean | 0 | [`numrust-vs-numpy.md`](../benchmark-results/numrust-vs-numpy.md) |
 | NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 53 supported | 52 | 1 | No | 9.95x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
 | NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of prior NumPy win | 1 | 1 | 0 | No | 1.08x | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | Same-data implemented slice | 4 | 4 | 0 | No | 3.51x geomean | 0 | [`statsrust-vs-statsmodels.md`](../benchmark-results/statsrust-vs-statsmodels.md) |
@@ -59,7 +60,7 @@ The remaining full-suite NumPy win is `asv_linalg_einsum_scalar_mul_f64_480000`,
 | Rust tests | `cargo test --workspace` | Workspace correctness status |
 | Rust formatting | `cargo fmt --all --check` | Formatting gate |
 | Rust linting | `cargo clippy --workspace --all-targets -- -D warnings` | Warning-free lint gate |
-| NumPy targeted smoke benchmark | `uv run benchmarks/compare_numpy.py` | `benchmark-results/numrust-vs-numpy.md` |
+| NumPy targeted smoke benchmark | `uv run --with numpy benchmarks/compare_numpy.py` | `benchmark-results/numrust-vs-numpy.md` |
 | NumPy ASV-derived benchmark | `uv run --with numpy python benchmarks/external_numpy_cases.py` | `benchmark-results/external-numpy-asv-inspired.md` |
 | NumPy focused loss rerun | `uv run --with numpy python benchmarks/external_numpy_cases.py --rerun-losses --loss-passes 3` | `benchmark-results/external-numpy-loss-focused.md` |
 | External source lock verification | `uv run benchmarks/external_sources.py --verify-pinned` | Hash verification for pinned sources |
@@ -90,8 +91,10 @@ The remaining full-suite NumPy win is `asv_linalg_einsum_scalar_mul_f64_480000`,
 
 | Priority | Target | Why |
 | ---: | --- | --- |
-| 1 | NumRust contiguous scalar multiply | Still a 1.6% NumPy near-tie win in the authoritative full run. |
-| 2 | Broader NumRust ASV coverage | The current supported slice ranks higher, but full NumPy-scale scope needs more translated cases. |
-| 3 | Broader externally derived SciPy and StatsModels cases | Current wins are strong but the benchmark surface is narrow. |
-| 4 | More cases for FrameRust, GraphRust, MediaExtractRust, ValidateRust, ImageRust, TextRust, and LearnRust | The current slices all beat Python, but production-grade parity needs broader workloads. |
-| 5 | Per-crate README files and Rust-native benchmark suites | Public users need crate-local usage, scope, and reproducible performance gates. |
+| 1 | NumRust `where_select` selection kernel | The targeted same-data run still exposes a real NumPy win on broadcasted `where_select_f64_loop`. |
+| 2 | NumRust near-tie linalg stability | `dot_f64_192` is a timing-sensitive targeted near tie that NumPy won by 0.5% in the latest run. |
+| 3 | NumRust contiguous scalar multiply | Still a 1.6% NumPy near-tie win in the authoritative full run. |
+| 4 | Broader NumRust ASV coverage | The current supported slice ranks higher, but full NumPy-scale scope needs more translated cases. |
+| 5 | Broader externally derived SciPy and StatsModels cases | Current wins are strong but the benchmark surface is narrow. |
+| 6 | More cases for FrameRust, GraphRust, MediaExtractRust, ValidateRust, ImageRust, TextRust, and LearnRust | The current slices all beat Python, but production-grade parity needs broader workloads. |
+| 7 | Per-crate README files and Rust-native benchmark suites | Public users need crate-local usage, scope, and reproducible performance gates. |

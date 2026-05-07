@@ -7,7 +7,7 @@ use crate::layout::{
     broadcast_strides, is_c_contiguous, offset_for_index, permute_unique_axes, OffsetIter,
 };
 use crate::shape::{
-    c_strides, normalize_axis, normalize_insert_axis, resolve_shape, size_of_shape,
+    broadcast_shape, c_strides, normalize_axis, normalize_insert_axis, resolve_shape, size_of_shape,
 };
 
 #[derive(Debug, Clone)]
@@ -324,6 +324,21 @@ where
 impl<T: DType> Array<T> {
     pub fn dtype(&self) -> DTypeKind {
         T::KIND
+    }
+}
+
+impl Array<bool> {
+    pub fn nonzero(&self) -> Result<Vec<Array<i64>>> {
+        self.view().nonzero()
+    }
+
+    pub fn where_select<T: Clone>(
+        &self,
+        true_values: &Array<T>,
+        false_values: &Array<T>,
+    ) -> Result<Array<T>> {
+        self.view()
+            .where_select(&true_values.view(), &false_values.view())
     }
 }
 
@@ -698,6 +713,169 @@ impl<'a, T: Clone> ArrayView<'a, T> {
 impl<'a, T: DType> ArrayView<'a, T> {
     pub fn dtype(&self) -> DTypeKind {
         T::KIND
+    }
+}
+
+impl<'a> ArrayView<'a, bool> {
+    pub fn nonzero(&self) -> Result<Vec<Array<i64>>> {
+        if let Some(slice) = self.contiguous_slice() {
+            if self.ndim() == 1 {
+                let mut coordinates = Vec::new();
+                for (index, selected) in slice.iter().copied().enumerate() {
+                    if selected {
+                        coordinates.push(index as i64);
+                    }
+                }
+                return Ok(vec![Array::from_vec(vec![coordinates.len()], coordinates)?]);
+            }
+
+            if self.ndim() == 2 {
+                let rows = self.shape[0];
+                let cols = self.shape[1];
+                let mut row_coordinates = Vec::new();
+                let mut col_coordinates = Vec::new();
+                for row in 0..rows {
+                    let row_start = row * cols;
+                    for col in 0..cols {
+                        if slice[row_start + col] {
+                            row_coordinates.push(row as i64);
+                            col_coordinates.push(col as i64);
+                        }
+                    }
+                }
+                return Ok(vec![
+                    Array::from_vec(vec![row_coordinates.len()], row_coordinates)?,
+                    Array::from_vec(vec![col_coordinates.len()], col_coordinates)?,
+                ]);
+            }
+        }
+
+        let mut coordinates = vec![Vec::<i64>::new(); self.ndim()];
+        for (linear, offset) in self.offset_iter()?.enumerate() {
+            if !self.data[offset] {
+                continue;
+            }
+
+            let mut remainder = linear;
+            for axis in (0..self.ndim()).rev() {
+                let dim = self.shape[axis];
+                let coordinate = remainder.checked_rem(dim).unwrap_or(0);
+                remainder = remainder.checked_div(dim).unwrap_or(0);
+                coordinates[axis].push(coordinate as i64);
+            }
+        }
+
+        coordinates
+            .into_iter()
+            .map(|axis_coordinates| Array::from_vec(vec![axis_coordinates.len()], axis_coordinates))
+            .collect()
+    }
+
+    pub fn where_select<T: Clone>(
+        &self,
+        true_values: &ArrayView<'_, T>,
+        false_values: &ArrayView<'_, T>,
+    ) -> Result<Array<T>> {
+        let output_shape = broadcast_shape(self.shape(), true_values.shape())?;
+        let output_shape = broadcast_shape(&output_shape, false_values.shape())?;
+        let output_len = size_of_shape(&output_shape)?;
+
+        if self.shape() == output_shape && true_values.shape() == output_shape {
+            if let (Some(condition), Some(true_slice), Some(false_slice)) = (
+                self.contiguous_slice(),
+                true_values.contiguous_slice(),
+                false_values.contiguous_slice(),
+            ) {
+                if false_values.shape() == output_shape {
+                    let mut out = Vec::with_capacity(output_len);
+                    for ((selected, true_value), false_value) in condition
+                        .iter()
+                        .copied()
+                        .zip(true_slice.iter())
+                        .zip(false_slice.iter())
+                    {
+                        out.push(if selected {
+                            true_value.clone()
+                        } else {
+                            false_value.clone()
+                        });
+                    }
+                    return Array::from_vec(output_shape, out);
+                }
+
+                if false_values.shape().is_empty() {
+                    let fallback = &false_slice[0];
+                    let mut out = Vec::with_capacity(output_len);
+                    for (selected, true_value) in condition.iter().copied().zip(true_slice.iter()) {
+                        out.push(if selected {
+                            true_value.clone()
+                        } else {
+                            fallback.clone()
+                        });
+                    }
+                    return Array::from_vec(output_shape, out);
+                }
+
+                if output_shape.len() == 2 && false_values.shape() == [1, output_shape[1]] {
+                    let rows = output_shape[0];
+                    let cols = output_shape[1];
+                    let mut out = Vec::with_capacity(output_len);
+                    for row in 0..rows {
+                        let row_start = row * cols;
+                        for (col, false_value) in false_slice.iter().enumerate().take(cols) {
+                            let index = row_start + col;
+                            out.push(if condition[index] {
+                                true_slice[index].clone()
+                            } else {
+                                false_value.clone()
+                            });
+                        }
+                    }
+                    return Array::from_vec(output_shape, out);
+                }
+
+                if output_shape.len() == 2 && false_values.shape() == [output_shape[0], 1] {
+                    let rows = output_shape[0];
+                    let cols = output_shape[1];
+                    let mut out = Vec::with_capacity(output_len);
+                    for (row, false_value) in false_slice.iter().enumerate().take(rows) {
+                        let row_start = row * cols;
+                        for col in 0..cols {
+                            let index = row_start + col;
+                            out.push(if condition[index] {
+                                true_slice[index].clone()
+                            } else {
+                                false_value.clone()
+                            });
+                        }
+                    }
+                    return Array::from_vec(output_shape, out);
+                }
+            }
+        }
+
+        let condition_strides = broadcast_strides(self.shape(), self.strides(), &output_shape)?;
+        let true_strides =
+            broadcast_strides(true_values.shape(), true_values.strides(), &output_shape)?;
+        let false_strides =
+            broadcast_strides(false_values.shape(), false_values.strides(), &output_shape)?;
+
+        let condition_offsets = OffsetIter::new(&output_shape, &condition_strides, self.offset())?;
+        let true_offsets = OffsetIter::new(&output_shape, &true_strides, true_values.offset())?;
+        let false_offsets = OffsetIter::new(&output_shape, &false_strides, false_values.offset())?;
+        let mut out = Vec::with_capacity(output_len);
+
+        for ((condition_offset, true_offset), false_offset) in
+            condition_offsets.zip(true_offsets).zip(false_offsets)
+        {
+            if self.data[condition_offset] {
+                out.push(true_values.raw_data()[true_offset].clone());
+            } else {
+                out.push(false_values.raw_data()[false_offset].clone());
+            }
+        }
+
+        Array::from_vec(output_shape, out)
     }
 }
 
