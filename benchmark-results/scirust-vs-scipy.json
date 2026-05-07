@@ -1,0 +1,194 @@
+{
+  "comparison": [
+    {
+      "checksum_abs_diff": 9.094947017729282e-13,
+      "checksum_ok": true,
+      "name": "scipy_integrate_trapezoid_10001",
+      "scipy_ms": 20.189457980450243,
+      "scirust_ms": 15.533834,
+      "speedup_vs_scipy": 1.2997086218669673,
+      "winner": "scirust"
+    },
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_ok": true,
+      "name": "scipy_integrate_simpson_10001",
+      "scipy_ms": 13.745125033892691,
+      "scirust_ms": 5.518166,
+      "speedup_vs_scipy": 2.4908864709565988,
+      "winner": "scirust"
+    },
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_ok": true,
+      "name": "scipy_asv_cumulative_simpson_1d_1000",
+      "scipy_ms": 21.10562496818602,
+      "scirust_ms": 1.147125,
+      "speedup_vs_scipy": 18.39871414901255,
+      "winner": "scirust"
+    },
+    {
+      "checksum_abs_diff": 8.392147719860077e-06,
+      "checksum_ok": true,
+      "name": "scipy_asv_cumulative_simpson_multid_100x100x1000",
+      "scipy_ms": 61.06666702544317,
+      "scirust_ms": 13.218458,
+      "speedup_vs_scipy": 4.619802629432508,
+      "winner": "scirust"
+    },
+    {
+      "checksum_abs_diff": 0.00014882212053635158,
+      "checksum_ok": true,
+      "name": "scipy_optimize_minimize_scalar_bounded",
+      "scipy_ms": 123.26145800761878,
+      "scirust_ms": 0.993583,
+      "speedup_vs_scipy": 124.05753521106821,
+      "winner": "scirust"
+    },
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_ok": true,
+      "name": "scipy_optimize_bisect",
+      "scipy_ms": 128.77229100558907,
+      "scirust_ms": 1.991375,
+      "speedup_vs_scipy": 64.66501337296545,
+      "winner": "scirust"
+    },
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_ok": true,
+      "name": "scipy_asv_zeros_f2_bisect",
+      "scipy_ms": 128.0783750116825,
+      "scirust_ms": 1.676583,
+      "speedup_vs_scipy": 76.39250488146577,
+      "winner": "scirust"
+    },
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_ok": true,
+      "name": "scipy_optimize_brentq",
+      "scipy_ms": 34.18399998918176,
+      "scirust_ms": 0.79575,
+      "speedup_vs_scipy": 42.958215506354705,
+      "winner": "scirust"
+    },
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_ok": true,
+      "name": "scipy_asv_zeros_f2_brentq",
+      "scipy_ms": 34.16254196781665,
+      "scirust_ms": 0.728958,
+      "speedup_vs_scipy": 46.86489752196512,
+      "winner": "scirust"
+    }
+  ],
+  "scipy": {
+    "cases": [
+      {
+        "checksum": 3999.9999671015253,
+        "millis": 20.189457980450243,
+        "name": "scipy_integrate_trapezoid_10001"
+      },
+      {
+        "checksum": 4000.0,
+        "millis": 13.745125033892691,
+        "name": "scipy_integrate_simpson_10001"
+      },
+      {
+        "checksum": 158995.78900305412,
+        "millis": 21.10562496818602,
+        "name": "scipy_asv_cumulative_simpson_1d_1000"
+      },
+      {
+        "checksum": 1589957.8900305447,
+        "millis": 61.06666702544317,
+        "name": "scipy_asv_cumulative_simpson_multid_100x100x1000"
+      },
+      {
+        "checksum": 32344.999999994096,
+        "millis": 123.26145800761878,
+        "name": "scipy_optimize_minimize_scalar_bounded"
+      },
+      {
+        "checksum": 15213.797068103397,
+        "millis": 128.77229100558907,
+        "name": "scipy_optimize_bisect"
+      },
+      {
+        "checksum": 10000.000000005943,
+        "millis": 128.0783750116825,
+        "name": "scipy_asv_zeros_f2_bisect"
+      },
+      {
+        "checksum": 15213.797068045154,
+        "millis": 34.18399998918176,
+        "name": "scipy_optimize_brentq"
+      },
+      {
+        "checksum": 10000.000000000024,
+        "millis": 34.16254196781665,
+        "name": "scipy_asv_zeros_f2_brentq"
+      }
+    ],
+    "engine": "scipy",
+    "scipy_version": "1.17.1"
+  },
+  "scirust": {
+    "cases": [
+      {
+        "checksum": 3999.999967101526,
+        "millis": 15.533834,
+        "name": "scipy_integrate_trapezoid_10001"
+      },
+      {
+        "checksum": 4000.0,
+        "millis": 5.518166,
+        "name": "scipy_integrate_simpson_10001"
+      },
+      {
+        "checksum": 158995.78900305412,
+        "millis": 1.147125,
+        "name": "scipy_asv_cumulative_simpson_1d_1000"
+      },
+      {
+        "checksum": 1589957.8900389369,
+        "millis": 13.218458,
+        "name": "scipy_asv_cumulative_simpson_multid_100x100x1000"
+      },
+      {
+        "checksum": 32345.000148816216,
+        "millis": 0.993583,
+        "name": "scipy_optimize_minimize_scalar_bounded"
+      },
+      {
+        "checksum": 15213.797068103397,
+        "millis": 1.991375,
+        "name": "scipy_optimize_bisect"
+      },
+      {
+        "checksum": 10000.000000005943,
+        "millis": 1.676583,
+        "name": "scipy_asv_zeros_f2_bisect"
+      },
+      {
+        "checksum": 15213.797068045154,
+        "millis": 0.79575,
+        "name": "scipy_optimize_brentq"
+      },
+      {
+        "checksum": 10000.000000000024,
+        "millis": 0.728958,
+        "name": "scipy_asv_zeros_f2_brentq"
+      }
+    ],
+    "engine": "scirust"
+  },
+  "score": {
+    "checksum_failures": [],
+    "geomean_speedup_vs_scipy": 19.107564469442394,
+    "global_scipy_replacement_claim": false,
+    "scipy_wins": 0,
+    "scirust_ranked_higher_on_this_suite": true,
+    "scirust_wins": 9
+  }
+}

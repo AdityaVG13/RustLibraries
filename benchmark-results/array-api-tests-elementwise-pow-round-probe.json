@@ -1,0 +1,36 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmpS9hDuT/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_minimum /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_multiply[__mul__(x, s)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_multiply[__imul__(x, s)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_negative[negative] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_negative[__neg__] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_positive[positive] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_pow[pow(x1, x2)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_pow[__pow__(x1, x2)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_pow[__pow__(x, s)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_pow[__ipow__(x1, x2)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_pow[__ipow__(x, s)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_round /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_signbit -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=20",
+  "duration_seconds": 0.856436375004705,
+  "failures": [],
+  "full_suite": false,
+  "returncode": 0,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "passed",
+  "stderr_tail": "",
+  "stdout_tail": ".............                                                            [100%]\n13 passed in 0.28s\n",
+  "summary": {
+    "collected": 13,
+    "passed": 13,
+    "total": 13
+  },
+  "targets": [
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_minimum",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_multiply[__mul__(x, s)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_multiply[__imul__(x, s)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_negative[negative]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_negative[__neg__]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_positive[positive]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_pow[pow(x1, x2)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_pow[__pow__(x1, x2)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_pow[__pow__(x, s)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_pow[__ipow__(x1, x2)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_pow[__ipow__(x, s)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_round",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_signbit"
+  ]
+}

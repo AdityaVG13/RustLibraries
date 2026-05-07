@@ -1,0 +1,99 @@
+{
+  "comparison": [
+    {
+      "checksum_abs_diff": 3.979039320256561e-13,
+      "checksum_ok": true,
+      "name": "statsmodels_ols_fit_2000x3",
+      "speedup_vs_statsmodels": 5.596512605839724,
+      "statsmodels_ms": 10.819457995239645,
+      "statsrust_ms": 1.93325,
+      "winner": "statsrust"
+    },
+    {
+      "checksum_abs_diff": 1.8189894035458565e-12,
+      "checksum_ok": true,
+      "name": "statsmodels_ols_predict_2000x3",
+      "speedup_vs_statsmodels": 1.8530351424714868,
+      "statsmodels_ms": 35.8281250228174,
+      "statsrust_ms": 19.334833,
+      "winner": "statsrust"
+    },
+    {
+      "checksum_abs_diff": 5.684341886080802e-14,
+      "checksum_ok": true,
+      "name": "statsmodels_wls_fit_2000x3",
+      "speedup_vs_statsmodels": 3.3417257879792333,
+      "statsmodels_ms": 7.570125046186149,
+      "statsrust_ms": 2.265334,
+      "winner": "statsrust"
+    },
+    {
+      "checksum_abs_diff": 1.8030021919912542e-13,
+      "checksum_ok": true,
+      "name": "statsmodels_logit_fit_800x2",
+      "speedup_vs_statsmodels": 4.399200744790181,
+      "statsmodels_ms": 3.715125028975308,
+      "statsrust_ms": 0.8445,
+      "winner": "statsrust"
+    }
+  ],
+  "score": {
+    "checksum_failures": [],
+    "geomean_speedup_vs_statsmodels": 3.5138760107671634,
+    "global_statsmodels_replacement_claim": false,
+    "statsmodels_wins": 0,
+    "statsrust_ranked_higher_on_this_suite": true,
+    "statsrust_wins": 4
+  },
+  "statsmodels": {
+    "cases": [
+      {
+        "checksum": -100.0019003999086,
+        "millis": 10.819457995239645,
+        "name": "statsmodels_ols_fit_2000x3"
+      },
+      {
+        "checksum": -7456.262478586814,
+        "millis": 35.8281250228174,
+        "name": "statsmodels_ols_predict_2000x3"
+      },
+      {
+        "checksum": -99.98687015445094,
+        "millis": 7.570125046186149,
+        "name": "statsmodels_wls_fit_2000x3"
+      },
+      {
+        "checksum": -5.65467612170918,
+        "millis": 3.715125028975308,
+        "name": "statsmodels_logit_fit_800x2"
+      }
+    ],
+    "engine": "statsmodels",
+    "statsmodels_version": "0.14.6"
+  },
+  "statsrust": {
+    "cases": [
+      {
+        "checksum": -100.001900399909,
+        "millis": 1.93325,
+        "name": "statsmodels_ols_fit_2000x3"
+      },
+      {
+        "checksum": -7456.262478586812,
+        "millis": 19.334833,
+        "name": "statsmodels_ols_predict_2000x3"
+      },
+      {
+        "checksum": -99.986870154451,
+        "millis": 2.265334,
+        "name": "statsmodels_wls_fit_2000x3"
+      },
+      {
+        "checksum": -5.654676121709,
+        "millis": 0.8445,
+        "name": "statsmodels_logit_fit_800x2"
+      }
+    ],
+    "engine": "statsrust"
+  }
+}

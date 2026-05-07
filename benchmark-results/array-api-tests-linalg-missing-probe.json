@@ -1,0 +1,36 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmp7wDP18/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_eigh /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_eigvalsh /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_pinv /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_qr /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_solve /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_svd /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_svdvals -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json",
+  "duration_seconds": 18.914784165972378,
+  "failures": [
+    {
+      "nodeid": "array_api_tests/test_linalg.py::test_svd",
+      "outcome": "failed"
+    }
+  ],
+  "full_suite": false,
+  "returncode": 1,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "failed",
+  "stderr_tail": "",
+  "stdout_tail": ".....F.                                                                  [100%]\n=================================== FAILURES ===================================\n___________________________________ test_svd ___________________________________\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:716: in test_svd\n    @pytest.mark.xp_extension('linalg')\n                   ^^^\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:760: in test_svd\n    assert _array_module.all(S[..., :-1] >= S[..., 1:]), \"svd().S values are not sorted from largest to smallest\"\nE   AssertionError: svd().S values are not sorted from largest to smallest\nE   assert numrust.Array(shape=[], dtype=bool)\nE    +  where numrust.Array(shape=[], dtype=bool) = <function all at 0x10bb92f20>(numrust.Array(shape=[2, 3], dtype=float64) >= numrust.Array(shape=[2, 3], dtype=float64))\nE    +    where <function all at 0x10bb92f20> = _array_module.all\nE   Falsifying example: test_svd(\nE       x=numrust.Array(shape=[2, 4, 6], dtype=complex128),\nE       kw={},\nE   )\n=========================== short test summary info ============================\nFAILED target/external/array-api-tests/array_api_tests/test_linalg.py::test_svd\n1 failed, 6 passed in 18.22s\n",
+  "summary": {
+    "collected": 7,
+    "failed": 1,
+    "passed": 6,
+    "total": 7
+  },
+  "targets": [
+    "array_api_tests/test_linalg.py::test_eigh",
+    "array_api_tests/test_linalg.py::test_eigvalsh",
+    "array_api_tests/test_linalg.py::test_pinv",
+    "array_api_tests/test_linalg.py::test_qr",
+    "array_api_tests/test_linalg.py::test_solve",
+    "array_api_tests/test_linalg.py::test_svd",
+    "array_api_tests/test_linalg.py::test_svdvals"
+  ]
+}

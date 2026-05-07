@@ -1,0 +1,31 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmp0PHgvC/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_indexing_functions.py::test_take /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_cholesky /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_cross /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_det /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_diagonal /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_matrix_transpose /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_transpose /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_outer -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=20",
+  "duration_seconds": 1.054623125004582,
+  "failures": [],
+  "full_suite": false,
+  "returncode": 0,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "passed",
+  "stderr_tail": "",
+  "stdout_tail": "........                                                                 [100%]\n8 passed in 0.52s\n",
+  "summary": {
+    "collected": 8,
+    "passed": 8,
+    "total": 8
+  },
+  "targets": [
+    "array_api_tests/test_indexing_functions.py::test_take",
+    "array_api_tests/test_linalg.py::test_cholesky",
+    "array_api_tests/test_linalg.py::test_cross",
+    "array_api_tests/test_linalg.py::test_det",
+    "array_api_tests/test_linalg.py::test_diagonal",
+    "array_api_tests/test_linalg.py::test_linalg_matrix_transpose",
+    "array_api_tests/test_linalg.py::test_matrix_transpose",
+    "array_api_tests/test_linalg.py::test_outer"
+  ]
+}

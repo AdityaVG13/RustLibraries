@@ -1,0 +1,216 @@
+{
+  "generated_at": "2026-05-07T03:50:48+00:00",
+  "purpose": "Pinned online sources for benchmark, conformance, and upstream API evidence.",
+  "schema_version": 1,
+  "sources": [
+    {
+      "commit": "80b1a07494964733f7d4571781608238f500e2dd",
+      "commit_url": "https://github.com/numpy/numpy/commit/80b1a07494964733f7d4571781608238f500e2dd",
+      "files": [
+        {
+          "bytes": 18218,
+          "path": "benchmarks/benchmarks/bench_ufunc.py",
+          "raw_url": "https://raw.githubusercontent.com/numpy/numpy/80b1a07494964733f7d4571781608238f500e2dd/benchmarks/benchmarks/bench_ufunc.py",
+          "sha256": "e7d27ef865858c769c19985ab04bbe77364900401bbe9f3bd1f6454c3b86d0c5",
+          "symbols": [
+            "Broadcast.time_broadcast",
+            "At.time_sum_at",
+            "At.time_maximum_at",
+            "NDArrayAsType.time_astype"
+          ]
+        },
+        {
+          "bytes": 3220,
+          "path": "benchmarks/benchmarks/bench_reduce.py",
+          "raw_url": "https://raw.githubusercontent.com/numpy/numpy/80b1a07494964733f7d4571781608238f500e2dd/benchmarks/benchmarks/bench_reduce.py",
+          "sha256": "6c51e7cd5a3c34a4b55c8c41e6754bdbf8f526eb4a4861af436529bdf46805c1",
+          "symbols": [
+            "SmallReduction.time_small",
+            "StatsReductions.time_min",
+            "StatsReductions.time_max",
+            "StatsReductions.time_mean",
+            "StatsReductions.time_std",
+            "StatsReductions.time_prod",
+            "StatsReductions.time_var",
+            "ArgMax.time_argmax",
+            "ArgMin.time_argmin"
+          ]
+        },
+        {
+          "bytes": 1730,
+          "path": "benchmarks/benchmarks/bench_itemselection.py",
+          "raw_url": "https://raw.githubusercontent.com/numpy/numpy/80b1a07494964733f7d4571781608238f500e2dd/benchmarks/benchmarks/bench_itemselection.py",
+          "sha256": "3e0f10fec05ed9592ff94f932b8397c1bea0babd044ad1a3932232a7a3e114ac",
+          "symbols": [
+            "Take.time_contiguous",
+            "PutMask.time_dense",
+            "PutMask.time_sparse",
+            "Put.time_ordered"
+          ]
+        },
+        {
+          "bytes": 9060,
+          "path": "benchmarks/benchmarks/bench_linalg.py",
+          "raw_url": "https://raw.githubusercontent.com/numpy/numpy/80b1a07494964733f7d4571781608238f500e2dd/benchmarks/benchmarks/bench_linalg.py",
+          "sha256": "94ce45f690ca7e1751e6fe2a53be136fda2fa1a5d8a555915b5b42a996d9bb32",
+          "symbols": [
+            "Eindot.time_dot_a_b",
+            "Eindot.time_dot_d_dot_b_c",
+            "Eindot.time_matmul_a_b",
+            "Eindot.time_matmul_d_matmul_b_c",
+            "Eindot.time_dot_trans_a_at",
+            "Eindot.time_dot_trans_a_atc",
+            "Eindot.time_dot_trans_at_a",
+            "Eindot.time_dot_trans_atc_a",
+            "Eindot.time_inner_trans_a_a",
+            "Eindot.time_inner_trans_a_ac",
+            "Eindot.time_einsum_i_ij_j",
+            "Eindot.time_einsum_ij_jk_a_b",
+            "Eindot.time_matmul_trans_a_at",
+            "Eindot.time_matmul_trans_a_atc",
+            "Eindot.time_matmul_trans_at_a",
+            "Eindot.time_matmul_trans_atc_a",
+            "Eindot.time_tensordot_a_b_axes_1_0_0_1",
+            "LinalgSmallArrays.time_norm_small_array",
+            "LinalgSmallArrays.time_det_small_array",
+            "LinalgSmallArrays.time_det_3x3",
+            "LinalgSmallArrays.time_solve_3x3",
+            "Lstsq.time_numpy_linalg_lstsq_a__b_float64",
+            "Einsum.time_einsum_outer",
+            "Einsum.time_einsum_multiply",
+            "Einsum.time_einsum_sum_mul",
+            "Einsum.time_einsum_sum_mul2",
+            "Einsum.time_einsum_mul",
+            "Einsum.time_einsum_contig_outstride0",
+            "Einsum.time_einsum_contig_contig",
+            "Einsum.time_einsum_noncon_outer",
+            "Einsum.time_einsum_noncon_multiply",
+            "Einsum.time_einsum_noncon_sum_mul",
+            "Einsum.time_einsum_noncon_sum_mul2",
+            "Einsum.time_einsum_noncon_mul",
+            "Einsum.time_einsum_noncon_contig_contig",
+            "Einsum.time_einsum_noncon_contig_outstride0"
+          ]
+        },
+        {
+          "bytes": 5558,
+          "path": "benchmarks/benchmarks/common.py",
+          "raw_url": "https://raw.githubusercontent.com/numpy/numpy/80b1a07494964733f7d4571781608238f500e2dd/benchmarks/benchmarks/common.py",
+          "sha256": "5ca092eb070cdd9056a8e13ce3b7ba1163ea0cde62aac6d20104bb633cec0069",
+          "symbols": [
+            "Benchmark"
+          ]
+        }
+      ],
+      "id": "numpy-asv",
+      "name": "NumPy ASV benchmark suite",
+      "ref": "refs/heads/main",
+      "repo": "https://github.com/numpy/numpy.git",
+      "web_url": "https://github.com/numpy/numpy/tree/main/benchmarks/benchmarks"
+    },
+    {
+      "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+      "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+      "files": [
+        {
+          "bytes": 16880,
+          "path": "README.md",
+          "raw_url": "https://raw.githubusercontent.com/data-apis/array-api-tests/55fcc60179efa2680ddd6cd926ddf17b83530e2b/README.md",
+          "sha256": "0429830ff3ad20343efc98661e42de24c13c72c5f75f36db26f567a19b8cc65d",
+          "symbols": [
+            "ARRAY_API_TESTS_MODULE",
+            "pytest array_api_tests/"
+          ]
+        }
+      ],
+      "id": "array-api-tests",
+      "name": "Python Array API conformance tests",
+      "ref": "HEAD",
+      "repo": "https://github.com/data-apis/array-api-tests.git",
+      "web_url": "https://data-apis.org/array-api-tests/"
+    },
+    {
+      "commit": "cf21847868bfb4979c29e66527e263f7b205e006",
+      "commit_url": "https://github.com/scipy/scipy/commit/cf21847868bfb4979c29e66527e263f7b205e006",
+      "files": [
+        {
+          "bytes": 3776,
+          "path": "benchmarks/benchmarks/optimize_zeros.py",
+          "raw_url": "https://raw.githubusercontent.com/scipy/scipy/cf21847868bfb4979c29e66527e263f7b205e006/benchmarks/benchmarks/optimize_zeros.py",
+          "sha256": "d9cfcfd52966aa7d6f406f167c070dc1a8cbce4398da4a7fab37840649ce3cdd",
+          "symbols": [
+            "Zeros.time_zeros"
+          ]
+        },
+        {
+          "bytes": 34060,
+          "path": "scipy/optimize/_tstutils.py",
+          "raw_url": "https://raw.githubusercontent.com/scipy/scipy/cf21847868bfb4979c29e66527e263f7b205e006/scipy/optimize/_tstutils.py",
+          "sha256": "1fc4bc68011191e2b0c930b2807ddf013e60b46ef22e69464820c446cea9ca51",
+          "symbols": [
+            "f2",
+            "methods",
+            "mstrings",
+            "functions",
+            "fstrings"
+          ]
+        },
+        {
+          "bytes": 9941,
+          "path": "benchmarks/benchmarks/integrate.py",
+          "raw_url": "https://raw.githubusercontent.com/scipy/scipy/cf21847868bfb4979c29e66527e263f7b205e006/benchmarks/benchmarks/integrate.py",
+          "sha256": "f1735c2ca189766ce56e731659530b541bc4bdd3b644063291afac170745577b",
+          "symbols": [
+            "CumulativeSimpson.time_1d",
+            "CumulativeSimpson.time_multid"
+          ]
+        }
+      ],
+      "id": "scipy-asv",
+      "name": "SciPy ASV benchmark suite",
+      "ref": "refs/heads/main",
+      "repo": "https://github.com/scipy/scipy.git",
+      "web_url": "https://github.com/scipy/scipy/tree/main/benchmarks/benchmarks"
+    },
+    {
+      "commit": "7d4c2b9d60928017f6eae10928528ce40bc3d2c4",
+      "commit_url": "https://github.com/statsmodels/statsmodels/commit/7d4c2b9d60928017f6eae10928528ce40bc3d2c4",
+      "files": [
+        {
+          "bytes": 119468,
+          "path": "statsmodels/regression/linear_model.py",
+          "raw_url": "https://raw.githubusercontent.com/statsmodels/statsmodels/7d4c2b9d60928017f6eae10928528ce40bc3d2c4/statsmodels/regression/linear_model.py",
+          "sha256": "dfee8fc41a42278ef1ad23d360ff6292732bebb5d26ad1578a929ae00a4fe0f5",
+          "symbols": [
+            "OLS",
+            "WLS"
+          ]
+        },
+        {
+          "bytes": 201719,
+          "path": "statsmodels/discrete/discrete_model.py",
+          "raw_url": "https://raw.githubusercontent.com/statsmodels/statsmodels/7d4c2b9d60928017f6eae10928528ce40bc3d2c4/statsmodels/discrete/discrete_model.py",
+          "sha256": "2331bfb550cf2b1b7433c5d6055efce278dc598458ce4bb52a4a9824f4cef1fe",
+          "symbols": [
+            "Logit"
+          ]
+        },
+        {
+          "bytes": 6653,
+          "path": "README.rst",
+          "raw_url": "https://raw.githubusercontent.com/statsmodels/statsmodels/7d4c2b9d60928017f6eae10928528ce40bc3d2c4/README.rst",
+          "sha256": "005c347fd71b6ad4d12966b5a299c0725c632132e96c1ec2bef8aced5a3e0c5e",
+          "symbols": [
+            "Linear regression models",
+            "Discrete models"
+          ]
+        }
+      ],
+      "id": "statsmodels-source",
+      "name": "StatsModels source APIs",
+      "ref": "refs/heads/main",
+      "repo": "https://github.com/statsmodels/statsmodels.git",
+      "web_url": "https://github.com/statsmodels/statsmodels"
+    }
+  ]
+}

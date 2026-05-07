@@ -1,0 +1,544 @@
+{
+  "numpy": {
+    "cases": [
+      {
+        "checksum": 0.0,
+        "millis": 1.7275839927606285,
+        "name": "asv_ufunc_broadcast_sub_f64"
+      },
+      {
+        "checksum": 49995000.0,
+        "millis": 14.276709000114352,
+        "name": "asv_ufunc_astype_i32_to_f64_100x100"
+      },
+      {
+        "checksum": 4589.9999999991505,
+        "millis": 6.437167001422495,
+        "name": "asv_ufunc_add_at_f64_10000000"
+      },
+      {
+        "checksum": 0.459,
+        "millis": 6.935124984011054,
+        "name": "asv_ufunc_maximum_at_f64_10000000"
+      },
+      {
+        "checksum": 20000000.0,
+        "millis": 150.47629200853407,
+        "name": "asv_reduce_small_sum_f32_100"
+      },
+      {
+        "checksum": 100000.0,
+        "millis": 72.90225004544482,
+        "name": "asv_reduce_stats_min_f64_200"
+      },
+      {
+        "checksum": 100000.0,
+        "millis": 80.37529198918492,
+        "name": "asv_reduce_stats_max_f64_200"
+      },
+      {
+        "checksum": 100000.0,
+        "millis": 125.57054101489484,
+        "name": "asv_reduce_stats_mean_f64_200"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 385.77791600255296,
+        "name": "asv_reduce_stats_std_f64_200"
+      },
+      {
+        "checksum": 100000.0,
+        "millis": 84.33220896404237,
+        "name": "asv_reduce_stats_prod_f64_200"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 349.482000048738,
+        "name": "asv_reduce_stats_var_f64_200"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 543.3741249726154,
+        "name": "asv_reduce_argmax_i64_200000"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 597.7480830042623,
+        "name": "asv_reduce_argmin_i64_200000"
+      },
+      {
+        "checksum": 4000.0,
+        "millis": 4.184750025160611,
+        "name": "asv_itemselection_take_i64_1000x1"
+      },
+      {
+        "checksum": 20000.0,
+        "millis": 6.171250017359853,
+        "name": "asv_itemselection_putmask_dense_scalar_f64_1000"
+      },
+      {
+        "checksum": 20000.0,
+        "millis": 5.639625014737248,
+        "name": "asv_itemselection_putmask_sparse_scalar_f64_1000"
+      },
+      {
+        "checksum": 20000.0,
+        "millis": 22.527625027578324,
+        "name": "asv_itemselection_put_ordered_f64_1000"
+      },
+      {
+        "checksum": 2893480040200000.0,
+        "millis": 250.7254159427248,
+        "name": "asv_linalg_dot_a_b_f64_150x400_400x600"
+      },
+      {
+        "checksum": 2893480040200000.0,
+        "millis": 310.6012499774806,
+        "name": "asv_linalg_matmul_a_b_f64_150x400_400x600"
+      },
+      {
+        "checksum": 4.594545663960056e+18,
+        "millis": 8.304708986543119,
+        "name": "asv_linalg_matmul_d_matmul_b_c_f64"
+      },
+      {
+        "checksum": 4.594545663960056e+18,
+        "millis": 7.971582992468029,
+        "name": "asv_linalg_dot_d_dot_b_c_f64"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 64.44033299339935,
+        "name": "asv_linalg_dot_trans_a_at_f64_150x400_400x150"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 90.20804200554267,
+        "name": "asv_linalg_dot_trans_a_atc_f64_150x400_400x150"
+      },
+      {
+        "checksum": 359998940150000.0,
+        "millis": 195.16237499192357,
+        "name": "asv_linalg_dot_trans_at_a_f64_400x150_150x400"
+      },
+      {
+        "checksum": 359998940150000.0,
+        "millis": 118.8262079958804,
+        "name": "asv_linalg_dot_trans_atc_a_f64_400x150_150x400"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 38.50387496640906,
+        "name": "asv_linalg_inner_a_a_f64_150x400_150x400"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 54.890917032025754,
+        "name": "asv_linalg_inner_a_ac_f64_150x400_150x400"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 32.05624996917322,
+        "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 47.133375017438084,
+        "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150"
+      },
+      {
+        "checksum": 359998940150000.0,
+        "millis": 90.99150000838563,
+        "name": "asv_linalg_matmul_trans_at_a_f64_400x150_150x400"
+      },
+      {
+        "checksum": 359998940150000.0,
+        "millis": 122.03949998365715,
+        "name": "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400"
+      },
+      {
+        "checksum": 2233323484688000.0,
+        "millis": 5.295624956488609,
+        "name": "asv_linalg_tensordot_a3_b3_axes_10_01"
+      },
+      {
+        "checksum": 2.297272831980028e+18,
+        "millis": 257.58183299330994,
+        "name": "asv_linalg_einsum_i_ij_j_f64_400_400x600_600"
+      },
+      {
+        "checksum": 2893480040200000.0,
+        "millis": 4740.9469580161385,
+        "name": "asv_linalg_einsum_ij_jk_f64_150x400_400x600"
+      },
+      {
+        "checksum": 547722.5575058461,
+        "millis": 45.90091702993959,
+        "name": "asv_linalg_norm_small_array_f64_5"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 103.68699999526143,
+        "name": "asv_linalg_det_small_array_f64_5x5"
+      },
+      {
+        "checksum": -500000.00000000006,
+        "millis": 105.62762501649559,
+        "name": "asv_linalg_det_3x3_f64"
+      },
+      {
+        "checksum": 40000.00000007539,
+        "millis": 205.06995799951255,
+        "name": "asv_linalg_solve_3x3_f64"
+      },
+      {
+        "checksum": -487.02559350316494,
+        "millis": 67.99725000746548,
+        "name": "asv_linalg_lstsq_square_f64_100x100"
+      },
+      {
+        "checksum": 8994001.0,
+        "millis": 2.2787079797126353,
+        "name": "asv_linalg_einsum_outer_f64_3000"
+      },
+      {
+        "checksum": 28774801.0,
+        "millis": 0.017542042769491673,
+        "name": "asv_linalg_einsum_multiply_f64_30x40_20x30x40"
+      },
+      {
+        "checksum": 1499850000000.0,
+        "millis": 0.7198749808594584,
+        "name": "asv_linalg_einsum_sum_mul_f64_scalar_10x100x10"
+      },
+      {
+        "checksum": 1499850000000.0,
+        "millis": 0.8778750197961926,
+        "name": "asv_linalg_einsum_sum_mul2_f64_10x100x10_scalar"
+      },
+      {
+        "checksum": 14399970000.0,
+        "millis": 6.0197500279173255,
+        "name": "asv_linalg_einsum_scalar_mul_f64_480000"
+      },
+      {
+        "checksum": 11519976000000.0,
+        "millis": 4.60829195799306,
+        "name": "asv_linalg_einsum_sum_f64_480000"
+      },
+      {
+        "checksum": 863276404000000.0,
+        "millis": 5.342749995179474,
+        "name": "asv_linalg_einsum_weighted_sum_f64_400x600"
+      },
+      {
+        "checksum": 15992002.0,
+        "millis": 1.8664999515749514,
+        "name": "asv_linalg_einsum_noncon_outer_f64_2000"
+      },
+      {
+        "checksum": 115149602.0,
+        "millis": 0.01929205609485507,
+        "name": "asv_linalg_einsum_noncon_multiply_f64_30x40_20x30x40"
+      },
+      {
+        "checksum": 17280000000000.0,
+        "millis": 0.999041018076241,
+        "name": "asv_linalg_einsum_noncon_sum_mul_f64_scalar_20x30x40"
+      },
+      {
+        "checksum": 17280000000000.0,
+        "millis": 0.9867080370895565,
+        "name": "asv_linalg_einsum_noncon_sum_mul2_f64_20x30x40_scalar"
+      },
+      {
+        "checksum": 120000000.0,
+        "millis": 0.5917079979553819,
+        "name": "asv_linalg_einsum_noncon_scalar_mul_f64_2000"
+      },
+      {
+        "checksum": 5823960000.0,
+        "millis": 0.6453330279327929,
+        "name": "asv_linalg_einsum_noncon_weighted_sum_f64_30x40"
+      },
+      {
+        "checksum": 400000000.0,
+        "millis": 0.30083401361480355,
+        "name": "asv_linalg_einsum_noncon_sum_f64_2000"
+      }
+    ],
+    "engine": "numpy",
+    "numpy_version": "2.4.4"
+  },
+  "numrust": {
+    "cases": [
+      {
+        "checksum": 0.0,
+        "millis": 0.900584,
+        "name": "asv_ufunc_broadcast_sub_f64"
+      },
+      {
+        "checksum": 49995000.0,
+        "millis": 5.238541,
+        "name": "asv_ufunc_astype_i32_to_f64_100x100"
+      },
+      {
+        "checksum": 4589.999999999151,
+        "millis": 4.549917,
+        "name": "asv_ufunc_add_at_f64_10000000"
+      },
+      {
+        "checksum": 0.459,
+        "millis": 4.639667,
+        "name": "asv_ufunc_maximum_at_f64_10000000"
+      },
+      {
+        "checksum": 20000000.0,
+        "millis": 3.034042,
+        "name": "asv_reduce_small_sum_f32_100"
+      },
+      {
+        "checksum": 100000.0,
+        "millis": 0.359458,
+        "name": "asv_reduce_stats_min_f64_200"
+      },
+      {
+        "checksum": 100000.0,
+        "millis": 0.354292,
+        "name": "asv_reduce_stats_max_f64_200"
+      },
+      {
+        "checksum": 100000.0,
+        "millis": 0.119417,
+        "name": "asv_reduce_stats_mean_f64_200"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 0.1145,
+        "name": "asv_reduce_stats_std_f64_200"
+      },
+      {
+        "checksum": 100000.0,
+        "millis": 10.047875,
+        "name": "asv_reduce_stats_prod_f64_200"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 0.11475,
+        "name": "asv_reduce_stats_var_f64_200"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 0.027917,
+        "name": "asv_reduce_argmax_i64_200000"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 0.027708,
+        "name": "asv_reduce_argmin_i64_200000"
+      },
+      {
+        "checksum": 4000.0,
+        "millis": 0.992625,
+        "name": "asv_itemselection_take_i64_1000x1"
+      },
+      {
+        "checksum": 20000.0,
+        "millis": 0.929333,
+        "name": "asv_itemselection_putmask_dense_scalar_f64_1000"
+      },
+      {
+        "checksum": 20000.0,
+        "millis": 0.025291,
+        "name": "asv_itemselection_putmask_sparse_scalar_f64_1000"
+      },
+      {
+        "checksum": 20000.0,
+        "millis": 7.475625,
+        "name": "asv_itemselection_put_ordered_f64_1000"
+      },
+      {
+        "checksum": 2893480040200000.0,
+        "millis": 208.579791,
+        "name": "asv_linalg_dot_a_b_f64_150x400_400x600"
+      },
+      {
+        "checksum": 2893480040200000.0,
+        "millis": 209.0885,
+        "name": "asv_linalg_matmul_a_b_f64_150x400_400x600"
+      },
+      {
+        "checksum": 4.594545663960056e+18,
+        "millis": 4.597958,
+        "name": "asv_linalg_matmul_d_matmul_b_c_f64"
+      },
+      {
+        "checksum": 4.594545663960056e+18,
+        "millis": 4.423125,
+        "name": "asv_linalg_dot_d_dot_b_c_f64"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 44.778917,
+        "name": "asv_linalg_dot_trans_a_at_f64_150x400_400x150"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 61.910292,
+        "name": "asv_linalg_dot_trans_a_atc_f64_150x400_400x150"
+      },
+      {
+        "checksum": 359998940150000.0,
+        "millis": 114.13025,
+        "name": "asv_linalg_dot_trans_at_a_f64_400x150_150x400"
+      },
+      {
+        "checksum": 359998940150000.0,
+        "millis": 136.65575,
+        "name": "asv_linalg_dot_trans_atc_a_f64_400x150_150x400"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 38.347917,
+        "name": "asv_linalg_inner_a_a_f64_150x400_150x400"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 59.679916,
+        "name": "asv_linalg_inner_a_ac_f64_150x400_150x400"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 34.652,
+        "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150"
+      },
+      {
+        "checksum": 1430418666800000.0,
+        "millis": 63.969167,
+        "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150"
+      },
+      {
+        "checksum": 359998940150000.0,
+        "millis": 103.31175,
+        "name": "asv_linalg_matmul_trans_at_a_f64_400x150_150x400"
+      },
+      {
+        "checksum": 359998940150000.0,
+        "millis": 146.908166,
+        "name": "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400"
+      },
+      {
+        "checksum": 2233323484688000.0,
+        "millis": 5.098666,
+        "name": "asv_linalg_tensordot_a3_b3_axes_10_01"
+      },
+      {
+        "checksum": 2.297272831980028e+18,
+        "millis": 4.164208,
+        "name": "asv_linalg_einsum_i_ij_j_f64_400_400x600_600"
+      },
+      {
+        "checksum": 2893480040200000.0,
+        "millis": 212.537833,
+        "name": "asv_linalg_einsum_ij_jk_f64_150x400_400x600"
+      },
+      {
+        "checksum": 547722.5575058461,
+        "millis": 5.096334,
+        "name": "asv_linalg_norm_small_array_f64_5"
+      },
+      {
+        "checksum": 0.0,
+        "millis": 8.980709,
+        "name": "asv_linalg_det_small_array_f64_5x5"
+      },
+      {
+        "checksum": -499999.99999999994,
+        "millis": 7.782958,
+        "name": "asv_linalg_det_3x3_f64"
+      },
+      {
+        "checksum": 40000.00000007539,
+        "millis": 16.563,
+        "name": "asv_linalg_solve_3x3_f64"
+      },
+      {
+        "checksum": -487.025593503164,
+        "millis": 5.520208,
+        "name": "asv_linalg_lstsq_square_f64_100x100"
+      },
+      {
+        "checksum": 8994001.0,
+        "millis": 0.678542,
+        "name": "asv_linalg_einsum_outer_f64_3000"
+      },
+      {
+        "checksum": 28774801.0,
+        "millis": 0.003417,
+        "name": "asv_linalg_einsum_multiply_f64_30x40_20x30x40"
+      },
+      {
+        "checksum": 1499850000000.0,
+        "millis": 0.0515,
+        "name": "asv_linalg_einsum_sum_mul_f64_scalar_10x100x10"
+      },
+      {
+        "checksum": 1499850000000.0,
+        "millis": 0.053583,
+        "name": "asv_linalg_einsum_sum_mul2_f64_10x100x10_scalar"
+      },
+      {
+        "checksum": 14399970000.0,
+        "millis": 6.321209,
+        "name": "asv_linalg_einsum_scalar_mul_f64_480000"
+      },
+      {
+        "checksum": 11519976000000.0,
+        "millis": 3.628417,
+        "name": "asv_linalg_einsum_sum_f64_480000"
+      },
+      {
+        "checksum": 863276404000000.0,
+        "millis": 0.360833,
+        "name": "asv_linalg_einsum_weighted_sum_f64_400x600"
+      },
+      {
+        "checksum": 15992002.0,
+        "millis": 0.5885,
+        "name": "asv_linalg_einsum_noncon_outer_f64_2000"
+      },
+      {
+        "checksum": 115149602.0,
+        "millis": 0.003375,
+        "name": "asv_linalg_einsum_noncon_multiply_f64_30x40_20x30x40"
+      },
+      {
+        "checksum": 17280000000000.0,
+        "millis": 0.164792,
+        "name": "asv_linalg_einsum_noncon_sum_mul_f64_scalar_20x30x40"
+      },
+      {
+        "checksum": 17280000000000.0,
+        "millis": 0.165917,
+        "name": "asv_linalg_einsum_noncon_sum_mul2_f64_20x30x40_scalar"
+      },
+      {
+        "checksum": 120000000.0,
+        "millis": 0.02325,
+        "name": "asv_linalg_einsum_noncon_scalar_mul_f64_2000"
+      },
+      {
+        "checksum": 5823960000.0,
+        "millis": 0.039917,
+        "name": "asv_linalg_einsum_noncon_weighted_sum_f64_30x40"
+      },
+      {
+        "checksum": 400000000.0,
+        "millis": 0.01325,
+        "name": "asv_linalg_einsum_noncon_sum_f64_2000"
+      }
+    ],
+    "engine": "numrust"
+  },
+  "pass_idx": 1
+}

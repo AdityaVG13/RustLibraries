@@ -1,0 +1,150 @@
+{
+  "comparison": [
+    {
+      "name": "small_add_f64_loop",
+      "numpy_ms": 12.661292043048888,
+      "numrust_ms": 3.598541,
+      "speedup_vs_numpy": 3.518451517725903,
+      "winner": "numrust"
+    },
+    {
+      "name": "large_add_f64_loop",
+      "numpy_ms": 4.152583016548306,
+      "numrust_ms": 3.189542,
+      "speedup_vs_numpy": 1.3019370858099082,
+      "winner": "numrust"
+    },
+    {
+      "name": "fused_add_sum_f64_loop",
+      "numpy_ms": 4.088958026841283,
+      "numrust_ms": 3.985125,
+      "speedup_vs_numpy": 1.026055149296768,
+      "winner": "numrust"
+    },
+    {
+      "name": "broadcast_add_f64",
+      "numpy_ms": 0.517916982062161,
+      "numrust_ms": 0.197875,
+      "speedup_vs_numpy": 2.6173947293097206,
+      "winner": "numrust"
+    },
+    {
+      "name": "sum_f64_loop",
+      "numpy_ms": 13.674624962732196,
+      "numrust_ms": 9.167084,
+      "speedup_vs_numpy": 1.49170935520305,
+      "winner": "numrust"
+    },
+    {
+      "name": "metadata_view_loop",
+      "numpy_ms": 47.17770795105025,
+      "numrust_ms": 38.0415,
+      "speedup_vs_numpy": 1.2401642403966786,
+      "winner": "numrust"
+    },
+    {
+      "name": "take_axis_i64_loop",
+      "numpy_ms": 25.757834024261683,
+      "numrust_ms": 20.988542,
+      "speedup_vs_numpy": 1.2272331267346577,
+      "winner": "numrust"
+    },
+    {
+      "name": "dot_f64_192",
+      "numpy_ms": 23.46462500281632,
+      "numrust_ms": 22.294542,
+      "speedup_vs_numpy": 1.0524829351872902,
+      "winner": "numrust"
+    }
+  ],
+  "numpy": {
+    "cases": [
+      {
+        "checksum": 14880000.0,
+        "millis": 12.661292043048888,
+        "name": "small_add_f64_loop"
+      },
+      {
+        "checksum": 2343740625000.0,
+        "millis": 4.152583016548306,
+        "name": "large_add_f64_loop"
+      },
+      {
+        "checksum": 2343740625000.0,
+        "millis": 4.088958026841283,
+        "name": "fused_add_sum_f64_loop"
+      },
+      {
+        "checksum": 1072693248.0,
+        "millis": 0.517916982062161,
+        "name": "broadcast_add_f64"
+      },
+      {
+        "checksum": 51137097600.0,
+        "millis": 13.674624962732196,
+        "name": "sum_f64_loop"
+      },
+      {
+        "checksum": 1600000.0,
+        "millis": 47.17770795105025,
+        "name": "metadata_view_loop"
+      },
+      {
+        "checksum": 20956160000.0,
+        "millis": 25.757834024261683,
+        "name": "take_axis_i64_loop"
+      },
+      {
+        "checksum": 220833000.0,
+        "millis": 23.46462500281632,
+        "name": "dot_f64_192"
+      }
+    ],
+    "engine": "numpy",
+    "numpy_version": "2.4.4"
+  },
+  "numrust": {
+    "cases": [
+      {
+        "millis": 3.598541,
+        "name": "small_add_f64_loop"
+      },
+      {
+        "millis": 3.189542,
+        "name": "large_add_f64_loop"
+      },
+      {
+        "millis": 3.985125,
+        "name": "fused_add_sum_f64_loop"
+      },
+      {
+        "millis": 0.197875,
+        "name": "broadcast_add_f64"
+      },
+      {
+        "millis": 9.167084,
+        "name": "sum_f64_loop"
+      },
+      {
+        "millis": 38.0415,
+        "name": "metadata_view_loop"
+      },
+      {
+        "millis": 20.988542,
+        "name": "take_axis_i64_loop"
+      },
+      {
+        "millis": 22.294542,
+        "name": "dot_f64_192"
+      }
+    ],
+    "engine": "numrust"
+  },
+  "score": {
+    "geomean_speedup_vs_numpy": 1.5259344606422292,
+    "global_numpy_replacement_claim": false,
+    "numpy_wins": 0,
+    "numrust_ranked_higher_on_this_suite": true,
+    "numrust_wins": 8
+  }
+}

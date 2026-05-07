@@ -1,0 +1,325 @@
+{
+  "benchmark_pass_order": "alternating; NumRust first on even passes, NumPy first on odd passes",
+  "benchmark_passes_per_engine": 3,
+  "checksum_failures": [],
+  "focused_cases": 10,
+  "global_numpy_replacement_claim": false,
+  "near_tie_relative_margin": 0.02,
+  "numpy_wins": 1,
+  "numrust_wins": 9,
+  "purpose": "Focused rerun of current NumPy-winning external rows for optimization triage.",
+  "rows": [
+    {
+      "baseline_speedup_vs_numpy": 0.821140725784474,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
+      "near_tie": false,
+      "numpy_checksum": 1430418666800000.0,
+      "numpy_ms": 42.70770802395418,
+      "numpy_pass_millis": [
+        41.35516699170694,
+        42.70770802395418,
+        43.12279197620228
+      ],
+      "numrust_checksum": 1430418666800000.0,
+      "numrust_ms": 41.805333,
+      "numrust_pass_millis": [
+        41.805333,
+        40.884791,
+        42.19925
+      ],
+      "priority": 1,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_matmul_trans_a_atc",
+      "speedup_vs_numpy": 1.0215851653174055,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T.copy()), repeated equally",
+      "winner": "numrust"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.8454733227859296,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_matmul_trans_at_a_f64_400x150_150x400",
+      "near_tie": true,
+      "numpy_checksum": 359998940150000.0,
+      "numpy_ms": 79.33445903472602,
+      "numpy_pass_millis": [
+        79.33445903472602,
+        78.43966601649299,
+        105.5534589686431
+      ],
+      "numrust_checksum": 359998940150000.0,
+      "numrust_ms": 78.096417,
+      "numrust_pass_millis": [
+        78.096417,
+        78.199625,
+        77.706833
+      ],
+      "priority": 2,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_matmul_trans_at_a",
+      "speedup_vs_numpy": 1.0158527379652516,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400).T, arange(60000).reshape(150,400)), repeated equally",
+      "winner": "numrust"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.873580907276335,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_dot_trans_a_atc_f64_150x400_400x150",
+      "near_tie": true,
+      "numpy_checksum": 1430418666800000.0,
+      "numpy_ms": 42.00141702312976,
+      "numpy_pass_millis": [
+        43.26620802748948,
+        41.61733400542289,
+        42.00141702312976
+      ],
+      "numrust_checksum": 1430418666800000.0,
+      "numrust_ms": 41.686875,
+      "numrust_pass_millis": [
+        41.809875,
+        41.017,
+        41.686875
+      ],
+      "priority": 3,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_dot_trans_a_atc",
+      "speedup_vs_numpy": 1.0075453490608197,
+      "translation": "direct setup and operation: dot(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T.copy()), repeated equally",
+      "winner": "numrust"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.879601208221661,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
+      "near_tie": true,
+      "numpy_checksum": 359998940150000.0,
+      "numpy_ms": 96.3942920207046,
+      "numpy_pass_millis": [
+        96.72154200961813,
+        95.22820799611509,
+        96.3942920207046
+      ],
+      "numrust_checksum": 359998940150000.0,
+      "numrust_ms": 94.986,
+      "numrust_pass_millis": [
+        96.00775,
+        94.898708,
+        94.986
+      ],
+      "priority": 4,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_matmul_trans_atc_a",
+      "speedup_vs_numpy": 1.014826311463843,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400).T.copy(), arange(60000).reshape(150,400)), repeated equally",
+      "winner": "numrust"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.8840769797517323,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_dot_trans_atc_a_f64_400x150_150x400",
+      "near_tie": false,
+      "numpy_checksum": 359998940150000.0,
+      "numpy_ms": 100.85237503517419,
+      "numpy_pass_millis": [
+        100.85237503517419,
+        99.93170801317319,
+        101.75308299949393
+      ],
+      "numrust_checksum": 359998940150000.0,
+      "numrust_ms": 95.618583,
+      "numrust_pass_millis": [
+        95.298083,
+        95.618583,
+        95.686292
+      ],
+      "priority": 5,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_dot_trans_atc_a",
+      "speedup_vs_numpy": 1.0547361388442056,
+      "translation": "direct setup and operation: dot(arange(60000).reshape(150,400).T.copy(), arange(60000).reshape(150,400)), repeated equally",
+      "winner": "numrust"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.9224156230166589,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_inner_a_ac_f64_150x400_150x400",
+      "near_tie": true,
+      "numpy_checksum": 1430418666800000.0,
+      "numpy_ms": 49.7713329968974,
+      "numpy_pass_millis": [
+        49.366624967660755,
+        50.252666987944394,
+        49.7713329968974
+      ],
+      "numrust_checksum": 1430418666800000.0,
+      "numrust_ms": 49.28925,
+      "numrust_pass_millis": [
+        48.527667,
+        49.328584,
+        49.28925
+      ],
+      "priority": 6,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_inner_trans_a_ac",
+      "speedup_vs_numpy": 1.0097806924815735,
+      "translation": "direct setup and operation: inner(arange(60000).reshape(150,400), copied array), repeated equally",
+      "winner": "numrust"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.9250909029543236,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
+      "near_tie": true,
+      "numpy_checksum": 1430418666800000.0,
+      "numpy_ms": 29.457750031724572,
+      "numpy_pass_millis": [
+        29.457750031724572,
+        30.573625001125038,
+        29.363500012550503
+      ],
+      "numrust_checksum": 1430418666800000.0,
+      "numrust_ms": 29.577125,
+      "numrust_pass_millis": [
+        29.577125,
+        29.163708,
+        30.597292
+      ],
+      "priority": 7,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_matmul_trans_a_at",
+      "speedup_vs_numpy": 0.9959639428012214,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally",
+      "winner": "numpy"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.9518839242795633,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_dot_a_b_f64_150x400_400x600",
+      "near_tie": true,
+      "numpy_checksum": 2893480040200000.0,
+      "numpy_ms": 146.75416599493474,
+      "numpy_pass_millis": [
+        146.75416599493474,
+        146.32770797470585,
+        147.3456250387244
+      ],
+      "numrust_checksum": 2893480040200000.0,
+      "numrust_ms": 144.248792,
+      "numrust_pass_millis": [
+        144.083917,
+        144.248792,
+        144.781
+      ],
+      "priority": 8,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_dot_a_b",
+      "speedup_vs_numpy": 1.0173684227104982,
+      "translation": "direct setup and operation: dot(arange(60000).reshape(150,400), arange(240000).reshape(400,600)), repeated equally",
+      "winner": "numrust"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.9626721992099884,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_einsum_scalar_mul_f64_480000",
+      "near_tie": false,
+      "numpy_checksum": 14399970000.0,
+      "numpy_ms": 6.778165989089757,
+      "numpy_pass_millis": [
+        6.848750053904951,
+        6.719917000737041,
+        6.778165989089757
+      ],
+      "numrust_checksum": 14399970000.0,
+      "numrust_ms": 6.326708,
+      "numrust_pass_millis": [
+        6.281125,
+        6.326708,
+        6.688709
+      ],
+      "priority": 9,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Einsum.time_einsum_mul(dtype=float64)",
+      "speedup_vs_numpy": 1.071357487826174,
+      "translation": "direct setup and operation: einsum(\"i,->i\", arange(480000), 300), repeated equally",
+      "winner": "numrust"
+    },
+    {
+      "baseline_speedup_vs_numpy": 0.97226568021876,
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "name": "asv_linalg_matmul_a_b_f64_150x400_400x600",
+      "near_tie": true,
+      "numpy_checksum": 2893480040200000.0,
+      "numpy_ms": 144.6437499835156,
+      "numpy_pass_millis": [
+        143.78750004107133,
+        144.76816699607298,
+        144.6437499835156
+      ],
+      "numrust_checksum": 2893480040200000.0,
+      "numrust_ms": 144.249542,
+      "numrust_pass_millis": [
+        144.249542,
+        144.023083,
+        144.335334
+      ],
+      "priority": 10,
+      "source_id": "numpy-asv",
+      "source_path": "benchmarks/benchmarks/bench_linalg.py",
+      "source_symbol": "Eindot.time_matmul_a_b",
+      "speedup_vs_numpy": 1.0027328196543985,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(240000).reshape(400,600)), repeated equally",
+      "winner": "numrust"
+    }
+  ],
+  "source_report": "benchmark-results/external-numpy-asv-inspired.json",
+  "stability": {
+    "authoritative_score_source": "benchmark-results/external-numpy-asv-inspired.json",
+    "focused_near_ties": 7,
+    "focused_numrust_winner_flips": 9,
+    "focused_still_numpy_winners": 1,
+    "interpretation": "Focused reruns are optimization and stability probes for current loss rows; the full external report remains the authoritative supported-case score.",
+    "near_tie_cases": [
+      "asv_linalg_matmul_trans_at_a_f64_400x150_150x400",
+      "asv_linalg_dot_trans_a_atc_f64_150x400_400x150",
+      "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
+      "asv_linalg_inner_a_ac_f64_150x400_150x400",
+      "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
+      "asv_linalg_dot_a_b_f64_150x400_400x600",
+      "asv_linalg_matmul_a_b_f64_150x400_400x600"
+    ],
+    "numrust_flip_cases": [
+      "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
+      "asv_linalg_matmul_trans_at_a_f64_400x150_150x400",
+      "asv_linalg_dot_trans_a_atc_f64_150x400_400x150",
+      "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
+      "asv_linalg_dot_trans_atc_a_f64_400x150_150x400",
+      "asv_linalg_inner_a_ac_f64_150x400_150x400",
+      "asv_linalg_dot_a_b_f64_150x400_400x600",
+      "asv_linalg_einsum_scalar_mul_f64_480000",
+      "asv_linalg_matmul_a_b_f64_150x400_400x600"
+    ],
+    "source_numpy_winners": 10,
+    "stable_numpy_win_cases": [
+      "asv_linalg_matmul_trans_a_at_f64_150x400_400x150"
+    ]
+  }
+}

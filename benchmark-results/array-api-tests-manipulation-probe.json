@@ -1,0 +1,25 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmp9ofVm7/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_manipulation_functions.py -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=20",
+  "duration_seconds": 1.7275601250003092,
+  "failures": [],
+  "full_suite": false,
+  "returncode": 0,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "passed",
+  "stderr_tail": "",
+  "stdout_tail": "..s..........                                                            [100%]\n12 passed, 1 skipped in 1.10s\n",
+  "summary": {
+    "collected": 13,
+    "passed": 12,
+    "skipped": 1,
+    "total": 13
+  },
+  "targets": [
+    "array_api_tests/test_manipulation_functions.py"
+  ]
+}

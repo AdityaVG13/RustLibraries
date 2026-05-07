@@ -1,0 +1,27 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmpU2Ia8n/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_inv /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_norm /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_rank /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_slogdet -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=10",
+  "duration_seconds": 0.7330958329839632,
+  "failures": [],
+  "full_suite": false,
+  "returncode": 0,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "passed",
+  "stderr_tail": "",
+  "stdout_tail": "....                                                                     [100%]\n4 passed in 0.23s\n",
+  "summary": {
+    "collected": 4,
+    "passed": 4,
+    "total": 4
+  },
+  "targets": [
+    "array_api_tests/test_linalg.py::test_inv",
+    "array_api_tests/test_linalg.py::test_matrix_norm",
+    "array_api_tests/test_linalg.py::test_matrix_rank",
+    "array_api_tests/test_linalg.py::test_slogdet"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmp0XWaLt/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_iinfo /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_iinfo_dtype /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_isdtype -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=20",
+  "duration_seconds": 0.581319999997504,
+  "failures": [],
+  "full_suite": false,
+  "returncode": 0,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "passed",
+  "stderr_tail": "",
+  "stdout_tail": ".................                                                        [100%]\n17 passed in 0.12s\n",
+  "summary": {
+    "collected": 17,
+    "passed": 17,
+    "total": 17
+  },
+  "targets": [
+    "array_api_tests/test_data_type_functions.py::test_iinfo",
+    "array_api_tests/test_data_type_functions.py::test_iinfo_dtype",
+    "array_api_tests/test_data_type_functions.py::test_isdtype"
+  ]
+}

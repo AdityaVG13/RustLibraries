@@ -1,0 +1,24 @@
+# Array API Tests Probe
+
+This report runs the pinned upstream `array-api-tests` pytest suite without patching the suite.
+
+## Source
+
+- Repo: `https://github.com/data-apis/array-api-tests.git`
+- Commit: `55fcc60179efa2680ddd6cd926ddf17b83530e2b`
+- API version: `2023.12`
+- Targets: `array_api_tests/test_creation_functions.py::test_arange, array_api_tests/test_creation_functions.py::test_asarray_scalars, array_api_tests/test_creation_functions.py::test_asarray_arrays, array_api_tests/test_creation_functions.py::test_empty_like, array_api_tests/test_creation_functions.py::test_eye, array_api_tests/test_creation_functions.py::test_full_like, array_api_tests/test_creation_functions.py::test_linspace, array_api_tests/test_creation_functions.py::test_meshgrid, array_api_tests/test_creation_functions.py::test_ones_like, array_api_tests/test_creation_functions.py::test_zeros_like, array_api_tests/test_data_type_functions.py::test_astype, array_api_tests/test_data_type_functions.py::test_broadcast_arrays, array_api_tests/test_data_type_functions.py::test_broadcast_to, array_api_tests/test_data_type_functions.py::test_can_cast, array_api_tests/test_data_type_functions.py::test_finfo, array_api_tests/test_data_type_functions.py::test_finfo_dtype`
+- Full suite: False
+
+## Result
+
+- Status: passed
+- Return code: 0
+- Duration seconds: 2.60
+- Summary: `{"collected": 22, "passed": 22, "total": 22}`
+
+## Command
+
+```sh
+/Users/aditya/.cache/uv/builds-v0/.tmpJapKPv/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_arange /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_asarray_scalars /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_asarray_arrays /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_empty_like /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_eye /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_full_like /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_linspace /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_meshgrid /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_ones_like /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_zeros_like /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_astype /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_broadcast_arrays /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_broadcast_to /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_can_cast /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_finfo /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_data_type_functions.py::test_finfo_dtype -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=25
+```

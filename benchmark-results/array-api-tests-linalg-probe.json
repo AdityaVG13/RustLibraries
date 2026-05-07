@@ -1,0 +1,25 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmpvmnDVL/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json",
+  "duration_seconds": 1.9593287919997238,
+  "failures": [],
+  "full_suite": false,
+  "returncode": 0,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "passed",
+  "stderr_tail": "",
+  "stdout_tail": "......ss......................                                           [100%]\n28 passed, 2 skipped in 1.45s\n",
+  "summary": {
+    "collected": 30,
+    "passed": 28,
+    "skipped": 2,
+    "total": 30
+  },
+  "targets": [
+    "array_api_tests/test_linalg.py"
+  ]
+}

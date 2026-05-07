@@ -1,0 +1,33 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmpf9wg01/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_sign /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_sin /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_sinh /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_square /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_sqrt /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_subtract[__sub__(x, s)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_subtract[__isub__(x, s)] /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_tan /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_tanh /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_operators_and_elementwise_functions.py::test_trunc -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=20",
+  "duration_seconds": 1.3765799999819137,
+  "failures": [],
+  "full_suite": false,
+  "returncode": 0,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "passed",
+  "stderr_tail": "",
+  "stdout_tail": "..........                                                               [100%]\n10 passed in 0.33s\n",
+  "summary": {
+    "collected": 10,
+    "passed": 10,
+    "total": 10
+  },
+  "targets": [
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_sign",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_sin",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_sinh",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_square",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_sqrt",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_subtract[__sub__(x, s)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_subtract[__isub__(x, s)]",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_tan",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_tanh",
+    "array_api_tests/test_operators_and_elementwise_functions.py::test_trunc"
+  ]
+}

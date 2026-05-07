@@ -1,0 +1,49 @@
+{
+  "api_version": "2023.12",
+  "command": "/Users/aditya/.cache/uv/builds-v0/.tmpdf8UXy/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_matmul /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matmul /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_norm /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_power /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_rank -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=10",
+  "duration_seconds": 0.8826672080322169,
+  "failures": [
+    {
+      "nodeid": "array_api_tests/test_linalg.py::test_linalg_matmul",
+      "outcome": "failed"
+    },
+    {
+      "nodeid": "array_api_tests/test_linalg.py::test_matmul",
+      "outcome": "failed"
+    },
+    {
+      "nodeid": "array_api_tests/test_linalg.py::test_matrix_norm",
+      "outcome": "failed"
+    },
+    {
+      "nodeid": "array_api_tests/test_linalg.py::test_matrix_power",
+      "outcome": "failed"
+    },
+    {
+      "nodeid": "array_api_tests/test_linalg.py::test_matrix_rank",
+      "outcome": "failed"
+    }
+  ],
+  "full_suite": false,
+  "returncode": 1,
+  "source": {
+    "commit": "55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "commit_url": "https://github.com/data-apis/array-api-tests/commit/55fcc60179efa2680ddd6cd926ddf17b83530e2b",
+    "repo": "https://github.com/data-apis/array-api-tests.git"
+  },
+  "status": "failed",
+  "stderr_tail": "",
+  "stdout_tail": "ith matching numeric dtypes\nE   Falsifying example: test_linalg_matmul(\nE       x1=numrust.Array(shape=[0], dtype=uint8),\nE       x2=numrust.Array(shape=[0], dtype=uint16),\nE   )\n_________________________________ test_matmul __________________________________\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:450: in test_matmul\n    @given(\n            \ntarget/external/array-api-tests/array_api_tests/test_linalg.py:454: in test_matmul\n    return _test_matmul(_array_module, x1, x2)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:416: in _test_matmul\n    res = matmul(x1, x2)\n          ^^^^^^^^^^^^^^\n/var/folders/tw/wpjfrh5s60j_yldw1nv2k4300000gn/T/tmpxpdt36i2/numrust/__init__.py:305: in matmul\n    return x1.matmul(x2)\n           ^^^^^^^^^^^^^\nE   TypeError: matmul requires arrays with matching numeric dtypes\nE   Falsifying example: test_matmul(\nE       x1=numrust.Array(shape=[0], dtype=uint8),\nE       x2=numrust.Array(shape=[0], dtype=uint16),\nE   )\n_______________________________ test_matrix_norm _______________________________\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:457: in test_matrix_norm\n    @pytest.mark.xp_extension('linalg')\n                   ^^^\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:464: in test_matrix_norm\n    res = linalg.matrix_norm(x, **kw)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/var/folders/tw/wpjfrh5s60j_yldw1nv2k4300000gn/T/tmpxpdt36i2/numrust/__init__.py:72: in _not_implemented\n    raise NotImplementedError(\"this Array API extension function is not implemented yet\")\nE   NotImplementedError: this Array API extension function is not implemented yet\nE   Falsifying example: test_matrix_norm(\nE       x=numrust.Array(shape=[1, 1], dtype=float32),\nE       kw={},\nE   )\n______________________________ test_matrix_power _______________________________\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:484: in test_matrix_power\n    @pytest.mark.xp_extension('linalg')\n                   ^^^\ntarget/external/array-api-tests/array_api_tests/hypothesis_helpers.py:432: in invertible_matrices\n    assert xp.all(xp.abs(d) >= 0.5)\n                  ^^^^^^^^^\n/var/folders/tw/wpjfrh5s60j_yldw1nv2k4300000gn/T/tmpxpdt36i2/numrust/__init__.py:72: in _not_implemented\n    raise NotImplementedError(\"this Array API extension function is not implemented yet\")\nE   NotImplementedError: this Array API extension function is not implemented yet\nE   while generating 'x' from shared(integers(min_value=-100, max_value=100), key='matrix_power n').flatmap(lambda n: invertible_matrices() if n < 0 else arrays(dtype=all_floating_dtypes(), shape=square_matrix_shapes))\n_______________________________ test_matrix_rank _______________________________\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:508: in test_matrix_rank\n    @pytest.mark.xp_extension('linalg')\n                   ^^^\ntarget/external/array-api-tests/array_api_tests/test_linalg.py:514: in test_matrix_rank\n    linalg.matrix_rank(x, **kw)\n/var/folders/tw/wpjfrh5s60j_yldw1nv2k4300000gn/T/tmpxpdt36i2/numrust/__init__.py:72: in _not_implemented\n    raise NotImplementedError(\"this Array API extension function is not implemented yet\")\nE   NotImplementedError: this Array API extension function is not implemented yet\nE   Falsifying example: test_matrix_rank(\nE       x=numrust.Array(shape=[1, 1], dtype=float32),\nE       kw={},\nE   )\n=========================== short test summary info ============================\nFAILED target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_matmul\nFAILED target/external/array-api-tests/array_api_tests/test_linalg.py::test_matmul\nFAILED target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_norm\nFAILED target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_power\nFAILED target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_rank\n5 failed in 0.36s\n",
+  "summary": {
+    "collected": 5,
+    "failed": 5,
+    "total": 5
+  },
+  "targets": [
+    "array_api_tests/test_linalg.py::test_linalg_matmul",
+    "array_api_tests/test_linalg.py::test_matmul",
+    "array_api_tests/test_linalg.py::test_matrix_norm",
+    "array_api_tests/test_linalg.py::test_matrix_power",
+    "array_api_tests/test_linalg.py::test_matrix_rank"
+  ]
+}
