@@ -1,0 +1,41 @@
+{
+  "comparison": [
+    {
+      "checksum_abs_diff": 0.0,
+      "checksum_match": true,
+      "graphrust_ms": 0.045917,
+      "name": "bfs_undirected_5000_30000",
+      "networkx_ms": 1.2468749773688614,
+      "speedup_vs_networkx": 27.154974788615576,
+      "winner": "graphrust"
+    }
+  ],
+  "graphrust": {
+    "cases": [
+      {
+        "checksum": 50391279.0,
+        "millis": 0.045917,
+        "name": "bfs_undirected_5000_30000"
+      }
+    ],
+    "engine": "graphrust"
+  },
+  "networkx": {
+    "cases": [
+      {
+        "checksum": 50391279.0,
+        "millis": 1.2468749773688614,
+        "name": "bfs_undirected_5000_30000"
+      }
+    ],
+    "engine": "networkx",
+    "networkx_version": "3.6.1"
+  },
+  "score": {
+    "cases": 1,
+    "checksum_failures": [],
+    "global_networkx_replacement_claim": false,
+    "graphrust_wins": 1,
+    "networkx_wins": 0
+  }
+}
