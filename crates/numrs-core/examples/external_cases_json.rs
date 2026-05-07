@@ -420,6 +420,103 @@ fn main() -> numrs_core::Result<()> {
         checksum,
     });
 
+    let stats_data_i64 = Array::full(vec![200], 1_i64)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_i64.min_all().unwrap() as f64;
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_min_i64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_i64.max_all().unwrap() as f64;
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_max_i64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_i64.mean_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_mean_i64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_i64.std_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_std_i64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_i64.prod_all().unwrap() as f64;
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_prod_i64_200",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                checksum += stats_data_i64.var_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_stats_var_i64_200",
+        millis,
+        checksum,
+    });
+
     let argmax_data = Array::<i64>::zeros(vec![200_000])?;
     let (millis, checksum) = bench(
         || {

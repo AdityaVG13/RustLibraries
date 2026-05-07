@@ -87,14 +87,14 @@ Use `uv run --with numpy python benchmarks/external_numpy_cases.py --rerun-losse
 
 Latest observed supported-case result:
 
-- Supported external cases: 90
-- NumRust wins: 89
+- Supported external cases: 96
+- NumRust wins: 95
 - NumPy wins: 1
-- Geomean speedup vs NumPy: 10.84x
-- Near-tie cases within 2%: 7
+- Geomean speedup vs NumPy: 14.03x
+- Near-tie cases within 2%: 5
 - Ranked higher by wins: true
 - Unsupported external case buckets tracked: 1
-- Current NumPy wins: `asv_linalg_matmul_trans_a_atc_f64_150x400_400x150`.
+- Current NumPy wins: `asv_linalg_dot_trans_a_atc_f64_150x400_400x150`.
 
 Latest focused rerun of those NumPy-winning rows:
 

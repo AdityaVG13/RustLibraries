@@ -15,7 +15,7 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Area | Rust crate | Python baseline | Evidence tier | Cases | Rust wins | Python wins | Full parity? | Speedup summary | Checksum failures | Report |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | NumPy targeted | `numrs-core` | NumPy 2.4.4 | Same-data implemented slice | 10 | 10 | 0 | No | 1.67x geomean | 0 | [`numrust-vs-numpy.md`](../benchmark-results/numrust-vs-numpy.md) |
-| NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 90 supported | 89 | 1 | No | 10.84x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
+| NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 96 supported | 95 | 1 | No | 14.03x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
 | NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of current NumPy wins | 1 | 1 | 0 | No | focused loss flips | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | Same-data implemented slice | 4 | 4 | 0 | No | 3.51x geomean | 0 | [`statsrust-vs-statsmodels.md`](../benchmark-results/statsrust-vs-statsmodels.md) |
 | Scientific routines | `scirust` | SciPy 1.17.1 | SciPy ASV translations plus same-data slice | 9 | 9 | 0 | No | 19.11x geomean | 0 | [`scirust-vs-scipy.md`](../benchmark-results/scirust-vs-scipy.md) |
@@ -34,12 +34,12 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Pinned NumPy ASV commit | `80b1a07494964733f7d4571781608238f500e2dd` |
 | Pinned Array API tests commit | `55fcc60179efa2680ddd6cd926ddf17b83530e2b` |
 | Full passes per engine | 5 |
-| Supported external cases | 90 |
+| Supported external cases | 96 |
 | Unsupported external cases tracked | 1 |
-| NumRust wins | 89 |
+| NumRust wins | 95 |
 | NumPy wins | 1 |
-| Geomean speedup vs NumPy | 10.84x |
-| Near-tie cases within 2% | 7 |
+| Geomean speedup vs NumPy | 14.03x |
+| Near-tie cases within 2% | 5 |
 | Checksum failures | 0 |
 | Global NumPy replacement claim | false |
 

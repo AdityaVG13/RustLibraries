@@ -344,6 +344,31 @@ impl Array<f32> {
     }
 }
 
+impl Array<i64> {
+    pub fn mean_all(&self) -> Result<f64> {
+        if let Some(value) = self.uniform_value() {
+            if !self.is_empty() {
+                return Ok(*value as f64);
+            }
+        }
+        self.view().mean_all()
+    }
+
+    pub fn var_all(&self) -> Result<f64> {
+        if self.has_uniform_storage() && !self.is_empty() {
+            return Ok(0.0);
+        }
+        self.view().var_all()
+    }
+
+    pub fn std_all(&self) -> Result<f64> {
+        if self.has_uniform_storage() && !self.is_empty() {
+            return Ok(0.0);
+        }
+        self.view().std_all()
+    }
+}
+
 impl Array<bool> {
     pub fn logical_not(&self) -> Result<Array<bool>> {
         self.view().logical_not()
@@ -2518,6 +2543,38 @@ impl<'a> ArrayView<'a, f64> {
 }
 
 impl<'a> ArrayView<'a, f32> {
+    pub fn mean_all(&self) -> Result<f64> {
+        let len = self.len();
+        if len == 0 {
+            return Err(NumRsError::EmptyReduction);
+        }
+        let mut acc = 0.0;
+        for offset in self.offset_iter()? {
+            acc += self.data_at(offset) as f64;
+        }
+        Ok(acc / len as f64)
+    }
+
+    pub fn var_all(&self) -> Result<f64> {
+        let len = self.len();
+        if len == 0 {
+            return Err(NumRsError::EmptyReduction);
+        }
+        let mean = self.mean_all()?;
+        let mut acc = 0.0;
+        for offset in self.offset_iter()? {
+            let diff = self.data_at(offset) as f64 - mean;
+            acc += diff * diff;
+        }
+        Ok(acc / len as f64)
+    }
+
+    pub fn std_all(&self) -> Result<f64> {
+        Ok(self.var_all()?.sqrt())
+    }
+}
+
+impl<'a> ArrayView<'a, i64> {
     pub fn mean_all(&self) -> Result<f64> {
         let len = self.len();
         if len == 0 {

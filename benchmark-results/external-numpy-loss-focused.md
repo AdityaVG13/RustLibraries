@@ -15,4 +15,4 @@
 
 | Priority | Case | NumRust ms | NumPy ms | Speedup | Winner | Baseline Speedup | Checksum |
 | ---: | --- | ---: | ---: | ---: | --- | ---: | --- |
-| 1 | `asv_linalg_matmul_trans_a_atc_f64_150x400_400x150` | 40.855 | 41.831 | 1.02x | numrust | 1.00x | ok |
+| 1 | `asv_linalg_dot_trans_a_atc_f64_150x400_400x150` | 40.903 | 42.160 | 1.03x | numrust | 0.99x | ok |
