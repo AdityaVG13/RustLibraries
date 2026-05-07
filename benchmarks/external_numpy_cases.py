@@ -182,12 +182,44 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=10_000,
     ),
     CaseSpec(
+        name="asv_manipulate_broadcast_arrays_f64_16x32",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="BroadcastArrays.time_broadcast_arrays(shape=(16, 32), ndtype=float64)",
+        translation="same operation, shape, and dtype; deterministic arange values instead of RNG setup, repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_broadcast_arrays_f64_128x256",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="BroadcastArrays.time_broadcast_arrays(shape=(128, 256), ndtype=float64)",
+        translation="same operation, shape, and dtype; deterministic arange values instead of RNG setup, repeated because ASV auto-calibrates metadata timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_manipulate_broadcast_arrays_f64_512x1024",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_manipulate.py",
         source_symbol="BroadcastArrays.time_broadcast_arrays(shape=(512, 1024), ndtype=float64)",
         translation="same operation, shape, and dtype; deterministic arange values instead of RNG setup, repeated because ASV auto-calibrates metadata timings",
         repetitions=100_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_broadcast_to_f64_16",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="BroadcastArraysTo.time_broadcast_to(size=16, ndtype=float64)",
+        translation="same operation, shape, and dtype; deterministic arange values instead of RNG setup, repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_broadcast_to_f64_64",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="BroadcastArraysTo.time_broadcast_to(size=64, ndtype=float64)",
+        translation="same operation, shape, and dtype; deterministic arange values instead of RNG setup, repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
     ),
     CaseSpec(
         name="asv_manipulate_broadcast_to_f64_512",
@@ -872,41 +904,51 @@ def bench_numpy() -> dict:
         }
     )
 
-    broadcast_arrays_source = np.arange(512 * 1024, dtype=np.float64).reshape(512, 1024)
-    broadcast_arrays_one = np.ones(1, dtype=np.float64)
+    def append_broadcast_arrays(rows: int, cols: int, repetitions: int) -> None:
+        source = np.arange(rows * cols, dtype=np.float64).reshape(rows, cols)
+        scalar_one = np.ones(1, dtype=np.float64)
 
-    def broadcast_arrays() -> float:
-        checksum = 0.0
-        for _ in range(100_000):
-            left, right = np.broadcast_arrays(broadcast_arrays_source, broadcast_arrays_one)
-            checksum += paired_broadcast_checksum(left, right)
-        return checksum
+        def broadcast_arrays() -> float:
+            checksum = 0.0
+            for _ in range(repetitions):
+                left, right = np.broadcast_arrays(source, scalar_one)
+                checksum += paired_broadcast_checksum(left, right)
+            return checksum
 
-    millis, checksum = median_ms(broadcast_arrays, rounds=7)
-    cases.append(
-        {
-            "name": "asv_manipulate_broadcast_arrays_f64_512x1024",
-            "millis": millis,
-            "checksum": checksum,
-        }
-    )
+        millis, checksum = median_ms(broadcast_arrays, rounds=7)
+        cases.append(
+            {
+                "name": f"asv_manipulate_broadcast_arrays_f64_{rows}x{cols}",
+                "millis": millis,
+                "checksum": checksum,
+            }
+        )
 
-    broadcast_source = np.arange(512, dtype=np.float64)
+    append_broadcast_arrays(16, 32, 200_000)
+    append_broadcast_arrays(128, 256, 100_000)
+    append_broadcast_arrays(512, 1024, 100_000)
 
-    def broadcast_to() -> float:
-        checksum = 0.0
-        for _ in range(200_000):
-            checksum += shape_checksum(np.broadcast_to(broadcast_source, (512, 512)))
-        return checksum
+    def append_broadcast_to(size: int) -> None:
+        source = np.arange(size, dtype=np.float64)
 
-    millis, checksum = median_ms(broadcast_to, rounds=7)
-    cases.append(
-        {
-            "name": "asv_manipulate_broadcast_to_f64_512",
-            "millis": millis,
-            "checksum": checksum,
-        }
-    )
+        def broadcast_to() -> float:
+            checksum = 0.0
+            for _ in range(200_000):
+                checksum += shape_checksum(np.broadcast_to(source, (size, size)))
+            return checksum
+
+        millis, checksum = median_ms(broadcast_to, rounds=7)
+        cases.append(
+            {
+                "name": f"asv_manipulate_broadcast_to_f64_{size}",
+                "millis": millis,
+                "checksum": checksum,
+            }
+        )
+
+    append_broadcast_to(16)
+    append_broadcast_to(64)
+    append_broadcast_to(512)
 
     concat_arrays = [
         (np.arange(32 * 64, dtype=np.float64) + idx * 32 * 64).reshape(32, 64)
@@ -1669,7 +1711,12 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         "asv_linalg_matmul_trans_at_a_f64_400x150_150x400",
         "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
         "asv_linalg_einsum_scalar_mul_f64_480000",
+        "asv_manipulate_broadcast_arrays_f64_16x32",
+        "asv_manipulate_broadcast_arrays_f64_128x256",
         "asv_manipulate_broadcast_arrays_f64_512x1024",
+        "asv_manipulate_broadcast_to_f64_16",
+        "asv_manipulate_broadcast_to_f64_64",
+        "asv_manipulate_broadcast_to_f64_512",
         "asv_manipulate_concatenate_ax0_f64_32x64_n5",
         "asv_manipulate_concatenate_ax1_f64_32x64_n5",
         "asv_manipulate_stack_ax0_f64_32x64_n5",
@@ -1697,8 +1744,6 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
     atc = a.T.copy()
     ac = a.copy()
     one_dim_big = np.arange(480_000, dtype=np.float64)
-    broadcast_arrays_source = np.arange(512 * 1024, dtype=np.float64).reshape(512, 1024)
-    broadcast_arrays_one = np.ones(1, dtype=np.float64)
     concat_arrays = [
         (np.arange(32 * 64, dtype=np.float64) + idx * 32 * 64).reshape(32, 64)
         for idx in range(5)
@@ -1785,14 +1830,37 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
 
     append_case("asv_linalg_einsum_scalar_mul_f64_480000", einsum_scalar_mul)
 
-    def broadcast_arrays() -> float:
-        checksum = 0.0
-        for _ in range(100_000):
-            left, right = np.broadcast_arrays(broadcast_arrays_source, broadcast_arrays_one)
-            checksum += paired_broadcast_checksum(left, right)
-        return checksum
+    def append_selected_broadcast_arrays(rows: int, cols: int, repetitions: int) -> None:
+        source = np.arange(rows * cols, dtype=np.float64).reshape(rows, cols)
+        scalar_one = np.ones(1, dtype=np.float64)
 
-    append_case("asv_manipulate_broadcast_arrays_f64_512x1024", broadcast_arrays)
+        def broadcast_arrays() -> float:
+            checksum = 0.0
+            for _ in range(repetitions):
+                left, right = np.broadcast_arrays(source, scalar_one)
+                checksum += paired_broadcast_checksum(left, right)
+            return checksum
+
+        append_case(f"asv_manipulate_broadcast_arrays_f64_{rows}x{cols}", broadcast_arrays)
+
+    append_selected_broadcast_arrays(16, 32, 200_000)
+    append_selected_broadcast_arrays(128, 256, 100_000)
+    append_selected_broadcast_arrays(512, 1024, 100_000)
+
+    def append_selected_broadcast_to(size: int) -> None:
+        source = np.arange(size, dtype=np.float64)
+
+        def broadcast_to() -> float:
+            checksum = 0.0
+            for _ in range(200_000):
+                checksum += shape_checksum(np.broadcast_to(source, (size, size)))
+            return checksum
+
+        append_case(f"asv_manipulate_broadcast_to_f64_{size}", broadcast_to)
+
+    append_selected_broadcast_to(16)
+    append_selected_broadcast_to(64)
+    append_selected_broadcast_to(512)
 
     def concatenate_ax0() -> float:
         checksum = 0.0
