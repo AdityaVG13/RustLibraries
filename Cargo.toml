@@ -8,6 +8,7 @@ members = [
     "crates/graphrust",
     "crates/mediaextractrust",
     "crates/imagerust",
+    "crates/textrust",
     "crates/validaterust",
     "crates/numrust-python",
 ]
