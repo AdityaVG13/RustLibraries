@@ -15,8 +15,8 @@ This file is intentionally committed and should be updated in normal git commits
 - Add portable SIMD backends where stable Rust support is strong enough.
 - Continue replacing generic stride paths with layout-specialized kernels only when real benchmarks improve.
 - [x] NumRust transposed GEMM v1: use column-major-swapped CBLAS for macOS transposed `f64`/`f32` 2-D GEMM and regenerate full external NumPy ASV-derived evidence at 52 of 53 NumRust wins.
-- [x] NumRust selection v1: add `nonzero`, broadcasted `where_select`, checksum-validated targeted NumPy benchmark rows, and contiguous selection fast paths. Latest targeted evidence: 8 NumRust wins, 2 NumPy wins, 0 checksum failures.
-- [ ] NumRust targeted loss cleanup: optimize `where_select_f64_loop` and near-tie `dot_f64_192` without hiding the Python-winning rows.
+- [x] NumRust selection v1: add `nonzero`, broadcasted `where_select`, checksum-validated targeted NumPy benchmark rows, and contiguous selection fast paths. Latest targeted evidence: 10 NumRust wins, 0 NumPy wins, 0 checksum failures.
+- [x] NumRust targeted loss cleanup: optimize `where_select_f64_loop` and near-tie `dot_f64_192` without hiding Python-winning rows. Latest targeted evidence: 10 NumRust wins, 0 NumPy wins, 1.67x geomean, 0 checksum failures.
 
 ## Ecosystem
 
