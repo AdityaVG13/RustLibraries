@@ -31,11 +31,37 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 
 ### Open
 
-- [x] 2026-05-07: Add GitHub Actions for format, clippy, tests, Python evidence schema checks, and source-lock verification. Evidence: `.github/workflows/ci.yml`.
 - [ ] 2026-05-07: Add more externally derived NumPy ASV cases without filtering out losses. Target: `benchmarks/external_numpy_cases.py`.
 - [ ] 2026-05-07: Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. Target: `docs/performance.md`.
 - [ ] 2026-05-07: Grow StatsRust and SciRust with more externally derived benchmarks. Target: `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py`.
-- [ ] 2026-05-07: Add publishing metadata, CI release checks, crate docs polish, and versioning policy before any crates.io release. Target: `Cargo.toml`, crate manifests.
+- [ ] 2026-05-07: Keep release and CI work deferred until Aditya asks for it. Target: no `.github/workflows` or release automation for now.
+
+### Production-Grade Gates
+
+- [ ] 2026-05-07: Define a shared enterprise readiness rubric for every library: stable Rust API, docs, examples, error model, feature flags, manual verification gates, fuzz/property tests, external benchmarks, security review, and MSRV.
+- [ ] 2026-05-07: Add per-crate `README.md` files showing immediate Rust usage, Python-equivalent workflows, supported scope, unsupported scope, and benchmark status.
+- [ ] 2026-05-07: Add Criterion or equivalent Rust-native benchmark suites alongside Python comparison harnesses.
+- [ ] 2026-05-07: Add corpus-based correctness tests for parsing, aggregation, graph algorithms, statistics, and document extraction.
+- [ ] 2026-05-07: Add benchmark dashboards that separate full-suite scores, focused reruns, checksum failures, unsupported cases, and near ties.
+
+### Python Library Port Backlog
+
+- [ ] 2026-05-07: Finish NumRust toward NumPy-scale coverage: broader ndarray APIs, full dtype semantics, linear algebra backends, random, FFT, masked/indexing semantics, serialization interop, and neutral benchmarks against NumPy.
+- [ ] 2026-05-07: Expand SciRust toward SciPy-scale coverage: optimize, integrate, interpolate, sparse, signal, spatial, stats, special functions, and externally derived SciPy benchmarks.
+- [ ] 2026-05-07: Expand StatsRust toward StatsModels-scale coverage: GLM families, time series, robust covariance, formula-like model building, diagnostics, and StatsModels comparison benchmarks.
+- [ ] 2026-05-07: Build FrameRust for Pandas-style dataframes and data aggregation: groupby, joins, pivots, rolling/window ops, time series, missing data, CSV/Parquet/Arrow interop, and benchmarks against Pandas plus relevant Rust incumbents.
+- [ ] 2026-05-07: Build GraphRust for NetworkX-style graph work: directed/undirected/multigraphs, traversal, shortest paths, centrality, PageRank, community detection, graph IO, and benchmarks against NetworkX and other graph libraries.
+- [ ] 2026-05-07: Build LearnRust for scikit-learn-style classical ML: preprocessing, pipelines, metrics, linear models, trees, neighbors, clustering, model selection, serialization, and benchmarks against scikit-learn.
+- [ ] 2026-05-07: Build PlotRust for Matplotlib/Seaborn/Plotly-style visualization: static plots, statistical charts, interactive exports, themes, notebooks/web embedding, and visual regression tests.
+- [ ] 2026-05-07: Build UXRust for Python-style UI/UX app workflows inspired by Streamlit, Gradio, Dash, and NiceGUI: declarative controls, state, layouts, charts, async tasks, deployment, accessibility, and Rust-first component APIs.
+- [ ] 2026-05-07: Build MediaExtractRust for instant extraction from PDFs, Office docs, images, scans, HTML, markdown, email, and archives: text, layout, tables, metadata, OCR hooks, batch pipelines, and throughput/accuracy benchmarks against PyMuPDF, pdfplumber, python-docx, Pillow, Tesseract wrappers, and unstructured-style pipelines.
+- [ ] 2026-05-07: Build ImageRust for Pillow/scikit-image-style image operations: decoding, transforms, filters, morphology, segmentation primitives, color management, metadata, and image quality benchmarks.
+- [ ] 2026-05-07: Build TextRust for NLTK/spaCy-style NLP utilities: tokenization, normalization, stemming/lemmatization hooks, vectorization, entity/rule pipelines, and benchmarks against Python NLP tooling.
+- [ ] 2026-05-07: Build RequestRust for requests/httpx-style high-level HTTP workflows if existing Rust clients do not cover the Python ergonomics: sessions, retries, auth, streaming, testing fixtures, and API compatibility examples.
+- [ ] 2026-05-07: Build ValidateRust for Pydantic-style data validation: schema derivation, coercion, rich errors, JSON schema, serde integration, and benchmarks against Pydantic.
+- [ ] 2026-05-07: Build WebAppRust for FastAPI-style service development: typed routing, validation, OpenAPI, auth hooks, background jobs, test client, and benchmarks against FastAPI where meaningful.
+- [ ] 2026-05-07 deferred: Add CI only when requested. Target: future `.github/workflows/*`.
+- [ ] 2026-05-07 deferred: Add release automation only when requested. Target: future release checklist and crate publishing workflow.
 
 ## Commands
 
