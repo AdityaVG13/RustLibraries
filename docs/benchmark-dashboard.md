@@ -6,8 +6,8 @@ This is the quick read for benchmark status. Every number below comes from commi
 
 | Area | Rust crate | Python baseline | Evidence tier | Cases | Rust wins | Python wins | Speedup summary | Checksum failures | Report |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 53 supported | 43 | 10 | 8.92x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
-| NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of prior NumPy wins | 10 | 9 | 1 | 7 near ties within 2% | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
+| NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 53 supported | 52 | 1 | 9.95x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
+| NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of prior NumPy win | 1 | 1 | 0 | 1.08x | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | Same-data implemented slice | 4 | 4 | 0 | 3.51x geomean | 0 | [`statsrust-vs-statsmodels.md`](../benchmark-results/statsrust-vs-statsmodels.md) |
 | Scientific routines | `scirust` | SciPy 1.17.1 | SciPy ASV translations plus same-data slice | 9 | 9 | 0 | 19.11x geomean | 0 | [`scirust-vs-scipy.md`](../benchmark-results/scirust-vs-scipy.md) |
 | Data aggregation | `framerust` | Pandas 3.0.2 | Same-data implemented slice | 1 | 1 | 0 | 2.14x | 0 | [`framerust-vs-pandas.md`](../benchmark-results/framerust-vs-pandas.md) |
@@ -26,14 +26,14 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Full passes per engine | 5 |
 | Supported external cases | 53 |
 | Unsupported external cases tracked | 1 |
-| NumRust wins | 43 |
-| NumPy wins | 10 |
-| Geomean speedup vs NumPy | 8.92x |
+| NumRust wins | 52 |
+| NumPy wins | 1 |
+| Geomean speedup vs NumPy | 9.95x |
 | Near-tie cases within 2% | 1 |
 | Checksum failures | 0 |
 | Global NumPy replacement claim | false |
 
-The remaining full-suite NumPy wins are concentrated in large 2-D linalg transpose/copy layouts and contiguous scalar multiply. The focused rerun flips 9 of those 10 rows to NumRust wins, but the full 53-case ASV-derived report remains the authoritative score until the whole suite is rerun.
+The remaining full-suite NumPy win is `asv_linalg_einsum_scalar_mul_f64_480000`, a 1.6% near tie in the authoritative report. The focused 3-pass rerun flips that row to NumRust at 1.08x, but the full 53-case ASV-derived report remains the authoritative score until the whole suite is rerun.
 
 ## Conformance Snapshot
 
@@ -79,8 +79,8 @@ The remaining full-suite NumPy wins are concentrated in large 2-D linalg transpo
 
 | Priority | Target | Why |
 | ---: | --- | --- |
-| 1 | NumRust large 2-D linalg transpose/copy paths | These account for most full-suite NumPy wins. |
-| 2 | NumRust contiguous scalar multiply | Still a NumPy win in the authoritative full run. |
+| 1 | NumRust contiguous scalar multiply | Still a 1.6% NumPy near-tie win in the authoritative full run. |
+| 2 | Broader NumRust ASV coverage | The current supported slice ranks higher, but full NumPy-scale scope needs more translated cases. |
 | 3 | Broader externally derived SciPy and StatsModels cases | Current wins are strong but the benchmark surface is narrow. |
 | 4 | More cases for FrameRust, GraphRust, MediaExtractRust, ValidateRust, ImageRust, and TextRust | The current slices all beat Python, but production-grade parity needs broader workloads. |
 | 5 | Per-crate README files and Rust-native benchmark suites | Public users need crate-local usage, scope, and reproducible performance gates. |

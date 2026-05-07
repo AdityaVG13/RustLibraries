@@ -8,8 +8,8 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 
 | Suite | Cases | Rust wins | Python wins | Speedup summary | Checksum failures |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| NumRust vs NumPy, external ASV-derived | 53 | 43 | 10 | 8.92x geomean | 0 |
-| NumRust vs NumPy, focused prior-loss rerun | 10 | 9 | 1 | 7 near ties within 2% | 0 |
+| NumRust vs NumPy, external ASV-derived | 53 | 52 | 1 | 9.95x geomean | 0 |
+| NumRust vs NumPy, focused prior-loss rerun | 1 | 1 | 0 | 1.08x | 0 |
 | StatsRust vs StatsModels | 4 | 4 | 0 | 3.51x geomean | 0 |
 | SciRust vs SciPy | 9 | 9 | 0 | 19.11x geomean | 0 |
 | FrameRust vs Pandas | 1 | 1 | 0 | 2.14x | 0 |
@@ -36,7 +36,7 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 - `min_all`, `max_all`, `prod_all`, `var_all`, and `std_all` cover NumPy ASV stats-reduction patterns.
 - `norm_l2`, `det`, and `solve` cover NumPy ASV small-linalg patterns without calling LAPACK.
 - `outer_product`, `mul_scalar`, repeated trailing-tile multiply, `weighted_axis1_sum`, and `bilinear_form` cover selected NumPy ASV einsum-style contraction patterns; contiguous `f64` scalar multiply and repeated trailing-tile multiply have aarch64 NEON paths.
-- `matmul` covers vector, matrix, and broadcasted batched matrix multiplication semantics; contiguous array-level `f64`/`f32` vector-vector, matrix-vector, vector-matrix, 2-D matrix-matrix, and selected transposed-view matrix-matrix paths dispatch straight to vDSP/BLAS.
+- `matmul` covers vector, matrix, and broadcasted batched matrix multiplication semantics; contiguous array-level `f64`/`f32` vector-vector, matrix-vector, vector-matrix, 2-D matrix-matrix, and selected transposed-view matrix-matrix paths dispatch straight to vDSP/BLAS. On macOS, transposed `f64`/`f32` 2-D GEMM uses column-major-swapped CBLAS calls to avoid the slower row-major transpose path.
 - `inner2d` covers the 2-D NumPy `inner` slice and dispatches contiguous `f64`/`f32` cases to transpose-B BLAS.
 - `tensordot_axes` covers explicit-axis tensor contractions and uses packed BLAS for contiguous `f64` contraction plans, including direct-pack elision when an operand already matches the GEMM layout.
 - Contiguous `outer_product`, `weighted_axis1_sum`, and `bilinear_form` use Accelerate BLAS rank-1, matrix-vector, and dot kernels on macOS.
@@ -59,9 +59,9 @@ The benchmark harnesses run one untimed warmup for each case on both engines, th
 
 `benchmarks/compare_numpy.py` is the NumPy comparison harness. Current evidence is written to `benchmark-results/numrust-vs-numpy.md`; the latest run ranks NumRust higher on 8 of 8 targeted cases, with 1.53x geometric-mean speedup against NumPy 2.4.4 on this machine.
 
-`benchmarks/external_numpy_cases.py` is the externally derived harness. It pins NumPy ASV and Array API test sources in `benchmark-results/external-source-lock.json`, then translates supported NumPy ASV cases without filtering out losses. Latest run: NumRust wins 43 of 53 supported external cases, NumPy wins 10, with 8.92x geometric-mean speedup. The current NumPy wins are concentrated in 2-D linalg transpose/copy cases plus contiguous scalar multiply; 1 case is a near-tie within 2%. The harness now uses 5 full passes per engine, alternates engine order, aggregates each case by median across passes, supports sharded one-pass artifacts for long runs, writes pass samples for NumPy-winning rows, emits loss-triage artifacts sorted by worst NumPy win, and can rerun focused NumPy-winning rows after backend experiments with explicit stability metadata. This ranks NumRust higher on supported external cases only and does not prove global NumPy replacement status.
+`benchmarks/external_numpy_cases.py` is the externally derived harness. It pins NumPy ASV and Array API test sources in `benchmark-results/external-source-lock.json`, then translates supported NumPy ASV cases without filtering out losses. Latest run: NumRust wins 52 of 53 supported external cases, NumPy wins 1, with 9.95x geometric-mean speedup. The remaining NumPy win is the contiguous scalar multiply case `asv_linalg_einsum_scalar_mul_f64_480000`, and it is a 1.6% near tie in the authoritative full report. The harness now uses 5 full passes per engine, alternates engine order, aggregates each case by median across passes, supports sharded one-pass artifacts for long runs, writes pass samples for NumPy-winning rows, emits loss-triage artifacts sorted by worst NumPy win, and can rerun focused NumPy-winning rows after backend experiments with explicit stability metadata. This ranks NumRust higher on supported external cases only and does not prove global NumPy replacement status.
 
-The latest 3-pass focused rerun of the 10 NumPy-winning rows reports NumRust wins 9 of 10, NumPy wins 1, 7 near ties within 2%, and no checksum failures. This is a triage signal for timing sensitivity, not a replacement for the full 53-case score.
+The latest 3-pass focused rerun of the single NumPy-winning row reports NumRust wins 1 of 1, NumPy wins 0, 1.08x speedup, and no checksum failures. This is a triage signal for timing sensitivity, not a replacement for the full 53-case score.
 
 `benchmarks/compare_statsmodels.py` is the same-data StatsModels comparison harness for the implemented StatsRust slice. Latest run: StatsRust wins 4 of 4 cases against StatsModels 0.14.6, StatsModels wins 0, with 3.51x geometric-mean speedup and no checksum failures. This does not prove full StatsModels replacement status.
 

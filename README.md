@@ -16,8 +16,8 @@ Full tables, rerun commands, and claim gates live in [`docs/benchmark-dashboard.
 
 | Library slice | Rust crate | Python baseline | Cases | Rust wins | Python wins | Speedup summary | Report |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| NumPy core, external ASV-derived | `numrs-core` | NumPy 2.4.4 | 53 | 43 | 10 | 8.92x geomean | [`external-numpy-asv-inspired.md`](benchmark-results/external-numpy-asv-inspired.md) |
-| NumPy prior-loss focused rerun | `numrs-core` | NumPy 2.4.4 | 10 | 9 | 1 | 7 near ties within 2% | [`external-numpy-loss-focused.md`](benchmark-results/external-numpy-loss-focused.md) |
+| NumPy core, external ASV-derived | `numrs-core` | NumPy 2.4.4 | 53 | 52 | 1 | 9.95x geomean | [`external-numpy-asv-inspired.md`](benchmark-results/external-numpy-asv-inspired.md) |
+| NumPy prior-loss focused rerun | `numrs-core` | NumPy 2.4.4 | 1 | 1 | 0 | 1.08x | [`external-numpy-loss-focused.md`](benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | 4 | 4 | 0 | 3.51x geomean | [`statsrust-vs-statsmodels.md`](benchmark-results/statsrust-vs-statsmodels.md) |
 | Scientific routines | `scirust` | SciPy 1.17.1 | 9 | 9 | 0 | 19.11x geomean | [`scirust-vs-scipy.md`](benchmark-results/scirust-vs-scipy.md) |
 | Data aggregation | `framerust` | Pandas 3.0.2 | 1 | 1 | 0 | 2.14x | [`framerust-vs-pandas.md`](benchmark-results/framerust-vs-pandas.md) |

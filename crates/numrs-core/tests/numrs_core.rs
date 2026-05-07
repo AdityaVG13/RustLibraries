@@ -364,6 +364,69 @@ fn performs_2d_dot_on_contiguous_and_strided_views() {
 }
 
 #[test]
+fn performs_float_dot_on_transposed_blas_views() {
+    let left = Array::from_vec(vec![2, 3], vec![1.0_f64, 2.0, 3.0, 4.0, 5.0, 6.0]).unwrap();
+    let right_source = Array::from_vec(
+        vec![4, 3],
+        vec![
+            7.0_f64, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0,
+        ],
+    )
+    .unwrap();
+    let right_t = right_source.transpose();
+    let out = left.view().dot2d(&right_t).unwrap();
+    assert_eq!(out.shape(), &[2, 4]);
+    assert_eq!(
+        out.as_slice(),
+        &[50.0, 68.0, 86.0, 104.0, 122.0, 167.0, 212.0, 257.0]
+    );
+
+    let left_source = Array::from_vec(vec![3, 2], vec![1.0_f64, 4.0, 2.0, 5.0, 3.0, 6.0]).unwrap();
+    let left_t = left_source.transpose();
+    let right = Array::from_vec(vec![3, 2], vec![7.0_f64, 8.0, 9.0, 10.0, 11.0, 12.0]).unwrap();
+    let out = left_t.dot2d(&right.view()).unwrap();
+    assert_eq!(out.shape(), &[2, 2]);
+    assert_eq!(out.as_slice(), &[58.0, 64.0, 139.0, 154.0]);
+
+    let gram_right = left.transpose();
+    let out = left.view().matmul(&gram_right).unwrap();
+    assert_eq!(out.shape(), &[2, 2]);
+    assert_eq!(out.as_slice(), &[14.0, 32.0, 32.0, 77.0]);
+
+    let gram_left = left.transpose();
+    let out = gram_left.matmul(&left.view()).unwrap();
+    assert_eq!(out.shape(), &[3, 3]);
+    assert_eq!(
+        out.as_slice(),
+        &[17.0, 22.0, 27.0, 22.0, 29.0, 36.0, 27.0, 36.0, 45.0]
+    );
+
+    let left32 = Array::from_vec(vec![2, 3], vec![1.0_f32, 2.0, 3.0, 4.0, 5.0, 6.0]).unwrap();
+    let right32_source = Array::from_vec(
+        vec![4, 3],
+        vec![
+            7.0_f32, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0,
+        ],
+    )
+    .unwrap();
+    let right32_t = right32_source.transpose();
+    let out = left32.view().dot2d(&right32_t).unwrap();
+    assert_eq!(out.shape(), &[2, 4]);
+    assert_eq!(
+        out.as_slice(),
+        &[50.0, 68.0, 86.0, 104.0, 122.0, 167.0, 212.0, 257.0]
+    );
+
+    let left32_source =
+        Array::from_vec(vec![3, 2], vec![1.0_f32, 4.0, 2.0, 5.0, 3.0, 6.0]).unwrap();
+    let left32_t = left32_source.transpose();
+    let right32 = Array::from_vec(vec![3, 2], vec![7.0_f32, 8.0, 9.0, 10.0, 11.0, 12.0]).unwrap();
+    let out = left32_t.dot2d(&right32.view()).unwrap();
+    assert_eq!(out.shape(), &[2, 2]);
+    assert_eq!(out.as_slice(), &[58.0, 64.0, 139.0, 154.0]);
+}
+
+#[test]
 fn performs_numpy_style_matmul() {
     let left = Array::from_vec(vec![3], vec![1_i64, 2, 3]).unwrap();
     let right = Array::from_vec(vec![3], vec![4_i64, 5, 6]).unwrap();
