@@ -42,6 +42,8 @@ This file is intentionally committed and should be updated in normal git commits
 - [x] MediaExtractRust v0: text/Markdown normalization, HTML text extraction, and uncompressed PDF literal text extraction.
 - [x] MediaExtractRust benchmark v0: same-data HTML and uncompressed PDF text extraction comparison against Python libraries.
 - [ ] LearnRust: scikit-learn-style classical ML APIs and benchmarks.
+- [x] LearnRust v0: dense matrices, StandardScaler, nearest-centroid classification, accuracy, and confusion matrix.
+- [x] LearnRust benchmark v0: same-data StandardScaler, nearest-centroid, and metrics comparison against scikit-learn.
 - [ ] PlotRust: Matplotlib/Seaborn/Plotly-style visualization APIs.
 - [ ] ImageRust: Pillow/scikit-image-style image processing APIs.
 - [x] ImageRust v0: PPM decode, grayscale conversion, nearest-neighbor resize, and thresholding.
