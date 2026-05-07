@@ -95,14 +95,6 @@ impl Column {
             Self::F64(_) => Err(FrameError::UnsupportedKeyColumn(name.to_string())),
         }
     }
-
-    fn numeric_at(&self, row: usize, name: &str) -> Result<f64> {
-        match self {
-            Self::F64(values) => Ok(values[row]),
-            Self::I64(values) => Ok(values[row] as f64),
-            Self::Bool(_) | Self::Text(_) => Err(FrameError::NonNumericColumn(name.to_string())),
-        }
-    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
@@ -277,15 +269,108 @@ pub struct GroupBy<'a> {
     key: String,
 }
 
+#[derive(Debug, Clone, Copy)]
+enum NumericColumn<'a> {
+    F64(&'a [f64]),
+    I64(&'a [i64]),
+}
+
+impl NumericColumn<'_> {
+    fn get(self, row: usize) -> f64 {
+        match self {
+            Self::F64(values) => values[row],
+            Self::I64(values) => values[row] as f64,
+        }
+    }
+}
+
+#[derive(Debug)]
+struct ResolvedAggregation<'a> {
+    kind: AggregationKind,
+    output: String,
+    numeric: Option<NumericColumn<'a>>,
+}
+
 impl GroupBy<'_> {
     pub fn agg(&self, aggs: &[Aggregation]) -> Result<Frame> {
         let key_column = self.frame.column(&self.key)?;
-        for agg in aggs {
-            if let Some(column) = &agg.column {
-                self.frame.column(column)?;
+        let resolved = self.resolve_aggs(aggs)?;
+        if let Column::I64(keys) = key_column {
+            if let Some(frame) = self.agg_dense_i64(keys, &resolved)? {
+                return Ok(frame);
             }
         }
+        self.agg_generic(key_column, &resolved)
+    }
 
+    fn resolve_aggs<'a>(&'a self, aggs: &[Aggregation]) -> Result<Vec<ResolvedAggregation<'a>>> {
+        aggs.iter()
+            .map(|agg| {
+                let numeric = match agg.kind {
+                    AggregationKind::Count => None,
+                    _ => {
+                        let name = agg.column.as_ref().expect("numeric aggregation column");
+                        let column = self.frame.column(name)?;
+                        Some(match column {
+                            Column::F64(values) => NumericColumn::F64(values),
+                            Column::I64(values) => NumericColumn::I64(values),
+                            Column::Bool(_) | Column::Text(_) => {
+                                return Err(FrameError::NonNumericColumn(name.clone()));
+                            }
+                        })
+                    }
+                };
+                Ok(ResolvedAggregation {
+                    kind: agg.kind,
+                    output: agg.output.clone(),
+                    numeric,
+                })
+            })
+            .collect()
+    }
+
+    fn agg_dense_i64(
+        &self,
+        key_values: &[i64],
+        aggs: &[ResolvedAggregation<'_>],
+    ) -> Result<Option<Frame>> {
+        if key_values.is_empty() {
+            return self
+                .finish_i64_keys(Vec::new(), vec![Vec::new(); aggs.len()], aggs)
+                .map(Some);
+        }
+        let min = *key_values.iter().min().expect("non-empty keys");
+        let max = *key_values.iter().max().expect("non-empty keys");
+        let range = (max as i128) - (min as i128) + 1;
+        if range <= 0 || range as usize > self.frame.nrows.max(1) * 4 {
+            return Ok(None);
+        }
+
+        let mut group_index = vec![usize::MAX; range as usize];
+        let mut keys = Vec::new();
+        let mut states: Vec<Vec<AggState>> = vec![Vec::new(); aggs.len()];
+
+        for (row, key) in key_values.iter().enumerate() {
+            let offset = (*key - min) as usize;
+            let idx = if group_index[offset] == usize::MAX {
+                let idx = keys.len();
+                group_index[offset] = idx;
+                keys.push(*key);
+                for state_column in &mut states {
+                    state_column.push(AggState::new());
+                }
+                idx
+            } else {
+                group_index[offset]
+            };
+
+            update_states(row, idx, aggs, &mut states);
+        }
+
+        self.finish_i64_keys(keys, states, aggs).map(Some)
+    }
+
+    fn agg_generic(&self, key_column: &Column, aggs: &[ResolvedAggregation<'_>]) -> Result<Frame> {
         let mut group_index = HashMap::new();
         let mut keys = Vec::new();
         let mut states: Vec<Vec<AggState>> = vec![Vec::new(); aggs.len()];
@@ -305,22 +390,37 @@ impl GroupBy<'_> {
                 }
             };
 
-            for (agg_idx, agg) in aggs.iter().enumerate() {
-                match agg.kind {
-                    AggregationKind::Count => states[agg_idx][idx].count_row(),
-                    _ => {
-                        let column_name = agg.column.as_ref().expect("numeric aggregation column");
-                        let value = self
-                            .frame
-                            .column(column_name)?
-                            .numeric_at(row, column_name)?;
-                        states[agg_idx][idx].push(value);
-                    }
-                }
-            }
+            update_states(row, idx, aggs, &mut states);
         }
 
-        let mut columns = vec![(self.key.clone(), keys_to_column(keys))];
+        self.finish_keys(keys, states, aggs)
+    }
+
+    fn finish_i64_keys(
+        &self,
+        keys: Vec<i64>,
+        states: Vec<Vec<AggState>>,
+        aggs: &[ResolvedAggregation<'_>],
+    ) -> Result<Frame> {
+        self.finish_columns(Column::I64(keys), states, aggs)
+    }
+
+    fn finish_keys(
+        &self,
+        keys: Vec<Key>,
+        states: Vec<Vec<AggState>>,
+        aggs: &[ResolvedAggregation<'_>],
+    ) -> Result<Frame> {
+        self.finish_columns(keys_to_column(keys), states, aggs)
+    }
+
+    fn finish_columns(
+        &self,
+        key_column: Column,
+        states: Vec<Vec<AggState>>,
+        aggs: &[ResolvedAggregation<'_>],
+    ) -> Result<Frame> {
+        let mut columns = vec![(self.key.clone(), key_column)];
         for (agg_idx, agg) in aggs.iter().enumerate() {
             let values = states[agg_idx]
                 .iter()
@@ -335,6 +435,23 @@ impl GroupBy<'_> {
             columns.push((agg.output.clone(), column));
         }
         Frame::from_columns(columns)
+    }
+}
+
+fn update_states(
+    row: usize,
+    group_idx: usize,
+    aggs: &[ResolvedAggregation<'_>],
+    states: &mut [Vec<AggState>],
+) {
+    for (agg_idx, agg) in aggs.iter().enumerate() {
+        match agg.kind {
+            AggregationKind::Count => states[agg_idx][group_idx].count_row(),
+            _ => {
+                let value = agg.numeric.expect("resolved numeric aggregation").get(row);
+                states[agg_idx][group_idx].push(value);
+            }
+        }
     }
 }
 
