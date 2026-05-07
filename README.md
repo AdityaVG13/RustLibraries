@@ -31,7 +31,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 
 ### Open
 
-- [ ] 2026-05-07: Add GitHub Actions for format, clippy, tests, Python evidence schema checks, and source-lock verification. Target: `.github/workflows/ci.yml`.
+- [x] 2026-05-07: Add GitHub Actions for format, clippy, tests, Python evidence schema checks, and source-lock verification. Evidence: `.github/workflows/ci.yml`.
 - [ ] 2026-05-07: Add more externally derived NumPy ASV cases without filtering out losses. Target: `benchmarks/external_numpy_cases.py`.
 - [ ] 2026-05-07: Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. Target: `docs/performance.md`.
 - [ ] 2026-05-07: Grow StatsRust and SciRust with more externally derived benchmarks. Target: `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py`.

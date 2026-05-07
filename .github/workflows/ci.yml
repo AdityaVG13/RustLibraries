@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify:
+    name: Verify workspace
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Check formatting
+        run: cargo fmt --all --check
+
+      - name: Run clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: Run Rust tests
+        run: cargo test --workspace
+
+      - name: Check Python benchmark scripts
+        run: uv run python -m py_compile benchmarks/external_numpy_cases.py benchmarks/external_sources.py benchmarks/test_external_evidence.py
+
+      - name: Run evidence schema tests
+        run: uv run --with numpy python -m unittest test_external_evidence.py
+        working-directory: benchmarks
+
+      - name: Verify pinned external sources
+        run: uv run benchmarks/external_sources.py --verify-pinned

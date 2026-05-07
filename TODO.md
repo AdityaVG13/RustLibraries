@@ -22,6 +22,6 @@ This file is intentionally committed and should be updated in normal git commits
 
 ## Release Readiness
 
-- Add CI for format, clippy, tests, Python benchmark schema checks, and source-lock verification.
+- [x] Add CI for format, clippy, tests, Python benchmark schema checks, and source-lock verification.
 - Add crate-level publishing metadata before any crates.io release.
 - Keep TODO changes committed with the implementation commits they describe.
