@@ -31,6 +31,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07: Start FrameRust with typed columns, validated frames, first-seen-order groupby, and `count`/`sum`/`mean`/`min`/`max` aggregations. Evidence: `crates/framerust`.
 - [x] 2026-05-07: Add same-data FrameRust vs Pandas benchmark evidence for the implemented groupby aggregation slice. Evidence: `benchmarks/compare_pandas.py`, `benchmark-results/framerust-vs-pandas.md`.
 - [x] 2026-05-07: Start GraphRust with CSR graph construction, BFS distances, connected components, and PageRank. Evidence: `crates/graphrust`.
+- [x] 2026-05-07: Add same-data GraphRust vs NetworkX benchmark evidence for the implemented BFS slice. Evidence: `benchmarks/compare_networkx.py`, `benchmark-results/graphrust-vs-networkx.md`.
 
 ### Open
 
@@ -75,6 +76,7 @@ cargo run -p numrs-core --example basic
 cargo run --release -p numrs-core --example microbench
 uv run benchmarks/compare_numpy.py
 uv run --with numpy --with pandas benchmarks/compare_pandas.py
+uv run --with networkx benchmarks/compare_networkx.py
 uv run benchmarks/external_sources.py --update-lock
 uv run --with numpy python benchmarks/external_numpy_cases.py
 uv run benchmarks/verify_array_api_namespace.py
@@ -104,6 +106,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `docs/rigortrail.md`: RigorTrail design and usage notes.
 - `benchmark-results/numrust-vs-numpy.md`: current NumRust vs NumPy evidence.
 - `benchmark-results/framerust-vs-pandas.md`: current FrameRust vs Pandas evidence for the implemented aggregation slice.
+- `benchmark-results/graphrust-vs-networkx.md`: current GraphRust vs NetworkX evidence for the implemented BFS slice.
 - `benchmark-results/external-numpy-asv-inspired.md`: externally derived NumPy ASV evidence.
 - `benchmark-results/array-api-tests-focused-probe.md`: pinned upstream focused Array API probe, currently 1109 passed, 4 skipped, out of 1113 collected.
 - `benchmark-results/array-api-tests-full-maxfail.md`: pinned upstream full Array API 2023.12 probe, currently 1161 passed, 58 skipped, out of 1219 collected.
