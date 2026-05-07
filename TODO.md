@@ -17,7 +17,7 @@ This file is intentionally committed and should be updated in normal git commits
 - [x] NumRust transposed GEMM v1: use column-major-swapped CBLAS for macOS transposed `f64`/`f32` 2-D GEMM and regenerate full external NumPy ASV-derived evidence at 52 of 53 NumRust wins.
 - [x] NumRust selection v1: add `nonzero`, broadcasted `where_select`, checksum-validated targeted NumPy benchmark rows, and contiguous selection fast paths. Latest targeted evidence: 10 NumRust wins, 0 NumPy wins, 0 checksum failures.
 - [x] NumRust targeted loss cleanup: optimize `where_select_f64_loop` and near-tie `dot_f64_192` without hiding Python-winning rows. Latest targeted evidence: 10 NumRust wins, 0 NumPy wins, 1.67x geomean, 0 checksum failures.
-- [ ] NumRust external near-tie cleanup: optimize the two current full-report copied-transpose linalg losses without hiding rows. Latest external evidence: 51 NumRust wins, 2 NumPy wins, 8.87x geomean, 0 checksum failures. Latest focused rerun flips the dot row to NumRust and leaves copied-transpose matmul as a NumPy near-tie.
+- [ ] NumRust external linalg stability cleanup: optimize the current full-report `asv_linalg_matmul_trans_a_at_f64_150x400_400x150` loss without hiding rows. Latest external evidence: 57 NumRust wins, 1 NumPy win, 8.63x geomean, 0 checksum failures. Latest focused rerun flips that row to NumRust, so the authoritative full report remains the target.
 
 ## Ecosystem
 
