@@ -206,6 +206,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=100_000,
     ),
     CaseSpec(
+        name="asv_manipulate_broadcast_arrays_i32_128x256",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="BroadcastArrays.time_broadcast_arrays(shape=(128, 256), ndtype=int32)",
+        translation="same operation, shape, and dtype; deterministic arange values instead of RNG setup, repeated because ASV auto-calibrates metadata timings",
+        repetitions=100_000,
+    ),
+    CaseSpec(
         name="asv_manipulate_broadcast_arrays_f64_512x1024",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_manipulate.py",
@@ -234,6 +242,14 @@ RUNNABLE_CASES: list[CaseSpec] = [
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_manipulate.py",
         source_symbol="BroadcastArraysTo.time_broadcast_to(size=64, ndtype=float32)",
+        translation="same operation, shape, and dtype; deterministic arange values instead of RNG setup, repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_broadcast_to_i32_64",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="BroadcastArraysTo.time_broadcast_to(size=64, ndtype=int32)",
         translation="same operation, shape, and dtype; deterministic arange values instead of RNG setup, repeated because ASV auto-calibrates metadata timings",
         repetitions=200_000,
     ),
@@ -935,7 +951,7 @@ def bench_numpy() -> dict:
         millis, checksum = median_ms(broadcast_arrays, rounds=7)
         cases.append(
             {
-                "name": f"asv_manipulate_broadcast_arrays_{dtype_name.replace('float', 'f')}_{rows}x{cols}",
+                "name": f"asv_manipulate_broadcast_arrays_{dtype_name.replace('float', 'f').replace('int', 'i')}_{rows}x{cols}",
                 "millis": millis,
                 "checksum": checksum,
             }
@@ -944,6 +960,7 @@ def bench_numpy() -> dict:
     append_broadcast_arrays("float64", 16, 32, 200_000)
     append_broadcast_arrays("float64", 128, 256, 100_000)
     append_broadcast_arrays("float32", 128, 256, 100_000)
+    append_broadcast_arrays("int32", 128, 256, 100_000)
     append_broadcast_arrays("float64", 512, 1024, 100_000)
 
     def append_broadcast_to(dtype_name: str, size: int) -> None:
@@ -959,7 +976,7 @@ def bench_numpy() -> dict:
         millis, checksum = median_ms(broadcast_to, rounds=7)
         cases.append(
             {
-                "name": f"asv_manipulate_broadcast_to_{dtype_name.replace('float', 'f')}_{size}",
+                "name": f"asv_manipulate_broadcast_to_{dtype_name.replace('float', 'f').replace('int', 'i')}_{size}",
                 "millis": millis,
                 "checksum": checksum,
             }
@@ -968,6 +985,7 @@ def bench_numpy() -> dict:
     append_broadcast_to("float64", 16)
     append_broadcast_to("float64", 64)
     append_broadcast_to("float32", 64)
+    append_broadcast_to("int32", 64)
     append_broadcast_to("float64", 512)
 
     concat_arrays = [
@@ -1734,10 +1752,12 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         "asv_manipulate_broadcast_arrays_f64_16x32",
         "asv_manipulate_broadcast_arrays_f64_128x256",
         "asv_manipulate_broadcast_arrays_f32_128x256",
+        "asv_manipulate_broadcast_arrays_i32_128x256",
         "asv_manipulate_broadcast_arrays_f64_512x1024",
         "asv_manipulate_broadcast_to_f64_16",
         "asv_manipulate_broadcast_to_f64_64",
         "asv_manipulate_broadcast_to_f32_64",
+        "asv_manipulate_broadcast_to_i32_64",
         "asv_manipulate_broadcast_to_f64_512",
         "asv_manipulate_concatenate_ax0_f64_32x64_n5",
         "asv_manipulate_concatenate_ax1_f64_32x64_n5",
@@ -1865,13 +1885,14 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
             return checksum
 
         append_case(
-            f"asv_manipulate_broadcast_arrays_{dtype_name.replace('float', 'f')}_{rows}x{cols}",
+            f"asv_manipulate_broadcast_arrays_{dtype_name.replace('float', 'f').replace('int', 'i')}_{rows}x{cols}",
             broadcast_arrays,
         )
 
     append_selected_broadcast_arrays("float64", 16, 32, 200_000)
     append_selected_broadcast_arrays("float64", 128, 256, 100_000)
     append_selected_broadcast_arrays("float32", 128, 256, 100_000)
+    append_selected_broadcast_arrays("int32", 128, 256, 100_000)
     append_selected_broadcast_arrays("float64", 512, 1024, 100_000)
 
     def append_selected_broadcast_to(dtype_name: str, size: int) -> None:
@@ -1885,13 +1906,14 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
             return checksum
 
         append_case(
-            f"asv_manipulate_broadcast_to_{dtype_name.replace('float', 'f')}_{size}",
+            f"asv_manipulate_broadcast_to_{dtype_name.replace('float', 'f').replace('int', 'i')}_{size}",
             broadcast_to,
         )
 
     append_selected_broadcast_to("float64", 16)
     append_selected_broadcast_to("float64", 64)
     append_selected_broadcast_to("float32", 64)
+    append_selected_broadcast_to("int32", 64)
     append_selected_broadcast_to("float64", 512)
 
     def concatenate_ax0() -> float:

@@ -93,6 +93,13 @@ fn paired_broadcast_checksum_f32(left: &ArrayView<'_, f32>, right: &ArrayView<'_
         + shape_checksum(right.shape())
 }
 
+fn paired_broadcast_checksum_i32(left: &ArrayView<'_, i32>, right: &ArrayView<'_, i32>) -> f64 {
+    sample_checksum_numeric(left)
+        + sample_checksum_numeric(right)
+        + shape_checksum(left.shape())
+        + shape_checksum(right.shape())
+}
+
 fn read_lstsq_fixture() -> numrs_core::Result<(Array<f64>, Array<f64>)> {
     let bytes = fs::read("benchmark-results/numpy-asv-lstsq-f64.bin").map_err(|err| {
         numrs_core::NumRsError::InvalidShape(format!(
@@ -476,6 +483,25 @@ fn main() -> numrs_core::Result<()> {
         checksum,
     });
 
+    let source = Array::from_shape_fn(vec![128, 256], |idx| (idx[0] * 256 + idx[1]) as i32)?;
+    let scalar_one = Array::full(vec![1], 1_i32)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                let out = Array::broadcast_arrays(&[&source, &scalar_one]).unwrap();
+                checksum += paired_broadcast_checksum_i32(&out[0], &out[1]);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_broadcast_arrays_i32_128x256",
+        millis,
+        checksum,
+    });
+
     for (name, size) in [
         ("asv_manipulate_broadcast_to_f64_16", 16usize),
         ("asv_manipulate_broadcast_to_f64_64", 64),
@@ -514,6 +540,24 @@ fn main() -> numrs_core::Result<()> {
     );
     cases.push(Case {
         name: "asv_manipulate_broadcast_to_f32_64",
+        millis,
+        checksum,
+    });
+
+    let source = Array::from_shape_fn(vec![64], |idx| idx[0] as i32)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = source.broadcast_to(&[64, 64]).unwrap();
+                checksum += shape_checksum(out.shape());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_broadcast_to_i32_64",
         millis,
         checksum,
     });

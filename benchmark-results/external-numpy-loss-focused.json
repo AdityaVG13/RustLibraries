@@ -1,55 +1,24 @@
 {
   "benchmark_pass_order": "alternating; NumRust first on even passes, NumPy first on odd passes",
-  "benchmark_passes_per_engine": 3,
+  "benchmark_passes_per_engine": 1,
   "checksum_failures": [],
-  "focused_cases": 1,
+  "focused_cases": 0,
   "global_numpy_replacement_claim": false,
   "near_tie_relative_margin": 0.02,
   "numpy_wins": 0,
-  "numrust_wins": 1,
+  "numrust_wins": 0,
   "purpose": "Focused rerun of current NumPy-winning external rows for optimization triage.",
-  "rows": [
-    {
-      "baseline_speedup_vs_numpy": 0.9886203214815652,
-      "checksum_abs_diff": 0.0,
-      "checksum_match": true,
-      "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
-      "near_tie": false,
-      "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 30.602000013459474,
-      "numpy_pass_millis": [
-        30.79358401009813,
-        30.602000013459474,
-        30.558334023226053
-      ],
-      "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 29.066375,
-      "numrust_pass_millis": [
-        29.086208,
-        29.066375,
-        29.045792
-      ],
-      "priority": 1,
-      "source_id": "numpy-asv",
-      "source_path": "benchmarks/benchmarks/bench_linalg.py",
-      "source_symbol": "Eindot.time_matmul_trans_a_at",
-      "speedup_vs_numpy": 1.0528316659184185,
-      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally",
-      "winner": "numrust"
-    }
-  ],
+  "rows": [],
   "source_report": "benchmark-results/external-numpy-asv-inspired.json",
   "stability": {
     "authoritative_score_source": "benchmark-results/external-numpy-asv-inspired.json",
     "focused_near_ties": 0,
-    "focused_numrust_winner_flips": 1,
+    "focused_numrust_winner_flips": 0,
     "focused_still_numpy_winners": 0,
     "interpretation": "Focused reruns are optimization and stability probes for current loss rows; the full external report remains the authoritative supported-case score.",
     "near_tie_cases": [],
-    "numrust_flip_cases": [
-      "asv_linalg_matmul_trans_a_at_f64_150x400_400x150"
-    ],
-    "source_numpy_winners": 1,
+    "numrust_flip_cases": [],
+    "source_numpy_winners": 0,
     "stable_numpy_win_cases": []
   }
 }
