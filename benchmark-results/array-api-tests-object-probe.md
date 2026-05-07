@@ -20,5 +20,5 @@ This report runs the pinned upstream `array-api-tests` pytest suite without patc
 ## Command
 
 ```sh
-/Users/aditya/.cache/uv/builds-v0/.tmpC4PNi7/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_constants.py /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_array_object.py::test_scalar_casting /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_array_object.py::test_getitem /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_array_object.py::test_getitem_masking -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=20
+python -m pytest <repo>/target/external/array-api-tests/array_api_tests/test_constants.py <repo>/target/external/array-api-tests/array_api_tests/test_array_object.py::test_scalar_casting <repo>/target/external/array-api-tests/array_api_tests/test_array_object.py::test_getitem <repo>/target/external/array-api-tests/array_api_tests/test_array_object.py::test_getitem_masking -q --tb=short --json-report --json-report-file=<repo>/target/array-api-tests-report.json --maxfail=20
 ```

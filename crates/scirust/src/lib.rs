@@ -1,4 +1,4 @@
-//! `scirust` is the SciPy-inspired FromPythonToRust numerical crate.
+//! `scirust` is the SciPy-inspired RustLibraries numerical crate.
 //!
 //! The first slice covers scalar bounded optimization, root finding, and
 //! numerical integration.

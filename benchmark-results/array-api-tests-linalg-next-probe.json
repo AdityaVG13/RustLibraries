@@ -1,6 +1,6 @@
 {
   "api_version": "2023.12",
-  "command": "/Users/aditya/.cache/uv/builds-v0/.tmpdf8UXy/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_matmul /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matmul /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_norm /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_power /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_rank -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=10",
+  "command": "python -m pytest <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_matmul <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matmul <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_norm <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_power <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_rank -q --tb=short --json-report --json-report-file=<repo>/target/array-api-tests-report.json --maxfail=10",
   "duration_seconds": 0.8826672080322169,
   "failures": [
     {

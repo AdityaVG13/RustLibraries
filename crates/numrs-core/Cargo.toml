@@ -1,10 +1,9 @@
 [package]
 name = "numrs-core"
 version = "0.1.0"
-description = "A pure Rust NumPy-core flagship experiment from FromPythonToRust."
+description = "A pure Rust NumPy-core flagship experiment from RustLibraries."
 edition.workspace = true
 license.workspace = true
-repository.workspace = true
 rust-version.workspace = true
 
 [lib]

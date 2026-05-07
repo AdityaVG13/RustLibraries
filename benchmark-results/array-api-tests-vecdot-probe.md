@@ -20,5 +20,5 @@ This report runs the pinned upstream `array-api-tests` pytest suite without patc
 ## Command
 
 ```sh
-/Users/aditya/.cache/uv/builds-v0/.tmpCkaNvE/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_vecdot /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_vecdot /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_vecdot_conj -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json
+python -m pytest <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_vecdot <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_vecdot <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_vecdot_conj -q --tb=short --json-report --json-report-file=<repo>/target/array-api-tests-report.json
 ```

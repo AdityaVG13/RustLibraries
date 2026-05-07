@@ -1,4 +1,4 @@
-# FromPythonToRust
+# RustLibraries
 
 Flagship-first porting lab for rebuilding top Python library ideas in pure Rust.
 
@@ -37,7 +37,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [ ] 2026-05-07: Add more externally derived NumPy ASV cases without filtering out losses. Target: `benchmarks/external_numpy_cases.py`.
 - [ ] 2026-05-07: Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. Target: `docs/performance.md`.
 - [ ] 2026-05-07: Grow StatsRust and SciRust with more externally derived benchmarks. Target: `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py`.
-- [ ] 2026-05-07: Keep release and CI work deferred until Aditya asks for it. Target: no `.github/workflows` or release automation for now.
+- [ ] 2026-05-07: Keep release and CI work deferred until the maintainer asks for it. Target: no `.github/workflows` or release automation for now.
 
 ### Production-Grade Gates
 

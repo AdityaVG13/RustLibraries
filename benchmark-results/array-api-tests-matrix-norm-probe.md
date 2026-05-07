@@ -20,5 +20,5 @@ This report runs the pinned upstream `array-api-tests` pytest suite without patc
 ## Command
 
 ```sh
-/Users/aditya/.cache/uv/builds-v0/.tmpFPfyE5/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_norm -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=5
+python -m pytest <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_matrix_norm -q --tb=short --json-report --json-report-file=<repo>/target/array-api-tests-report.json --maxfail=5
 ```

@@ -22,8 +22,8 @@ This file is intentionally committed and should be updated in normal git commits
 
 ## Release Readiness
 
-- [ ] Defer CI until Aditya asks for it.
-- [ ] Defer release automation and crates.io publishing metadata until Aditya asks for it.
+- [ ] Defer CI until the maintainer asks for it.
+- [ ] Defer release automation and crates.io publishing metadata until the maintainer asks for it.
 - Keep TODO changes committed with the implementation commits they describe.
 
 ## Enterprise Library Backlog

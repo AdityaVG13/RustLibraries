@@ -20,5 +20,5 @@ This report runs the pinned upstream `array-api-tests` pytest suite without patc
 ## Command
 
 ```sh
-/Users/aditya/.cache/uv/builds-v0/.tmp8iabD8/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_special_cases.py::test_unary -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json
+python -m pytest <repo>/target/external/array-api-tests/array_api_tests/test_special_cases.py::test_unary -q --tb=short --json-report --json-report-file=<repo>/target/array-api-tests-report.json
 ```

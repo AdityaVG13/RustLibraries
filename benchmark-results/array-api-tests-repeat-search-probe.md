@@ -20,5 +20,5 @@ This report runs the pinned upstream `array-api-tests` pytest suite without patc
 ## Command
 
 ```sh
-/Users/aditya/.cache/uv/builds-v0/.tmpXHWAIN/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_manipulation_functions.py::test_repeat /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_searching_functions.py::test_argmax /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_searching_functions.py::test_argmin /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_vecdot -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=10
+python -m pytest <repo>/target/external/array-api-tests/array_api_tests/test_manipulation_functions.py::test_repeat <repo>/target/external/array-api-tests/array_api_tests/test_searching_functions.py::test_argmax <repo>/target/external/array-api-tests/array_api_tests/test_searching_functions.py::test_argmin <repo>/target/external/array-api-tests/array_api_tests/test_linalg.py::test_linalg_vecdot -q --tb=short --json-report --json-report-file=<repo>/target/array-api-tests-report.json --maxfail=10
 ```

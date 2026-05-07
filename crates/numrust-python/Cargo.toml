@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Python Array API namespace bridge for numrs-core."
 edition.workspace = true
 license.workspace = true
-repository.workspace = true
 rust-version.workspace = true
 
 [lib]

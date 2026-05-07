@@ -1,4 +1,4 @@
-//! `statsrust` is the StatsModels-inspired FromPythonToRust library slice.
+//! `statsrust` is the StatsModels-inspired RustLibraries library slice.
 //!
 //! It starts a StatsModels-style Rust crate with ordinary least squares,
 //! logistic regression, model diagnostics, and prediction over the

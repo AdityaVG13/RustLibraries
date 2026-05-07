@@ -2,13 +2,13 @@
 
 ## Objective Restated
 
-Create all work inside `/Users/aditya/AI/GitHub Research/FromPythonToRust`; use Grill-Me before starting; perform expert research; invent/port a well-known top Python library to Rust; start flagship-first with NumPy core; keep detailed journey logs; test and document the result.
+Create all work inside `<repo>`; use Grill-Me before starting; perform expert research; invent/port a well-known top Python library to Rust; start flagship-first with NumPy core; keep detailed journey logs; test and document the result.
 
 ## Checklist
 
 | Requirement | Evidence |
 | --- | --- |
-| Everything lives inside `FromPythonToRust` | Workspace files are under `FromPythonToRust/Cargo.toml`, `FromPythonToRust/crates/numrs-core`, `FromPythonToRust/crates/numrust-python`, `FromPythonToRust/crates/statsrust`, `FromPythonToRust/crates/scirust`, `FromPythonToRust/crates/rigortrail`, `FromPythonToRust/python`, `FromPythonToRust/docs`, and `FromPythonToRust/logs`. |
+| Everything lives inside `RustLibraries` | Workspace files are under `RustLibraries/Cargo.toml`, `RustLibraries/crates/numrs-core`, `RustLibraries/crates/numrust-python`, `RustLibraries/crates/statsrust`, `RustLibraries/crates/scirust`, `RustLibraries/crates/rigortrail`, `RustLibraries/python`, `RustLibraries/docs`, and `RustLibraries/logs`. |
 | Grill-Me before starting | `logs/journey.md` records resolved questions: flagship first, NumPy core, pure Rust first, v0 scope. |
 | Expert research | `docs/research.md` records NumPy, Array API, and Rust `ndarray` sources and findings. |
 | Novel architecture | `docs/architecture.md` documents the layout/kernel split, Rust aliasing model, zero-copy metadata transforms, and optimization roadmap. |
@@ -20,7 +20,7 @@ Create all work inside `/Users/aditya/AI/GitHub Research/FromPythonToRust`; use 
 
 ## Verification Commands
 
-Executed from `FromPythonToRust`:
+Executed from `RustLibraries`:
 
 ```sh
 cargo fmt --all --check

@@ -20,5 +20,5 @@ This report runs the pinned upstream `array-api-tests` pytest suite without patc
 ## Command
 
 ```sh
-/Users/aditya/.cache/uv/builds-v0/.tmppRmjDi/bin/python -m pytest /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_zeros /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_ones /Users/aditya/AI/GitHub Research/FromPythonToRust/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_full -q --tb=short --json-report --json-report-file=/Users/aditya/AI/GitHub Research/FromPythonToRust/target/array-api-tests-report.json --maxfail=10
+python -m pytest <repo>/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_zeros <repo>/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_ones <repo>/target/external/array-api-tests/array_api_tests/test_creation_functions.py::test_full -q --tb=short --json-report --json-report-file=<repo>/target/array-api-tests-report.json --maxfail=10
 ```
