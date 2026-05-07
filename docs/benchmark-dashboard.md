@@ -15,8 +15,8 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Area | Rust crate | Python baseline | Evidence tier | Cases | Rust wins | Python wins | Full parity? | Speedup summary | Checksum failures | Report |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | --- |
 | NumPy targeted | `numrs-core` | NumPy 2.4.4 | Same-data implemented slice | 10 | 10 | 0 | No | 1.67x geomean | 0 | [`numrust-vs-numpy.md`](../benchmark-results/numrust-vs-numpy.md) |
-| NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 58 supported | 57 | 1 | No | 8.63x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
-| NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of current NumPy wins | 1 | 1 | 0 | No | 1.04x | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
+| NumPy core | `numrs-core` | NumPy 2.4.4 | Pinned NumPy ASV-derived suite | 62 supported | 61 | 1 | No | 8.06x geomean | 0 | [`external-numpy-asv-inspired.md`](../benchmark-results/external-numpy-asv-inspired.md) |
+| NumPy loss triage | `numrs-core` | NumPy 2.4.4 | Focused rerun of current NumPy wins | 1 | 0 | 1 | No | 0.996x near-tie loss | 0 | [`external-numpy-loss-focused.md`](../benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | Same-data implemented slice | 4 | 4 | 0 | No | 3.51x geomean | 0 | [`statsrust-vs-statsmodels.md`](../benchmark-results/statsrust-vs-statsmodels.md) |
 | Scientific routines | `scirust` | SciPy 1.17.1 | SciPy ASV translations plus same-data slice | 9 | 9 | 0 | No | 19.11x geomean | 0 | [`scirust-vs-scipy.md`](../benchmark-results/scirust-vs-scipy.md) |
 | Data aggregation | `framerust` | Pandas 3.0.2 | Same-data implemented slice | 1 | 1 | 0 | No | 2.14x | 0 | [`framerust-vs-pandas.md`](../benchmark-results/framerust-vs-pandas.md) |
@@ -34,16 +34,16 @@ This is the quick read for benchmark status. Every number below comes from commi
 | Pinned NumPy ASV commit | `80b1a07494964733f7d4571781608238f500e2dd` |
 | Pinned Array API tests commit | `55fcc60179efa2680ddd6cd926ddf17b83530e2b` |
 | Full passes per engine | 5 |
-| Supported external cases | 58 |
+| Supported external cases | 62 |
 | Unsupported external cases tracked | 1 |
-| NumRust wins | 57 |
+| NumRust wins | 61 |
 | NumPy wins | 1 |
-| Geomean speedup vs NumPy | 8.63x |
-| Near-tie cases within 2% | 3 |
+| Geomean speedup vs NumPy | 8.06x |
+| Near-tie cases within 2% | 5 |
 | Checksum failures | 0 |
 | Global NumPy replacement claim | false |
 
-The remaining full-suite NumPy win is `asv_linalg_matmul_trans_a_at_f64_150x400_400x150` at 0.94x in the authoritative full report. The focused 3-pass rerun flips that row to NumRust at 1.04x, but the full 58-case ASV-derived report remains the authoritative score until the whole suite is rerun.
+The remaining full-suite NumPy win is `asv_linalg_matmul_trans_a_at_f64_150x400_400x150` at 0.994x in the authoritative full report. The focused 3-pass rerun also keeps that row as a NumPy near-tie at 0.996x. It remains visible as the current optimization target.
 
 ## Conformance Snapshot
 
@@ -91,7 +91,7 @@ The remaining full-suite NumPy win is `asv_linalg_matmul_trans_a_at_f64_150x400_
 
 | Priority | Target | Why |
 | ---: | --- | --- |
-| 1 | NumRust transposed-view linalg timing stability | The authoritative full run still has one NumPy win on `asv_linalg_matmul_trans_a_at_f64_150x400_400x150`, while the focused rerun flips it to NumRust. |
+| 1 | NumRust transposed-view linalg timing stability | The authoritative full run still has one NumPy win on `asv_linalg_matmul_trans_a_at_f64_150x400_400x150`, and the focused rerun keeps it as a NumPy near-tie. |
 | 2 | Broader NumRust ASV coverage | The current supported slice ranks higher, but full NumPy-scale scope needs more translated cases. |
 | 3 | Broader externally derived SciPy and StatsModels cases | Current wins are strong but the benchmark surface is narrow. |
 | 4 | More cases for FrameRust, GraphRust, MediaExtractRust, ValidateRust, ImageRust, TextRust, and LearnRust | The current slices all beat Python, but production-grade parity needs broader workloads. |

@@ -385,6 +385,81 @@ fn main() -> numrs_core::Result<()> {
         checksum,
     });
 
+    let concat_arrays = (0..5)
+        .map(|array_idx| {
+            Array::from_shape_fn(vec![32, 64], |idx| {
+                (array_idx * 32 * 64 + idx[0] * 64 + idx[1]) as f64
+            })
+        })
+        .collect::<numrs_core::Result<Vec<_>>>()?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
+                let out = Array::concatenate(&concat_arrays, 0).unwrap();
+                checksum += edge_sum_f64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_concatenate_ax0_f64_32x64_n5",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
+                let out = Array::concatenate(&concat_arrays, 1).unwrap();
+                checksum += edge_sum_f64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_concatenate_ax1_f64_32x64_n5",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
+                let out = Array::stack(&concat_arrays, 0).unwrap();
+                checksum += edge_sum_f64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_stack_ax0_f64_32x64_n5",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
+                let out = Array::stack(&concat_arrays, 1).unwrap();
+                checksum += edge_sum_f64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_stack_ax1_f64_32x64_n5",
+        millis,
+        checksum,
+    });
+
     let dims_source = Array::full(vec![5, 2, 3, 1], 1.0_f64)?;
     let (millis, checksum) = bench(
         || {

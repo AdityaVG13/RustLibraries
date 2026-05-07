@@ -133,6 +133,48 @@ fn supports_fancy_indexing_take_and_boolean_masks() {
 }
 
 #[test]
+fn supports_concatenate_and_stack() {
+    let a = Array::from_vec(vec![2, 3], vec![0_i64, 1, 2, 3, 4, 5]).unwrap();
+    let b = Array::from_vec(vec![2, 3], vec![10_i64, 11, 12, 13, 14, 15]).unwrap();
+
+    let joined_rows = Array::concatenate(&[a.clone(), b.clone()], 0).unwrap();
+    assert_eq!(joined_rows.shape(), &[4, 3]);
+    assert_eq!(
+        joined_rows.as_slice(),
+        &[0, 1, 2, 3, 4, 5, 10, 11, 12, 13, 14, 15]
+    );
+
+    let joined_cols = Array::concatenate(&[a.clone(), b.clone()], 1).unwrap();
+    assert_eq!(joined_cols.shape(), &[2, 6]);
+    assert_eq!(
+        joined_cols.as_slice(),
+        &[0, 1, 2, 10, 11, 12, 3, 4, 5, 13, 14, 15]
+    );
+
+    let stacked_first = Array::stack(&[a.clone(), b.clone()], 0).unwrap();
+    assert_eq!(stacked_first.shape(), &[2, 2, 3]);
+    assert_eq!(stacked_first.as_slice(), joined_rows.as_slice());
+
+    let stacked_middle = Array::stack(&[a.clone(), b.clone()], 1).unwrap();
+    assert_eq!(stacked_middle.shape(), &[2, 2, 3]);
+    assert_eq!(
+        stacked_middle.as_slice(),
+        &[0, 1, 2, 10, 11, 12, 3, 4, 5, 13, 14, 15]
+    );
+
+    let stacked_last = Array::stack(&[a.clone(), b.clone()], -1).unwrap();
+    assert_eq!(stacked_last.shape(), &[2, 3, 2]);
+    assert_eq!(
+        stacked_last.as_slice(),
+        &[0, 10, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15]
+    );
+
+    let mismatch = Array::from_vec(vec![3, 2], vec![0_i64; 6]).unwrap();
+    assert!(Array::concatenate(&[a.clone(), mismatch.clone()], 0).is_err());
+    assert!(Array::stack(&[a, mismatch], 0).is_err());
+}
+
+#[test]
 fn supports_nonzero_and_where_selection() {
     let mask = Array::from_vec(
         vec![3, 4],

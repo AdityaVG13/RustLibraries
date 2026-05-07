@@ -101,6 +101,10 @@ SOURCES: list[dict[str, Any]] = [
                 "path": "benchmarks/benchmarks/bench_manipulate.py",
                 "symbols": [
                     "BroadcastArraysTo.time_broadcast_to",
+                    "ConcatenateStackArrays.time_concatenate_ax0",
+                    "ConcatenateStackArrays.time_concatenate_ax1",
+                    "ConcatenateStackArrays.time_stack_ax0",
+                    "ConcatenateStackArrays.time_stack_ax1",
                     "DimsManipulations.time_expand_dims",
                     "DimsManipulations.time_expand_dims_neg",
                     "DimsManipulations.time_squeeze_dims",

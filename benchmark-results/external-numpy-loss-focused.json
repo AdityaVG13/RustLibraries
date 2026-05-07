@@ -5,51 +5,53 @@
   "focused_cases": 1,
   "global_numpy_replacement_claim": false,
   "near_tie_relative_margin": 0.02,
-  "numpy_wins": 0,
-  "numrust_wins": 1,
+  "numpy_wins": 1,
+  "numrust_wins": 0,
   "purpose": "Focused rerun of current NumPy-winning external rows for optimization triage.",
   "rows": [
     {
-      "baseline_speedup_vs_numpy": 0.9437407946029848,
+      "baseline_speedup_vs_numpy": 0.9940358605106122,
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
       "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
-      "near_tie": false,
+      "near_tie": true,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 30.337250034790486,
+      "numpy_ms": 29.159708006773144,
       "numpy_pass_millis": [
-        30.854417011141777,
-        30.337250034790486,
-        29.207999992650002
+        29.234166955575347,
+        29.159708006773144,
+        29.03887501452118
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 29.126375,
+      "numrust_ms": 29.258,
       "numrust_pass_millis": [
-        28.953459,
-        29.126375,
-        30.807792
+        29.258,
+        29.120584,
+        42.918666
       ],
       "priority": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
       "source_symbol": "Eindot.time_matmul_trans_a_at",
-      "speedup_vs_numpy": 1.041573145809957,
+      "speedup_vs_numpy": 0.9966405088103474,
       "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally",
-      "winner": "numrust"
+      "winner": "numpy"
     }
   ],
   "source_report": "benchmark-results/external-numpy-asv-inspired.json",
   "stability": {
     "authoritative_score_source": "benchmark-results/external-numpy-asv-inspired.json",
-    "focused_near_ties": 0,
-    "focused_numrust_winner_flips": 1,
-    "focused_still_numpy_winners": 0,
+    "focused_near_ties": 1,
+    "focused_numrust_winner_flips": 0,
+    "focused_still_numpy_winners": 1,
     "interpretation": "Focused reruns are optimization and stability probes for current loss rows; the full external report remains the authoritative supported-case score.",
-    "near_tie_cases": [],
-    "numrust_flip_cases": [
+    "near_tie_cases": [
       "asv_linalg_matmul_trans_a_at_f64_150x400_400x150"
     ],
+    "numrust_flip_cases": [],
     "source_numpy_winners": 1,
-    "stable_numpy_win_cases": []
+    "stable_numpy_win_cases": [
+      "asv_linalg_matmul_trans_a_at_f64_150x400_400x150"
+    ]
   }
 }

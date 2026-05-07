@@ -201,6 +201,81 @@ impl<T> Array<T> {
 }
 
 impl<T: Clone> Array<T> {
+    pub fn concatenate(arrays: &[Array<T>], axis: isize) -> Result<Array<T>> {
+        let first = arrays.first().ok_or_else(|| {
+            NumRsError::InvalidShape("concatenate requires at least one array".to_string())
+        })?;
+        let ndim = first.ndim();
+        let axis = normalize_axis(axis, ndim)?;
+        let mut shape = first.shape.clone();
+        let mut axis_len = 0usize;
+
+        for array in arrays {
+            if array.ndim() != ndim {
+                return Err(NumRsError::InvalidShape(format!(
+                    "concatenate expected rank {ndim}, got rank {}",
+                    array.ndim()
+                )));
+            }
+            for dim in 0..ndim {
+                if dim != axis && array.shape[dim] != shape[dim] {
+                    return Err(NumRsError::InvalidShape(format!(
+                        "concatenate shape mismatch at axis {dim}: expected {}, got {}",
+                        shape[dim], array.shape[dim]
+                    )));
+                }
+            }
+            axis_len = axis_len
+                .checked_add(array.shape[axis])
+                .ok_or(NumRsError::ShapeOverflow)?;
+        }
+
+        shape[axis] = axis_len;
+        let mut out = Vec::with_capacity(size_of_shape(&shape)?);
+        let outer = size_of_shape(&first.shape[..axis])?;
+        let inner = size_of_shape(&first.shape[axis + 1..])?;
+        for prefix in 0..outer {
+            for array in arrays {
+                let chunk_len = array.shape[axis] * inner;
+                let start = prefix * array.shape[axis] * inner;
+                out.extend_from_slice(&array.data[start..start + chunk_len]);
+            }
+        }
+
+        Ok(Array::from_vec_trusted(shape, out))
+    }
+
+    pub fn stack(arrays: &[Array<T>], axis: isize) -> Result<Array<T>> {
+        let first = arrays.first().ok_or_else(|| {
+            NumRsError::InvalidShape("stack requires at least one array".to_string())
+        })?;
+        let ndim = first.ndim();
+        let axis = normalize_insert_axis(axis, ndim)?;
+
+        for array in arrays {
+            if array.shape != first.shape {
+                return Err(NumRsError::InvalidShape(format!(
+                    "stack expected shape {:?}, got {:?}",
+                    first.shape, array.shape
+                )));
+            }
+        }
+
+        let mut shape = first.shape.clone();
+        shape.insert(axis, arrays.len());
+        let mut out = Vec::with_capacity(size_of_shape(&shape)?);
+        let outer = size_of_shape(&first.shape[..axis])?;
+        let inner = size_of_shape(&first.shape[axis..])?;
+        for prefix in 0..outer {
+            let start = prefix * inner;
+            for array in arrays {
+                out.extend_from_slice(&array.data[start..start + inner]);
+            }
+        }
+
+        Ok(Array::from_vec_trusted(shape, out))
+    }
+
     pub fn take(&self, indices: &[isize]) -> Result<Array<T>> {
         self.view().take(indices)
     }
