@@ -10,31 +10,31 @@
   "purpose": "Focused rerun of current NumPy-winning external rows for optimization triage.",
   "rows": [
     {
-      "baseline_speedup_vs_numpy": 0.9992210588688176,
+      "baseline_speedup_vs_numpy": 0.9886203214815652,
       "checksum_abs_diff": 0.0,
       "checksum_match": true,
-      "name": "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150",
+      "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
       "near_tie": false,
       "numpy_checksum": 1430418666800000.0,
-      "numpy_ms": 46.11691599711776,
+      "numpy_ms": 30.602000013459474,
       "numpy_pass_millis": [
-        46.11691599711776,
-        48.68470795918256,
-        42.958291014656425
+        30.79358401009813,
+        30.602000013459474,
+        30.558334023226053
       ],
       "numrust_checksum": 1430418666800000.0,
-      "numrust_ms": 42.72225,
+      "numrust_ms": 29.066375,
       "numrust_pass_millis": [
-        46.021334,
-        42.72225,
-        42.247333
+        29.086208,
+        29.066375,
+        29.045792
       ],
       "priority": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
-      "source_symbol": "Eindot.time_matmul_trans_a_atc",
-      "speedup_vs_numpy": 1.0794589703753372,
-      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T.copy()), repeated equally",
+      "source_symbol": "Eindot.time_matmul_trans_a_at",
+      "speedup_vs_numpy": 1.0528316659184185,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally",
       "winner": "numrust"
     }
   ],
@@ -47,7 +47,7 @@
     "interpretation": "Focused reruns are optimization and stability probes for current loss rows; the full external report remains the authoritative supported-case score.",
     "near_tie_cases": [],
     "numrust_flip_cases": [
-      "asv_linalg_matmul_trans_a_atc_f64_150x400_400x150"
+      "asv_linalg_matmul_trans_a_at_f64_150x400_400x150"
     ],
     "source_numpy_winners": 1,
     "stable_numpy_win_cases": []

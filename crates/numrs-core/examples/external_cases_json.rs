@@ -43,7 +43,10 @@ fn shape_checksum(shape: &[usize]) -> f64 {
     shape.iter().map(|dim| *dim as f64).sum::<f64>() + shape.len() as f64
 }
 
-fn sample_checksum_f64(array: &ArrayView<'_, f64>) -> f64 {
+fn sample_checksum_numeric<T>(array: &ArrayView<'_, T>) -> f64
+where
+    T: Copy + Into<f64>,
+{
     let mut total = shape_checksum(array.shape());
     if array.is_empty() {
         return total;
@@ -63,14 +66,29 @@ fn sample_checksum_f64(array: &ArrayView<'_, f64>) -> f64 {
             logical_index[axis] = remainder.checked_rem(dim).unwrap_or(0);
             remainder = remainder.checked_div(dim).unwrap_or(0);
         }
-        total += (sample_idx + 1) as f64 * *array.get(&logical_index).unwrap();
+        total += (sample_idx + 1) as f64 * (*array.get(&logical_index).unwrap()).into();
     }
     total
+}
+
+fn sample_checksum_f64(array: &ArrayView<'_, f64>) -> f64 {
+    sample_checksum_numeric(array)
+}
+
+fn sample_checksum_f32(array: &ArrayView<'_, f32>) -> f64 {
+    sample_checksum_numeric(array)
 }
 
 fn paired_broadcast_checksum(left: &ArrayView<'_, f64>, right: &ArrayView<'_, f64>) -> f64 {
     sample_checksum_f64(left)
         + sample_checksum_f64(right)
+        + shape_checksum(left.shape())
+        + shape_checksum(right.shape())
+}
+
+fn paired_broadcast_checksum_f32(left: &ArrayView<'_, f32>, right: &ArrayView<'_, f32>) -> f64 {
+    sample_checksum_f32(left)
+        + sample_checksum_f32(right)
         + shape_checksum(left.shape())
         + shape_checksum(right.shape())
 }
@@ -439,6 +457,25 @@ fn main() -> numrs_core::Result<()> {
         });
     }
 
+    let source = Array::from_shape_fn(vec![128, 256], |idx| (idx[0] * 256 + idx[1]) as f32)?;
+    let scalar_one = Array::full(vec![1], 1.0_f32)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                let out = Array::broadcast_arrays(&[&source, &scalar_one]).unwrap();
+                checksum += paired_broadcast_checksum_f32(&out[0], &out[1]);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_broadcast_arrays_f32_128x256",
+        millis,
+        checksum,
+    });
+
     for (name, size) in [
         ("asv_manipulate_broadcast_to_f64_16", 16usize),
         ("asv_manipulate_broadcast_to_f64_64", 64),
@@ -462,6 +499,24 @@ fn main() -> numrs_core::Result<()> {
             checksum,
         });
     }
+
+    let source = Array::from_shape_fn(vec![64], |idx| idx[0] as f32)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = source.broadcast_to(&[64, 64]).unwrap();
+                checksum += shape_checksum(out.shape());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_broadcast_to_f32_64",
+        millis,
+        checksum,
+    });
 
     let concat_arrays = (0..5)
         .map(|array_idx| {
