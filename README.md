@@ -81,7 +81,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 
 - [ ] 2026-05-07: Add more externally derived NumPy ASV cases without filtering out losses. Target: `benchmarks/external_numpy_cases.py`.
 - [ ] 2026-05-07: Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. Target: `docs/performance.md`.
-- [ ] 2026-05-07: Optimize the current full external NumPy linalg loss without hiding rows: `asv_linalg_matmul_trans_a_at_f64_150x400_400x150`. Latest focused rerun flips that row to NumRust, so the authoritative full report remains the target. Target: `crates/numrs-core/src/blas.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [ ] 2026-05-07: Optimize the current full external NumPy linalg loss without hiding rows: `asv_linalg_matmul_trans_a_at_f64_150x400_400x150`. Latest focused rerun keeps that row as a NumPy near-tie at 0.996x. Target: `crates/numrs-core/src/blas.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
 - [x] 2026-05-07: Optimize visible NumRust targeted losses without hiding rows: `where_select_f64_loop` and near-tie `dot_f64_192`. Latest targeted same-data evidence: 10 NumRust wins, 0 NumPy wins, 1.67x geomean, 0 checksum failures. Evidence: `crates/numrs-core/src/array.rs`, `benchmark-results/numrust-vs-numpy.md`.
 - [ ] 2026-05-07: Grow StatsRust and SciRust with more externally derived benchmarks. Target: `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py`.
 - [ ] 2026-05-07: Keep release and CI work deferred until the maintainer asks for it. Target: no `.github/workflows` or release automation for now.
