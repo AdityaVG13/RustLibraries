@@ -943,6 +943,42 @@ fn main() -> numrs_core::Result<()> {
         checksum,
     });
 
+    let take_arr_3d = Array::full(vec![2, 1000, 1], 1_i64)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
+                let out = take_arr_3d.take_axis(&take_indices, -2).unwrap();
+                checksum += edge_sum_i64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_itemselection_take_i64_2x1000x1",
+        millis,
+        checksum,
+    });
+
+    let take_arr_wide = Array::full(vec![1000, 3], 1_i64)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..2_000 {
+                let out = take_arr_wide.take_axis(&take_indices, -2).unwrap();
+                checksum += edge_sum_i64(&out);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_itemselection_take_i64_1000x3",
+        millis,
+        checksum,
+    });
+
     let dense_mask = Array::full(vec![1000], true)?;
     let sparse_mask = Array::full(vec![1000], false)?;
     let (millis, checksum) = bench(

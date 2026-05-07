@@ -96,6 +96,11 @@ fn supports_fancy_indexing_take_and_boolean_masks() {
     assert_eq!(identity.shape(), &[3, 4]);
     assert_eq!(identity.as_slice(), a.as_slice());
 
+    let cube = Array::from_vec(vec![2, 3, 1], (0_i64..6).collect()).unwrap();
+    let identity_middle = cube.take_axis(&[0, 1, 2], -2).unwrap();
+    assert_eq!(identity_middle.shape(), &[2, 3, 1]);
+    assert_eq!(identity_middle.as_slice(), cube.as_slice());
+
     let mask = Array::from_vec(
         vec![3, 4],
         vec![

@@ -766,6 +766,11 @@ impl<'a, T: Clone> ArrayView<'a, T> {
     pub fn take_axis(&self, indices: &[isize], axis: isize) -> Result<Array<T>> {
         let axis = normalize_axis(axis, self.ndim())?;
 
+        if self.is_c_contiguous() && is_positive_identity_take(indices, self.shape[axis]) {
+            let data = self.contiguous_slice().expect("contiguous checked above");
+            return Array::from_vec(self.shape.clone(), data.to_vec());
+        }
+
         if self.ndim() == 2 && self.is_c_contiguous() {
             let rows = self.shape[0];
             let cols = self.shape[1];

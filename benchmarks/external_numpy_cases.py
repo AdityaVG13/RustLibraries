@@ -430,6 +430,22 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=2_000,
     ),
     CaseSpec(
+        name="asv_itemselection_take_i64_2x1000x1",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_itemselection.py",
+        source_symbol="Take.time_contiguous(shape=(2, 1000, 1), mode='raise', dtype='int64')",
+        translation="direct setup and operation, repeated because ASV auto-calibrates tiny timings",
+        repetitions=2_000,
+    ),
+    CaseSpec(
+        name="asv_itemselection_take_i64_1000x3",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_itemselection.py",
+        source_symbol="Take.time_contiguous(shape=(1000, 3), mode='raise', dtype='int64')",
+        translation="direct setup and operation, repeated because ASV auto-calibrates tiny timings",
+        repetitions=2_000,
+    ),
+    CaseSpec(
         name="asv_itemselection_putmask_dense_scalar_f64_1000",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_itemselection.py",
@@ -1539,6 +1555,28 @@ def bench_numpy() -> dict:
     millis, checksum = median_ms(take_contiguous, rounds=7)
     cases.append({"name": "asv_itemselection_take_i64_1000x1", "millis": millis, "checksum": checksum})
 
+    take_arr_3d = np.ones((2, 1000, 1), dtype=np.int64)
+
+    def take_contiguous_3d() -> float:
+        checksum = 0.0
+        for _ in range(2_000):
+            checksum += edge_checksum(take_arr_3d.take(take_indices, axis=-2, mode="raise"))
+        return checksum
+
+    millis, checksum = median_ms(take_contiguous_3d, rounds=7)
+    cases.append({"name": "asv_itemselection_take_i64_2x1000x1", "millis": millis, "checksum": checksum})
+
+    take_arr_wide = np.ones((1000, 3), dtype=np.int64)
+
+    def take_contiguous_wide() -> float:
+        checksum = 0.0
+        for _ in range(2_000):
+            checksum += edge_checksum(take_arr_wide.take(take_indices, axis=-2, mode="raise"))
+        return checksum
+
+    millis, checksum = median_ms(take_contiguous_wide, rounds=7)
+    cases.append({"name": "asv_itemselection_take_i64_1000x3", "millis": millis, "checksum": checksum})
+
     putmask_vals = np.array(1.0, dtype=np.float64)
     dense_mask = np.ones(1000, dtype=bool)
     sparse_mask = np.zeros(1000, dtype=bool)
@@ -2515,6 +2553,9 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         "asv_reduce_fmax_f32_20000",
         "asv_reduce_fmin_f64_20000",
         "asv_reduce_fmax_f64_20000",
+        "asv_itemselection_take_i64_1000x1",
+        "asv_itemselection_take_i64_2x1000x1",
+        "asv_itemselection_take_i64_1000x3",
         "asv_manipulate_broadcast_arrays_f64_16x32",
         "asv_manipulate_broadcast_arrays_f64_128x256",
         "asv_manipulate_broadcast_arrays_f32_128x256",
@@ -2571,6 +2612,22 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         for idx in range(5)
     ]
     dims_values = np.arange(5 * 2 * 3 * 1, dtype=np.float64).reshape(5, 2, 3, 1)
+
+    def append_selected_take_i64(name: str, shape: tuple[int, ...]) -> None:
+        arr = np.ones(shape, dtype=np.int64)
+        indices = np.arange(1000)
+
+        def take_contiguous() -> float:
+            checksum = 0.0
+            for _ in range(2_000):
+                checksum += edge_checksum(arr.take(indices, axis=-2, mode="raise"))
+            return checksum
+
+        append_case(name, take_contiguous)
+
+    append_selected_take_i64("asv_itemselection_take_i64_1000x1", (1000, 1))
+    append_selected_take_i64("asv_itemselection_take_i64_2x1000x1", (2, 1000, 1))
+    append_selected_take_i64("asv_itemselection_take_i64_1000x3", (1000, 3))
 
     def dot_a_b() -> float:
         checksum = 0.0
@@ -3351,6 +3408,66 @@ def rerun_focused_losses(passes: int = 1) -> dict:
     return payload
 
 
+def targeted_case_payload(case_names: list[str]) -> dict:
+    if not case_names:
+        raise ValueError("at least one targeted case name is required")
+    unknown = sorted(set(case_names) - {case.name for case in RUNNABLE_CASES})
+    if unknown:
+        raise ValueError(f"unknown targeted external cases: {unknown}")
+
+    write_lstsq_fixture()
+    numrust = aggregate_selected_engine_runs(case_names, [run_numrust()])
+    numpy_result = bench_numpy_selected(case_names)
+    rust_by_name = {case["name"]: case for case in numrust["cases"]}
+    numpy_by_name = {case["name"]: case for case in numpy_result["cases"]}
+    specs = {case.name: case for case in RUNNABLE_CASES}
+    rows = []
+    checksum_failures = []
+
+    for name in case_names:
+        rust_case = rust_by_name[name]
+        numpy_case = numpy_by_name[name]
+        rust_ms = float(rust_case["millis"])
+        numpy_ms = float(numpy_case["millis"])
+        speedup = numpy_ms / rust_ms if rust_ms else math.inf
+        checksum_abs_diff = abs(float(rust_case["checksum"]) - float(numpy_case["checksum"]))
+        checksum_match = math.isclose(
+            float(rust_case["checksum"]),
+            float(numpy_case["checksum"]),
+            rel_tol=1e-9,
+            abs_tol=1e-5,
+        )
+        if not checksum_match:
+            checksum_failures.append(name)
+        spec = specs[name]
+        rows.append(
+            {
+                "name": name,
+                "source_path": spec.source_path,
+                "source_symbol": spec.source_symbol,
+                "repetitions": spec.repetitions,
+                "numrust_ms": rust_ms,
+                "numpy_ms": numpy_ms,
+                "speedup_vs_numpy": speedup,
+                "winner": "numrust" if speedup > 1.0 else "numpy",
+                "checksum_match": checksum_match,
+                "checksum_abs_diff": checksum_abs_diff,
+            }
+        )
+
+    numrust_wins = sum(row["winner"] == "numrust" for row in rows)
+    return {
+        "purpose": "Targeted external case run for iteration; does not replace canonical full evidence.",
+        "numpy_version": numpy_result["numpy_version"],
+        "targeted_cases": len(rows),
+        "numrust_wins": numrust_wins,
+        "numpy_wins": len(rows) - numrust_wins,
+        "checksum_failures": checksum_failures,
+        "global_numpy_replacement_claim": False,
+        "rows": rows,
+    }
+
+
 def write_markdown(result: dict) -> None:
     numpy_source = next(
         source for source in result["source_lock"]["sources"] if source["id"] == "numpy-asv"
@@ -3500,10 +3617,20 @@ def main() -> int:
         default=1,
         help="number of alternating passes for --rerun-losses",
     )
+    parser.add_argument(
+        "--cases",
+        nargs="+",
+        help="run targeted external case names without writing canonical benchmark artifacts",
+    )
     args = parser.parse_args()
 
     RESULT_DIR.mkdir(parents=True, exist_ok=True)
     lock = load_lock()
+
+    if args.cases:
+        payload = targeted_case_payload(args.cases)
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        return 0
 
     if args.loss_triage:
         if args.pass_index is not None or args.aggregate_passes is not None or args.rerun_losses:
