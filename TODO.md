@@ -42,6 +42,8 @@ This file is intentionally committed and should be updated in normal git commits
 - [ ] LearnRust: scikit-learn-style classical ML APIs and benchmarks.
 - [ ] PlotRust: Matplotlib/Seaborn/Plotly-style visualization APIs.
 - [ ] ImageRust: Pillow/scikit-image-style image processing APIs.
+- [x] ImageRust v0: PPM decode, grayscale conversion, nearest-neighbor resize, and thresholding.
+- [x] ImageRust benchmark v0: same-data PPM grayscale, resize, and threshold comparison against Pillow.
 - [ ] TextRust: NLTK/spaCy-style text processing APIs.
 - [ ] ValidateRust: Pydantic-style validation APIs.
 - [x] ValidateRust v0: object schemas, required/optional fields, primitive/list type checks, and simple constraints.
