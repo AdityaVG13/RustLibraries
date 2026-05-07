@@ -14,25 +14,28 @@ This is not a full NumPy replacement yet. The v0 slice is deliberately narrow an
 
 Backfilled items are completed work imported from the pre-GitHub build history. New work should update this list in the same commit as the implementation or benchmark evidence.
 
-| Status | Date | Area | Task | Evidence |
-| --- | --- | --- | --- | --- |
-| Done | 2026-05-07 backfilled | Workspace | Create a Rust workspace for NumRust, StatsRust, SciRust, RigorTrail, and the Python bridge. | `Cargo.toml`, `crates/*` |
-| Done | 2026-05-07 backfilled | NumRust scope | Implement typed arrays, shape/stride metadata, views, slicing, reshape, transpose, broadcasting, reductions, selected linalg, matmul, tensordot, and indexed writes. | `crates/numrs-core`, `crates/numrs-core/tests/numrs_core.rs` |
-| Done | 2026-05-07 backfilled | Dtypes | Add primitive dtype metadata, casts, promotion records, bool/int/float/complex Python namespace tokens, and Array API smoke coverage. | `crates/numrs-core/src/dtype.rs`, `python/numrust` |
-| Done | 2026-05-07 backfilled | SIMD/BLAS | Add Accelerate/vDSP and BLAS-backed fast paths for supported contiguous reductions, dot, matmul, inner, selected contractions, and NEON scalar multiply. | `docs/performance.md`, `crates/numrs-core/src/blas.rs` |
-| Done | 2026-05-07 backfilled | Fancy indexing | Implement `take`, `take_axis`, boolean masks, `put`, `putmask`, `add_at`, and `maximum_at`. | `crates/numrs-core/tests/numrs_core.rs` |
-| Done | 2026-05-07 backfilled | Python bridge | Add a PyO3-backed `numrust` namespace and verify import, dtype, arithmetic, indexing, reshape, matmul, sum, and mean smoke cases. | `crates/numrust-python`, `benchmarks/verify_array_api_namespace.py` |
-| Done | 2026-05-07 backfilled | External evidence | Pin NumPy ASV, Array API, SciPy, and StatsModels source references with hash verification. | `benchmark-results/external-source-lock.json`, `benchmarks/external_sources.py` |
-| Done | 2026-05-07 backfilled | Benchmarks | Add external NumPy ASV-derived benchmarks with real NumPy comparison, sharded pass aggregation, loss triage, focused loss reruns, and stability metadata. | `benchmarks/external_numpy_cases.py`, `benchmark-results/external-numpy-asv-inspired.md` |
-| Done | 2026-05-07 backfilled | Conformance | Run pinned upstream Array API probes without patching upstream tests. | `benchmark-results/array-api-tests-focused-probe.md`, `benchmark-results/array-api-tests-full-maxfail.md` |
-| Done | 2026-05-07 backfilled | Other libraries | Start StatsRust and SciRust slices with tests and comparison harnesses. | `crates/statsrust`, `crates/scirust`, `benchmark-results/*statsmodels*`, `benchmark-results/*scipy*` |
-| Done | 2026-05-07 backfilled | New library | Invent and implement RigorTrail for evidence-ledger validation and claim gating. | `crates/rigortrail`, `docs/rigortrail.md` |
-| Done | 2026-05-07 backfilled | Verification | Pass Rust format, clippy, workspace tests, Python benchmark schema tests, and source-lock verification before GitHub import. | See `docs/completion-audit.md` |
-| Open | 2026-05-07 | CI | Add GitHub Actions for format, clippy, tests, Python evidence schema checks, and source-lock verification. | `.github/workflows/ci.yml` |
-| Open | 2026-05-07 | NumRust scope | Add more externally derived NumPy ASV cases without filtering out losses. | `benchmarks/external_numpy_cases.py` |
-| Open | 2026-05-07 | Performance | Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. | `docs/performance.md` |
-| Open | 2026-05-07 | Ecosystem | Grow StatsRust and SciRust with more externally derived benchmarks. | `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py` |
-| Open | 2026-05-07 | Release | Add publishing metadata, CI release checks, crate docs polish, and versioning policy before any crates.io release. | `Cargo.toml`, crate manifests |
+### Backfilled Done
+
+- [x] 2026-05-07 backfilled: Create a Rust workspace for NumRust, StatsRust, SciRust, RigorTrail, and the Python bridge. Evidence: `Cargo.toml`, `crates/*`.
+- [x] 2026-05-07 backfilled: Implement NumRust typed arrays, shape/stride metadata, views, slicing, reshape, transpose, broadcasting, reductions, selected linalg, matmul, tensordot, and indexed writes. Evidence: `crates/numrs-core`, `crates/numrs-core/tests/numrs_core.rs`.
+- [x] 2026-05-07 backfilled: Add primitive dtype metadata, casts, promotion records, bool/int/float/complex Python namespace tokens, and Array API smoke coverage. Evidence: `crates/numrs-core/src/dtype.rs`, `python/numrust`.
+- [x] 2026-05-07 backfilled: Add Accelerate/vDSP and BLAS-backed fast paths for supported contiguous reductions, dot, matmul, inner, selected contractions, and NEON scalar multiply. Evidence: `docs/performance.md`, `crates/numrs-core/src/blas.rs`.
+- [x] 2026-05-07 backfilled: Implement fancy indexing primitives: `take`, `take_axis`, boolean masks, `put`, `putmask`, `add_at`, and `maximum_at`. Evidence: `crates/numrs-core/tests/numrs_core.rs`.
+- [x] 2026-05-07 backfilled: Add a PyO3-backed `numrust` namespace and verify import, dtype, arithmetic, indexing, reshape, matmul, sum, and mean smoke cases. Evidence: `crates/numrust-python`, `benchmarks/verify_array_api_namespace.py`.
+- [x] 2026-05-07 backfilled: Pin NumPy ASV, Array API, SciPy, and StatsModels source references with hash verification. Evidence: `benchmark-results/external-source-lock.json`, `benchmarks/external_sources.py`.
+- [x] 2026-05-07 backfilled: Add external NumPy ASV-derived benchmarks with real NumPy comparison, sharded pass aggregation, loss triage, focused loss reruns, and stability metadata. Evidence: `benchmarks/external_numpy_cases.py`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [x] 2026-05-07 backfilled: Run pinned upstream Array API probes without patching upstream tests. Evidence: `benchmark-results/array-api-tests-focused-probe.md`, `benchmark-results/array-api-tests-full-maxfail.md`.
+- [x] 2026-05-07 backfilled: Start StatsRust and SciRust slices with tests and comparison harnesses. Evidence: `crates/statsrust`, `crates/scirust`, `benchmark-results/*statsmodels*`, `benchmark-results/*scipy*`.
+- [x] 2026-05-07 backfilled: Invent and implement RigorTrail for evidence-ledger validation and claim gating. Evidence: `crates/rigortrail`, `docs/rigortrail.md`.
+- [x] 2026-05-07 backfilled: Pass Rust format, clippy, workspace tests, Python benchmark schema tests, and source-lock verification before GitHub import. Evidence: `docs/completion-audit.md`.
+
+### Open
+
+- [ ] 2026-05-07: Add GitHub Actions for format, clippy, tests, Python evidence schema checks, and source-lock verification. Target: `.github/workflows/ci.yml`.
+- [ ] 2026-05-07: Add more externally derived NumPy ASV cases without filtering out losses. Target: `benchmarks/external_numpy_cases.py`.
+- [ ] 2026-05-07: Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. Target: `docs/performance.md`.
+- [ ] 2026-05-07: Grow StatsRust and SciRust with more externally derived benchmarks. Target: `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py`.
+- [ ] 2026-05-07: Add publishing metadata, CI release checks, crate docs polish, and versioning policy before any crates.io release. Target: `Cargo.toml`, crate manifests.
 
 ## Commands
 
