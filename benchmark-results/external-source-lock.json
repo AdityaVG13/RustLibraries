@@ -93,6 +93,19 @@
           ]
         },
         {
+          "bytes": 3178,
+          "path": "benchmarks/benchmarks/bench_manipulate.py",
+          "raw_url": "https://raw.githubusercontent.com/numpy/numpy/80b1a07494964733f7d4571781608238f500e2dd/benchmarks/benchmarks/bench_manipulate.py",
+          "sha256": "b46c80b29917b412f5e411941e5194967830cc8da51e223aed9fd46fe1d6124c",
+          "symbols": [
+            "BroadcastArraysTo.time_broadcast_to",
+            "DimsManipulations.time_expand_dims",
+            "DimsManipulations.time_expand_dims_neg",
+            "DimsManipulations.time_squeeze_dims",
+            "DimsManipulations.time_reshape"
+          ]
+        },
+        {
           "bytes": 5558,
           "path": "benchmarks/benchmarks/common.py",
           "raw_url": "https://raw.githubusercontent.com/numpy/numpy/80b1a07494964733f7d4571781608238f500e2dd/benchmarks/benchmarks/common.py",

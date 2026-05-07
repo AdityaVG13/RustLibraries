@@ -31,7 +31,7 @@ uv run benchmarks/external_sources.py --update-lock
 
 This writes `benchmark-results/external-source-lock.json` with pinned commits, raw file URLs, and SHA-256 hashes for:
 
-- NumPy ASV benchmark files under `numpy/numpy/benchmarks/benchmarks`.
+- NumPy ASV benchmark files under `numpy/numpy/benchmarks/benchmarks`, including ufunc, reduction, itemselection, linalg/einsum, and manipulation files.
 - The `data-apis/array-api-tests` README that documents the conformance workflow.
 - SciPy ASV benchmark/source files for `Zeros.time_zeros`, `f2`, root solver lists, and `CumulativeSimpson`.
 - StatsModels source files for the implemented OLS, WLS, and Logit APIs.
@@ -87,22 +87,22 @@ Use `uv run --with numpy python benchmarks/external_numpy_cases.py --rerun-losse
 
 Latest observed supported-case result:
 
-- Supported external cases: 53
-- NumRust wins: 51
-- NumPy wins: 2
-- Geomean speedup vs NumPy: 8.87x
-- Near-tie cases within 2%: 5
+- Supported external cases: 58
+- NumRust wins: 57
+- NumPy wins: 1
+- Geomean speedup vs NumPy: 8.63x
+- Near-tie cases within 2%: 3
 - Ranked higher by wins: true
 - Unsupported external case buckets tracked: 1
-- Current NumPy wins: `asv_linalg_dot_trans_a_atc_f64_150x400_400x150` and `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400`, both near ties in the authoritative full report.
+- Current NumPy win: `asv_linalg_matmul_trans_a_at_f64_150x400_400x150` at 0.94x in the authoritative full report.
 
 Latest focused rerun of those NumPy-winning rows:
 
-- Focused cases: 2
+- Focused cases: 1
 - Focused passes per engine: 3
 - NumRust wins: 1
-- NumPy wins: 1
-- Near ties within 2%: 1
+- NumPy wins: 0
+- Near ties within 2%: 0
 - Checksum failures: 0
 - Report: `benchmark-results/external-numpy-loss-focused.md`
 

@@ -39,6 +39,10 @@ fn edge_sum_i64(array: &Array<i64>) -> f64 {
     (values[0] + values[values.len() - 1]) as f64
 }
 
+fn shape_checksum(shape: &[usize]) -> f64 {
+    shape.iter().map(|dim| *dim as f64).sum::<f64>() + shape.len() as f64
+}
+
 fn read_lstsq_fixture() -> numrs_core::Result<(Array<f64>, Array<f64>)> {
     let bytes = fs::read("benchmark-results/numpy-asv-lstsq-f64.bin").map_err(|err| {
         numrs_core::NumRsError::InvalidShape(format!(
@@ -359,6 +363,93 @@ fn main() -> numrs_core::Result<()> {
     );
     cases.push(Case {
         name: "asv_itemselection_put_ordered_f64_1000",
+        millis,
+        checksum,
+    });
+
+    let broadcast_source = Array::from_shape_fn(vec![512], |idx| idx[0] as f64)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = broadcast_source.broadcast_to(&[512, 512]).unwrap();
+                checksum += shape_checksum(out.shape());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_broadcast_to_f64_512",
+        millis,
+        checksum,
+    });
+
+    let dims_source = Array::full(vec![5, 2, 3, 1], 1.0_f64)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = dims_source.expand_dims(1).unwrap();
+                checksum += shape_checksum(out.shape());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_expand_dims_f64_5x2x3x1_axis1",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = dims_source.expand_dims(-1).unwrap();
+                checksum += shape_checksum(out.shape());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_expand_dims_neg_f64_5x2x3x1",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = dims_source.squeeze(None).unwrap();
+                checksum += shape_checksum(out.shape());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_squeeze_dims_f64_5x2x3x1",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..200_000 {
+                let out = dims_source.reshape(&[1, 5, 2, 3]).unwrap();
+                checksum += shape_checksum(out.shape());
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_reshape_f64_5x2x3x1_to_1x5x2x3",
         millis,
         checksum,
     });

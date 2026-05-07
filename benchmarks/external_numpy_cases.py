@@ -182,6 +182,46 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=10_000,
     ),
     CaseSpec(
+        name="asv_manipulate_broadcast_to_f64_512",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="BroadcastArraysTo.time_broadcast_to(size=512, ndtype=float64)",
+        translation="direct setup and operation: broadcast_to(random(512).astype(float64), (512, 512)), repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_expand_dims_f64_5x2x3x1_axis1",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_expand_dims(shape=(5, 2, 3, 1))",
+        translation="direct setup and operation: expand_dims(ones((5,2,3,1)), axis=1), repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_expand_dims_neg_f64_5x2x3x1",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_expand_dims_neg(shape=(5, 2, 3, 1))",
+        translation="direct setup and operation: expand_dims(ones((5,2,3,1)), axis=-1), repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_squeeze_dims_f64_5x2x3x1",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_squeeze_dims(shape=(5, 2, 3, 1))",
+        translation="direct setup and operation: squeeze(ones((5,2,3,1))), repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
+        name="asv_manipulate_reshape_f64_5x2x3x1_to_1x5x2x3",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_manipulate.py",
+        source_symbol="DimsManipulations.time_reshape(shape=(5, 2, 3, 1))",
+        translation="direct setup and operation: reshape(ones((5,2,3,1)), deque-rotated shape (1,5,2,3)), repeated because ASV auto-calibrates metadata timings",
+        repetitions=200_000,
+    ),
+    CaseSpec(
         name="asv_linalg_dot_a_b_f64_150x400_400x600",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_linalg.py",
@@ -496,6 +536,10 @@ def edge_checksum(array: np.ndarray) -> float:
     return float(flat[0]) + float(flat[-1])
 
 
+def shape_checksum(array: np.ndarray) -> float:
+    return float(sum(array.shape) + array.ndim)
+
+
 def lstsq_fixture() -> tuple[np.ndarray, np.ndarray]:
     rng = np.random.RandomState(1804169117)
     values = np.tile(rng.uniform(0, 100, size=1000 * 1000 // 10), 10)
@@ -719,6 +763,85 @@ def bench_numpy() -> dict:
     cases.append(
         {
             "name": "asv_itemselection_put_ordered_f64_1000",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    broadcast_source = np.arange(512, dtype=np.float64)
+
+    def broadcast_to() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += shape_checksum(np.broadcast_to(broadcast_source, (512, 512)))
+        return checksum
+
+    millis, checksum = median_ms(broadcast_to, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_broadcast_to_f64_512",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    dims_source = np.ones((5, 2, 3, 1), dtype=np.float64)
+
+    def expand_dims_axis1() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += shape_checksum(np.expand_dims(dims_source, axis=1))
+        return checksum
+
+    millis, checksum = median_ms(expand_dims_axis1, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_expand_dims_f64_5x2x3x1_axis1",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    def expand_dims_neg() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += shape_checksum(np.expand_dims(dims_source, axis=-1))
+        return checksum
+
+    millis, checksum = median_ms(expand_dims_neg, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_expand_dims_neg_f64_5x2x3x1",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    def squeeze_dims() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += shape_checksum(np.squeeze(dims_source))
+        return checksum
+
+    millis, checksum = median_ms(squeeze_dims, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_squeeze_dims_f64_5x2x3x1",
+            "millis": millis,
+            "checksum": checksum,
+        }
+    )
+
+    def reshape_dims() -> float:
+        checksum = 0.0
+        for _ in range(200_000):
+            checksum += shape_checksum(np.reshape(dims_source, (1, 5, 2, 3)))
+        return checksum
+
+    millis, checksum = median_ms(reshape_dims, rounds=7)
+    cases.append(
+        {
+            "name": "asv_manipulate_reshape_f64_5x2x3x1_to_1x5x2x3",
             "millis": millis,
             "checksum": checksum,
         }
