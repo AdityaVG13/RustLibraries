@@ -44,4 +44,6 @@ This file is intentionally committed and should be updated in normal git commits
 - [ ] ImageRust: Pillow/scikit-image-style image processing APIs.
 - [ ] TextRust: NLTK/spaCy-style text processing APIs.
 - [ ] ValidateRust: Pydantic-style validation APIs.
+- [x] ValidateRust v0: object schemas, required/optional fields, primitive/list type checks, and simple constraints.
+- [x] ValidateRust benchmark v0: same-data schema validation comparison against Pydantic.
 - [ ] WebAppRust: FastAPI-style typed web app APIs.
