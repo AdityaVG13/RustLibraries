@@ -1,0 +1,32 @@
+[package]
+name = "numrs-core"
+version = "0.1.0"
+description = "A pure Rust NumPy-core flagship experiment from FromPythonToRust."
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[lib]
+name = "numrs_core"
+path = "src/lib.rs"
+
+[dependencies]
+matrixmultiply = "0.3"
+num-complex = "0.4"
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
+
+[[example]]
+name = "microbench"
+path = "examples/microbench.rs"
+
+[[example]]
+name = "bench_json"
+path = "examples/bench_json.rs"
+
+[[example]]
+name = "parity_json"
+path = "examples/parity_json.rs"
