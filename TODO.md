@@ -14,6 +14,7 @@ This file is intentionally committed and should be updated in normal git commits
 - Add more dtype coverage for integer, boolean, and complex Array API behavior.
 - Add portable SIMD backends where stable Rust support is strong enough.
 - Continue replacing generic stride paths with layout-specialized kernels only when real benchmarks improve.
+- [x] NumRust transposed GEMM v1: use column-major-swapped CBLAS for macOS transposed `f64`/`f32` 2-D GEMM and regenerate full external NumPy ASV-derived evidence at 52 of 53 NumRust wins.
 
 ## Ecosystem
 

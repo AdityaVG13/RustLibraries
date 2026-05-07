@@ -57,6 +57,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07: Add same-data ImageRust vs Pillow benchmark evidence for the implemented image-processing slice. Evidence: `benchmarks/compare_pillow.py`, `benchmark-results/imagerust-vs-pillow.md`.
 - [x] 2026-05-07: Start TextRust with NLTK-style word/punctuation tokenization, lowercase word frequencies, and word bigrams. Evidence: `crates/textrust`.
 - [x] 2026-05-07: Add same-data TextRust vs NLTK benchmark evidence for the implemented tokenization slice. Evidence: `benchmarks/compare_nltk.py`, `benchmark-results/textrust-vs-nltk.md`.
+- [x] 2026-05-07: Optimize NumRust transposed `f64`/`f32` GEMM dispatch on macOS and regenerate full external NumPy ASV-derived evidence at 52 of 53 NumRust wins. Evidence: `crates/numrs-core/src/blas.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
 
 ### Open
 
