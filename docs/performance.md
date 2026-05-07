@@ -8,7 +8,7 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 
 | Suite | Cases | Rust wins | Python wins | Speedup summary | Checksum failures |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| NumRust vs NumPy, targeted same-data | 10 | 8 | 2 | 1.52x geomean | 0 |
+| NumRust vs NumPy, targeted same-data | 10 | 10 | 0 | 1.67x geomean | 0 |
 | NumRust vs NumPy, external ASV-derived | 53 | 52 | 1 | 9.95x geomean | 0 |
 | NumRust vs NumPy, focused prior-loss rerun | 1 | 1 | 0 | 1.08x | 0 |
 | StatsRust vs StatsModels | 4 | 4 | 0 | 3.51x geomean | 0 |
@@ -60,7 +60,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 
 The benchmark harnesses run one untimed warmup for each case on both engines, then report median timed samples. They are smoke tests for kernel path regressions, not replacements for Criterion or hardware-counter profiling.
 
-`benchmarks/compare_numpy.py` is the NumPy comparison harness. Current evidence is written to `benchmark-results/numrust-vs-numpy.md`; the latest run ranks NumRust higher on 8 of 10 targeted cases, with 1.52x geometric-mean speedup, 0 checksum failures, and two visible NumPy wins: `where_select_f64_loop` at 0.60x and the near-tie `dot_f64_192` at 1.00x. Those losses stay in the report and are the next optimization targets.
+`benchmarks/compare_numpy.py` is the NumPy comparison harness. Current evidence is written to `benchmark-results/numrust-vs-numpy.md`; the latest run ranks NumRust higher on 10 of 10 targeted cases, with 1.67x geometric-mean speedup and 0 checksum failures. This is still a targeted implemented-slice result, not a full NumPy replacement claim.
 
 `benchmarks/external_numpy_cases.py` is the externally derived harness. It pins NumPy ASV and Array API test sources in `benchmark-results/external-source-lock.json`, then translates supported NumPy ASV cases without filtering out losses. Latest run: NumRust wins 52 of 53 supported external cases, NumPy wins 1, with 9.95x geometric-mean speedup. The remaining NumPy win is the contiguous scalar multiply case `asv_linalg_einsum_scalar_mul_f64_480000`, and it is a 1.6% near tie in the authoritative full report. The harness now uses 5 full passes per engine, alternates engine order, aggregates each case by median across passes, supports sharded one-pass artifacts for long runs, writes pass samples for NumPy-winning rows, emits loss-triage artifacts sorted by worst NumPy win, and can rerun focused NumPy-winning rows after backend experiments with explicit stability metadata. This ranks NumRust higher on supported external cases only and does not prove global NumPy replacement status.
 

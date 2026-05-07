@@ -183,7 +183,7 @@ fn main() -> numrs_core::Result<()> {
             let mut checksum = 0.0;
             for _ in 0..400 {
                 checksum += where_mask
-                    .where_select(&where_true, &where_false)
+                    .where_select_f64(&where_true, &where_false)
                     .unwrap()
                     .sum_all()
                     .unwrap();

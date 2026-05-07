@@ -340,6 +340,15 @@ impl Array<bool> {
         self.view()
             .where_select(&true_values.view(), &false_values.view())
     }
+
+    pub fn where_select_f64(
+        &self,
+        true_values: &Array<f64>,
+        false_values: &Array<f64>,
+    ) -> Result<Array<f64>> {
+        self.view()
+            .where_select_f64(&true_values.view(), &false_values.view())
+    }
 }
 
 impl<T> Array<T>
@@ -877,6 +886,98 @@ impl<'a> ArrayView<'a, bool> {
 
         Array::from_vec(output_shape, out)
     }
+
+    pub fn where_select_f64(
+        &self,
+        true_values: &ArrayView<'_, f64>,
+        false_values: &ArrayView<'_, f64>,
+    ) -> Result<Array<f64>> {
+        let output_shape = broadcast_shape(self.shape(), true_values.shape())?;
+        let output_shape = broadcast_shape(&output_shape, false_values.shape())?;
+
+        if self.shape() == output_shape && true_values.shape() == output_shape {
+            if let (Some(condition), Some(true_slice), Some(false_slice)) = (
+                self.contiguous_slice(),
+                true_values.contiguous_slice(),
+                false_values.contiguous_slice(),
+            ) {
+                if false_values.shape() == output_shape {
+                    return array_from_f64_selector(&output_shape, |index| {
+                        if condition[index] {
+                            true_slice[index]
+                        } else {
+                            false_slice[index]
+                        }
+                    });
+                }
+
+                if false_values.shape().is_empty() {
+                    let fallback = false_slice[0];
+                    return array_from_f64_selector(&output_shape, |index| {
+                        if condition[index] {
+                            true_slice[index]
+                        } else {
+                            fallback
+                        }
+                    });
+                }
+
+                if output_shape.len() == 2 && false_values.shape() == [1, output_shape[1]] {
+                    let rows = output_shape[0];
+                    let cols = output_shape[1];
+                    let len = size_of_shape(&output_shape)?;
+                    let mut out: Vec<f64> = Vec::with_capacity(len);
+                    let out_ptr = out.as_mut_ptr();
+                    for row in 0..rows {
+                        let row_start = row * cols;
+                        for (col, false_value) in false_slice.iter().copied().enumerate().take(cols)
+                        {
+                            let index = row_start + col;
+                            let value = if condition[index] {
+                                true_slice[index]
+                            } else {
+                                false_value
+                            };
+                            unsafe {
+                                out_ptr.add(index).write(value);
+                            }
+                        }
+                    }
+                    unsafe {
+                        out.set_len(len);
+                    }
+                    return Array::from_vec(output_shape, out);
+                }
+
+                if output_shape.len() == 2 && false_values.shape() == [output_shape[0], 1] {
+                    let cols = output_shape[1];
+                    let len = size_of_shape(&output_shape)?;
+                    let mut out: Vec<f64> = Vec::with_capacity(len);
+                    let out_ptr = out.as_mut_ptr();
+                    for (row, false_value) in false_slice.iter().copied().enumerate() {
+                        let row_start = row * cols;
+                        for col in 0..cols {
+                            let index = row_start + col;
+                            let value = if condition[index] {
+                                true_slice[index]
+                            } else {
+                                false_value
+                            };
+                            unsafe {
+                                out_ptr.add(index).write(value);
+                            }
+                        }
+                    }
+                    unsafe {
+                        out.set_len(len);
+                    }
+                    return Array::from_vec(output_shape, out);
+                }
+            }
+        }
+
+        self.where_select(true_values, false_values)
+    }
 }
 
 impl<'a, T> ArrayView<'a, T>
@@ -931,4 +1032,23 @@ fn is_positive_identity_take(indices: &[isize], len: usize) -> bool {
             .copied()
             .enumerate()
             .all(|(idx, source)| source >= 0 && source as usize == idx)
+}
+
+fn array_from_f64_selector<F>(shape: &[usize], mut selector: F) -> Result<Array<f64>>
+where
+    F: FnMut(usize) -> f64,
+{
+    let len = size_of_shape(shape)?;
+    let mut out: Vec<f64> = Vec::with_capacity(len);
+    let out_ptr = out.as_mut_ptr();
+    for index in 0..len {
+        // Every element is written exactly once before the vector length is set.
+        unsafe {
+            out_ptr.add(index).write(selector(index));
+        }
+    }
+    unsafe {
+        out.set_len(len);
+    }
+    Array::from_vec(shape.to_vec(), out)
 }

@@ -6,23 +6,23 @@ NumPy version: `2.4.4`
 
 | Case | NumRust ms | NumPy ms | Speedup vs NumPy | Checksum diff | Checksum ok | Winner |
 | --- | ---: | ---: | ---: | ---: | --- | --- |
-| `small_add_f64_loop` | 2.829 | 9.727 | 3.44x | 0 | True | numrust |
-| `large_add_f64_loop` | 3.582 | 3.807 | 1.06x | 0 | True | numrust |
-| `fused_add_sum_f64_loop` | 3.035 | 3.816 | 1.26x | 0 | True | numrust |
-| `broadcast_add_f64` | 0.192 | 0.422 | 2.20x | 0 | True | numrust |
-| `sum_f64_loop` | 7.494 | 10.635 | 1.42x | 0 | True | numrust |
-| `metadata_view_loop` | 30.088 | 40.862 | 1.36x | 0 | True | numrust |
-| `take_axis_i64_loop` | 16.420 | 20.002 | 1.22x | 0 | True | numrust |
-| `where_select_f64_loop` | 85.690 | 51.328 | 0.60x | 0 | True | numpy |
-| `nonzero_bool_loop` | 193.816 | 917.348 | 4.73x | 0 | True | numrust |
-| `dot_f64_192` | 15.657 | 15.584 | 1.00x | 0 | True | numpy |
+| `small_add_f64_loop` | 2.806 | 9.918 | 3.53x | 0 | True | numrust |
+| `large_add_f64_loop` | 3.522 | 3.884 | 1.10x | 0 | True | numrust |
+| `fused_add_sum_f64_loop` | 2.999 | 3.882 | 1.29x | 0 | True | numrust |
+| `broadcast_add_f64` | 0.183 | 0.456 | 2.49x | 0 | True | numrust |
+| `sum_f64_loop` | 7.101 | 11.129 | 1.57x | 0 | True | numrust |
+| `metadata_view_loop` | 31.967 | 40.042 | 1.25x | 0 | True | numrust |
+| `take_axis_i64_loop` | 16.526 | 20.588 | 1.25x | 0 | True | numrust |
+| `where_select_f64_loop` | 48.615 | 52.859 | 1.09x | 0 | True | numrust |
+| `nonzero_bool_loop` | 192.362 | 935.158 | 4.86x | 0 | True | numrust |
+| `dot_f64_192` | 16.473 | 17.051 | 1.04x | 0 | True | numrust |
 
 ## Score
 
-- NumRust wins: 8
-- NumPy wins: 2
+- NumRust wins: 10
+- NumPy wins: 0
 - Checksum failures: 0
-- Geomean speedup vs NumPy: 1.52x
+- Geomean speedup vs NumPy: 1.67x
 - Ranked higher on this suite: True
 - Global NumPy replacement claim: false
 

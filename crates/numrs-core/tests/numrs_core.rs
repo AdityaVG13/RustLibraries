@@ -166,6 +166,20 @@ fn supports_nonzero_and_where_selection() {
         selected.as_slice(),
         &[0, -2, 8, -2, 5, -2, -2, -2, 10, 3, -2, -2]
     );
+
+    let float_values = Array::from_vec(
+        vec![3, 4],
+        (0..12).map(|value| value as f64 + 0.5).collect(),
+    )
+    .unwrap();
+    let float_fallback = Array::from_vec(vec![1, 4], vec![-1.0, -2.0, -3.0, -4.0]).unwrap();
+    let selected = mask
+        .where_select_f64(&float_values, &float_fallback)
+        .unwrap();
+    assert_eq!(
+        selected.as_slice(),
+        &[0.5, -2.0, -3.0, 3.5, -1.0, 5.5, -3.0, -4.0, 8.5, -2.0, 10.5, -4.0]
+    );
 }
 
 #[test]
