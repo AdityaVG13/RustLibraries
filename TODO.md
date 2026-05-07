@@ -45,6 +45,8 @@ This file is intentionally committed and should be updated in normal git commits
 - [x] ImageRust v0: PPM decode, grayscale conversion, nearest-neighbor resize, and thresholding.
 - [x] ImageRust benchmark v0: same-data PPM grayscale, resize, and threshold comparison against Pillow.
 - [ ] TextRust: NLTK/spaCy-style text processing APIs.
+- [x] TextRust v0: NLTK-style word/punctuation tokenization, lowercase word frequencies, and word bigrams.
+- [x] TextRust benchmark v0: same-data wordpunct tokenization comparison against NLTK.
 - [ ] ValidateRust: Pydantic-style validation APIs.
 - [x] ValidateRust v0: object schemas, required/optional fields, primitive/list type checks, and simple constraints.
 - [x] ValidateRust benchmark v0: same-data schema validation comparison against Pydantic.

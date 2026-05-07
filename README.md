@@ -38,6 +38,8 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07: Add same-data ValidateRust vs Pydantic benchmark evidence for the implemented validation slice. Evidence: `benchmarks/compare_pydantic.py`, `benchmark-results/validaterust-vs-pydantic.md`.
 - [x] 2026-05-07: Start ImageRust with PPM decode, grayscale conversion, nearest-neighbor resize, and thresholding. Evidence: `crates/imagerust`.
 - [x] 2026-05-07: Add same-data ImageRust vs Pillow benchmark evidence for the implemented image-processing slice. Evidence: `benchmarks/compare_pillow.py`, `benchmark-results/imagerust-vs-pillow.md`.
+- [x] 2026-05-07: Start TextRust with NLTK-style word/punctuation tokenization, lowercase word frequencies, and word bigrams. Evidence: `crates/textrust`.
+- [x] 2026-05-07: Add same-data TextRust vs NLTK benchmark evidence for the implemented tokenization slice. Evidence: `benchmarks/compare_nltk.py`, `benchmark-results/textrust-vs-nltk.md`.
 
 ### Open
 
@@ -86,6 +88,7 @@ uv run --with networkx benchmarks/compare_networkx.py
 uv run --with beautifulsoup4 --with pypdf benchmarks/compare_mediaextract.py
 uv run --with pydantic benchmarks/compare_pydantic.py
 uv run --with pillow benchmarks/compare_pillow.py
+uv run --with nltk benchmarks/compare_nltk.py
 uv run benchmarks/external_sources.py --update-lock
 uv run --with numpy python benchmarks/external_numpy_cases.py
 uv run benchmarks/verify_array_api_namespace.py
@@ -107,6 +110,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `crates/mediaextractrust`: document/media text extraction crate.
 - `crates/validaterust`: Pydantic-style schema validation crate.
 - `crates/imagerust`: Pillow-style image processing crate.
+- `crates/textrust`: NLTK-style text processing crate.
 - `docs/research.md`: research notes and source map.
 - `docs/novel-library-research.md`: research notes for the new invented crate.
 - `docs/architecture.md`: architecture decisions and optimization roadmap.
@@ -122,6 +126,7 @@ uv run --with numpy --with scipy benchmarks/compare_scipy.py
 - `benchmark-results/mediaextractrust-vs-python.md`: current MediaExtractRust vs Python evidence for implemented extraction slices.
 - `benchmark-results/validaterust-vs-pydantic.md`: current ValidateRust vs Pydantic evidence for the implemented validation slice.
 - `benchmark-results/imagerust-vs-pillow.md`: current ImageRust vs Pillow evidence for the implemented image-processing slice.
+- `benchmark-results/textrust-vs-nltk.md`: current TextRust vs NLTK evidence for the implemented tokenization slice.
 - `benchmark-results/external-numpy-asv-inspired.md`: externally derived NumPy ASV evidence.
 - `benchmark-results/array-api-tests-focused-probe.md`: pinned upstream focused Array API probe, currently 1109 passed, 4 skipped, out of 1113 collected.
 - `benchmark-results/array-api-tests-full-maxfail.md`: pinned upstream full Array API 2023.12 probe, currently 1161 passed, 58 skipped, out of 1219 collected.
