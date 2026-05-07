@@ -17,8 +17,9 @@ This file is intentionally committed and should be updated in normal git commits
 - [x] NumRust transposed GEMM v1: use column-major-swapped CBLAS for macOS transposed `f64`/`f32` 2-D GEMM and regenerate full external NumPy ASV-derived evidence at 52 of 53 NumRust wins.
 - [x] NumRust selection v1: add `nonzero`, broadcasted `where_select`, checksum-validated targeted NumPy benchmark rows, and contiguous selection fast paths. Latest targeted evidence: 10 NumRust wins, 0 NumPy wins, 0 checksum failures.
 - [x] NumRust targeted loss cleanup: optimize `where_select_f64_loop` and near-tie `dot_f64_192` without hiding Python-winning rows. Latest targeted evidence: 10 NumRust wins, 0 NumPy wins, 1.67x geomean, 0 checksum failures.
-- [x] NumRust manipulation v2: add `flip`, `moveaxis`, and `roll`, plus pinned NumPy ASV manipulation rows. Latest external evidence: 65 NumRust wins, 2 NumPy wins, 8.47x geomean, 0 checksum failures.
-- [ ] NumRust external linalg stability cleanup: optimize the current full-report `asv_linalg_matmul_trans_a_at_f64_150x400_400x150` and `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400` losses without hiding rows. Latest focused rerun flips both to NumRust, but the full 67-case report remains authoritative.
+- [x] NumRust manipulation v2: add `flip`, `moveaxis`, and `roll`, plus pinned NumPy ASV manipulation rows. Step evidence: 65 NumRust wins, 2 NumPy wins, 8.47x geomean, 0 checksum failures.
+- [x] NumRust broadcast arrays v1: add same-dtype `broadcast_arrays` and pinned NumPy ASV `BroadcastArrays.time_broadcast_arrays` evidence. Latest external evidence: 67 NumRust wins, 1 NumPy win, 8.67x geomean, 0 checksum failures.
+- [ ] NumRust external linalg stability cleanup: optimize the current full-report `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400` loss without hiding rows. Latest focused rerun flips it to NumRust at 1.006x, but the full 68-case report remains authoritative.
 
 ## Ecosystem
 
