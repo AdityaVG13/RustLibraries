@@ -1,0 +1,40 @@
+{
+  "comparison": [
+    {
+      "checksum_match": true,
+      "name": "user_schema_100000",
+      "pydantic_ms": 178.53929102420807,
+      "speedup_vs_pydantic": 35.68793006469349,
+      "validaterust_ms": 5.002792,
+      "winner": "validaterust"
+    }
+  ],
+  "pydantic": {
+    "cases": [
+      {
+        "checksum": 5002338890,
+        "millis": 178.53929102420807,
+        "name": "user_schema_100000"
+      }
+    ],
+    "engine": "pydantic",
+    "pydantic_version": "2.13.4"
+  },
+  "score": {
+    "cases": 1,
+    "checksum_failures": [],
+    "global_pydantic_replacement_claim": false,
+    "pydantic_wins": 0,
+    "validaterust_wins": 1
+  },
+  "validaterust": {
+    "cases": [
+      {
+        "checksum": 5002338890,
+        "millis": 5.002792,
+        "name": "user_schema_100000"
+      }
+    ],
+    "engine": "validaterust"
+  }
+}
