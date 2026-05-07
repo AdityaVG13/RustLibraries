@@ -824,6 +824,72 @@ fn main() -> numrs_core::Result<()> {
         checksum,
     });
 
+    let fminmax_data_f32 = Array::full(vec![20_000], 1.0_f32)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..20_000 {
+                checksum += fminmax_data_f32.fmin_all().unwrap() as f64;
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_fmin_f32_20000",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..20_000 {
+                checksum += fminmax_data_f32.fmax_all().unwrap() as f64;
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_fmax_f32_20000",
+        millis,
+        checksum,
+    });
+
+    let fminmax_data_f64 = Array::full(vec![20_000], 1.0_f64)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..20_000 {
+                checksum += fminmax_data_f64.fmin_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_fmin_f64_20000",
+        millis,
+        checksum,
+    });
+
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..20_000 {
+                checksum += fminmax_data_f64.fmax_all().unwrap();
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_reduce_fmax_f64_20000",
+        millis,
+        checksum,
+    });
+
     let argmax_data = Array::<i64>::zeros(vec![200_000])?;
     let (millis, checksum) = bench(
         || {

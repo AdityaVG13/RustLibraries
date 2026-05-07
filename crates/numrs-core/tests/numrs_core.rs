@@ -392,10 +392,22 @@ fn reduces_all_and_by_axis() {
     assert!((a.var_all().unwrap() - (35.0 / 12.0)).abs() < 1e-12);
     assert!((a.std_all().unwrap() - (35.0_f64 / 12.0).sqrt()).abs() < 1e-12);
 
+    let fminmax = Array::from_vec(vec![4], vec![f64::NAN, 3.0, -2.0, f64::NAN]).unwrap();
+    assert_eq!(fminmax.fmin_all().unwrap(), -2.0);
+    assert_eq!(fminmax.fmax_all().unwrap(), 3.0);
+    assert!(Array::from_vec(vec![2], vec![f64::NAN, f64::NAN])
+        .unwrap()
+        .fmin_all()
+        .unwrap()
+        .is_nan());
+
     let f32_values = Array::from_vec(vec![4], vec![1.0_f32, 2.0, 3.0, 4.0]).unwrap();
     assert_eq!(f32_values.mean_all().unwrap(), 2.5);
     assert!((f32_values.var_all().unwrap() - 1.25).abs() < 1e-12);
     assert!((f32_values.std_all().unwrap() - 1.25_f64.sqrt()).abs() < 1e-12);
+    let f32_fminmax = Array::from_vec(vec![3], vec![f32::NAN, -4.0, 6.0]).unwrap();
+    assert_eq!(f32_fminmax.fmin_all().unwrap(), -4.0);
+    assert_eq!(f32_fminmax.fmax_all().unwrap(), 6.0);
 
     let i64_values = Array::from_vec(vec![4], vec![1_i64, 2, 3, 4]).unwrap();
     assert_eq!(i64_values.mean_all().unwrap(), 2.5);

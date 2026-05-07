@@ -277,6 +277,24 @@ impl Array<f64> {
         self.view().std_all()
     }
 
+    pub fn fmin_all(&self) -> Result<f64> {
+        if let Some(value) = self.uniform_value() {
+            if !self.is_empty() {
+                return Ok(*value);
+            }
+        }
+        self.view().fmin_all()
+    }
+
+    pub fn fmax_all(&self) -> Result<f64> {
+        if let Some(value) = self.uniform_value() {
+            if !self.is_empty() {
+                return Ok(*value);
+            }
+        }
+        self.view().fmax_all()
+    }
+
     pub fn norm_l2(&self) -> Result<f64> {
         self.view().norm_l2()
     }
@@ -341,6 +359,24 @@ impl Array<f32> {
             return Ok(0.0);
         }
         self.view().std_all()
+    }
+
+    pub fn fmin_all(&self) -> Result<f32> {
+        if let Some(value) = self.uniform_value() {
+            if !self.is_empty() {
+                return Ok(*value);
+            }
+        }
+        self.view().fmin_all()
+    }
+
+    pub fn fmax_all(&self) -> Result<f32> {
+        if let Some(value) = self.uniform_value() {
+            if !self.is_empty() {
+                return Ok(*value);
+            }
+        }
+        self.view().fmax_all()
     }
 }
 
@@ -2352,6 +2388,46 @@ fn offset_from_linear(
     offset
 }
 
+fn float_extreme_all<T, IsNan, Better>(
+    view: &ArrayView<'_, T>,
+    is_nan: IsNan,
+    better: Better,
+) -> Result<T>
+where
+    T: Copy,
+    IsNan: Fn(T) -> bool,
+    Better: Fn(T, T) -> bool,
+{
+    if view.is_empty() {
+        return Err(NumRsError::EmptyReduction);
+    }
+
+    let next = |best: &mut T, value: T| {
+        if is_nan(*best) {
+            *best = value;
+        } else if !is_nan(value) && better(value, *best) {
+            *best = value;
+        }
+    };
+
+    if let Some(slice) = view.contiguous_slice() {
+        let (first, rest) = slice.split_first().expect("empty checked above");
+        let mut best = *first;
+        for value in rest.iter().copied() {
+            next(&mut best, value);
+        }
+        return Ok(best);
+    }
+
+    let mut offsets = view.offset_iter()?;
+    let first_offset = offsets.next().expect("empty checked above");
+    let mut best = view.data_at(first_offset);
+    for offset in offsets {
+        next(&mut best, view.data_at(offset));
+    }
+    Ok(best)
+}
+
 impl<'a> ArrayView<'a, f64> {
     pub fn mean_all(&self) -> Result<f64> {
         let len = self.len();
@@ -2387,6 +2463,14 @@ impl<'a> ArrayView<'a, f64> {
 
     pub fn std_all(&self) -> Result<f64> {
         Ok(self.var_all()?.sqrt())
+    }
+
+    pub fn fmin_all(&self) -> Result<f64> {
+        float_extreme_all(self, f64::is_nan, |candidate, best| candidate < best)
+    }
+
+    pub fn fmax_all(&self) -> Result<f64> {
+        float_extreme_all(self, f64::is_nan, |candidate, best| candidate > best)
     }
 
     pub fn norm_l2(&self) -> Result<f64> {
@@ -2727,6 +2811,14 @@ impl<'a> ArrayView<'a, f32> {
 
     pub fn std_all(&self) -> Result<f64> {
         Ok(self.var_all()?.sqrt())
+    }
+
+    pub fn fmin_all(&self) -> Result<f32> {
+        float_extreme_all(self, f32::is_nan, |candidate, best| candidate < best)
+    }
+
+    pub fn fmax_all(&self) -> Result<f32> {
+        float_extreme_all(self, f32::is_nan, |candidate, best| candidate > best)
     }
 }
 

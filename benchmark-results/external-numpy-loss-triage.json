@@ -1,40 +1,40 @@
 {
-  "geomean_speedup_vs_numpy": 28.633360418168888,
+  "geomean_speedup_vs_numpy": 32.62093382880344,
   "global_numpy_replacement_claim": false,
   "near_tie_relative_margin": 0.02,
   "numpy_wins": 1,
-  "numrust_wins": 113,
+  "numrust_wins": 117,
   "rows": [
     {
       "checksum_match": true,
-      "name": "asv_linalg_matmul_trans_atc_a_f64_400x150_150x400",
-      "near_tie": true,
-      "numpy_ms": 95.82933300407603,
+      "name": "asv_linalg_matmul_trans_a_at_f64_150x400_400x150",
+      "near_tie": false,
+      "numpy_ms": 29.020875052083284,
       "numpy_pass_millis": [
-        95.5554160173051,
-        95.29779100557789,
-        96.64549998706207,
-        95.82933300407603,
-        96.5737919905223
+        29.00083299027756,
+        30.606667045503855,
+        28.952291002497077,
+        30.65229201456532,
+        29.020875052083284
       ],
-      "numrust_ms": 96.338458,
+      "numrust_ms": 30.566583,
       "numrust_pass_millis": [
-        95.401708,
-        96.041667,
-        96.338458,
-        107.88425,
-        101.341667
+        29.052333,
+        30.566583,
+        30.62125,
+        30.753833,
+        28.997958
       ],
-      "numrust_slowdown_vs_numpy": 0.00531283042429509,
+      "numrust_slowdown_vs_numpy": 0.0532619345606451,
       "priority": 1,
       "source_id": "numpy-asv",
       "source_path": "benchmarks/benchmarks/bench_linalg.py",
-      "source_symbol": "Eindot.time_matmul_trans_atc_a",
-      "speedup_vs_numpy": 0.9947152465744887,
-      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400).T.copy(), arange(60000).reshape(150,400)), repeated equally"
+      "source_symbol": "Eindot.time_matmul_trans_a_at",
+      "speedup_vs_numpy": 0.9494314445315423,
+      "translation": "direct setup and operation: matmul(arange(60000).reshape(150,400), arange(60000).reshape(150,400).T), repeated equally"
     }
   ],
   "sort": "NumPy-winning rows only, ordered by ascending speedup_vs_numpy",
   "source_report": "benchmark-results/external-numpy-asv-inspired.json",
-  "supported_external_cases": 114
+  "supported_external_cases": 118
 }

@@ -374,6 +374,38 @@ RUNNABLE_CASES: list[CaseSpec] = [
         repetitions=100_000,
     ),
     CaseSpec(
+        name="asv_reduce_fmin_f32_20000",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="FMinMax.time_min(dtype=float32)",
+        translation="direct setup and operation: fmin.reduce(ones(20000, float32)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=20_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_fmax_f32_20000",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="FMinMax.time_max(dtype=float32)",
+        translation="direct setup and operation: fmax.reduce(ones(20000, float32)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=20_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_fmin_f64_20000",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="FMinMax.time_min(dtype=float64)",
+        translation="direct setup and operation: fmin.reduce(ones(20000, float64)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=20_000,
+    ),
+    CaseSpec(
+        name="asv_reduce_fmax_f64_20000",
+        source_id="numpy-asv",
+        source_path="benchmarks/benchmarks/bench_reduce.py",
+        source_symbol="FMinMax.time_max(dtype=float64)",
+        translation="direct setup and operation: fmax.reduce(ones(20000, float64)), repeated because ASV auto-calibrates tiny timings",
+        repetitions=20_000,
+    ),
+    CaseSpec(
         name="asv_reduce_argmax_i64_200000",
         source_id="numpy-asv",
         source_path="benchmarks/benchmarks/bench_reduce.py",
@@ -1434,6 +1466,45 @@ def bench_numpy() -> dict:
     millis, checksum = median_ms(stats_var_c64, rounds=7)
     cases.append({"name": "asv_reduce_stats_var_c64_200", "millis": millis, "checksum": checksum})
 
+    fminmax_data_f32 = np.ones(20_000, dtype=np.float32)
+    fminmax_data_f64 = np.ones(20_000, dtype=np.float64)
+
+    def fmin_f32() -> float:
+        checksum = 0.0
+        for _ in range(20_000):
+            checksum += float(np.fmin.reduce(fminmax_data_f32))
+        return checksum
+
+    millis, checksum = median_ms(fmin_f32, rounds=7)
+    cases.append({"name": "asv_reduce_fmin_f32_20000", "millis": millis, "checksum": checksum})
+
+    def fmax_f32() -> float:
+        checksum = 0.0
+        for _ in range(20_000):
+            checksum += float(np.fmax.reduce(fminmax_data_f32))
+        return checksum
+
+    millis, checksum = median_ms(fmax_f32, rounds=7)
+    cases.append({"name": "asv_reduce_fmax_f32_20000", "millis": millis, "checksum": checksum})
+
+    def fmin_f64() -> float:
+        checksum = 0.0
+        for _ in range(20_000):
+            checksum += float(np.fmin.reduce(fminmax_data_f64))
+        return checksum
+
+    millis, checksum = median_ms(fmin_f64, rounds=7)
+    cases.append({"name": "asv_reduce_fmin_f64_20000", "millis": millis, "checksum": checksum})
+
+    def fmax_f64() -> float:
+        checksum = 0.0
+        for _ in range(20_000):
+            checksum += float(np.fmax.reduce(fminmax_data_f64))
+        return checksum
+
+    millis, checksum = median_ms(fmax_f64, rounds=7)
+    cases.append({"name": "asv_reduce_fmax_f64_20000", "millis": millis, "checksum": checksum})
+
     argmax_data = np.zeros(200_000, dtype=np.int64)
 
     def argmax_i64() -> float:
@@ -2440,6 +2511,10 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
         "asv_reduce_stats_std_c64_200",
         "asv_reduce_stats_prod_c64_200",
         "asv_reduce_stats_var_c64_200",
+        "asv_reduce_fmin_f32_20000",
+        "asv_reduce_fmax_f32_20000",
+        "asv_reduce_fmin_f64_20000",
+        "asv_reduce_fmax_f64_20000",
         "asv_manipulate_broadcast_arrays_f64_16x32",
         "asv_manipulate_broadcast_arrays_f64_128x256",
         "asv_manipulate_broadcast_arrays_f32_128x256",
@@ -2666,6 +2741,23 @@ def bench_numpy_selected(case_names: list[str]) -> dict:
     append_selected_real_stats_c64("std", np.std)
     append_selected_stats_c64("prod", np.prod)
     append_selected_real_stats_c64("var", np.var)
+
+    fminmax_data_f32 = np.ones(20_000, dtype=np.float32)
+    fminmax_data_f64 = np.ones(20_000, dtype=np.float64)
+
+    def append_selected_fminmax(dtype_suffix: str, data: np.ndarray, op_name: str, op: Callable[[np.ndarray], np.generic]) -> None:
+        def fminmax_op() -> float:
+            checksum = 0.0
+            for _ in range(20_000):
+                checksum += float(op.reduce(data))
+            return checksum
+
+        append_case(f"asv_reduce_{op_name}_{dtype_suffix}_20000", fminmax_op)
+
+    append_selected_fminmax("f32", fminmax_data_f32, "fmin", np.fmin)
+    append_selected_fminmax("f32", fminmax_data_f32, "fmax", np.fmax)
+    append_selected_fminmax("f64", fminmax_data_f64, "fmin", np.fmin)
+    append_selected_fminmax("f64", fminmax_data_f64, "fmax", np.fmax)
 
     def append_selected_broadcast_arrays(dtype_name: str, rows: int, cols: int, repetitions: int) -> None:
         dtype = np.dtype(dtype_name)

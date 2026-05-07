@@ -43,6 +43,8 @@ SOURCES: list[dict[str, Any]] = [
                     "StatsReductions.time_std",
                     "StatsReductions.time_prod",
                     "StatsReductions.time_var",
+                    "FMinMax.time_min",
+                    "FMinMax.time_max",
                     "ArgMax.time_argmax",
                     "ArgMin.time_argmin",
                 ],
