@@ -73,6 +73,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07: Start TextRust with NLTK-style word/punctuation tokenization, lowercase word frequencies, and word bigrams. Evidence: `crates/textrust`.
 - [x] 2026-05-07: Add same-data TextRust vs NLTK benchmark evidence for the implemented tokenization slice. Evidence: `benchmarks/compare_nltk.py`, `benchmark-results/textrust-vs-nltk.md`.
 - [x] 2026-05-07: Optimize NumRust transposed `f64`/`f32` GEMM dispatch on macOS and regenerate full external NumPy ASV-derived evidence at 52 of 53 NumRust wins. Evidence: `crates/numrs-core/src/blas.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [x] 2026-05-07: Add NumRust `nonzero` and broadcasted `where_select` selection APIs, checksum-validated targeted NumPy benchmark rows, and contiguous selection fast paths. Latest targeted same-data evidence: 8 NumRust wins, 2 NumPy wins, 0 checksum failures. Evidence: `crates/numrs-core/src/array.rs`, `benchmarks/compare_numpy.py`, `benchmark-results/numrust-vs-numpy.md`.
 - [x] 2026-05-07: Start LearnRust with dense matrices, `StandardScaler`, nearest-centroid classification, accuracy, and confusion-matrix metrics. Evidence: `crates/learnrust`.
 - [x] 2026-05-07: Add same-data LearnRust vs scikit-learn benchmark evidence for the implemented preprocessing, nearest-centroid, and metrics slice. Evidence: `benchmarks/compare_sklearn.py`, `benchmark-results/learnrust-vs-sklearn.md`.
 
@@ -80,6 +81,7 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 
 - [ ] 2026-05-07: Add more externally derived NumPy ASV cases without filtering out losses. Target: `benchmarks/external_numpy_cases.py`.
 - [ ] 2026-05-07: Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. Target: `docs/performance.md`.
+- [ ] 2026-05-07: Optimize visible NumRust targeted losses without hiding rows: `where_select_f64_loop` and near-tie `dot_f64_192`. Target: `crates/numrs-core/src/array.rs`, `crates/numrs-core/src/blas.rs`, `benchmark-results/numrust-vs-numpy.md`.
 - [ ] 2026-05-07: Grow StatsRust and SciRust with more externally derived benchmarks. Target: `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py`.
 - [ ] 2026-05-07: Keep release and CI work deferred until the maintainer asks for it. Target: no `.github/workflows` or release automation for now.
 
