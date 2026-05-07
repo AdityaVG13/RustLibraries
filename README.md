@@ -4,7 +4,7 @@ Flagship-first porting lab for rebuilding top Python library ideas in pure Rust.
 
 Working names: **NumRust** for the NumPy-core slice, **StatsRust** for the StatsModels-style slice, **SciRust** for the SciPy-style slice, and **LearnRust** for the scikit-learn-style slice. Core crate: `numrs-core`.
 
-Current flagship: `numrs-core`, a Rust-first NumPy-core foundation. It targets typed n-dimensional arrays, shape/stride metadata, uniform-array metadata, zero-copy views, NumPy-style slicing, reshape, transpose, flip, moveaxis, concatenate, stack, roll, broadcasting, elementwise kernels, reductions, 2-D dot products, NumPy-style matrix multiplication, and tensor contractions.
+Current flagship: `numrs-core`, a Rust-first NumPy-core foundation. It targets typed n-dimensional arrays, shape/stride metadata, uniform-array metadata, zero-copy views, NumPy-style slicing, reshape, transpose, flip, moveaxis, concatenate, stack, roll, multi-array broadcasting, elementwise kernels, reductions, 2-D dot products, NumPy-style matrix multiplication, and tensor contractions.
 
 ## Status
 
@@ -30,8 +30,8 @@ Full tables, rerun commands, and claim gates live in [`docs/benchmark-dashboard.
 | Library slice | Rust crate | Python baseline | Cases | Rust wins | Python wins | Full parity? | Speedup summary | Report |
 | --- | --- | --- | ---: | ---: | ---: | --- | ---: | --- |
 | NumPy targeted same-data | `numrs-core` | NumPy 2.4.4 | 10 | 10 | 0 | No | 1.67x geomean | [`numrust-vs-numpy.md`](benchmark-results/numrust-vs-numpy.md) |
-| NumPy core, external ASV-derived | `numrs-core` | NumPy 2.4.4 | 67 | 65 | 2 | No | 8.47x geomean | [`external-numpy-asv-inspired.md`](benchmark-results/external-numpy-asv-inspired.md) |
-| NumPy current-loss focused rerun | `numrs-core` | NumPy 2.4.4 | 2 | 2 | 0 | No | 1.00x to 1.02x focused wins | [`external-numpy-loss-focused.md`](benchmark-results/external-numpy-loss-focused.md) |
+| NumPy core, external ASV-derived | `numrs-core` | NumPy 2.4.4 | 68 | 67 | 1 | No | 8.67x geomean | [`external-numpy-asv-inspired.md`](benchmark-results/external-numpy-asv-inspired.md) |
+| NumPy current-loss focused rerun | `numrs-core` | NumPy 2.4.4 | 1 | 1 | 0 | No | 1.006x focused near-tie win | [`external-numpy-loss-focused.md`](benchmark-results/external-numpy-loss-focused.md) |
 | Statistics | `statsrust` | StatsModels 0.14.6 | 4 | 4 | 0 | No | 3.51x geomean | [`statsrust-vs-statsmodels.md`](benchmark-results/statsrust-vs-statsmodels.md) |
 | Scientific routines | `scirust` | SciPy 1.17.1 | 9 | 9 | 0 | No | 19.11x geomean | [`scirust-vs-scipy.md`](benchmark-results/scirust-vs-scipy.md) |
 | Data aggregation | `framerust` | Pandas 3.0.2 | 1 | 1 | 0 | No | 2.14x | [`framerust-vs-pandas.md`](benchmark-results/framerust-vs-pandas.md) |

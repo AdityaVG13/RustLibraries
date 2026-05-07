@@ -9,8 +9,8 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 | Suite | Cases | Rust wins | Python wins | Speedup summary | Checksum failures |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | NumRust vs NumPy, targeted same-data | 10 | 10 | 0 | 1.67x geomean | 0 |
-| NumRust vs NumPy, external ASV-derived | 67 | 65 | 2 | 8.47x geomean | 0 |
-| NumRust vs NumPy, focused current-loss rerun | 2 | 2 | 0 | 1.00x to 1.02x focused wins | 0 |
+| NumRust vs NumPy, external ASV-derived | 68 | 67 | 1 | 8.67x geomean | 0 |
+| NumRust vs NumPy, focused current-loss rerun | 1 | 1 | 0 | 1.006x focused near-tie win | 0 |
 | StatsRust vs StatsModels | 4 | 4 | 0 | 3.51x geomean | 0 |
 | SciRust vs SciPy | 9 | 9 | 0 | 19.11x geomean | 0 |
 | FrameRust vs Pandas | 1 | 1 | 0 | 2.14x | 0 |
@@ -26,6 +26,7 @@ For the table-first benchmark view, use [`benchmark-dashboard.md`](benchmark-das
 - Contiguous equal-shape elementwise operations zip input slices directly.
 - `full` and `zeros` arrays carry uniform-value metadata; reductions and all-true/all-false `putmask` use that metadata without scanning payloads.
 - Broadcasted operations compute zero-stride views and write one contiguous output.
+- `broadcast_arrays` computes a shared broadcast shape and returns zero-copy views for same-dtype arrays.
 - Reductions over contiguous `f64`/`f32` views use Accelerate/vDSP on macOS.
 - Contiguous `f64` and `f32` 2-D dot use Accelerate BLAS on macOS.
 - `f64` add+sum has a fused temporary-free kernel.
@@ -63,9 +64,9 @@ The benchmark harnesses run one untimed warmup for each case on both engines, th
 
 `benchmarks/compare_numpy.py` is the NumPy comparison harness. Current evidence is written to `benchmark-results/numrust-vs-numpy.md`; the latest run ranks NumRust higher on 10 of 10 targeted cases, with 1.67x geometric-mean speedup and 0 checksum failures. This is still a targeted implemented-slice result, not a full NumPy replacement claim.
 
-`benchmarks/external_numpy_cases.py` is the externally derived harness. It pins NumPy ASV and Array API test sources in `benchmark-results/external-source-lock.json`, then translates supported NumPy ASV cases without filtering out losses. Latest run: NumRust wins 65 of 67 supported external cases, NumPy wins 2, with 8.47x geometric-mean speedup. The remaining NumPy wins are `asv_linalg_matmul_trans_a_at_f64_150x400_400x150` at 0.975x and `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400` at 0.998x in the full report. The harness uses 5 full passes per engine, alternates engine order, aggregates each case by median across passes, supports sharded one-pass artifacts for long runs, writes pass samples for NumPy-winning rows, emits loss-triage artifacts sorted by worst NumPy win, and can rerun focused NumPy-winning rows after backend experiments with explicit stability metadata. This ranks NumRust higher on supported external cases only and does not prove global NumPy replacement status.
+`benchmarks/external_numpy_cases.py` is the externally derived harness. It pins NumPy ASV and Array API test sources in `benchmark-results/external-source-lock.json`, then translates supported NumPy ASV cases without filtering out losses. Latest run: NumRust wins 67 of 68 supported external cases, NumPy wins 1, with 8.67x geometric-mean speedup. The remaining NumPy win is `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400` at 0.993x in the full report. The harness uses 5 full passes per engine, alternates engine order, aggregates each case by median across passes, supports sharded one-pass artifacts for long runs, writes pass samples for NumPy-winning rows, emits loss-triage artifacts sorted by worst NumPy win, and can rerun focused NumPy-winning rows after backend experiments with explicit stability metadata. This ranks NumRust higher on supported external cases only and does not prove global NumPy replacement status.
 
-The latest 3-pass focused rerun of the two NumPy-winning rows flips both to NumRust at 1.004x and 1.023x, with no checksum failures. This is a triage signal for timing sensitivity, not a replacement for the full 67-case score.
+The latest 3-pass focused rerun of the one NumPy-winning row flips it to NumRust at 1.006x, with no checksum failures. This is a triage signal for timing sensitivity, not a replacement for the full 68-case score.
 
 `benchmarks/compare_statsmodels.py` is the same-data StatsModels comparison harness for the implemented StatsRust slice. Latest run: StatsRust wins 4 of 4 cases against StatsModels 0.14.6, StatsModels wins 0, with 3.51x geometric-mean speedup and no checksum failures. This does not prove full StatsModels replacement status.
 

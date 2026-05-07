@@ -68,6 +68,13 @@ fn sample_checksum_f64(array: &ArrayView<'_, f64>) -> f64 {
     total
 }
 
+fn paired_broadcast_checksum(left: &ArrayView<'_, f64>, right: &ArrayView<'_, f64>) -> f64 {
+    sample_checksum_f64(left)
+        + sample_checksum_f64(right)
+        + shape_checksum(left.shape())
+        + shape_checksum(right.shape())
+}
+
 fn read_lstsq_fixture() -> numrs_core::Result<(Array<f64>, Array<f64>)> {
     let bytes = fs::read("benchmark-results/numpy-asv-lstsq-f64.bin").map_err(|err| {
         numrs_core::NumRsError::InvalidShape(format!(
@@ -388,6 +395,28 @@ fn main() -> numrs_core::Result<()> {
     );
     cases.push(Case {
         name: "asv_itemselection_put_ordered_f64_1000",
+        millis,
+        checksum,
+    });
+
+    let broadcast_arrays_source =
+        Array::from_shape_fn(vec![512, 1024], |idx| (idx[0] * 1024 + idx[1]) as f64)?;
+    let broadcast_arrays_one = Array::full(vec![1], 1.0_f64)?;
+    let (millis, checksum) = bench(
+        || {
+            let mut checksum = 0.0;
+            for _ in 0..100_000 {
+                let out =
+                    Array::broadcast_arrays(&[&broadcast_arrays_source, &broadcast_arrays_one])
+                        .unwrap();
+                checksum += paired_broadcast_checksum(&out[0], &out[1]);
+            }
+            checksum
+        },
+        7,
+    );
+    cases.push(Case {
+        name: "asv_manipulate_broadcast_arrays_f64_512x1024",
         millis,
         checksum,
     });

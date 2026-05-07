@@ -49,7 +49,7 @@ Observed results:
 - Basic example ran and printed expected array outputs.
 - Release microbench ran: contiguous add 250k elements x 50 in 8 ms; broadcast add `[1024, 1024]` in 3 ms on this machine.
 - Targeted NumPy comparison: NumRust wins 10 of 10 cases, 1.67x geomean speedup.
-- External ASV-derived comparison: NumRust wins 65 of 67 supported cases, NumPy wins 2, 8.47x geomean speedup, 4 near-ties within 2%, ranked higher by wins on supported external cases.
+- External ASV-derived comparison: NumRust wins 67 of 68 supported cases, NumPy wins 1, 8.67x geomean speedup, 2 near-ties within 2%, ranked higher by wins on supported external cases.
 - External evidence schema tests: 11 passed, including source-lock symbol coverage, report coverage of every runnable case, sharded pass aggregation coverage, loss-triage coverage, focused-loss coverage, focused selected-run aggregation, focused stability metadata reconciliation, and score recomputation from raw rows.
 - StatsModels same-data comparison: StatsRust wins 4 of 4 cases, StatsModels wins 0, 3.51x geomean speedup, no checksum failures.
 - SciPy comparison: SciRust wins 9 of 9 cases, SciPy wins 0, 19.11x geomean speedup, no checksum failures; 4 cases translate pinned SciPy ASV root-finding and cumulative Simpson benchmarks.

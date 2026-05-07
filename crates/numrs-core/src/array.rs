@@ -174,6 +174,17 @@ impl<T> Array<T> {
         self.view().broadcast_to(shape)
     }
 
+    pub fn broadcast_arrays<'a>(arrays: &[&'a Array<T>]) -> Result<Vec<ArrayView<'a, T>>> {
+        let mut shape = Vec::new();
+        for array in arrays {
+            shape = broadcast_shape(&shape, array.shape())?;
+        }
+        arrays
+            .iter()
+            .map(|array| array.broadcast_to(&shape))
+            .collect()
+    }
+
     pub fn ravel(&self) -> Result<ArrayView<'_, T>> {
         self.view().ravel()
     }

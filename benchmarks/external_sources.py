@@ -100,6 +100,7 @@ SOURCES: list[dict[str, Any]] = [
             {
                 "path": "benchmarks/benchmarks/bench_manipulate.py",
                 "symbols": [
+                    "BroadcastArrays.time_broadcast_arrays",
                     "BroadcastArraysTo.time_broadcast_to",
                     "ConcatenateStackArrays.time_concatenate_ax0",
                     "ConcatenateStackArrays.time_concatenate_ax1",

@@ -310,6 +310,14 @@ fn broadcasts_elementwise_ops_without_materializing_inputs() {
         &[11, 21, 31, 41, 12, 22, 32, 42, 13, 23, 33, 43]
     );
 
+    let broadcasted = Array::broadcast_arrays(&[&a, &b]).unwrap();
+    assert_eq!(broadcasted[0].shape(), &[3, 4]);
+    assert_eq!(broadcasted[0].strides(), &[1, 0]);
+    assert_eq!(broadcasted[1].shape(), &[3, 4]);
+    assert_eq!(broadcasted[1].strides(), &[0, 1]);
+    assert_eq!(*broadcasted[0].get(&[2, 3]).unwrap(), 3);
+    assert_eq!(*broadcasted[1].get(&[2, 3]).unwrap(), 40);
+
     let mask = out.eq_elem(&Array::scalar(22_i64).unwrap()).unwrap();
     assert_eq!(mask.shape(), &[3, 4]);
     assert_eq!(
