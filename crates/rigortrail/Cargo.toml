@@ -1,0 +1,10 @@
+[package]
+name = "rigortrail"
+version = "0.1.0"
+description = "Evidence-ledger primitives for bias-resistant benchmark and evaluation claims."
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]

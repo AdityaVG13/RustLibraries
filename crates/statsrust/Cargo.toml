@@ -1,0 +1,11 @@
+[package]
+name = "statsrust"
+version = "0.1.0"
+description = "StatsModels-inspired Rust statistics crate."
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+numrs-core = { path = "../numrs-core" }
