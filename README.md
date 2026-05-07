@@ -77,13 +77,14 @@ Backfilled items are completed work imported from the pre-GitHub build history. 
 - [x] 2026-05-07: Start LearnRust with dense matrices, `StandardScaler`, nearest-centroid classification, accuracy, and confusion-matrix metrics. Evidence: `crates/learnrust`.
 - [x] 2026-05-07: Add same-data LearnRust vs scikit-learn benchmark evidence for the implemented preprocessing, nearest-centroid, and metrics slice. Evidence: `benchmarks/compare_sklearn.py`, `benchmark-results/learnrust-vs-sklearn.md`.
 - [x] 2026-05-07: Add NumRust `flip`, `moveaxis`, and `roll`, plus pinned NumPy ASV manipulation rows for those operations. Step evidence: 65 NumRust wins, 2 NumPy wins, 8.47x geomean, 0 checksum failures. Evidence: `crates/numrs-core/src/array.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
-- [x] 2026-05-07: Add same-dtype NumRust `broadcast_arrays` and the pinned NumPy ASV `BroadcastArrays.time_broadcast_arrays` row. Latest external ASV evidence: 67 NumRust wins, 1 NumPy win, 8.67x geomean, 0 checksum failures. Evidence: `crates/numrs-core/src/array.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [x] 2026-05-07: Add same-dtype NumRust `broadcast_arrays` and the pinned NumPy ASV `BroadcastArrays.time_broadcast_arrays` row. Step evidence: 67 NumRust wins, 1 NumPy win, 8.67x geomean, 0 checksum failures. Evidence: `crates/numrs-core/src/array.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [x] 2026-05-07: Expand pinned NumPy ASV broadcast parameter coverage with four more `BroadcastArrays` and `BroadcastArraysTo` rows. Latest external ASV evidence: 71 NumRust wins, 1 NumPy win, 9.07x geomean, 0 checksum failures. Evidence: `benchmarks/external_numpy_cases.py`, `benchmark-results/external-numpy-asv-inspired.md`.
 
 ### Open
 
 - [ ] 2026-05-07: Add more externally derived NumPy ASV cases without filtering out losses. Target: `benchmarks/external_numpy_cases.py`.
 - [ ] 2026-05-07: Convert only benchmark-proven wins into new SIMD/BLAS/layout-specialized kernels. Target: `docs/performance.md`.
-- [ ] 2026-05-07: Optimize the current full external NumPy linalg loss without hiding rows: `asv_linalg_matmul_trans_atc_a_f64_400x150_150x400`. Latest focused rerun flips it to NumRust at 1.006x, but the full 68-case report remains authoritative. Target: `crates/numrs-core/src/blas.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
+- [ ] 2026-05-07: Optimize the current full external NumPy linalg loss without hiding rows: `asv_linalg_matmul_trans_a_atc_f64_150x400_400x150`. Latest focused rerun flips it to NumRust at 1.08x, but the full 72-case report remains authoritative. Target: `crates/numrs-core/src/blas.rs`, `benchmark-results/external-numpy-asv-inspired.md`.
 - [x] 2026-05-07: Optimize visible NumRust targeted losses without hiding rows: `where_select_f64_loop` and near-tie `dot_f64_192`. Latest targeted same-data evidence: 10 NumRust wins, 0 NumPy wins, 1.67x geomean, 0 checksum failures. Evidence: `crates/numrs-core/src/array.rs`, `benchmark-results/numrust-vs-numpy.md`.
 - [ ] 2026-05-07: Grow StatsRust and SciRust with more externally derived benchmarks. Target: `benchmarks/compare_statsmodels.py`, `benchmarks/compare_scipy.py`.
 - [ ] 2026-05-07: Keep release and CI work deferred until the maintainer asks for it. Target: no `.github/workflows` or release automation for now.
